@@ -331,8 +331,13 @@
 +setSize(size : int)
 &lt;font color=&quot;green&quot;&gt;+Pizza()
 +Pizza(id : int, name : String, price : float, icon : int,discount : float, massType : String, type : String, size : int)&lt;/font&gt;
-&lt;font color=&quot;red&quot;&gt;+getIngredeintList() : IngredientList
-+setIngredientList(ingredientList : IngredientList)
+&lt;font color=&apos;red&apos;&gt;+addIngredient(ingredient : Ingredient) : boolean
++removeIngredient(ingredient : Ingredient) : boolean
++getIngredientsList() : IngredientList
++hasInIngredient(ingredient : Ingredient) : boolean
++iteratorIngredients() : iterator
++sizeIngredients() : int
++removeAll() : boolean
 +removeYou()&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
 +print()&lt;/font&gt;</string>
@@ -373,7 +378,7 @@
 &lt;font color=&quot;purple&quot;&gt;+toString()
 +print()&lt;/font&gt;
 +getIngredients() : List&lt;Ingredient&gt;
-+getNumOfIngredient(ingredient : Ingredient)</string>
++getTotalIngredients() : int</string>
      </void>
     </void>
     <void property="name">
@@ -521,7 +526,9 @@
 -customTemporaryPizzas : Set &lt;Pizza&gt;
 -ordersSaved : Set &lt;Order&gt;
 -ingredients : Set &lt;Ingredient&gt;
--shoppingCart : ShoppingCart</string>
+-shoppingCart : ShoppingCart
+-drinks : Set &lt;Drink&gt;
+-offers : Set &lt;Offer&gt;</string>
      </void>
     </void>
     <void property="methods">
@@ -547,19 +554,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double10"/>
-      <double>2122.828055994535</double>
+      <double>2124.828055994535</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double10"/>
-      <double>1005.9441191463993</double>
+      <double>999.9441191463993</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>2122.828055994535</double>
-     <double>1005.9441191463993</double>
+     <double>2124.828055994535</double>
+     <double>999.9441191463993</double>
     </void>
    </object>
   </void>
@@ -902,6 +909,78 @@
    </object>
    <object idref="ClassNode7"/>
    <object idref="ClassNode12"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode10"/>
+   <object idref="ClassNode1"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode10"/>
+   <object idref="ClassNode9"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode10"/>
+   <object idref="ClassNode3"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode10"/>
+   <object idref="ClassNode2"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode10"/>
+   <object idref="ClassNode0"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode10"/>
+   <object idref="ClassNode5"/>
   </void>
  </object>
 </java>
