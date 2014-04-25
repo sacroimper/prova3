@@ -10,7 +10,7 @@ public abstract class IdObject {
     // ATTRIBUTES
     // ====================
 
-    private int id;
+    protected int id;
 
     // ====================
     // CONSTRUCTORS
