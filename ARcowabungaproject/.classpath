@@ -10,5 +10,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/ARcowabungaproject-model"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
