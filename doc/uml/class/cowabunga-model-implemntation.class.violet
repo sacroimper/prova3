@@ -295,19 +295,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double5"/>
-      <double>1719.7166103076365</double>
+      <double>1617.1272476466834</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double5"/>
-      <double>1440.720783626131</double>
+      <double>1439.0389907956235</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1719.7166103076365</double>
-     <double>1440.720783626131</double>
+     <double>1617.1272476466834</double>
+     <double>1439.0389907956235</double>
     </void>
    </object>
   </void>
@@ -528,17 +528,25 @@
 -ingredients : Set &lt;Ingredient&gt;
 -shoppingCart : ShoppingCart
 -drinks : Set &lt;Drink&gt;
--offers : Set &lt;Offer&gt;&lt;/font&gt;</string>
+-offers : Set &lt;Offer&gt;
+-dao : DAO&lt;/font&gt;</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>&lt;font color=&apos;green&apos;&gt;&lt;u&gt;+getInstance() : Sistema&lt;/u&gt;
--Sistema()&lt;/font&gt;
+      <string>&lt;font color=&apos;green&apos;&gt;&lt;u&gt;+getInstance() : System&lt;/u&gt;
+-System()&lt;/font&gt;
 &lt;font color=&quot;red&quot;&gt;+searchPizzaByName(name : String) : Set &lt;pizza&gt;
 +searchPizzaByIngredientName(name : String) : Set &lt;pizza&gt;
 +searchProductWithDiscount() : Set &lt;Product&gt;
-+searchProductWithoutDiscount() : Set &lt;Product&gt;&lt;/font&gt;
++searchProductWithoutDiscount() : Set &lt;Product&gt;
++setPredefinedPizzas(predefinedPizza : Set&lt;Pizza&gt;)
++setCustomSavedPizzas(customSavedPizzas : Set&lt;Pizza&gt;)
++setCustomTemporaryPizzas(CustomTemporaryPizzas : Set&lt;Pizza&gt;)
++setOrdersSaved(ordersSaved : Set&lt;Order&gt;)
++setIngredients(ingredients : Set&lt;Ingredient&gt;)
++setDrinks(drinks : Set&lt;Drink&gt;)
++setOffers(offers : Set&lt;Offer&gt;)&lt;/font&gt;
 +productHaveDiscount(product : Product) : boolean
 +pizzaMostPopular() : pizza Pizza</string>
      </void>
@@ -575,12 +583,15 @@
     <void property="attributes">
      <void property="text">
       <string>-currentVersion : int
--&lt;u&gt;instance&lt;/u&gt; : DAO</string>
+-&lt;u&gt;instance&lt;/u&gt; : DAO
+&lt;font color=&quot;red&quot;&gt;-system : System&lt;/font&gt;</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+loadData() : boolean
+      <string>&lt;font color=&quot;green&quot;&gt;+&lt;u&gt;getInstance(system : System) : DAO&lt;/u&gt;
+-DAO(system : System)&lt;/font&gt;
++loadData() : boolean
 -loadLocalData() : boolean
 -loadServerData() : boolean</string>
      </void>
@@ -596,19 +607,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double11"/>
-      <double>2769.638167147511</double>
+      <double>2775.638167147511</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double11"/>
-      <double>1075.4343684202938</double>
+      <double>1090.4343684202938</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>2769.638167147511</double>
-     <double>1075.4343684202938</double>
+     <double>2775.638167147511</double>
+     <double>1090.4343684202938</double>
     </void>
    </object>
   </void>
@@ -981,6 +992,36 @@
    </object>
    <object idref="ClassNode10"/>
    <object idref="ClassNode5"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="middleLabel">
+     <string>instance</string>
+    </void>
+   </object>
+   <object idref="ClassNode10"/>
+   <object idref="ClassNode10"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="middleLabel">
+     <string>insatnce</string>
+    </void>
+   </object>
+   <object idref="ClassNode11"/>
+   <object idref="ClassNode11"/>
   </void>
  </object>
 </java>
