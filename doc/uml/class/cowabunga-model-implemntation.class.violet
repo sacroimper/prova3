@@ -521,24 +521,24 @@
      <void property="text">
       <string>-role : String
 -&lt;u&gt;instance&lt;/u&gt; : System
--predefinedPizzas : Set &lt;Pizza&gt;
+&lt;font color=&quot;red&quot;&gt;-predefinedPizzas : Set &lt;Pizza&gt;
 -customSavedPizzas : Set &lt;Pizza&gt;
 -customTemporaryPizzas : Set &lt;Pizza&gt;
 -ordersSaved : Set &lt;Order&gt;
 -ingredients : Set &lt;Ingredient&gt;
 -shoppingCart : ShoppingCart
 -drinks : Set &lt;Drink&gt;
--offers : Set &lt;Offer&gt;</string>
+-offers : Set &lt;Offer&gt;&lt;/font&gt;</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
       <string>&lt;font color=&apos;green&apos;&gt;&lt;u&gt;+getInstance() : Sistema&lt;/u&gt;
 -Sistema()&lt;/font&gt;
-+searchPizzaByName(name : String) : Set &lt;pizza&gt;
+&lt;font color=&quot;red&quot;&gt;+searchPizzaByName(name : String) : Set &lt;pizza&gt;
 +searchPizzaByIngredientName(name : String) : Set &lt;pizza&gt;
 +searchProductWithDiscount() : Set &lt;Product&gt;
-+searchProductWithoutDiscount() : Set &lt;Product&gt;
++searchProductWithoutDiscount() : Set &lt;Product&gt;&lt;/font&gt;
 +productHaveDiscount(product : Product) : boolean
 +pizzaMostPopular() : pizza Pizza</string>
      </void>
