@@ -50,8 +50,8 @@ public class Ingredient extends IdObject {
 
     @Override
     public String toString() {
-	return "Ingredient [id=" + id + ", price=" + price + ", model=" + model
-		+ ", icon=" + icon + ", name=" + name + "]";
+	return "Ingredient [id=" + id + ", name=" + name + ", price=" + price
+		+ ", model=" + model + ", icon=" + icon + "]";
     }
 
     public void print() {
