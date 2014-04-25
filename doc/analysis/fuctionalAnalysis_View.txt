@@ -1,0 +1,129 @@
+﻿Análisis funcional de la Vista
+
+
+
+
+Activity de Carga (Splash Screen)
+
+
+- Imagen corporativa (background)
+- Se conecta con servidor para comprobar la versión de la base de datos
+- En caso de que se tenga que descargar una nueva versión se la descarga
+
+
+
+
+¿Como hacer un splash screen android ?
+http://amatellanes.wordpress.com/2013/08/27/android-crear-un-splash-screen-en-android/
+
+
+
+
+
+
+
+
+Activity de Menu Principal
+ TortugasNijaColor.jpg 
+
+-Menú con cuatro “botones/opciones”
+
+
+
+
+-Boton 1 Carta: Lanza la activity de la Carta con los productos ofertados
+-Boton 2 Cesta: Lanza la activity de cesta, donde se ve el carro de la compra previo a efectuar el pedido.
+-Boton 3 Contacto: Lanza una activity con los datos de la “Empresa” 
+-Boton 4 Anterior: Lanza una activity una lista de pedidos anteriores.
+-Boton 5 Cowabunga team: Sale informacion de los desarrolladores del proyecto.
+
+
+
+
+Ejemplo grafico: Boton 1 Carta, Boton 2 Cesta, Boton 3 Contacto, Boton 4 Anterior, Boton 5 Cowabunga BCN (verde abajo)
+
+
+
+
+
+
+
+
+
+
+Activity Carta:
+
+
+- Tres pestañas para diferenciar los productos: Pizzas, Bebidas y Ofertas.
+- Lista de productos 
+        * No se ha decidido todavía la mejor la manera de presentarlas.
+
+
+- Seleccionando cada producto se accedera a información detallada 
+        * No se ha decidido cómo se accede a esta nueva info. Opciones: 
+- A través de un swipe desplegable en cada objeto de la lista.
+- A traves de un pop up
+- A través de una nueva activity
+En caso de que la info detallada no se realice desde una nueva activity desde el apartado donde esta se muestra se podrá llamar a la vista de edición/RealidadAumentada
+
+
+-Tiene un boton de realizar pedido que lleva directamente al carro de la compra
+-Boton atras
+
+
+
+
+
+
+
+
+Activity Edicion
+
+
+-Esta activity utiliza la librería de realidad aumentada
+-En ella se pueden ver las pizzas, tanto sobre un marcador como en el aire si no existe.
+-Utiliza la camara
+-Tiene un listview /swipe en un lateral para añadir ingredientes. 
+-Tiene una activity? lateral , para ver los ingredientes en letra, de una manera escrita y más ampliada.
+-Tiene un boton de añadir al carro (si la pizza no existe sale un popup de guardar la pizza y darle nombre)
+-Boton descartar (atras)
+
+
+
+
+Activity Carro de la compra
+
+
+-Existen 3 vías de llegar a esta activity, desde:
+        -Menu principal
+        -Carta de pizzas (Boton de realizar pedido)
+        -Pedidos anteriores (Al seleccionar un pedido anterior, se ve de nuevo en el carro de la compra)
+
+
+- Tiene una lista de productos y precio total 
+-Tiene opciones de eliminar producto y añadir (esta última abre la carta)
+-Tiene un boton de Realizar Pedido (se conecta al servidor)
+-Boton atras
+
+
+
+
+
+
+
+
+Activity de PedidosAnteriores
+
+
+- ListView de pedidos anteriores, al apretar uno llama a la vista Carro de la compra.
+-Boton atras
+
+
+
+
+
+
+Activity de Miembros del Grupo (boton 5)
+
+
+-Información de los miembros del grupo.
