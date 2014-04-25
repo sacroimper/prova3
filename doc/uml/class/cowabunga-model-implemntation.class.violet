@@ -21,7 +21,8 @@
 +removeAll() : boolean
 +removeYou()&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
-+print()&lt;/font&gt;</string>
++print()
++printProductList()&lt;/font&gt;</string>
      </void>
     </void>
     <void property="name">
@@ -61,7 +62,7 @@
 -dateTime : DateTime
 -paymentMethod :  String
 &lt;font color=&quot;red&quot;&gt;-addres : Addres
-- shoppingCart : ShoppingCart&lt;/font&gt;</string>
+-shoppingCart : ShoppingCart&lt;/font&gt;</string>
      </void>
     </void>
     <void property="methods">
@@ -82,7 +83,9 @@
 +setShoppingCart(shoppingCart : ShoppingCart)
 +removeYou()&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
-+print()&lt;/font&gt;
++print()
++printAddres()
++printShoppingCart&lt;/font&gt;
 +send() : boolean</string>
      </void>
     </void>
@@ -232,8 +235,7 @@
      <void property="text">
       <string>+getId() : int
 +setId(id : int)
-&lt;font color=&quot;green&quot;&gt;+IdObject()
-+IdObject(id : int)&lt;/font&gt;
+&lt;font color=&quot;green&quot;&gt;+IdObject(id : int)&lt;/font&gt;
 &lt;font color=&quot;blue&quot;&gt;+hashCode() : int
 +equals(object : Object)&lt;/font&gt;
 &lt;font color =&quot;purple&quot;&gt;+toString()
@@ -340,7 +342,8 @@
 +removeAll() : boolean
 +removeYou()&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
-+print()&lt;/font&gt;</string>
++print()
++printIngredientsList()&lt;/font&gt;</string>
      </void>
     </void>
     <void property="name">
@@ -422,7 +425,9 @@
     </void>
     <void property="methods">
      <void property="text">
-      <string>+getNumber() : String
+      <string>+getStreet() : String
++setStreet(street : String)
++getNumber() : String
 +setNumber(number : String)
 +getPostCode() : String
 +setPostCode(postCode : String)
@@ -433,7 +438,7 @@
 +getDoor() : String
 +setDoor(door : String)
 &lt;font color=&quot;green&quot;&gt;+Addres()
-+Addres(id : int, number : String, postCode : String, floor : String, stair : String, door : String)&lt;/font&gt;
++Addres(id : int, street : String, number : String, postCode : String, floor : String, stair : String, door : String)&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
 +print()&lt;/font&gt;</string>
      </void>
@@ -485,7 +490,8 @@
 +removeAll() : boolean
 +removeYou()&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
-+print()&lt;/font&gt;</string>
++print()
++printProductList()&lt;/font&gt;</string>
      </void>
     </void>
     <void property="name">
