@@ -48,8 +48,8 @@ public class Product extends IdObject {
 
     @Override
     public String toString() {
-	return "Product [name=" + name + ", price=" + price + ", icon=" + icon
-		+ ", discount=" + discount + "]";
+	return "Product [id=" + id + ", name=" + name + ", price=" + price
+		+ ", icon=" + icon + ", discount=" + discount + "]";
     }
 
     public void print() {
