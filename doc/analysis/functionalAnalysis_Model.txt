@@ -1,0 +1,124 @@
+﻿Classes client:
+
+
+- Pizza(hereda producte):
+        -Atributs: 
+                -Llista ingredients
+                -tipus de massa(gruixuda, fina,)
+                -tipus de pizza(personalitzada guardada, personalitzada temporal, predefinida)
+                -tamany (gran,mitjana,petita,pizza Cowabunga)
+- Beguda(hereda de producte): 
+        -Atributs:
+                -tamany(gran,mitja,petites)
+- Ingredient llista(extend de map)
+        -id
+        - metodes funcionals
+        
+- Ingredient: 
+        -Atributs:
+                -nom
+                -preu
+                -textura/model(id)
+                -icon
+-Producte:
+        -Atributs:
+                -nom
+                -preu
+                -icon
+                -descompte
+-Ofertas(Hereda de producte):
+        -Atributs:
+                -Llista de Productes
+- Comanda:
+        Atributs: 
+                -id
+                -Carro de la compra
+                -Adreça
+                -Telf contacte
+                -Correu contacte
+                -data/hora
+                -Metode de pagament
+- Carro de la compra:
+        -Atributs:
+                -Llista de productes
+- Sistema: 
+        - Atributs: 
+- Llista pizzes predefinides
+- Llista pizzes personalitzades guardades
+- Llista pizzes personalitzades temporal.
+- Llista de comandes
+- Llista ingredients
+- Carro de la compra
+- Adreça:
+        -Atributs:
+                -Carrer
+                -Numero
+                -codi postal
+                -pis
+                -escala
+                -porta
+
+
+=================================================================
+
+
+- Pizza ( inherits the product) :
+    - Attributes :
+        -ingredients
+        -massType ( thick , thin )
+        -type ( costumSaved , costumTemporary, predefined)
+        -size ( large, medium , small , CowabungaPizza )
+- Drink ( inherited product ) :
+    - Attributes :
+        -size ( large , medium , small )
+- Ingredients llist(extend map)
+        -id
+        - methods
+- Ingredient :
+    - Attributes :
+        -id
+        -name
+        -price
+        -texture/model ( id)
+        -icon
+- Product:
+    - Attributes :
+        -id
+        -name
+        -price
+        -icon
+        -discount
+- Offer ( Heredia product ) :
+    - Attributes :
+        -pizzas
+        -drinks
+- Order:
+    attributes :
+        -id
+        -shoppingCart
+        -address
+        -phone
+        -email
+        -datetime
+        -paymentMethod
+- ShoppingCart :
+    - Attributes :
+        -id
+        -products
+- System :
+    - Attributes :
+        -predefinedPizzas
+        -customSavedPizzas
+        -customTemporaryPizzas.
+        -ordersSaved
+        -ingredients
+        -shoppingCart
+- Address:
+    - Attributes :
+        -id
+        -street
+        -number
+        -postCode
+        -floor/level
+        -stair
+        -door
