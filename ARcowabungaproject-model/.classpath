@@ -7,5 +7,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/run/media/local/ext4/CowabungaAr/ar-cowabunga-project/libs/joda-time-2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
