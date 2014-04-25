@@ -1,0 +1,224 @@
+﻿Proyecto Cowabunga
+ANÁLISIS FUNCIONAL Y NO FUNCIONAL
+
+
+
+
+
+
+
+
+
+
+Descripción básica
+
+
+
+
+        El objetivo de la práctica es crear una aplicación para Movil que permita al usuario, realizar un pedido a un punto de venta. Como base para desarrollar el proyecto nos hemos centrado en sector de la comida rápida, concretamente en una pizzería ficticia.
+
+
+        La idea es dar un paso más en la interacción con el usuario, mejorando la información del cliente a la hora de percibir el producto que se pretende vender. Por tanto esta aplicación, trata de desmarcarse de las aplicaciones tradicionales de venta, aportando un relevante plus de información al usuario.
+
+
+        Esta mejora del input que recibe el usuario sobre el producto se logrará aplicando tecnologías de realidad aumentada. Para acotar las enormes posibilidades que nos brinda la realidad aumentada, hemos escogido diseñar una aplicacion para una pizzeria. Dado que el objetivo último será el de vender pizzas,  el factor diferencial consistirá en una mejora en el modo de presentar el producto, las pizzas. Estas se presentarán de un modo realista, de modo que el cliente/usuario pueda, con su movil y un marcador (papel), pueda ver la pizza sobre un entorno que conoce, como por ejemplo, la mesa de su cocina.
+
+
+
+
+        Resumiendo: 
+
+
+1) El objetivo último del proyecto es crear una aplicación para poder realizar pedidos de pizzas a domicilio a una pizzería ficticia.
+2) La aplicación debe cumplir con ciertos principios básicos:
+-Fácil: Debe ser sencillo y amigable por el usuario
+-Intuitivo: El usuario debe entender rápidamente la dinámica de la aplicación de un modo natural.
+-Fluido: Debe gestionar los recursos de un móvil convencional de un modo eficiente que no entorpezca la inmersión del usuario.
+
+
+
+
+
+
+
+
+
+
+
+
+Análisis funcional
+
+
+        
+        La aplicación está pensada para generar un .apk para dispositivos android. Consta de un cliente, que instala la apk, y un servidor que recibe el pedido realizado desde la misma.
+
+
+
+
+Las vistas:
+El cliente
+
+
+View 0)Pantalla de carga
+
+
+En la pantalla de carga se comprueba coherencia de la base de datos
+Se informa al usuario en caso de que haya que actualizar. Se pueden poner anuncios spam de las ofertas.
+
+
+View 1)El Menu de incio:
+
+
+
+
+        En el básicamente el usuario se encontrará con tres opciones. 
+         
+        - Carta : Carta de productos a la venta
+        - Carro de la compra : Productos que se han ido añadiendo antes de realizar el pedido.
+        - Contacta con nosotros : Telefono, mapa de la franquicia mas cercana, enviaMail.
+
+
+
+
+View 2)La carta:
+
+
+
+
+        La carta es un conjunto de productos, separados separados en varios listviews. Que se deben recorrer de un modo sencillo, que dan al usuario una idea previa y muy resumida del producto del que se trata. El nombre en grande, precio y una pequeña foto o icono.
+        Deberá distribuirse entre pizzas, bebidas y menús.
+
+
+        Las bebidas deben tener un boton para añadir al carro, y que salga seleccionador de cantidad.
+
+
+        En el listview de  las pizzas aparte de las pizzas básicas, existirá una opción de crea tu propia pizza. En vez de botón de añadir al carro, para las pizzas se pasará a la listview 3.
+
+
+        Desde la carta debe existir una opción de ir directamente a realizar el pedido, (view 4, carro de la compra).
+
+
+        Los menús en realidad aumentada?
+
+
+View 3)La Información detallada (REALIDAD AUMENTADA)
+
+
+
+
+        Cuando se selecciona una pizza (las bebidas no es necesario) se salta a una nueva vista. En ella el móvil utilizará la cámara para implantar el modelo de la pizza en 3d. (Puede existir una pantalla previa de instrucciones la primera vez que se utilize la app)
+En caso de que se detecte marcador el modelo se pondrá sobre él y en caso de que no se detecte, se verá el modelo en un lado de la pantalla (¿pudiendo moverlo con los dedos?).
+
+
+        En las pizzas tradicionales se puede añadir una pequeña descripción. Aparte tendrá un botón de edición para añadir al carro.
+        
+En las pizzas editadas por el usuario existirá un menú a la derecha, desplegable, en donde se podrán elegir los ingredientes, masa y tamaño Existe la posibilidad de poner nombre a la pizza editada (quieres poner un nombre a esta obra maestra?)
+
+
+Esta view debe tener un boton de aceptar, añadiendo al carro o desechar. 
+
+
+
+
+View4)El carro de la compra
+
+
+        En esta view se ven los productos seleccionados para el pedido y el precio. Existirá un botón de aceptar y realizar el pedido, comenzará un protocolo de envio pedirá al usuario un numero de telefono, un mail, una direccion de envio y un nombre.
+        
+Tambien podrian ver pedidos anteriores, que se podrían copiar. (desarrollar esto un poco)
+
+
+
+
+View5)Cowabunga pizza
+        -Posibilidad de realizar enviar correo
+        -Telefono
+        -Mapa de la tienda
+        -Cualquier chorrada o kinder 
+
+
+
+
+
+
+
+
+El servidor
+
+
+Contiene la base de datos general de la aplicacion. La apk se conecta para comprobar coherencia de base de datos y descargarsela si requiere actualización.
+
+
+Recibe pedido, precio y direccion de envio…
+
+
+Puede enviar mail al usuario con tiempo estimado.
+
+
+
+
+Ideas a mayores :
+        - Pagar desde aplicaciones (api paypal)
+        - Interfaz servidor
+        - Web presentación
+        - Convertir a tablet
+
+
+
+
+
+
+Esquema
+Objetivo :
+
+
+        - Vender Pizzas
+        - Fácil
+        - Intuitivo 
+        - Rápido, fluído eficente
+        - Sencillo
+
+
+Pizza : 
+        - Carta básica
+        - Pizza al gusto  ---- > Menú edición
+
+
+Carrito de la compra : 
+        - Añadir
+        - Borrar
+        - Editar      -----> Menú edición
+
+
+Envío : 
+        - Pago 
+        - Añadir Dirección
+        - Direcciones anteriores
+        - Telefono de contacte
+        - Correo electrónico
+        - Aceptación del pedido  ----> Servidor
+        - Ping servidor (Confirmación conexión/pedido)
+
+
+Att Cliente: 
+        - Telefono
+        - Donde estamos
+        - Correo
+Ideas a mayores :
+        - Pagar desde aplicaciones (api paypal)
+        - Interfaz servidor
+        - Web presentación
+        - Convertir a tablet
+
+
+SERVIDOR 
+
+
+Base de datos :
+- Contenido App
+- Taula pedidos   : 
+- Historico
+- Actuales
+
+
+Actualización base de datos del cliente (app) desde servidor.
