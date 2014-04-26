@@ -66,13 +66,17 @@ public class ShoppingCart extends IdObject {
 	return productList.size();
     }
 
-    // public boolean removeAll() {
-    // productList.clear();
-    // }
+    public boolean removeAll() {
+	if (productList != null) {
+	    productList.clear();
+	    return true;
+	}
+	return false;
+    }
 
-    // public void removeYou() {
-    //
-    // }
+    public void removeYou() {
+	productList = null;
+    }
 
     // ====================
     // PROTECTED METHODS
@@ -85,6 +89,15 @@ public class ShoppingCart extends IdObject {
     // ====================
     // OVERRIDE METHODS
     // ====================
+
+    @Override
+    public String toString() {
+	return "ShoppingCart [Id=" + id + "productList=" + productList + "]";
+    }
+
+    public void print() {
+	System.out.println(toString());
+    }
 
     // ====================
     // GETTERS & SETTERS
