@@ -9,10 +9,10 @@ public class Product extends IdObject {
     // ====================
     // ATTRIBUTES
     // ====================
-    private String name;
-    private float price;
-    private int icon;
-    private float discount;
+    protected String name;
+    protected float price;
+    protected int icon;
+    protected float discount;
 
     // ====================
     // CONSTRUCTORS
