@@ -1,6 +1,7 @@
 package org.escoladeltreball.arcowabungaproject.model;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class IngredientsList extends HashMap<Ingredient, Integer> {
 
@@ -53,6 +54,10 @@ public class IngredientsList extends HashMap<Ingredient, Integer> {
 	    total += v;
 	}
 	return total;
+    }
+
+    public Set<Ingredient> getIngredients() {
+	return keySet();
     }
 
     // ====================
