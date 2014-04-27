@@ -1,11 +1,14 @@
 package org.escoladeltreball.arcowabungaproject.model;
 
-public abstract class IdObject {
+import java.io.Serializable;
+
+public abstract class IdObject implements Serializable {
 
     // ====================
     // CONSTANTS
     // ====================
 
+    private static final long serialVersionUID = -7056112589728294900L;
     public static final int MIN_CUSTOM_ID = 10000;
 
     // ====================
