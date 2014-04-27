@@ -1,5 +1,6 @@
 package org.escoladeltreball.arcowabungaproject.model;
 
+
 public class Pizza extends Product {
     // ====================
     // CONSTANTS
@@ -28,6 +29,20 @@ public class Pizza extends Product {
     // ====================
     // PUBLIC METHODS
     // ====================
+    public boolean addIngredient(Ingredient ingredient) {
+	if (ingredient != null) {
+	    if (ingredientsList == null) {
+		ingredientsList = new IngredientsList(id);
+	    }
+	    if (ingredientsList.containsKey(ingredient)) {
+		int numOfIngredient = ingredientsList.get(ingredient);
+		return ingredientsList.add(ingredient, numOfIngredient++);
+	    } else {
+		return ingredientsList.add(ingredient);
+	    }
+	}
+	return false;
+    }
 
     // ====================
     // PROTECTED METHODS
