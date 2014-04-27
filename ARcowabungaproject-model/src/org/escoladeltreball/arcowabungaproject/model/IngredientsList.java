@@ -67,8 +67,47 @@ public class IngredientsList extends HashMap<Ingredient, Integer> {
     // OVERRIDE METHODS
     // ====================
 
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = super.hashCode();
+	result = prime * result + id;
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (!super.equals(obj))
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	IngredientsList other = (IngredientsList) obj;
+	if (id != other.id)
+	    return false;
+	return true;
+    }
+
+    @Override
+    public String toString() {
+	return "IngredientsList [id=" + id + ", " + super.toString() + "]";
+    }
+
+    public void print() {
+	System.out.println(toString());
+    }
+
     // ====================
     // GETTERS & SETTERS
     // ====================
+
+    public int getId() {
+	return id;
+    }
+
+    public void setId(int id) {
+	this.id = id;
+    }
 
 }
