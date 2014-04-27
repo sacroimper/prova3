@@ -51,11 +51,16 @@ public class Offer {
     }
 
     public boolean removeAll() {
+	this.productList.clear();
+	if (this.productList.size() == 0) {
+	    return true;
+	}
 	return false;
     }
 
     public boolean removeYou() {
-	return false;
+	removeAll();
+	return true;
     }
 
     // ====================
@@ -69,6 +74,18 @@ public class Offer {
     // ====================
     // OVERRIDE METHODS
     // ====================
+    @Override
+    public String toString() {
+	return "Offer [productList=" + productList + "]";
+    }
+
+    public void print() {
+	System.out.println(toString());
+    }
+
+    public void printProductList() {
+	System.out.println(this.productList.toString());
+    }
 
     // ====================
     // ====================
