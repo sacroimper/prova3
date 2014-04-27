@@ -58,11 +58,6 @@ public class Offer {
 	return false;
     }
 
-    public boolean removeYou() {
-	removeAll();
-	return true;
-    }
-
     // ====================
     // PROTECTED METHODS
     // ====================
