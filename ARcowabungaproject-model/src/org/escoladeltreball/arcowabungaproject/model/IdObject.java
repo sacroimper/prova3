@@ -6,9 +6,14 @@ public abstract class IdObject {
     // CONSTANTS
     // ====================
 
+    public static final int MIN_CUSTOM_ID = 10000;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
+    private static int nextId = 1;
+    private static int nextCustomId = MIN_CUSTOM_ID + 1;
 
     protected int id;
 
@@ -24,6 +29,14 @@ public abstract class IdObject {
     // ====================
     // PUBLIC METHODS
     // ====================
+
+    public static int nextId() {
+	return nextId++;
+    }
+
+    public static int nextCustomId() {
+	return nextCustomId++;
+    }
 
     // ====================
     // PROTECTED METHODS
@@ -69,6 +82,22 @@ public abstract class IdObject {
 
     public void setId(int id) {
 	this.id = id;
+    }
+
+    public static int getNextId() {
+	return nextId;
+    }
+
+    public static void setNextId(int nextId) {
+	IdObject.nextId = nextId;
+    }
+
+    public static int getNextCustomId() {
+	return nextCustomId;
+    }
+
+    public static void setNextCostumId(int nextCustomId) {
+	IdObject.nextCustomId = nextCustomId;
     }
 
 }
