@@ -9,17 +9,16 @@
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_above="@+id/linearButton1"
+        android:layout_above="@id/linearButton1"
         android:layout_alignParentTop="true"
         android:background="@drawable/home_image" />
 
     <LinearLayout
-        android:id="@+id/linearButton4"
+        android:id="@+id/linearButton1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="#FE2E2E"
+        android:layout_above="@id/linearButton2"
+        android:background="#ad2334"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
@@ -38,99 +37,101 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="Do stuff" />
+            android:text="CARTA"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
-   <LinearLayout
-       android:id="@+id/linearButton3"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       android:layout_above="@+id/linearButton4"
-       android:layout_alignParentLeft="true"
-       android:background="#FE2E33"
-       android:clickable="true"
-       android:orientation="horizontal"
-       android:paddingLeft="20dp" >
+    <LinearLayout
+        android:id="@+id/linearButton2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/linearButton3"
+        android:layout_alignParentLeft="true"
+        android:background="#8d1f2a"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp" >
 
-       <ImageView
-           android:id="@+id/img"
-           android:layout_width="34dp"
-           android:layout_height="34dp"
-           android:layout_gravity="center_vertical"
-           android:layout_marginLeft="5dp"
-           android:src="@drawable/ic_launcher" />
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_launcher" />
 
-       <TextView
-           android:id="@+id/textView2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_vertical"
-           android:layout_margin="5dp"
-           android:text="Do stuff" />
-   </LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:text="PEDIDO ACTUAL"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
-   <LinearLayout
-       android:id="@+id/linearButton2"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       android:layout_above="@+id/linearButton3"
-       android:layout_alignParentLeft="true"
-       android:background="#F22E2E"
-       android:clickable="true"
-       android:orientation="horizontal"
-       android:paddingLeft="20dp" >
+    <LinearLayout
+        android:id="@+id/linearButton3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/linearButton4"
+        android:background="#711b23"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp" >
 
-       <ImageView
-           android:id="@+id/img"
-           android:layout_width="34dp"
-           android:layout_height="34dp"
-           android:layout_gravity="center_vertical"
-           android:layout_marginLeft="5dp"
-           android:src="@drawable/ic_launcher" />
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_launcher" />
 
-       <TextView
-           android:id="@+id/textView2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_vertical"
-           android:layout_margin="5dp"
-           android:text="Do stuff" />
-   </LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:text="CONTACTO"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
-   <LinearLayout
-       android:id="@+id/linearButton1"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       android:layout_above="@+id/linearButton2"
-       android:layout_alignParentLeft="true"
-       android:background="#FE2355"
-       android:clickable="true"
-       android:orientation="horizontal"
-       android:paddingLeft="20dp" >
+    <LinearLayout
+        android:id="@+id/linearButton4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#5a1b22"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp" >
 
-       <ImageView
-           android:id="@+id/img"
-           android:layout_width="34dp"
-           android:layout_height="34dp"
-           android:layout_gravity="center_vertical"
-           android:layout_marginLeft="5dp"
-           android:src="@drawable/ic_launcher" />
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_launcher" />
 
-       <TextView
-           android:id="@+id/textView2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_vertical"
-           android:layout_margin="5dp"
-           android:text="Do stuff" />
-   </LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:text="PEDIDOS ANTERIORES"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
-   <View
-       android:id="@+id/view1"
-       android:layout_width="match_parent"
-       android:layout_height="5dp"
-       android:layout_alignParentLeft="true"
-       android:layout_alignTop="@+id/linearButton1"
-       android:background="@drawable/gradient" />
-    
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/linearButton1"
+        android:background="@drawable/gradient3" />
+
 </RelativeLayout>
