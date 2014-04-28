@@ -3,7 +3,7 @@ package org.escoladeltreball.arcowabungaproject.model;
 import java.util.HashMap;
 import java.util.Set;
 
-public class IngredientsList extends HashMap<Ingredient, Integer> {
+public class Ingredients extends HashMap<Ingredient, Integer> {
 
     // ====================
     // CONSTANTS
@@ -23,7 +23,7 @@ public class IngredientsList extends HashMap<Ingredient, Integer> {
     // CONSTRUCTORS
     // ====================
 
-    public IngredientsList(int id) {
+    public Ingredients(int id) {
 	super();
 	this.id = id;
     }
@@ -37,7 +37,8 @@ public class IngredientsList extends HashMap<Ingredient, Integer> {
     }
 
     public boolean add(Ingredient ingredient, int value) {
-	if (getTotalIngredients() + value <= MAX_INGREDIENTS) {
+	if (getTotalIngredients() + value <= MAX_INGREDIENTS
+		|| get(ingredient) + value >= 0) {
 	    if (containsKey(ingredient)) {
 		value = get(ingredient) + value;
 	    }
@@ -88,7 +89,7 @@ public class IngredientsList extends HashMap<Ingredient, Integer> {
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	IngredientsList other = (IngredientsList) obj;
+	Ingredients other = (Ingredients) obj;
 	if (id != other.id)
 	    return false;
 	return true;
@@ -96,7 +97,7 @@ public class IngredientsList extends HashMap<Ingredient, Integer> {
 
     @Override
     public String toString() {
-	return "IngredientsList [id=" + id + ", " + super.toString() + "]";
+	return "Ingredients [id=" + id + ", " + super.toString() + "]";
     }
 
     public void print() {
