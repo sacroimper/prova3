@@ -10,9 +10,12 @@ public class ShoppingCart extends IdObject {
     // CONSTANTS
     // ====================
 
+    private static final long serialVersionUID = 1966476365496691321L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     private List<Product> productList;
 
     // ====================
@@ -26,6 +29,7 @@ public class ShoppingCart extends IdObject {
     // ====================
     // PUBLIC METHODS
     // ====================
+
     public boolean addProduct(final Product product) {
 	if (product != null) {
 	    if (productList == null) {
