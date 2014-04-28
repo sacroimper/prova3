@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:minHeight="130dp" >
+
+    <View
+        android:id="@+id/separatorTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <ImageView
+        android:id="@+id/imageInSubItem"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/pizzaIcon"
+        android:padding="5dp"
+        android:src="@drawable/home_image" />
+
+    <TextView
+        android:id="@+id/textInSubItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imageInSubItem"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/separatorTop"
+        android:layout_above="@+id/pizzaButtonInSubItem"
+        android:padding="5dp"
+        android:background="#33FF33" >
+    </TextView>
+
+    <LinearLayout
+        android:id="@id/pizzaButtonInSubItem"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/imageInSubItem"
+        android:layout_above="@+id/separatorBottom"
+        android:orientation="horizontal"
+        android:background="#FF33FF" 
+        android:padding="5dp"
+        android:clickable="true" >
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:contentDescription="@string/pizzaIcon"
+            android:drawable="@drawable/home_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:text="@string/thirdDView" />
+    </LinearLayout>
+
+    <View
+        android:id="@id/separatorBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray" />
+
+</RelativeLayout>
