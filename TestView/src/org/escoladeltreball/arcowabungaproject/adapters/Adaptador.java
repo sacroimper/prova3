@@ -1,15 +1,18 @@
 package org.escoladeltreball.arcowabungaproject.adapters;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.activities.ARViewActivity;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +49,7 @@ public class Adaptador extends BaseExpandableListAdapter {
     @Override
     public View getChildView(final int groupPosition, final int childPosition,
 	    boolean isLastChild, View convertView, ViewGroup parent) {
+	
 	final String children = (String) getChild(groupPosition, childPosition);
 	TextView textvw = null;
 	if (convertView == null) {
@@ -53,6 +57,12 @@ public class Adaptador extends BaseExpandableListAdapter {
 	}
 	textvw = (TextView) convertView.findViewById(R.id.textView1);
 	textvw.setText(children);
+	
+	Button ar3dpizzaButton = (Button) convertView.findViewById(R.id.pizzaButtonInSubItem);
+	
+	
+	ar3dpizzaButton.setOnClickListener(new MyOnClickListener(groupPosition));
+	
 	switch (groupPosition) {
 	case 0:
 	    switch (childPosition) {
@@ -72,14 +82,14 @@ public class Adaptador extends BaseExpandableListAdapter {
 		textvw.setCompoundDrawablesWithIntrinsicBounds(
 			R.drawable.pescadopaella, 0, 0, 0);
 		break;
-	    case 1:
-		textvw.setCompoundDrawablesWithIntrinsicBounds(
-			R.drawable.pescadoparrilla, 0, 0, 0);
-		break;
-	    case 2:
-		textvw.setCompoundDrawablesWithIntrinsicBounds(
-			R.drawable.pescadofrito, 0, 0, 0);
-		break;
+//	    case 1:
+//		textvw.setCompoundDrawablesWithIntrinsicBounds(
+//			R.drawable.pescadoparrilla, 0, 0, 0);
+//		break;
+//	    case 2:
+//		textvw.setCompoundDrawablesWithIntrinsicBounds(
+//			R.drawable.pescadofrito, 0, 0, 0);
+//		break;
 	    }
 	    break;
 	case 2:
@@ -158,4 +168,24 @@ public class Adaptador extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
 	return false;
     }
+    
+    public class MyOnClickListener implements OnClickListener{
+	
+	private int index;
+	
+	public MyOnClickListener(int index) {
+		this.index = index;
+	    }
+	    
+	    
+	    @Override
+	    public void onClick(View v) {
+		Intent i = new Intent(activity, ARViewActivity.class);
+		//Pasarle pizza
+//		i.putExtra("pizza", grupos.get(index));
+		activity.startActivity(i);
+	    }
+    }
 }
+
+

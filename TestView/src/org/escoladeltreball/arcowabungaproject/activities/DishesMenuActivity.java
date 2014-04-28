@@ -97,13 +97,13 @@ public class DishesMenuActivity extends Activity implements OnTouchListener, OnC
 
 	GrupoDeItems grupo0 = new GrupoDeItems("Pizza Margarita");
 	grupo0.children.add("Tomate, mozzarella, albahaca fresca, sal y aceite");
-	// grupo0.children.add("A la parrilla");
+//	 grupo0.children.add("A la parrilla");
 	grupos.append(0, grupo0);
 
 	GrupoDeItems grupo1 = new GrupoDeItems("Pizza Caprichosa");
 	grupo1.children.add("Tomate, mozzarella,alcachofas,champiñones, anchoas.");
-	// grupo1.children.add("A la parrilla");
-	// grupo1.children.add("Frito");
+//	 grupo1.children.add("A la parrilla");
+//	 grupo1.children.add("Frito");
 	grupos.append(1, grupo1);
 
 	GrupoDeItems grupo2 = new GrupoDeItems("Pizza Cuatro Estaciones");

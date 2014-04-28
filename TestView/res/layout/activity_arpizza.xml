@@ -12,32 +12,4 @@
         android:contentDescription="image_home"
         android:background="@drawable/home_image" />
 
-    <ImageButton
-        android:id="@+id/buttonMenu"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/home_menu_menu" />
-
-    <ImageButton
-        android:id="@+id/buttonShopCart"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/home_menu_actualorder" />
-
-    <ImageButton
-        android:id="@+id/buttonContact"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/home_menu_contact" />
-
-    <ImageButton
-        android:id="@+id/buttonOldShopCart"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="0.03"
-        android:scaleType="centerCrop"
-        android:background="@drawable/home_menu_lastorders" />
-
 </LinearLayout>
