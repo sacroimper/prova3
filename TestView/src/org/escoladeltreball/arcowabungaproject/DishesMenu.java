@@ -4,10 +4,14 @@ import org.escoladeltreball.arcowabungaproject.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.MotionEvent;
+import android.widget.ExpandableListView;
 import android.widget.TabHost;
 
 public class DishesMenu extends Activity {
+    	SparseArray<GrupoDeItems> grupos = new SparseArray<GrupoDeItems>();
+    
 	TabHost tabs;
 	float lastX;
 	
@@ -35,6 +39,32 @@ public class DishesMenu extends Activity {
 		tabs.addTab(spec);
 
 		tabs.setCurrentTab(0);
+		
+		//Vista expandible
+		ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
+		Adaptador adapter = new Adaptador(this, grupos);
+		listView.setAdapter(adapter);
+	}
+	
+
+	    public void crearDatos() {
+
+		GrupoDeItems grupo0 = new GrupoDeItems("Lechon");
+		grupo0.children.add("Al horno");
+		grupo0.children.add("A la parrilla");
+		grupos.append(0, grupo0);
+
+		GrupoDeItems grupo1 = new GrupoDeItems("Pescado");
+		grupo1.children.add("Paella");
+		grupo1.children.add("A la parrilla");
+		grupo1.children.add("Frito");
+		grupos.append(1, grupo1);
+
+		GrupoDeItems grupo2 = new GrupoDeItems("Sandwichs");
+		grupo2.children.add("Jam�n, queso y anan�");
+		grupo2.children.add("Pollo, morrones y aceitunas");
+		grupo2.children.add("Carlitos");
+		grupos.append(2, grupo2);
 	}
 
 	@Override

@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 public class MainActivity extends Activity implements OnClickListener{
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +29,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	//Boton
 	ImageButton bCarta = (ImageButton) findViewById(R.id.buttonMenu);
 	bCarta.setOnClickListener(this);
+	
     }
 
     @Override

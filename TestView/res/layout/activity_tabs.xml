@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TabHost
         android:id="@android:id/tabhost"
@@ -29,10 +29,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal" >
-                    <TextView 
-                        android:text="hola"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    <!-- ADDED  FOR THE LISTVIEW-->
+                    <ExpandableListView
+				        android:id="@+id/listViewexp"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content" >
+			    	</ExpandableListView>
+
                 </LinearLayout>
 
                 <LinearLayout
