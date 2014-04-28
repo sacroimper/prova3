@@ -1,6 +1,5 @@
 package org.escoladeltreball.arcowabungaproject.model;
 
-
 public class Pizza extends Product {
     // ====================
     // CONSTANTS
@@ -13,7 +12,7 @@ public class Pizza extends Product {
     private String type;
     private int size;
 
-    private IngredientsList ingredientsList;
+    private Ingredients ingredients;
 
     // ====================
     // CONSTRUCTORS
@@ -31,14 +30,14 @@ public class Pizza extends Product {
     // ====================
     public boolean addIngredient(Ingredient ingredient) {
 	if (ingredient != null) {
-	    if (ingredientsList == null) {
-		ingredientsList = new IngredientsList(id);
+	    if (ingredients == null) {
+		ingredients = new Ingredients(id);
 	    }
-	    if (ingredientsList.containsKey(ingredient)) {
-		int numOfIngredient = ingredientsList.get(ingredient);
-		return ingredientsList.add(ingredient, numOfIngredient++);
+	    if (ingredients.containsKey(ingredient)) {
+		int numOfIngredient = ingredients.get(ingredient);
+		return ingredients.add(ingredient, numOfIngredient++);
 	    } else {
-		return ingredientsList.add(ingredient);
+		return ingredients.add(ingredient);
 	    }
 	}
 	return false;
