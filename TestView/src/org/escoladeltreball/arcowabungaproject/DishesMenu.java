@@ -15,8 +15,12 @@ import android.widget.ExpandableListView;
 import android.widget.TabHost;
 
 public class DishesMenu extends Activity implements OnTouchListener {
+    
+    //Esta variable guarda el valor de resistencia al touch swipe
+    //Cuando esta a 0 con mover un milimetro el dedo salta de tab
+    static final int SCREEN_TOUCH_RESISTENCE = 200;
+    
     SparseArray<GrupoDeItems> grupos = new SparseArray<GrupoDeItems>();
-
     TabHost tabs;
     float lastX;
 
@@ -73,22 +77,38 @@ public class DishesMenu extends Activity implements OnTouchListener {
      */
     public void crearDatos() {
 
-	GrupoDeItems grupo0 = new GrupoDeItems("Lechon");
-	grupo0.children.add("Al horno");
+	GrupoDeItems grupo0 = new GrupoDeItems("Pizza Margarita");
+	grupo0.children.add("Tomate, mozzarella, albahaca fresca, sal y aceite");
 	// grupo0.children.add("A la parrilla");
 	grupos.append(0, grupo0);
 
-	GrupoDeItems grupo1 = new GrupoDeItems("Pescado");
-	grupo1.children.add("Paella");
+	GrupoDeItems grupo1 = new GrupoDeItems("Pizza Caprichosa");
+	grupo1.children.add("Tomate, mozzarella,alcachofas,champiñones, anchoas.");
 	// grupo1.children.add("A la parrilla");
 	// grupo1.children.add("Frito");
 	grupos.append(1, grupo1);
 
-	GrupoDeItems grupo2 = new GrupoDeItems("Sandwichs");
-	grupo2.children.add("Jam�n, queso y anan�");
+	GrupoDeItems grupo2 = new GrupoDeItems("Pizza Cuatro Estaciones");
+	grupo2.children.add("Champiñones, alcachofa, jamon de york, aceitunas");
 	// grupo2.children.add("Pollo, morrones y aceitunas");
 	// grupo2.children.add("Carlitos");
 	grupos.append(2, grupo2);
+	
+	GrupoDeItems grupo3 = new GrupoDeItems("Pizza Cuatro Quesos");
+	grupo3.children.add("Mozarrella, Gouda, Roquefort y Emental");
+	grupos.append(3, grupo3);
+	
+	GrupoDeItems grupo4 = new GrupoDeItems("Pizza Calzone");
+	grupo4.children.add("Jamón, champiñones y huevo");
+	grupos.append(4, grupo4);
+	
+	GrupoDeItems grupo5 = new GrupoDeItems("Pizza Frutti di Mare");
+	grupo5.children.add("Mejillones, gambas y albaca fresca");
+	grupos.append(5, grupo5);
+	
+	GrupoDeItems grupo6 = new GrupoDeItems("Pizza Proschiutto e funghi");
+	grupo6.children.add("Jamón y Champiñones");
+	grupos.append(6, grupo6);
     }
 
     public void switchTabs(boolean direction) {
@@ -130,12 +150,12 @@ public class DishesMenu extends Activity implements OnTouchListener {
 	case MotionEvent.ACTION_UP: {
 	    float currentX = event.getRawX();
 	    // if left to right swipe on screen
-	    if (lastX < currentX) {
+	    if (lastX < currentX + SCREEN_TOUCH_RESISTENCE) {
 
 		switchTabs(true);
 	    }
 	    // if right to left swipe on screen
-	    if (lastX > currentX) {
+	    if (lastX > currentX - SCREEN_TOUCH_RESISTENCE) {
 		switchTabs(false);
 	    }
 
