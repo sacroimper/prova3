@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="15"
+        android:contentDescription="image_home"
+        android:background="@drawable/home_image" />
+
+    <ImageButton
+        android:id="@+id/buttonMenu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/home_menu_menu" />
+
+    <ImageButton
+        android:id="@+id/buttonShopCart"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/home_menu_actualorder" />
+
+    <ImageButton
+        android:id="@+id/buttonContact"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/home_menu_contact" />
+
+    <ImageButton
+        android:id="@+id/buttonOldShopCart"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0.03"
+        android:scaleType="centerCrop"
+        android:background="@drawable/home_menu_lastorders" />
+
+</LinearLayout>

@@ -1,4 +1,6 @@
-package org.escoladeltreball.arcowabungaproject;
+package org.escoladeltreball.arcowabungaproject.activities;
+
+import org.escoladeltreball.arcowabungaproject.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -41,7 +43,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-	Intent intent = new Intent(this.getApplicationContext(), DishesMenu.class);
+	Intent intent = new Intent(this.getApplicationContext(), DishesMenuActivity.class);
 	startActivity(intent);
     }
 

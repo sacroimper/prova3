@@ -1,4 +1,4 @@
-package org.escoladeltreball.arcowabungaproject;
+package org.escoladeltreball.arcowabungaproject.model;
 
 import java.util.ArrayList;
 import java.util.List;
