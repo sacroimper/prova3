@@ -10,7 +10,7 @@
     </void>
     <void property="methods">
      <void property="text">
-      <string>&lt;font color=&quot;green&quot;&gt;+Offer()
+      <string>&lt;font color=&quot;green&quot;&gt;+Offer(id : int)
 +Offer(id : int, name : String, price : float, icon : int, discount : float)&lt;/font&gt;
 &lt;font color=&apos;red&apos;&gt;+addProduct(product : Product) : boolean
 +removeProduct(product : Product) : boolean
@@ -75,7 +75,7 @@
 +setDateTime(dateTime : DateTime)
 +getPaymentMethod() : String
 +setPaymentMethod(payMethod : String)
-&lt;font color=&quot;green&quot;&gt;+Order()
+&lt;font color=&quot;green&quot;&gt;+Order(id : int)
 +Order(id : int, phone : String, email : String, dateTime : DateTime, paymentMethod : String)&lt;/font&gt;
 &lt;font color=&quot;red&quot;&gt;+getAddres() : Addres
 +setAddres(addres : Addres)
@@ -136,8 +136,7 @@
 +setModel(model : int)
 +getIcon() : int
 +setIcon( icon : int)
-&lt;font color=&quot;green&quot;&gt;+Ingredient()
-+Ingredient(id : int)
+&lt;font color=&quot;green&quot;&gt;+Ingredient(id : int)
 +Ingredient(id : int, name : String, price : float, model : int, icon : int)&lt;/font&gt; 
 &lt;font color=&quot;purple&quot;&gt;+toString()
 +print()&lt;/font&gt;</string>
@@ -190,8 +189,7 @@
 +setIcon(icon : int)
 +getDiscount() : float
 +setDiscount(discount : float)
-&lt;font color=&quot;green&quot;&gt;+Product()
-+Product(id : int)
+&lt;font color=&quot;green&quot;&gt;+Product(id : int)
 +Product(id : int, name : String, price : float, icon : int, discount : float)&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
 +print()&lt;/font&gt;</string>
@@ -282,7 +280,7 @@
      <void property="text">
       <string>+getSize() : int
 +setSize(size : int)
-&lt;font color=&quot;green&quot;&gt;+Drink()
+&lt;font color=&quot;green&quot;&gt;+Drink(id : int)
 +Drink(id : int, name : String, price : float, icon : int,discount : float, size : int)&lt;/font&gt;</string>
      </void>
     </void>
@@ -320,7 +318,7 @@
       <string>-massType : String
 -type : String
 -size : int
-&lt;font color=&quot;red&quot;&gt;-ingredientList : IngredientList&lt;/font&gt;</string>
+&lt;font color=&quot;red&quot;&gt;-ingredients : Ingredients&lt;/font&gt;</string>
      </void>
     </void>
     <void property="methods">
@@ -331,19 +329,16 @@
 +setType(type : String)
 +getSize() : int
 +setSize(size : int)
-&lt;font color=&quot;green&quot;&gt;+Pizza()
+&lt;font color=&quot;green&quot;&gt;+Pizza(id : int)
 +Pizza(id : int, name : String, price : float, icon : int,discount : float, massType : String, type : String, size : int)&lt;/font&gt;
-&lt;font color=&apos;red&apos;&gt;+addIngredient(ingredient : Ingredient) : boolean
+&lt;font color=&apos;red&apos;&gt;+addIngredient(ingredient : Ingredient, value : int) : boolean
 +removeIngredient(ingredient : Ingredient) : boolean
-+getIngredientsList() : IngredientList
-+hasInIngredient(ingredient : Ingredient) : boolean
-+iteratorIngredients() : iterator
-+sizeIngredients() : int
-+removeAll() : boolean
-+removeYou()&lt;/font&gt;
++getIngredients() : Ingredients
++getIngredientsSet() : Set&lt;Ingredient&gt;
++remove()&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
 +print()
-+printIngredientsList()&lt;/font&gt;</string>
++printIngredients()&lt;/font&gt;</string>
      </void>
     </void>
     <void property="name">
@@ -375,18 +370,29 @@
   </void>
   <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode7">
+    <void property="attributes">
+     <void property="text">
+      <string>id : int</string>
+     </void>
+    </void>
     <void property="methods">
      <void property="text">
-      <string>&lt;font color=&quot;green&quot;&gt;+IngredientsList()&lt;/font&gt;
+      <string>getId() : int
+setId(id : int)
+&lt;font color=&quot;green&quot;&gt;+Ingredients(id : int)&lt;/font&gt;
+&lt;font color=&quot;blue&quot;&gt;+hashCode() : int
++equals(object : Object)&lt;/font&gt;
++add(ingredient : Ingredient) : boolean
++add(ingredient : Ingredient, value : int) : boolean
++getIngredients() : Set&lt;Ingredient&gt;
++getTotalIngredients() : int
 &lt;font color=&quot;purple&quot;&gt;+toString()
-+print()&lt;/font&gt;
-+getIngredients() : List&lt;Ingredient&gt;
-+getTotalIngredients() : int</string>
++print()&lt;/font&gt;</string>
      </void>
     </void>
     <void property="name">
      <void property="text">
-      <string>IngredientsList</string>
+      <string>Ingredients</string>
      </void>
     </void>
    </object>
@@ -437,7 +443,7 @@
 +setStair(stari : String)
 +getDoor() : String
 +setDoor(door : String)
-&lt;font color=&quot;green&quot;&gt;+Addres()
+&lt;font color=&quot;green&quot;&gt;+Addres(id : int)
 +Addres(id : int, street : String, number : String, postCode : String, floor : String, stair : String, door : String)&lt;/font&gt;
 &lt;font color=&quot;purple&quot;&gt;+toString()
 +print()&lt;/font&gt;</string>
@@ -474,13 +480,12 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode9">
     <void property="attributes">
      <void property="text">
-      <string>&lt;font color=&quot;red&quot;&gt;-productList : ArrayList&lt;Product&gt;&lt;/font&gt;</string>
+      <string>&lt;font color=&quot;red&quot;&gt;-productList : List&lt;Product&gt;&lt;/font&gt;</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>&lt;font color=&quot;green&quot;&gt;+ShoppingCart()
-+ShoppingCart(id : int)&lt;/font&gt;
+      <string>&lt;font color=&quot;green&quot;&gt;+ShoppingCart(id : int)&lt;/font&gt;
 &lt;font color=&apos;red&apos;&gt;+addProduct(product : Product) : boolean
 +removeProduct(product : Product) : boolean
 +getProduct() : ArrayList&lt;Product&gt;
