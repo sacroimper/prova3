@@ -1,20 +1,24 @@
-package org.escoladeltreball.arcowabungaproject;
+package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
+import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TabHost;
 
-public class DishesMenu extends Activity implements OnTouchListener {
+public class DishesMenuActivity extends Activity implements OnTouchListener, OnClickListener {
     
     //Esta variable guarda el valor de resistencia al touch swipe
     //Cuando esta a 0 con mover un milimetro el dedo salta de tab
@@ -37,7 +41,26 @@ public class DishesMenu extends Activity implements OnTouchListener {
 
 	setContentView(R.layout.activity_tabs);
 
+	//ELIMINAR CUANDO SE INCORORE BASE DE DATOS
+	//Incorpora datos ficticios
 	crearDatos();
+	
+	//Pestañas
+	makeTabs();
+
+	
+	// añadiendo la posibilidad de arrastrar a la derecha tambien en los
+	// botones
+	//De momento solo hay una listview en la tab1 (listViewexp)
+	ExpandableListView elv = (ExpandableListView) findViewById(R.id.listViewexp);
+	elv.setOnTouchListener(this);
+	
+	Button b = (Button) findViewById(R.id.imageInSubItem);
+	b.setOnClickListener(this);
+
+    }
+
+    private void makeTabs() {
 	// Vista expandible
 	ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
 	Adaptador adapter = new Adaptador(this, grupos);
@@ -62,14 +85,6 @@ public class DishesMenu extends Activity implements OnTouchListener {
 	tabs.addTab(spec);
 
 	tabs.setCurrentTab(0);
-
-	// añadiendo la posibilidad de arrastrar a la derecha tambien en los
-	// botones
-	
-	//De momento solo hay una listview en la tab1 (listViewexp)
-	ExpandableListView elv = (ExpandableListView) findViewById(R.id.listViewexp);
-	elv.setOnTouchListener(this);
-
     }
 
     /**
@@ -163,6 +178,11 @@ public class DishesMenu extends Activity implements OnTouchListener {
 	}
 	}
 	return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+	
     }
 
 }

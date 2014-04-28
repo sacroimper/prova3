@@ -1,7 +1,9 @@
-package org.escoladeltreball.arcowabungaproject;
+package org.escoladeltreball.arcowabungaproject.activities;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import org.escoladeltreball.arcowabungaproject.R;
 
 import android.app.Activity;
 import android.content.Intent;
