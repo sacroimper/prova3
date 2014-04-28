@@ -41,6 +41,8 @@ public abstract class IdObject implements Serializable {
 	return nextCustomId++;
     }
 
+    public abstract void print();
+
     // ====================
     // PROTECTED METHODS
     // ====================

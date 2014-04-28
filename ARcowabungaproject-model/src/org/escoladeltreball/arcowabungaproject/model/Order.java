@@ -1,13 +1,19 @@
 package org.escoladeltreball.arcowabungaproject.model;
 
-
 import org.joda.time.DateTime;
 
 public class Order extends IdObject {
 
     // ====================
+    // CONSTANTS
+    // ====================
+
+    private static final long serialVersionUID = -2135877001141999580L;
+
+    // ====================
     // ATTRIBUTES
     // ====================
+
     private String phone;
     private String email;
     private DateTime dateTime;
@@ -50,22 +56,6 @@ public class Order extends IdObject {
     }
 
     // ====================
-    // PRINTS
-    // ====================
-
-    public void print() {
-	System.out.println(toString());
-    }
-
-    public void printAddress() {
-	System.out.println(this.address.toString());
-    }
-
-    public void printShoppingCart() {
-	System.out.println(this.shoppingCart.toString());
-    }
-
-    // ====================
     // PROTECTED METHODS
     // ====================
 
@@ -82,6 +72,18 @@ public class Order extends IdObject {
 	return "Order [phone=" + phone + ", email=" + email + ", dateTime="
 		+ dateTime + ", paymentMethod=" + paymentMethod + ", address="
 		+ address + ", shoppingCart=" + shoppingCart + "]";
+    }
+
+    public void print() {
+	System.out.println(toString());
+    }
+
+    public void printAddress() {
+	System.out.println(this.address.toString());
+    }
+
+    public void printShoppingCart() {
+	System.out.println(this.shoppingCart.toString());
     }
 
     // ====================

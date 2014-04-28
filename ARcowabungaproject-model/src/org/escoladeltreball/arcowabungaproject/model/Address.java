@@ -3,6 +3,12 @@ package org.escoladeltreball.arcowabungaproject.model;
 public class Address extends IdObject {
 
     // ====================
+    // CONSTANTS
+    // ====================
+
+    private static final long serialVersionUID = 2162643300824182716L;
+
+    // ====================
     // ATTRIBUTES
     // ====================
 

@@ -1,10 +1,13 @@
 package org.escoladeltreball.arcowabungaproject.model;
 
+import java.util.Set;
+
 public class Pizza extends Product {
     // ====================
     // CONSTANTS
     // ====================
 
+    private static final long serialVersionUID = 3520483599417593606L;
     // ====================
     // ATTRIBUTES
     // ====================
@@ -17,6 +20,10 @@ public class Pizza extends Product {
     // ====================
     // CONSTRUCTORS
     // ====================
+    public Pizza(int id) {
+	super(id);
+    }
+
     public Pizza(int id, String name, float price, int icon, float discount,
 	    String massType, String type, int size) {
 	super(id, name, price, icon, discount);
@@ -28,19 +35,30 @@ public class Pizza extends Product {
     // ====================
     // PUBLIC METHODS
     // ====================
-    public boolean addIngredient(Ingredient ingredient) {
+    public boolean addIngredient(Ingredient ingredient, int value) {
 	if (ingredient != null) {
 	    if (ingredients == null) {
 		ingredients = new Ingredients(id);
 	    }
-	    if (ingredients.containsKey(ingredient)) {
-		int numOfIngredient = ingredients.get(ingredient);
-		return ingredients.add(ingredient, numOfIngredient++);
-	    } else {
-		return ingredients.add(ingredient);
-	    }
+	    return ingredients.add(ingredient, value);
 	}
 	return false;
+    }
+
+    public boolean removeIngredient(Ingredient ingredient) {
+	if (ingredient != null) {
+	    ingredients.remove(ingredient);
+	    return true;
+	}
+	return false;
+    }
+
+    public Set<Ingredient> getIngredientsSet() {
+	return ingredients.getIngredients();
+    }
+
+    public void remove() {
+	ingredients = null;
     }
 
     // ====================
@@ -54,6 +72,21 @@ public class Pizza extends Product {
     // ====================
     // OVERRIDE METHODS
     // ====================
+    @Override
+    public String toString() {
+	return "Pizza [" + "id=" + id + ", name=" + name + ", price=" + price
+		+ ", icon=" + icon + ", discount=" + discount + ", massType="
+		+ massType + ", type=" + type + ", size=" + size
+		+ ", ingredients=" + ingredients.toString() + "]";
+    }
+
+    public void print() {
+	System.out.println(toString());
+    }
+
+    public void printIngredients() {
+	System.out.println(ingredients.toString());
+    }
 
     // ====================
     // GETTERS & SETTERS
@@ -80,5 +113,9 @@ public class Pizza extends Product {
 
     public void setSize(int size) {
 	this.size = size;
+    }
+
+    public Ingredients getIngredients() {
+	return ingredients;
     }
 }
