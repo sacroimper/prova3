@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.MotionEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.TabHost;
 
@@ -18,13 +20,28 @@ public class DishesMenu extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Remove title bar
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		// Remove notification bar
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+			WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		setContentView(R.layout.activity_tabs);
+		
+		crearDatos();
+		//Vista expandible
+		ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
+		Adaptador adapter = new Adaptador(this, grupos);
+		listView.setAdapter(adapter);
 		
 		tabs = (TabHost) findViewById(android.R.id.tabhost);
 		tabs.setup();
 
 		TabHost.TabSpec spec = tabs.newTabSpec("mitab1");
-		spec.setContent(R.id.tab1);
+//		spec.setContent(R.id.tab1);
+		spec.setContent(R.id.listViewexp);
 		spec.setIndicator("TAB1");
 		tabs.addTab(spec);
 
@@ -40,10 +57,7 @@ public class DishesMenu extends Activity {
 
 		tabs.setCurrentTab(0);
 		
-		//Vista expandible
-		ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
-		Adaptador adapter = new Adaptador(this, grupos);
-		listView.setAdapter(adapter);
+		
 	}
 	
 
