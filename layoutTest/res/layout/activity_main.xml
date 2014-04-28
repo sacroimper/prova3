@@ -9,15 +9,15 @@
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_above="@id/linearButton1"
+        android:layout_above="@+id/linearButton1"
         android:layout_alignParentTop="true"
         android:background="@drawable/home_image" />
 
     <LinearLayout
-        android:id="@+id/linearButton1"
+        android:id="@id/linearButton1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@id/linearButton2"
+        android:layout_above="@+id/linearButton2"
         android:background="#ad2334"
         android:clickable="true"
         android:orientation="horizontal"
@@ -42,7 +42,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearButton2"
+        android:id="@id/linearButton2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_above="@+id/linearButton3"
