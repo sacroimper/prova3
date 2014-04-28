@@ -20,29 +20,23 @@
                 android:layout_height="wrap_content" >
             </TabWidget>
 
-            <FrameLayout
+           <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
-<!--                 <ExpandableListView -->
-<!-- 				        android:id="@+id/listViewexp" -->
-<!-- 				        android:layout_width="match_parent" -->
-<!-- 				        android:layout_height="wrap_content" > -->
-<!-- 			    	</ExpandableListView> -->
 			    	
-<!--                 <LinearLayout -->
-<!--                     android:id="@+id/tab1" -->
-<!--                     android:layout_width="match_parent" -->
-<!--                     android:layout_height="match_parent" -->
-<!--                     android:orientation="vertical"> -->
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
                     <ExpandableListView
 				        android:id="@+id/listViewexp"
 				        android:layout_width="match_parent"
 				        android:layout_height="wrap_content" >
 			    	</ExpandableListView>
-
-<!--                 </LinearLayout> -->
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/tab2"
