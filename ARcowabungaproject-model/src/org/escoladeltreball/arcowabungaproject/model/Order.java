@@ -56,22 +56,6 @@ public class Order extends IdObject {
     }
 
     // ====================
-    // PRINTS
-    // ====================
-
-    public void print() {
-	System.out.println(toString());
-    }
-
-    public void printAddress() {
-	System.out.println(this.address.toString());
-    }
-
-    public void printShoppingCart() {
-	System.out.println(this.shoppingCart.toString());
-    }
-
-    // ====================
     // PROTECTED METHODS
     // ====================
 
@@ -88,6 +72,18 @@ public class Order extends IdObject {
 	return "Order [phone=" + phone + ", email=" + email + ", dateTime="
 		+ dateTime + ", paymentMethod=" + paymentMethod + ", address="
 		+ address + ", shoppingCart=" + shoppingCart + "]";
+    }
+
+    public void print() {
+	System.out.println(toString());
+    }
+
+    public void printAddress() {
+	System.out.println(this.address.toString());
+    }
+
+    public void printShoppingCart() {
+	System.out.println(this.shoppingCart.toString());
     }
 
     // ====================
