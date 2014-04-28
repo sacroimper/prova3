@@ -5,6 +5,7 @@ import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.MotionEvent;
@@ -45,6 +46,12 @@ public class DishesMenuActivity extends Activity implements OnTouchListener, OnC
 	//Incorpora datos ficticios
 	crearDatos();
 	
+	// Vista expandible
+	ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
+	Adaptador adapter = new Adaptador(this, grupos);
+	listView.setAdapter(adapter);
+
+
 	//Pestañas
 	makeTabs();
 
@@ -52,20 +59,16 @@ public class DishesMenuActivity extends Activity implements OnTouchListener, OnC
 	// añadiendo la posibilidad de arrastrar a la derecha tambien en los
 	// botones
 	//De momento solo hay una listview en la tab1 (listViewexp)
-	ExpandableListView elv = (ExpandableListView) findViewById(R.id.listViewexp);
-	elv.setOnTouchListener(this);
+//	ExpandableListView elv = (ExpandableListView) findViewById(R.id.listViewexp);
+	listView.setOnTouchListener(this);
 	
-	Button b = (Button) findViewById(R.id.imageInSubItem);
-	b.setOnClickListener(this);
+//	Button b = (Button) findViewById(R.id.pizzaButtonInSubItem);
+//	b.setOnClickListener(this);
 
     }
 
     private void makeTabs() {
-	// Vista expandible
-	ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
-	Adaptador adapter = new Adaptador(this, grupos);
-	listView.setAdapter(adapter);
-
+	
 	tabs = (TabHost) findViewById(android.R.id.tabhost);
 	tabs.setup();
 
@@ -180,9 +183,12 @@ public class DishesMenuActivity extends Activity implements OnTouchListener, OnC
 	return false;
     }
 
+    //Intent para que empieze la realidad aumentada
+    //Habrá que identificar el id del boton para saber que pizza lanzar
     @Override
     public void onClick(View v) {
-	
+//	Intent arPizza = new Intent(this, ARViewActivity.class);
+//	startActivity(arPizza);
     }
 
 }

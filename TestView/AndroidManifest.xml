@@ -22,7 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="DishesMenu"></activity>
+        <activity android:name="org.escoladeltreball.arcowabungaproject.activities.DishesMenuActivity"></activity>
+        <activity android:name="org.escoladeltreball.arcowabungaproject.activities.ARViewActivity"></activity>
     </application>
 
 </manifest>
