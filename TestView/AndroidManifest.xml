@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name="org.escoladeltreball.arcowabungaproject.activities.DishesMenuActivity"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity android:name="org.escoladeltreball.arcowabungaproject.activities.ARViewActivity" >
         </activity>
