@@ -32,7 +32,9 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/separatorTop"
         android:layout_above="@+id/pizzaButtonInSubItem"
-        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
         android:background="#33FF33" >
     </TextView>
 
@@ -44,20 +46,23 @@
         android:layout_toRightOf="@id/imageInSubItem"
         android:layout_above="@+id/separatorBottom"
         android:orientation="horizontal"
-        android:background="#FF33FF" 
-        android:padding="5dp"
+        android:background="#e73445" 
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
         android:clickable="true" >
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:contentDescription="@string/pizzaIcon"
-            android:drawable="@drawable/home_image" />
+            android:paddingRight="5dp"
+            android:src="@drawable/home_image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="5dp"
             android:text="@string/thirdDView" />
     </LinearLayout>
 
