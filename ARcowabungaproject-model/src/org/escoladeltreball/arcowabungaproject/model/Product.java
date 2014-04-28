@@ -6,9 +6,12 @@ public class Product extends IdObject {
     // CONSTANTS
     // ====================
 
+    private static final long serialVersionUID = -1719816694255972083L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     protected String name;
     protected float price;
     protected int icon;
@@ -59,6 +62,7 @@ public class Product extends IdObject {
     // ====================
     // GETTERS & SETTERS
     // ====================
+
     public String getName() {
 	return name;
     }
