@@ -1,13 +1,19 @@
 package org.escoladeltreball.arcowabungaproject.model;
 
-
 import org.joda.time.DateTime;
 
 public class Order extends IdObject {
 
     // ====================
+    // CONSTANTS
+    // ====================
+
+    private static final long serialVersionUID = -2135877001141999580L;
+
+    // ====================
     // ATTRIBUTES
     // ====================
+
     private String phone;
     private String email;
     private DateTime dateTime;
