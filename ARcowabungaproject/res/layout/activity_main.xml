@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     android:orientation="vertical" >
 
     <ImageView
@@ -9,35 +10,110 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="15"
-        android:contentDescription="image_home"
         android:background="@drawable/home_image" />
 
-    <ImageButton
-        android:id="@+id/buttonMenu"
+    <LinearLayout
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/home_menu_menu" />
+        android:background="#FE2E2E"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp" >
 
-    <ImageButton
-        android:id="@+id/buttonShopCart"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/home_menu_actualorder" />
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_launcher" />
 
-    <ImageButton
-        android:id="@+id/buttonContact"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/home_menu_contact" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:text="Do stuff" />
+    </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/buttonOldShopCart"
+    <LinearLayout
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="0.03"
-        android:scaleType="centerCrop"
-        android:background="@drawable/home_menu_lastorders" />
+        android:background="#FE2E2E"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"  >
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:text="Do stuff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FE2E2E"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"  >
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:text="Do stuff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FE2E2E"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"  >
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:text="Do stuff" />
+    </LinearLayout>
 
 </LinearLayout>
