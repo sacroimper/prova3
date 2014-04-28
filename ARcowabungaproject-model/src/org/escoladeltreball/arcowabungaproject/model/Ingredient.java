@@ -6,6 +6,8 @@ public class Ingredient extends IdObject {
     // CONSTANTS
     // ====================
 
+    private static final long serialVersionUID = 8143762553201667318L;
+
     // ====================
     // ATTRIBUTES
     // ====================

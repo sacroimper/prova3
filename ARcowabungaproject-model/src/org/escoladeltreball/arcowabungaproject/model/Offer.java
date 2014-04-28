@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ShoppingCart extends IdObject {
-
+public class Offer {
     // ====================
     // CONSTANTS
     // ====================
@@ -19,63 +18,44 @@ public class ShoppingCart extends IdObject {
     // CONSTRUCTORS
     // ====================
 
-    public ShoppingCart(int id) {
-	super(id);
+    public Offer() {
+	super();
+	this.productList = new ArrayList<>();
     }
 
     // ====================
     // PUBLIC METHODS
     // ====================
-    public boolean addProduct(final Product product) {
-	if (product != null) {
-	    if (productList == null) {
-		productList = new ArrayList<Product>();
-	    }
-	    return productList.add(product);
-	}
-	return false;
+    public boolean addProduct(Product product) {
+	return this.productList.add(product);
     }
 
-    public boolean removeProduct(final Product product) {
-	if (product != null) {
-	    Iterator<Product> it = iteratorProducts();
-	    while (it.hasNext()) {
-		Product p = (Product) it.next();
-		if (p.equals(product)) {
-		    productList.remove(product);
-		    return true;
-		}
-	    }
-	}
-	return false;
+    public boolean removeProduct(Product product) {
+	return this.productList.remove(product);
     }
 
     public List<Product> getProduct() {
-	return productList;
+	return this.productList;
     }
 
     public boolean hasInProducts(Product product) {
-	return productList.contains(product);
+	return this.productList.contains(product);
     }
 
     public Iterator<Product> iteratorProducts() {
-	return productList.iterator();
+	return this.productList.iterator();
     }
 
     public int sizeProducts() {
-	return productList.size();
+	return this.productList.size();
     }
 
     public boolean removeAll() {
-	if (productList != null) {
-	    productList.clear();
+	this.productList.clear();
+	if (this.productList.size() == 0) {
 	    return true;
 	}
 	return false;
-    }
-
-    public void removeYou() {
-	productList = null;
     }
 
     // ====================
@@ -89,18 +69,28 @@ public class ShoppingCart extends IdObject {
     // ====================
     // OVERRIDE METHODS
     // ====================
-
     @Override
     public String toString() {
-	return "ShoppingCart [Id=" + id + "productList=" + productList + "]";
+	return "Offer [productList=" + productList + "]";
     }
 
     public void print() {
 	System.out.println(toString());
     }
 
+    public void printProductList() {
+	System.out.println(this.productList.toString());
+    }
+
+    // ====================
     // ====================
     // GETTERS & SETTERS
-    // ====================
 
+    public List<Product> getProductList() {
+	return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+	this.productList = productList;
+    }
 }
