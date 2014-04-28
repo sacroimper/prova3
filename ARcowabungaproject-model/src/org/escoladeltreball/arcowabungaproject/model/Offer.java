@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Offer {
+public class Offer extends Product {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -422646089915638752L;
+    /**
+     * 
+     */
+
     // ====================
     // CONSTANTS
     // ====================
@@ -18,8 +26,8 @@ public class Offer {
     // CONSTRUCTORS
     // ====================
 
-    public Offer() {
-	super();
+    public Offer(int id, String name, float price, int icon, float discount) {
+	super(id, name, price, icon, discount);
 	this.productList = new ArrayList<>();
     }
 
