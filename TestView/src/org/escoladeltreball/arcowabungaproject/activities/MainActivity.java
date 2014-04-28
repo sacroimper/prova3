@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 public class MainActivity extends Activity implements OnClickListener{
     
@@ -28,8 +29,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_main);
 	
-	//Boton
-	ImageButton bCarta = (ImageButton) findViewById(R.id.buttonMenu);
+	//LinearLayout
+	LinearLayout bCarta = (LinearLayout) findViewById(R.id.linearButtonMenu);
 	bCarta.setOnClickListener(this);
 	
     }
