@@ -4,5 +4,6 @@
     <string name="app_name">ARcowabungaproject</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="thirdView">Vista 3D</string>
 
 </resources>
