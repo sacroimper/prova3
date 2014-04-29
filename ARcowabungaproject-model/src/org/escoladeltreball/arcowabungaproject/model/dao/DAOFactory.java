@@ -73,13 +73,13 @@ public abstract class DAOFactory {
     // ATTRIBUTES
     // ====================
     private int currentVersion;
-    private static DAOFactory instance;
+    protected static DAOFactory instance;
     private System system;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-    private DAOFactory(System system) {
+    protected DAOFactory(System system) {
 	this.system = system;
     }
 
