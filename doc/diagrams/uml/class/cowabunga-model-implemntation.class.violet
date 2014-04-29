@@ -545,19 +545,42 @@ setId(id : int)
     </void>
     <void property="methods">
      <void property="text">
-      <string>&lt;font color=&apos;green&apos;&gt;&lt;u&gt;+getInstance() : System&lt;/u&gt;
+      <string>+getPredefinedPizzas() : Set&lt;Pizza&gt;
++setPredefinedPizzas(predefinedPizza : Set&lt;Pizza&gt;)
++getCustomSavedPizzas() : Set&lt;Pizza&gt;
++setCustomSavedPizzas(customSavedPizzas : Set&lt;Pizza&gt;)
++getCustomTemporaryPizzas() : Set&lt;Pizza&gt;
++setCustomTemporaryPizzas(CustomTemporaryPizzas : Set&lt;Pizza&gt;)
++getOrdersSaved() : Set&lt;Order&gt;
++setOrdersSaved(ordersSaved : Set&lt;Order&gt;)
++getIngredients() : Set&lt;Ingredient&gt;
++setIngredients(ingredients : Set&lt;Ingredient&gt;)
++getDrinks() : Set&lt;Drink&gt;
++setDrinks(drinks : Set&lt;Drink&gt;)
++getOffers(): Set&lt;Offer&gt;
++setOffers(offers : Set&lt;Offer&gt;)
++getShoppingCart() : ShoppingCart
++setShoppingCart(shoppingCart : ShoppingCart) 
+&lt;font color=&apos;green&apos;&gt;&lt;u&gt;+getInstance() : System&lt;/u&gt;
 -System()&lt;/font&gt;
 &lt;font color=&quot;red&quot;&gt;+searchPizzaByName(name : String) : Set &lt;pizza&gt;
 +searchPizzaByIngredientName(name : String) : Set &lt;pizza&gt;
 +searchProductWithDiscount() : Set &lt;Product&gt;
 +searchProductWithoutDiscount() : Set &lt;Product&gt;
-+setPredefinedPizzas(predefinedPizza : Set&lt;Pizza&gt;)
-+setCustomSavedPizzas(customSavedPizzas : Set&lt;Pizza&gt;)
-+setCustomTemporaryPizzas(CustomTemporaryPizzas : Set&lt;Pizza&gt;)
-+setOrdersSaved(ordersSaved : Set&lt;Order&gt;)
-+setIngredients(ingredients : Set&lt;Ingredient&gt;)
-+setDrinks(drinks : Set&lt;Drink&gt;)
-+setOffers(offers : Set&lt;Offer&gt;)&lt;/font&gt;
++addPredefinedPizzas(pizza : Pizza) : boolean
++addCustomSavedPizzas(pizza : Pizza) : boolean
++addCustomTemporaryPizzas(pizza : Pizza) : boolean
++addOrderSaved(order : Order) : boolean
++addIngredients(ingredient : Ingredient) : boolean
++addDrink(drink : Drink) : boolean
++addOffer(offer : Offer) : boolean
++removePredefinedPizzas(pizza : Pizza) : boolean
++removeCustomSavedPizzas(pizza : Pizza) : boolean
++removeCustomTemporaryPizzas(pizza : Pizza) : boolean
++removeOrderSaved(order : Order) : boolean
++removeIngredients(ingredient : Ingredient) : boolean
++removeDrink(drink : Drink) : boolean
++removeOffer(offer : Offer) : boolean&lt;/font&gt;
 +productHaveDiscount(product : Product) : boolean
 +pizzaMostPopular() : pizza Pizza</string>
      </void>
@@ -573,19 +596,19 @@ setId(id : int)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double10"/>
-      <double>2124.828055994535</double>
+      <double>2225.828055994535</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double10"/>
-      <double>999.9441191463993</double>
+      <double>1034.9441191463993</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>2124.828055994535</double>
-     <double>999.9441191463993</double>
+     <double>2225.828055994535</double>
+     <double>1034.9441191463993</double>
     </void>
    </object>
   </void>
