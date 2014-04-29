@@ -143,9 +143,12 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	tvDesc = (TextView) convertView.findViewById(R.id.descTextInItem);
 	ibAdd = (ImageButton) convertView.findViewById(R.id.imageButtonInItem);
 	
+	ivIcon.setBackgroundDrawable(activity.getResources().getAssets().)
+	
 	tvTitle.setText(group.getName());
 	tvPrice.setText(String.format("%.2f€",group.getPrice()));
 	
+	ibAdd.setOnClickListener(new AddButtonClickListener(groupPosition));
 	
 	return convertView;
     }
