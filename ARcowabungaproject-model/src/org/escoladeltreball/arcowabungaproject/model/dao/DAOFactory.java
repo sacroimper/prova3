@@ -10,6 +10,7 @@ import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 public abstract class DAOFactory {
     // ====================
@@ -74,13 +75,13 @@ public abstract class DAOFactory {
     // ====================
     private int currentVersion;
     protected static DAOFactory instance;
-    private System system;
+    private Pizzeria pizzeria;
 
     // ====================
     // CONSTRUCTORS
     // ====================
     protected DAOFactory(System system) {
-	this.system = system;
+	this.pizzeria = pizzeria;
     }
 
     // ====================
