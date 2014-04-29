@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
@@ -13,12 +11,11 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
-import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 
 
 
-public class SecondActivity extends Activity implements OnTouchListener {
+public class SecondActivity extends Activity {
 	TabHost tabs;
 	LinearLayout actualTab;
 	float lastX;
@@ -35,12 +32,19 @@ public class SecondActivity extends Activity implements OnTouchListener {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_second);
-
-		makeTabs();
+		
 
 		this.overridePendingTransition(R.anim.animation_enter,
 				R.anim.animation_leave);
 		
+		makeTabs();
+	}
+	
+	@Override
+	public void onPause() {
+		this.overridePendingTransition(R.anim.animation_leave,
+				R.anim.animation_enter);
+		super.onPause();
 	}
 
 	private void makeTabs() {
@@ -156,14 +160,7 @@ public class SecondActivity extends Activity implements OnTouchListener {
 	}
 
 	@Override
-	public void onStop() {
-		finish();
-		super.onStop();
-	}
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		Toast.makeText(this, "hola", Toast.LENGTH_SHORT).show();
+	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
 		// when user first touches the screen to swap
 		case MotionEvent.ACTION_DOWN: {
@@ -174,13 +171,13 @@ public class SecondActivity extends Activity implements OnTouchListener {
 			float currentX = event.getX();
 
 			// if left to right swipe on screen
-			if (lastX < currentX) {
-				tabs.setCurrentTab(tabs.getCurrentTab()+1);
+			if (lastX < currentX - 250) {
+				tabs.setCurrentTab(tabs.getCurrentTab()-1);
 			}
 
 			// if right to left swipe on screen
-			if (lastX > currentX) {
-				tabs.setCurrentTab(tabs.getCurrentTab()-1);
+			if (lastX > currentX + 250) {
+				tabs.setCurrentTab(tabs.getCurrentTab()+1);
 			}
 
 			break;
