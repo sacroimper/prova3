@@ -29,8 +29,19 @@ public class MainActivity extends Activity implements OnClickListener{
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_main);
 	
-	//LinearLayout
+	
+	
+	//Buttons
 	LinearLayout bCarta = (LinearLayout) findViewById(R.id.linearButtonMenu);
+	bCarta.setOnClickListener(this);
+	
+	LinearLayout bOrder = (LinearLayout) findViewById(R.id.linearButtonPedidoActual);
+	bCarta.setOnClickListener(this);
+	
+	LinearLayout bLastOrders = (LinearLayout) findViewById(R.id.linearButtonPedidosAnteriores);
+	bCarta.setOnClickListener(this);
+	
+	LinearLayout bContact = (LinearLayout) findViewById(R.id.linearButtonContacto);
 	bCarta.setOnClickListener(this);
 	
     }
@@ -44,8 +55,23 @@ public class MainActivity extends Activity implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-	Intent intent = new Intent(this.getApplicationContext(), DishesMenuActivity.class);
-	startActivity(intent);
+	
+	if ( v.getId() == R.id.linearButtonMenu ){
+	    Intent intent = new Intent(this.getApplicationContext(), DishesMenuActivity.class);
+       	    startActivity(intent);
+	}else if ( v.getId() == R.id.linearButtonPedidoActual ){
+	    Intent intent = new Intent(this.getApplicationContext(), OrderActivity.class);
+       	    startActivity(intent);
+	}else if ( v.getId() == R.id.linearButtonPedidosAnteriores ){
+	    Intent intent = new Intent(this.getApplicationContext(), LastOrdersActivity.class);
+       	    startActivity(intent);
+	}
+	//To develope
+//	else if ( v.getId() == R.id.linearButtonContacto ){
+//	    Intent intent = new Intent(this.getApplicationContext(), LastOrdersActivity.class);
+//       	    startActivity(intent);
+//	}
+	
     }
 
 }
