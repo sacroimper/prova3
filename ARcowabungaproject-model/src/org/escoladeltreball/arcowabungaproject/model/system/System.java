@@ -8,6 +8,7 @@ import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 
@@ -168,6 +169,104 @@ public class System {
 	    return offers.remove(offer);
 	}
 	return false;
+    }
+
+    public boolean productHaveDiscount(Product product) {
+	if (product.getDiscount() != 0) {
+	    return true;
+	}
+	return false;
+    }
+
+    public Set<Pizza> searchPizzaByName(String name) {
+	Set<Pizza> pizzas = new HashSet<Pizza>();
+	for (Pizza pizza : predefinedPizzas) {
+	    if (pizza.getName().equals(name)) {
+		pizzas.add(pizza);
+	    }
+	}
+
+	for (Pizza pizza : customSavedPizzas) {
+	    if (pizza.getName().equals(name)) {
+		pizzas.add(pizza);
+	    }
+	}
+	return pizzas;
+    }
+
+    public Set<Pizza> searchPizzaByIngredientName(String name) {
+	Set<Pizza> pizzas = new HashSet<Pizza>();
+	for (Pizza pizza : predefinedPizzas) {
+	    for (Ingredient ingredient : pizza.getIngredientsSet()) {
+		if (ingredient.getName().equals(name)) {
+		    pizzas.add(pizza);
+		}
+	    }
+	}
+	for (Pizza pizza : customSavedPizzas) {
+	    for (Ingredient ingredient : pizza.getIngredientsSet()) {
+		if (ingredient.getName().equals(name)) {
+		    pizzas.add(pizza);
+		}
+	    }
+	}
+	return pizzas;
+    }
+
+    public Set<Product> searchProductWithDiscount() {
+	Set<Product> products = new HashSet<Product>();
+	for (Pizza pizza : predefinedPizzas) {
+	    if (productHaveDiscount(pizza)) {
+		products.add(pizza);
+	    }
+	}
+
+	for (Pizza pizza : customSavedPizzas) {
+	    if (productHaveDiscount(pizza)) {
+		products.add(pizza);
+	    }
+	}
+
+	for (Drink drink : drinks) {
+	    if (productHaveDiscount(drink)) {
+		products.add(drink);
+	    }
+	}
+
+	for (Offer offer : offers) {
+	    if (productHaveDiscount(offer)) {
+		products.add(offer);
+	    }
+	}
+	return products;
+    }
+
+    public Set<Product> searchProductWithoutDiscount() {
+	Set<Product> products = new HashSet<Product>();
+	for (Pizza pizza : predefinedPizzas) {
+	    if (!productHaveDiscount(pizza)) {
+		products.add(pizza);
+	    }
+	}
+
+	for (Pizza pizza : customSavedPizzas) {
+	    if (!productHaveDiscount(pizza)) {
+		products.add(pizza);
+	    }
+	}
+
+	for (Drink drink : drinks) {
+	    if (!productHaveDiscount(drink)) {
+		products.add(drink);
+	    }
+	}
+
+	for (Offer offer : offers) {
+	    if (!productHaveDiscount(offer)) {
+		products.add(offer);
+	    }
+	}
+	return products;
     }
 
     // ====================
