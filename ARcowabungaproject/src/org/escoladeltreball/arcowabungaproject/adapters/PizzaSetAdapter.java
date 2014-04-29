@@ -146,7 +146,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	ibAdd = (ImageButton) convertView.findViewById(R.id.imageButtonInItem);
 	String path = "";
 	DAOAndroid dao = DAOAndroid.getInstance();
-	Drawable icon = dao.getDrawableFromAssets(activity, dao.getResourcePath(group.getIcon()));
+	Drawable icon = dao.getDrawableFromAssets(activity, group.getIcon());
 	ivIcon.setBackgroundDrawable(icon);
 	
 	tvTitle.setText(group.getName());

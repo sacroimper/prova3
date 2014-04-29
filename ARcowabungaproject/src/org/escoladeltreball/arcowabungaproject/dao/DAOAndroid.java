@@ -51,6 +51,11 @@ public class DAOAndroid extends DAOFactory {
 	return drawable;
     }
     
+
+    public Drawable getDrawableFromAssets(Activity activity, int resourceId){
+	return getDrawableFromAssets(activity, getResourcePath(resourceId));
+    }
+    
     public String getResourcePath(int resourceId){
 	return resources.get(resourceId);
     }
