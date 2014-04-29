@@ -1,6 +1,17 @@
 package org.escoladeltreball.arcowabungaproject.model.dao;
 
-public class DAOFactory {
+import java.util.Map;
+import java.util.Set;
+
+import org.escoladeltreball.arcowabungaproject.model.Address;
+import org.escoladeltreball.arcowabungaproject.model.Drink;
+import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Offer;
+import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
+
+public abstract class DAOFactory {
     // ====================
     // CONSTANTS
     // ====================
@@ -75,33 +86,50 @@ public class DAOFactory {
     // ====================
     // PUBLIC METHODS
     // ====================
-    public static DAOFactory getInstance(System system) {
-	if (instance == null) {
-	    instance = new DAOFactory(system);
-	}
-	return instance;
-    }
 
     public boolean loadData() {
 
 	return false;
     }
 
-    public boolean loadLocalData() {
-	return false;
-    }
-
-    public boolean loadServerData() {
-	return false;
-    }
-
-    public boolean writeData() {
-	return false;
-    }
     // ====================
     // PROTECTED METHODS
     // ====================
+    protected abstract Set<Ingredient> readIngredient();
 
+    protected abstract Set<Pizza> readPizza();
+
+    protected abstract Set<Offer> readOffer();
+
+    protected abstract Set<Drink> readDrink();
+
+    protected abstract Set<ShoppingCart> readShoppingCart();
+
+    protected abstract Set<Order> readOrder();
+
+    protected abstract Set<Address> readAddress();
+
+    protected abstract Map<String, Object> readPreferences();
+
+    protected abstract void writeIngredients(Set<Ingredient> ingredients);
+
+    protected abstract void writePizzas(Set<Pizza> pizzas);
+
+    protected abstract void writeOffers(Set<Offer> offers);
+
+    protected abstract void writeDrinks(Set<Drink> drinks);
+
+    protected abstract void writeShoppingCarts(Set<ShoppingCart> shoppingCarts);
+
+    protected abstract void writeOrders(Set<Order> orders);
+
+    protected abstract void writeAddress(Set<Address> address);
+
+    protected abstract void writePreferences(Map<String, Object> preferences);
+
+    public void writeDataBase() {
+
+    }
     // ====================
     // PRIVATE METHODS
     // ====================
