@@ -1,9 +1,15 @@
 package org.escoladeltreball.layouttest;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
@@ -12,8 +18,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
-
-
+import android.widget.TabHost.TabContentFactory;
+import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 
 public class SecondActivity extends Activity {
 	TabHost tabs;
@@ -32,25 +39,41 @@ public class SecondActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_second);
-		
 
 		this.overridePendingTransition(R.anim.animation_enter,
 				R.anim.animation_leave);
-		
+
 		makeTabs();
+
 	}
-	
-	@Override
-	public void onPause() {
-		this.overridePendingTransition(R.anim.animation_leave,
-				R.anim.animation_enter);
-		super.onPause();
+
+	private void setupTab(final View view, final String tag, int id) {
+		View tabview = createTabView(tabs.getContext(), tag);
+		TabSpec setContent = tabs.newTabSpec(tag).setIndicator(tabview)
+				.setContent(new TabContentFactory() {
+					public View createTabContent(String tag) {
+						return view;
+					}
+				});
+		tabs.addTab(setContent);
+	}
+
+	private static View createTabView(final Context context, final String text) {
+		View view = LayoutInflater.from(context)
+				.inflate(R.layout.tabs_bg, null);
+		TextView tv = (TextView) view.findViewById(R.id.tabsText);
+		tv.setText(text);
+		return view;
 	}
 
 	private void makeTabs() {
 
 		tabs = (TabHost) findViewById(android.R.id.tabhost);
 		tabs.setup();
+
+		// setupTab(new TextView(this), "mitab1", R.id.tab1);
+		// setupTab(new TextView(this), "mitab2", R.id.tab2);
+		// setupTab(new TextView(this), "mitab3", R.id.tab3);
 
 		TabHost.TabSpec spec = tabs.newTabSpec("mitab1");
 		spec.setContent(R.id.tab1);
@@ -67,6 +90,37 @@ public class SecondActivity extends Activity {
 		spec.setIndicator("TAB3");
 		tabs.addTab(spec);
 
+//		tabs.getTabWidget().getChildAt(0).getLayoutParams().height = 40;
+		tabs.getTabWidget().getChildAt(0).setBackgroundColor(Color.parseColor("#3be0d0"));
+		tabs.getTabWidget().getChildAt(1).setBackgroundColor(Color.parseColor("#3be0d0"));
+		tabs.getTabWidget().getChildAt(2).setBackgroundColor(Color.parseColor("#3be0d0"));
+
+		
+		int tabCount = tabs.getTabWidget().getTabCount();
+		for (int i = 0; i < tabCount; i++) {
+		    final View view = tabs.getTabWidget().getChildTabViewAt(i);
+		    if ( view != null ) {
+		        // reduce height of the tab
+		        view.getLayoutParams().height *= 0.66;
+
+		        //  get title text view
+		        final View textView = view.findViewById(android.R.id.title);
+		        if ( textView instanceof TextView ) {
+		            // just in case check the type
+
+		            // center text
+		            ((TextView) textView).setGravity(Gravity.CENTER);
+		            // wrap text
+		            ((TextView) textView).setSingleLine(false);
+
+		            // explicitly set layout parameters
+		            textView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+		            textView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+		            
+		        }
+		    }
+		}
+		
 		tabs.setCurrentTab(0);
 		actualTab = (LinearLayout) findViewById(R.id.tab1);
 
@@ -172,12 +226,12 @@ public class SecondActivity extends Activity {
 
 			// if left to right swipe on screen
 			if (lastX < currentX - 250) {
-				tabs.setCurrentTab(tabs.getCurrentTab()-1);
+				tabs.setCurrentTab(tabs.getCurrentTab() - 1);
 			}
 
 			// if right to left swipe on screen
 			if (lastX > currentX + 250) {
-				tabs.setCurrentTab(tabs.getCurrentTab()+1);
+				tabs.setCurrentTab(tabs.getCurrentTab() + 1);
 			}
 
 			break;
