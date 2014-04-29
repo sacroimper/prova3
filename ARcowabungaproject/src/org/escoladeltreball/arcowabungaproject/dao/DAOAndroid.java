@@ -33,7 +33,7 @@ public class DAOAndroid extends DAOFactory {
     // ====================
 
     protected DAOAndroid(System system) {
-	super();
+	super(system);
     }
     
     // ====================
@@ -56,14 +56,14 @@ public class DAOAndroid extends DAOFactory {
     }
     
     public static DAOAndroid getInstance(){
-	return instance;
+	return (DAOAndroid) instance;
     }
     
     public static DAOAndroid getInstance(System system){
 	if (instance == null){
 	    instance = new DAOAndroid(system);
 	}
-	return instance;
+	return (DAOAndroid) instance;
     }
     
     // ====================
