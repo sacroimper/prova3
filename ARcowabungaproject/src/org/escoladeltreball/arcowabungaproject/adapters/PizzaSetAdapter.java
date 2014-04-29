@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.system.System;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -142,8 +144,10 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	tvPrice = (TextView) convertView.findViewById(R.id.priceTextInItem);
 	tvDesc = (TextView) convertView.findViewById(R.id.descTextInItem);
 	ibAdd = (ImageButton) convertView.findViewById(R.id.imageButtonInItem);
-	
-	ivIcon.setBackgroundDrawable(activity.getResources().getAssets().)
+	String path = "";
+	DAOAndroid dao = DAOAndroid.getInstance();
+	Drawable icon = dao.getDrawableFromAssets(activity, dao.getResourcePath(group.getIcon()));
+	ivIcon.setBackgroundDrawable(icon);
 	
 	tvTitle.setText(group.getName());
 	tvPrice.setText(String.format("%.2f€",group.getPrice()));
