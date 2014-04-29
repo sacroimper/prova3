@@ -50,7 +50,7 @@ public class System {
 	return instance;
     }
 
-    public boolean addPredefinedPizzas(Pizza pizza) {
+    public boolean addPredefinedPizza(Pizza pizza) {
 	if (pizza != null) {
 	    if (predefinedPizzas == null) {
 		predefinedPizzas = new HashSet<Pizza>();
@@ -60,7 +60,7 @@ public class System {
 	return false;
     }
 
-    public boolean addCustomSavedPizzas(Pizza pizza) {
+    public boolean addCustomSavedPizza(Pizza pizza) {
 	if (pizza != null) {
 	    if (customSavedPizzas == null) {
 		customSavedPizzas = new HashSet<Pizza>();
@@ -70,7 +70,7 @@ public class System {
 	return false;
     }
 
-    public boolean addCustomTemporaryPizzas(Pizza pizza) {
+    public boolean addCustomTemporaryPizza(Pizza pizza) {
 	if (pizza != null) {
 	    if (customTemporaryPizzas == null) {
 		customTemporaryPizzas = new HashSet<Pizza>();
@@ -90,7 +90,7 @@ public class System {
 	return false;
     }
 
-    public boolean addIngredients(Ingredient ingredient) {
+    public boolean addIngredient(Ingredient ingredient) {
 	if (ingredient != null) {
 	    if (ingredients == null) {
 		ingredients = new HashSet<Ingredient>();
@@ -121,35 +121,35 @@ public class System {
 
     }
 
-    public boolean removePredefinedPizzas(Pizza pizza) {
+    public boolean removePredefinedPizza(Pizza pizza) {
 	if (pizza != null) {
 	    return predefinedPizzas.remove(pizza);
 	}
 	return false;
     }
 
-    public boolean removeCustomSavedPizzas(Pizza pizza) {
+    public boolean removeCustomSavedPizza(Pizza pizza) {
 	if (pizza != null) {
 	    return customSavedPizzas.remove(pizza);
 	}
 	return false;
     }
 
-    public boolean removeCustomTemporaryPizzas(Pizza pizza) {
+    public boolean removeCustomTemporaryPizza(Pizza pizza) {
 	if (pizza != null) {
 	    return customTemporaryPizzas.remove(pizza);
 	}
 	return false;
     }
 
-    public boolean removeOrdersSaved(Order order) {
+    public boolean removeOrderSaved(Order order) {
 	if (order != null) {
 	    return ordersSaved.remove(order);
 	}
 	return false;
     }
 
-    public boolean removeIngredients(Ingredient ingredient) {
+    public boolean removeIngredient(Ingredient ingredient) {
 	if (ingredient != null) {
 	    return ingredients.remove(ingredient);
 	}
