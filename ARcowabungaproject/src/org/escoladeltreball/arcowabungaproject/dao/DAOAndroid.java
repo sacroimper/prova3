@@ -18,6 +18,8 @@ import android.graphics.drawable.Drawable;
 
 public class DAOAndroid extends DAOFactory {
 
+    private Map<Integer,String> resources; 
+    
     // ====================
     // CONSTANTS
     // ====================
@@ -47,6 +49,10 @@ public class DAOAndroid extends DAOFactory {
 	    e.printStackTrace();
 	}
 	return drawable;
+    }
+    
+    public String getResourcePath(int resourceId){
+	return resources.get(resourceId);
     }
     
     // ====================
