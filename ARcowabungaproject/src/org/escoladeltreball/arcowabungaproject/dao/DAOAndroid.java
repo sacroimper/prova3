@@ -1,5 +1,6 @@
 package org.escoladeltreball.arcowabungaproject.dao;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +12,9 @@ import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+
+import android.app.Activity;
+import android.graphics.drawable.Drawable;
 
 public class DAOAndroid extends DAOFactory {
 
@@ -34,6 +38,17 @@ public class DAOAndroid extends DAOFactory {
     // PUBLIC METHODS
     // ====================
 
+    public Drawable getDrawableFromAssets(Activity activity, String path){
+	Drawable drawable = null;
+	try {
+	    drawable = Drawable.createFromStream(activity.getAssets().open(path), null);
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return drawable;
+    }
+    
     // ====================
     // PROTECTED METHODS
     // ====================
