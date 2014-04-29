@@ -12,7 +12,7 @@ import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 
-public class System {
+public class Pizzeria {
 
     // ====================
     // CONSTANTS
@@ -23,7 +23,7 @@ public class System {
     // ====================
 
     private String role;
-    private System instance;
+    private Pizzeria instance;
     private Set<Pizza> predefinedPizzas;
     private Set<Pizza> customSavedPizzas;
     private Set<Pizza> customTemporaryPizzas;
@@ -37,16 +37,16 @@ public class System {
     // ====================
     // CONSTRUCTORS
     // ====================
-    private System(DAOFactory dao) {
+    private Pizzeria(DAOFactory dao) {
 	this.dao = dao;
     }
 
     // ====================
     // PUBLIC METHODS
     // ====================
-    public System getInstance(DAOFactory dao) {
+    public Pizzeria getInstance(DAOFactory dao) {
 	if (instance == null) {
-	    instance = new System(dao);
+	    instance = new Pizzeria(dao);
 	}
 	return instance;
     }

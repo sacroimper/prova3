@@ -9,7 +9,7 @@ import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
-import org.escoladeltreball.arcowabungaproject.model.system.System;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
