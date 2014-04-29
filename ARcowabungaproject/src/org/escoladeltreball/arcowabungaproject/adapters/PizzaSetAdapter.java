@@ -8,6 +8,7 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.system.System;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -125,6 +127,28 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
+	Pizza group = (Pizza)getGroup(groupPosition);
+	ImageView ivIcon;
+	TextView tvTitle;
+	TextView tvPrice;
+	TextView tvDesc;
+	ImageButton ibAdd;
+	if (convertView == null) {
+	    convertView = inflater
+		    .inflate(R.layout.listitem_pizza_layout, null);
+	}
+	ivIcon = (ImageView) convertView.findViewById(R.id.imageInItem);
+	tvTitle = (TextView) convertView.findViewById(R.id.titleTextInItem);
+	tvPrice = (TextView) convertView.findViewById(R.id.priceTextInItem);
+	tvDesc = (TextView) convertView.findViewById(R.id.descTextInItem);
+	ibAdd = (ImageButton) convertView.findViewById(R.id.imageButtonInItem);
+	
+	ivIcon.setBackgroundDrawable(activity.getResources().getAssets().)
+	
+	tvTitle.setText(group.getName());
+	tvPrice.setText(String.format("%.2f€",group.getPrice()));
+	
+	ibAdd.setOnClickListener(new AddButtonClickListener(groupPosition));
 	
 	return convertView;
     }
@@ -158,5 +182,21 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    // i.putExtra("pizza", pizzas.get(index));
 	    //activity.startActivity(i);
 	}
+    }
+    
+    public class AddButtonClickListener implements OnClickListener {
+
+	private int index;
+
+	public AddButtonClickListener(int index) {
+	    this.index = index;
+	}
+	
+	@Override
+	public void onClick(View v) {
+	   // System.
+	    
+	}
+	
     }
 }
