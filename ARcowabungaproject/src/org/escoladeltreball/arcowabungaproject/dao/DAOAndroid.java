@@ -32,7 +32,7 @@ public class DAOAndroid extends DAOFactory {
     // CONSTRUCTORS
     // ====================
 
-    public DAOAndroid(System system) {
+    protected DAOAndroid(System system) {
 	super();
     }
     
@@ -53,6 +53,17 @@ public class DAOAndroid extends DAOFactory {
     
     public String getResourcePath(int resourceId){
 	return resources.get(resourceId);
+    }
+    
+    public static DAOAndroid getInstance(){
+	return instance;
+    }
+    
+    public static DAOAndroid getInstance(System system){
+	if (instance == null){
+	    instance = new DAOAndroid(system);
+	}
+	return instance;
     }
     
     // ====================
