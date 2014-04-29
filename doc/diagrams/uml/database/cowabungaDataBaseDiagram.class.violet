@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.7.0_40" class="java.beans.XMLDecoder">
+<java version="1.7.0_45" class="java.beans.XMLDecoder">
  <object class="com.horstmann.violet.ClassDiagramGraph">
   <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
     <void property="attributes">
      <void property="text">
-      <string>id_list : smallint (PK) NOT NULL
+      <string>id_list : integer (PK) NOT NULL
 ingredient_id : smallint
 num_ing : smallint</string>
      </void>
@@ -21,19 +21,19 @@ num_ing : smallint</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>32.0</double>
+      <double>23.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>438.0</double>
+      <double>471.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>32.0</double>
-     <double>438.0</double>
+     <double>23.0</double>
+     <double>471.0</double>
     </void>
    </object>
   </void>
@@ -41,13 +41,13 @@ num_ing : smallint</string>
    <object class="com.horstmann.violet.ClassNode" id="ClassNode1">
     <void property="attributes">
      <void property="text">
-      <string>id_pizza : smallint (PK) NOT NULL
-name : varchar
+      <string>id_pizza : integer (PK) NOT NULL
+name : varchar(30)
 price : numeric
 icon : smallint
 discount : numeric
-massType : varchar
-type : varchar
+massType : varchar(10)
+type : varchar(5)
 size : smallint</string>
      </void>
     </void>
@@ -62,19 +62,19 @@ size : smallint</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>314.0</double>
+      <double>292.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>437.0</double>
+      <double>436.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>314.0</double>
-     <double>437.0</double>
+     <double>292.0</double>
+     <double>436.0</double>
     </void>
    </object>
   </void>
@@ -82,8 +82,8 @@ size : smallint</string>
    <object class="com.horstmann.violet.ClassNode" id="ClassNode2">
     <void property="attributes">
      <void property="text">
-      <string>id_drinks : smallint
-name : varchar
+      <string>id_drinks : integer (PK)
+name : varchar(15)
 price : numeric
 icon : smallint
 discount : numeric
@@ -101,19 +101,19 @@ size : smallint</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>842.0</double>
+      <double>922.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>446.0</double>
+      <double>444.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>842.0</double>
-     <double>446.0</double>
+     <double>922.0</double>
+     <double>444.0</double>
     </void>
    </object>
   </void>
@@ -121,8 +121,8 @@ size : smallint</string>
    <object class="com.horstmann.violet.ClassNode" id="ClassNode3">
     <void property="attributes">
      <void property="text">
-      <string>id_offer : smallint (PK) NOT NULL
-name : text
+      <string>id_offer : integer (PK) NOT NULL
+name : varchar(30)
 price : numeric
 icon : smallint
 discount : numeric</string>
@@ -139,19 +139,19 @@ discount : numeric</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>564.0</double>
+      <double>601.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>160.0</double>
+      <double>164.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>564.0</double>
-     <double>160.0</double>
+     <double>601.0</double>
+     <double>164.0</double>
     </void>
    </object>
   </void>
@@ -159,7 +159,7 @@ discount : numeric</string>
    <object class="com.horstmann.violet.ClassNode" id="ClassNode4">
     <void property="attributes">
      <void property="text">
-      <string>id_shoppingcarts : smallint
+      <string>id_shoppingcarts : integer (PK) NOT NULL
 </string>
      </void>
     </void>
@@ -174,19 +174,19 @@ discount : numeric</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>594.0</double>
+      <double>567.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>482.0</double>
+      <double>480.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>594.0</double>
-     <double>482.0</double>
+     <double>567.0</double>
+     <double>480.0</double>
     </void>
    </object>
   </void>
@@ -194,12 +194,12 @@ discount : numeric</string>
    <object class="com.horstmann.violet.ClassNode" id="ClassNode5">
     <void property="attributes">
      <void property="text">
-      <string>id_addres : smallint
-number : varchar
-postCode : varchar
-floor : varchar
-stair : varchar
-door : varchar</string>
+      <string>id_addres : integer (PK)
+number : varchar(4)
+postCode : varchar(6)
+floor : varchar(3)
+stair : char
+door : varchar(3)</string>
      </void>
     </void>
     <void property="name">
@@ -213,19 +213,19 @@ door : varchar</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double5"/>
-      <double>843.0</double>
+      <double>918.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double5"/>
-      <double>642.0</double>
+      <double>654.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>843.0</double>
-     <double>642.0</double>
+     <double>918.0</double>
+     <double>654.0</double>
     </void>
    </object>
   </void>
@@ -233,10 +233,10 @@ door : varchar</string>
    <object class="com.horstmann.violet.ClassNode" id="ClassNode6">
     <void property="attributes">
      <void property="text">
-      <string>id_orders : smallint (PK)
-email : varchar 
+      <string>id_orders : integer (PK)
+email : varchar(100) 
 dateTime : Date
-paymentMethod :  varchar
+paymentMethod :  varchar(15)
 addres : smallint
 shopping_card : smallint (FK) </string>
      </void>
@@ -252,19 +252,19 @@ shopping_card : smallint (FK) </string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double6"/>
-      <double>574.0</double>
+      <double>611.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double6"/>
-      <double>640.0</double>
+      <double>656.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>574.0</double>
-     <double>640.0</double>
+     <double>611.0</double>
+     <double>656.0</double>
     </void>
    </object>
   </void>
@@ -272,8 +272,8 @@ shopping_card : smallint (FK) </string>
    <object class="com.horstmann.violet.ClassNode" id="ClassNode7">
     <void property="attributes">
      <void property="text">
-      <string>id_ingredient : smallint (PK) NOT NULL 
-nom : text
+      <string>id_ingredient : integer (PK) NOT NULL 
+nom : varchar(30)
 price : numeric
 model : smallint
 icon : smallint</string>
@@ -290,19 +290,19 @@ icon : smallint</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double7"/>
-      <double>53.0</double>
+      <double>3.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double7"/>
-      <double>181.0</double>
+      <double>179.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>53.0</double>
-     <double>181.0</double>
+     <double>3.0</double>
+     <double>179.0</double>
     </void>
    </object>
   </void>
@@ -310,8 +310,8 @@ icon : smallint</string>
    <object class="com.horstmann.violet.ClassNode">
     <void property="attributes">
      <void property="text">
-      <string>key : varchar
-value : varchar</string>
+      <string>key : varchar(15) (PK)
+value : varchar(30)</string>
      </void>
     </void>
     <void property="name">
@@ -325,19 +325,19 @@ value : varchar</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>1022.0</double>
+      <double>1083.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>379.0</double>
+      <double>319.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1022.0</double>
-     <double>379.0</double>
+     <double>1083.0</double>
+     <double>319.0</double>
     </void>
    </object>
   </void>
@@ -346,7 +346,7 @@ value : varchar</string>
     <void property="attributes">
      <void property="text">
       <string>id : smallint (PK)
-path : varchar</string>
+path : varchar(150)</string>
      </void>
     </void>
     <void property="name">
@@ -360,19 +360,19 @@ path : varchar</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double9"/>
-      <double>1008.0</double>
+      <double>1084.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double9"/>
-      <double>232.0</double>
+      <double>196.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1008.0</double>
-     <double>232.0</double>
+     <double>1084.0</double>
+     <double>196.0</double>
     </void>
    </object>
   </void>
