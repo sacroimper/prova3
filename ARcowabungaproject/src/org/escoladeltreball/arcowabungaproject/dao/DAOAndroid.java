@@ -162,17 +162,37 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
-	// TODO Auto-generated method stub
-	for (Ingredient ingredient : ingredients) {
-	    // ContentValues values = new ContentValues();
-	    // values.put
-	    // database.insert(table, nullColumnHack, values)
+
+	
+	for(Ingredient ingredient : ingredients){
+	    ContentValues values = new ContentValues();
+	    
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[0], ingredient.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[1], ingredient.getName());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[2], ingredient.getIcon());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[3], ingredient.getModel());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[4], ingredient.getPrice());
+	    
+	    database.insert(DAOFactory.TABLE_INGREDIENT, null, values);
 	}
     }
 
     @Override
     protected void writePizzas(Set<Pizza> pizzas) {
-	// TODO Auto-generated method stub
+	for(Pizza pizza : pizzas){
+	    ContentValues values = new ContentValues();
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[0], pizza.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[1], pizza.getName());
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[2], pizza.getPrice());
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[3], pizza.getIcon());
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[4], pizza.getMassType());
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[5], pizza.getType());
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[6], pizza.getSize());
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[7], pizza.getDiscount());
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[8], pizza.getIngredients().getId());
+	    
+	    database.insert(DAOFactory.TABLE_PIZZAS, null, values);
+	}
 
     }
 

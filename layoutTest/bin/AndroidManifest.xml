@@ -23,7 +23,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
- >
         </activity>
         <activity
             android:name="org.escoladeltreball.layouttest.Tab1"
@@ -40,6 +39,10 @@
         <activity
             android:name="org.escoladeltreball.layouttest.SecondActivity"
             android:label="@string/title_activity_second" >
+        </activity>
+        <activity
+            android:name="org.escoladeltreball.layouttest.TabActivity"
+            android:label="@string/title_activity_tab" >
         </activity>
     </application>
 

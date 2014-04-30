@@ -8,5 +8,6 @@
     <string name="title_activity_tab2">Tab2</string>
     <string name="title_activity_tab3">Tab3</string>
     <string name="title_activity_second">SecondActivity</string>
+    <string name="title_activity_tab">TabActivity</string>
 
 </resources>
