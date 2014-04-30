@@ -148,11 +148,16 @@ private DataBaseHelper dbHepler;
 
     @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
-	// TODO Auto-generated method stub
 	for(Ingredient ingredient : ingredients){
-//	    ContentValues values = new ContentValues();
-//	    values.put
-//	    database.insert(table, nullColumnHack, values)
+	    ContentValues values = new ContentValues();
+	    
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[0], ingredient.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[1], ingredient.getName());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[2], ingredient.getIcon());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[3], ingredient.getModel());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[4], ingredient.getPrice());
+	    
+	    database.insert("ingredient", null, values);
 	}
     }
 
