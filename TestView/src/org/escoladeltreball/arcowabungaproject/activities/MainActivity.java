@@ -44,6 +44,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	LinearLayout bContact = (LinearLayout) findViewById(R.id.linearButtonContacto);
 	bContact.setOnClickListener(this);
 	
+	this.overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
+	
     }
 
     @Override

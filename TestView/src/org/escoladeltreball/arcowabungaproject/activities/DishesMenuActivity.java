@@ -13,19 +13,12 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -34,8 +27,7 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 
-public class DishesMenuActivity extends Activity implements OnTouchListener,
-	OnClickListener {
+public class DishesMenuActivity extends Activity implements OnTouchListener {
 
     // Esta variable guarda el valor de resistencia al touch swipe
     // Cuando esta a 0 con mover un milimetro el dedo salta de tab
@@ -58,6 +50,8 @@ public class DishesMenuActivity extends Activity implements OnTouchListener,
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 	setContentView(R.layout.activity_tabs);
+	
+	this.overridePendingTransition(R.anim.animation_enter,R.anim.animation_leave);
 
 	// ELIMINAR CUANDO SE INCORORE BASE DE DATOS
 	// Incorpora datos ficticios
@@ -262,31 +256,23 @@ public class DishesMenuActivity extends Activity implements OnTouchListener,
 	return false;
     }
 
-    // Intent para que empieze la realidad aumentada
-    // Habrá que identificar el id del boton para saber que pizza lanzar
-    @Override
-    public void onClick(View v) {
-	// Intent arPizza = new Intent(this, ARViewActivity.class);
-	// startActivity(arPizza);
+    private void setupTab(final View view, final String tag, int id) {
+	View tabview = createTabView(tabs.getContext(), tag);
+	TabSpec setContent = tabs.newTabSpec(tag).setIndicator(tabview)
+		.setContent(new TabContentFactory() {
+		    public View createTabContent(String tag) {
+			return view;
+		    }
+		});
+	tabs.addTab(setContent);
     }
 
-//    private void setupTab(final View view, final String tag, int id) {
-//	View tabview = createTabView(tabs.getContext(), tag);
-//	TabSpec setContent = tabs.newTabSpec(tag).setIndicator(tabview)
-//		.setContent(new TabContentFactory() {
-//		    public View createTabContent(String tag) {
-//			return view;
-//		    }
-//		});
-//	tabs.addTab(setContent);
-//    }
-
-//    private static View createTabView(final Context context, final String text) {
-//	View view = LayoutInflater.from(context)
-//		.inflate(R.layout.tabs_bg, null);
-//	TextView tv = (TextView) view.findViewById(R.id.tabsText);
-//	tv.setText(text);
-//	return view;
-//    }
+    private static View createTabView(final Context context, final String text) {
+	View view = LayoutInflater.from(context)
+		.inflate(R.layout.tabs_bg, null);
+	TextView tv = (TextView) view.findViewById(R.id.tabsText);
+	tv.setText(text);
+	return view;
+    }
 
 }
