@@ -144,4 +144,8 @@ public class Pizza extends Product {
     public Ingredients getIngredients() {
 	return ingredients;
     }
+
+    public void setIngredients(Ingredients ingredients) {
+	this.ingredients = ingredients;
+    }
 }
