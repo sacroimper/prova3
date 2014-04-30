@@ -20,6 +20,9 @@ public abstract class DAOFactory {
     // ====================
 
     public static final String CREATE_DATA_BASE = "CREATE DATABASE cowabunga;";
+
+    /* CREATE TABLES */
+
     public static final String CREATE_TABLE_RESOURCES = "CREATE TABLE resources("
 	    + "id_resources INTEGER PRIMARY KEY," + "path VARCHAR(150));";
     public static final String CREATE_TABLE_INGREDIENT = "CREATE TABLE ingredient("
@@ -37,7 +40,8 @@ public abstract class DAOFactory {
 	    + "name VARCHAR(50),"
 	    + "price NUMERIC,"
 	    + "icon SMALLINT FOREIGN KEY REFERNCES resources ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + "massType VARCHAR(10)," + "type VARCHAR(10)," + "size SMALLINT);";
+	    + "massType VARCHAR(10)," + "type VARCHAR(10)," + "size SMALLINT,"
+	    + "discount NUMERIC);";
     public static final String CREATE_TABLE_DRINKS = "CREATE TABLE drinks("
 	    + "id_drink INTEGER PRIMARY KEY,"
 	    + "name VARCHAR(50),"
@@ -74,6 +78,7 @@ public abstract class DAOFactory {
     public static final String CREATE_TABLE_PREFERENCES = "CREATE TABLE preferences(key VARCHAR(30) PRIMARY KEY,"
 	    + "value VARCHAR(50));";
 
+    /* DROP TABLES */
     public static final String DROP_TABLE_RESOURCES = "DROP TABLE resources;";
     public static final String DROP_TABLE_INGREDIENT = "DROP TABLE ingredient;";
     public static final String DROP_TABLE_INGREDIENTS = "DROP TABLE ingredients;";
@@ -86,6 +91,31 @@ public abstract class DAOFactory {
     public static final String DROP_TABLE_ORDERS = "DROP TABLE orders;";
     public static final String DROP_TABLE_ADDRESS = "DROP TABLE address;";
     public static final String DROP_TABLE_PREFERENCES = "DROP TABLE preferences;";
+
+    /* COLUMNS NAME */
+    public static final String[] COLUMNS_NAME_RESOURCES = { "id_resources",
+	    "path" };
+    public static final String[] COLUMNS_NAME_INGREDIENT = { "id_ingredient",
+	    "name", "icon", "model", "price" };
+    public static final String[] COLUMNS_NAME_INGREDIENTS = { "id_ingredients",
+	    "ingredient", "num_ingredient" };
+    public static final String[] COLUMNS_NAME_PIZZAS = { "id_pizzas", "name",
+	    "price", "icon", "massType", "type", "size", "discount" };
+    public static final String[] COLUMNS_NAME_DRINKS = { "id_drink", "name",
+	    "price", "icon", "discount", "size" };
+    public static final String[] COLUMNS_NAME_OFFERS = { "id_offers", "name",
+	    "price", "icon", "discount" };
+    public static final String[] COLUMNS_NAME_OFFERS_PRODUCTS = { "offer",
+	    "pizza", "drink" };
+    public static final String[] COLUMNS_NAME_SHOPPINGCARTS = { "id_shoopingcart" };
+    public static final String[] COLUMNS_NAME_SHOPPINCART_PRODUCTS = {
+	    "shoppingcart", "offer", "pizza", "drink" };
+    public static final String[] COLUMNS_NAME_ORDERS = { "id_order", "email",
+	    "date_time", "payment_method", "addres" };
+    public static final String[] COLUMNS_NAME_ADDRESS = { "id_address",
+	    "number", "post_code", "floor", "stair", "door" };
+    public static final String[] COLUMNS_NAME_PREFERENCES = { "key", "value" };
+
     // ====================
     // ATTRIBUTES
     // ====================
