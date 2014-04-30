@@ -71,13 +71,11 @@ public class TabsMaker {
    	return tabs;
        }
 
-       public static TabHost tabsColor(TabHost tabs) {
-   	tabs.getTabWidget().getChildAt(0)
-   		.setBackgroundColor(Color.parseColor("#3be0d0"));
-   	tabs.getTabWidget().getChildAt(1)
-   		.setBackgroundColor(Color.parseColor("#3be0d0"));
-   	tabs.getTabWidget().getChildAt(2)
-   		.setBackgroundColor(Color.parseColor("#3be0d0"));
+       public static TabHost tabsColor(TabHost tabs, String color) {
+	   int numberOfTabs =  tabs.getTabWidget().getChildCount();
+	   for (int i = 0 ; i < numberOfTabs ; i++){
+	       tabs.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor(color));
+	   }
    	return tabs;
 
        }
@@ -133,7 +131,7 @@ public class TabsMaker {
     //OJO mytab2... y los demas Strings que se comparan
     //TENDRAN QUE ENTRAR POR EL METODO
     public static LinearLayout OnChangeTabAnimation(String tabId,
-	    LinearLayout actualTab, LinearLayout t1l, LinearLayout t2l,
+	    TabHost tabs, LinearLayout actualTab, LinearLayout t1l, LinearLayout t2l,
 	    LinearLayout t3l) {
 	if (actualTab.equals(t1l) && tabId.equals("mytab2")) {
 	    t1l.setAnimation(outToLeftAnimation());

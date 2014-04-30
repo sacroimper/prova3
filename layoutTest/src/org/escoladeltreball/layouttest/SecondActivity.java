@@ -90,37 +90,44 @@ public class SecondActivity extends Activity {
 		spec.setIndicator("TAB3");
 		tabs.addTab(spec);
 
-//		tabs.getTabWidget().getChildAt(0).getLayoutParams().height = 40;
-		tabs.getTabWidget().getChildAt(0).setBackgroundColor(Color.parseColor("#3be0d0"));
-		tabs.getTabWidget().getChildAt(1).setBackgroundColor(Color.parseColor("#3be0d0"));
-		tabs.getTabWidget().getChildAt(2).setBackgroundColor(Color.parseColor("#3be0d0"));
+		// tabs.getTabWidget().getChildAt(0).getLayoutParams().height = 40;
+		tabs.getTabWidget().getChildAt(0)
+				.setBackgroundColor(Color.parseColor("#3be0d0"));
+		tabs.getTabWidget().getChildAt(1)
+				.setBackgroundColor(Color.parseColor("#3be0d0"));
+		tabs.getTabWidget().getChildAt(2)
+				.setBackgroundColor(Color.parseColor("#3be0d0"));
 
-		
 		int tabCount = tabs.getTabWidget().getTabCount();
 		for (int i = 0; i < tabCount; i++) {
-		    final View view = tabs.getTabWidget().getChildTabViewAt(i);
-		    if ( view != null ) {
-		        // reduce height of the tab
-		        view.getLayoutParams().height *= 0.66;
+			final View view = tabs.getTabWidget().getChildTabViewAt(i);
+			if (view != null) {
+				// reduce height of the tab
+				view.getLayoutParams().height *= 0.66;
 
-		        //  get title text view
-		        final View textView = view.findViewById(android.R.id.title);
-		        if ( textView instanceof TextView ) {
-		            // just in case check the type
+				// get title text view
+				final View textView = view.findViewById(android.R.id.title);
+				if (textView instanceof TextView) {
+					// just in case check the type
+					// Change color
+					if (i != 0) {
+						((TextView) textView).setTextColor(Color.WHITE);
+					} else {
+						((TextView) textView).setTextColor(Color.GRAY);
+					}
+					// center text
+					((TextView) textView).setGravity(Gravity.CENTER);
+					// wrap text
+					((TextView) textView).setSingleLine(false);
 
-		            // center text
-		            ((TextView) textView).setGravity(Gravity.CENTER);
-		            // wrap text
-		            ((TextView) textView).setSingleLine(false);
+					// explicitly set layout parameters
+					textView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+					textView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
 
-		            // explicitly set layout parameters
-		            textView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
-		            textView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
-		            
-		        }
-		    }
+				}
+			}
 		}
-		
+
 		tabs.setCurrentTab(0);
 		actualTab = (LinearLayout) findViewById(R.id.tab1);
 

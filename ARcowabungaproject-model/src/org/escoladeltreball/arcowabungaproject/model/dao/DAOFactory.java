@@ -67,13 +67,25 @@ public abstract class DAOFactory {
 	    + "date_time DATE,"
 	    + "payment_method VARCHAR(15),"
 	    + "addres SMALLINT FOREIGN KEY REFERENCES addres ON DELTE CASCADE ON UPDATE CASCADE)";
-    public static final String CREATE_TABLE_ADDRES = "CREATE TABLE addres("
+    public static final String CREATE_TABLE_ADDRESS = "CREATE TABLE address("
 	    + "id_addres INTEGER PRIMARY KEY," + "number VARCHAR(3),"
 	    + "post_code VARCHAR(5)," + "floor VARCHAR(3)" + "stair CHAR,"
 	    + "door VARCHAR(2));";
     public static final String CREATE_TABLE_PREFERENCES = "CREATE TABLE preferences(key VARCHAR(30) PRIMARY KEY,"
 	    + "value VARCHAR(50));";
 
+    public static final String DROP_TABLE_RESOURCES = "DROP TABLE resources;";
+    public static final String DROP_TABLE_INGREDIENT = "DROP TABLE ingredient;";
+    public static final String DROP_TABLE_INGREDIENTS = "DROP TABLE ingredients;";
+    public static final String DROP_TABLE_PIZZAS = "DROP TABLE pizzas;";
+    public static final String DROP_TABLE_DRINKS = "DROP TABLE drinks;";
+    public static final String DROP_TABLE_OFFERS = "DROP TABLE offers;";
+    public static final String DROP_TABLE_OFFERS_PRODUCTS = "DROP TABLE offers_products;";
+    public static final String DROP_TABLE_SHOPPINGCARTS = "DROP TABLE shoppingcarts;";
+    public static final String DROP_TABLE_SHOPPINGCARTS_PRODUCTS = "DROP TABLE shoppingcart_products;";
+    public static final String DROP_TABLE_ORDERS = "DROP TABLE orders;";
+    public static final String DROP_TABLE_ADDRESS = "DROP TABLE address;";
+    public static final String DROP_TABLE_PREFERENCES = "DROP TABLE preferences;";
     // ====================
     // ATTRIBUTES
     // ====================
