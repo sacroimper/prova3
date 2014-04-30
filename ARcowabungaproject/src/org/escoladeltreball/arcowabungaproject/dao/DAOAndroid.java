@@ -12,6 +12,7 @@ import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -32,8 +33,8 @@ public class DAOAndroid extends DAOFactory {
     // CONSTRUCTORS
     // ====================
 
-    protected DAOAndroid(System system) {
-	super(system);
+    protected DAOAndroid(Pizzeria pizzeria) {
+	super(pizzeria);
     }
     
     // ====================
@@ -64,9 +65,9 @@ public class DAOAndroid extends DAOFactory {
 	return (DAOAndroid) instance;
     }
     
-    public static DAOAndroid getInstance(System system){
+    public static DAOAndroid getInstance(Pizzeria pizzeria){
 	if (instance == null){
-	    instance = new DAOAndroid(system);
+	    instance = new DAOAndroid(pizzeria);
 	}
 	return (DAOAndroid) instance;
     }

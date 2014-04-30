@@ -80,7 +80,7 @@ public abstract class DAOFactory {
     // ====================
     // CONSTRUCTORS
     // ====================
-    protected DAOFactory(System system) {
+    protected DAOFactory(Pizzeria pizzeria) {
 	this.pizzeria = pizzeria;
     }
 
