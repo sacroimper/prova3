@@ -174,6 +174,8 @@ private DataBaseHelper dbHepler;
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[6], pizza.getSize());
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[7], pizza.getDiscount());
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[8], pizza.getIngredients().getId());
+	    
+	    database.insert(DAOFactory.TABLE_PIZZAS, null, values);
 	}
 
     }
