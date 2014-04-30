@@ -7,11 +7,13 @@ import java.util.Set;
 import org.escoladeltreball.arcowabungaproject.model.Address;
 import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.joda.time.DateTime;
 
 public abstract class DAOFactory {
 
@@ -178,14 +180,30 @@ public abstract class DAOFactory {
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_LARGE);
 	Pizza p3 = new Pizza(3, "P3", 10, 150, 0, Pizza.MASSTYPE_THIN,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_MEDIUM);
-	Pizza p4 = new Pizza(4, "PC1", 10, 150, 0, Pizza.MASSTYPE_THICK,
+	Pizza p4 = new Pizza(10004, "PC1", 10, 150, 0, Pizza.MASSTYPE_THICK,
 		Pizza.TYPE_COSTUM_SAVED, Pizza.SIZE_SMALL);
-	Pizza p5 = new Pizza(5, "PC2", 10, 150, 0, Pizza.MASSTYPE_THIN,
+	Pizza p5 = new Pizza(10005, "PC2", 10, 150, 0, Pizza.MASSTYPE_THIN,
 		Pizza.TYPE_COSTUM_SAVED, Pizza.SIZE_SMALL);
-	Pizza p6 = new Pizza(6, "PT1", 10, 150, 0, Pizza.MASSTYPE_THIN,
+	Pizza p6 = new Pizza(10006, "PT1", 10, 150, 0, Pizza.MASSTYPE_THIN,
 		Pizza.TYPE_COSTUM_TEMPORARY, Pizza.SIZE_COWABUNGA);
-	Pizza p7 = new Pizza(7, "PT2", 10, 150, 0, Pizza.MASSTYPE_THICK,
+	Pizza p7 = new Pizza(10007, "PT2", 10, 150, 0, Pizza.MASSTYPE_THICK,
 		Pizza.TYPE_COSTUM_TEMPORARY, Pizza.SIZE_MEDIUM);
+
+	Ingredients is1 = new Ingredients(28);
+	Ingredients is2 = new Ingredients(29);
+	Ingredients is3 = new Ingredients(30);
+	Ingredients is4 = new Ingredients(10031);
+	Ingredients is5 = new Ingredients(10032);
+	Ingredients is6 = new Ingredients(10033);
+	Ingredients is7 = new Ingredients(10034);
+
+	p1.setIngredients(is1);
+	p1.setIngredients(is2);
+	p1.setIngredients(is3);
+	p1.setIngredients(is4);
+	p1.setIngredients(is5);
+	p1.setIngredients(is6);
+	p1.setIngredients(is7);
 
 	p1.addIngredient(i1, 1);
 	p1.addIngredient(i2, 1);
@@ -230,6 +248,78 @@ public abstract class DAOFactory {
 	Drink d4 = new Drink(21, "D4", 4, 153, 0, Drink.SIZE_LARGE);
 	Drink d5 = new Drink(22, "D5", 3, 153, 0, Drink.SIZE_SMALL);
 	Drink d6 = new Drink(23, "D6", 5, 153, 0, Drink.SIZE_SMALL);
+
+	drinks.add(d1);
+	drinks.add(d2);
+	drinks.add(d3);
+	drinks.add(d4);
+	drinks.add(d5);
+	drinks.add(d6);
+
+	Offer of1 = new Offer(24, "OF1", 15, 154, 0);
+	Offer of2 = new Offer(25, "OF2", 15, 154, 0);
+	Offer of3 = new Offer(26, "OF3", 15, 154, 0);
+	Offer of4 = new Offer(27, "OF4", 15, 154, 0);
+
+	of1.addProduct(p1);
+	of1.addProduct(p3);
+	of1.addProduct(d1);
+	of2.addProduct(p2);
+	of2.addProduct(p2);
+	of3.addProduct(d5);
+	of3.addProduct(d2);
+	of3.addProduct(d3);
+	of4.addProduct(p1);
+	of4.addProduct(p2);
+	of4.addProduct(d3);
+	of4.addProduct(d4);
+
+	offers.add(of1);
+	offers.add(of2);
+	offers.add(of3);
+	offers.add(of4);
+
+	Address a1 = new Address(35, "a", "a", "a", "a", "a", "a");
+	Address a2 = new Address(36, "b", "b", "b", "b", "b", "b");
+	Address a3 = new Address(37, "c", "c", "c", "c", "c", "c");
+
+	DateTime dt1 = DateTime.now().minusDays(3);
+	DateTime dt2 = DateTime.now().minusDays(25);
+	DateTime dt3 = DateTime.now().minusDays(10);
+
+	ShoppingCart s1 = new ShoppingCart(38);
+	ShoppingCart s2 = new ShoppingCart(39);
+	ShoppingCart s3 = new ShoppingCart(40);
+
+	s1.addProduct(p1);
+	s1.addProduct(d2);
+	s1.addProduct(p2);
+	s1.addProduct(d3);
+	s2.addProduct(p6);
+	s2.addProduct(p7);
+	s2.addProduct(p5);
+	s2.addProduct(of1);
+	s2.addProduct(d4);
+	s3.addProduct(p7);
+	s3.addProduct(d5);
+	s3.addProduct(p4);
+	s3.addProduct(p3);
+
+	Order or1 = new Order(41, "a", "a", dt1, "a", a1, s1);
+	Order or2 = new Order(42, "b", "b", dt2, "b", a1, s2);
+	Order or3 = new Order(43, "c", "c", dt3, "c", a1, s3);
+
+	ordersSaved.add(or1);
+	ordersSaved.add(or2);
+	ordersSaved.add(or3);
+
+	pizzeria.setPredefinedPizzas(predefinedPizzas);
+	pizzeria.setCustomSavedPizzas(customSavedPizzas);
+	pizzeria.setCustomTemporaryPizzas(customTemporaryPizzas);
+	pizzeria.setIngredients(ingredients);
+	pizzeria.setDrinks(drinks);
+	pizzeria.setOffers(offers);
+	pizzeria.setOrdersSaved(ordersSaved);
 
 	return true;
     }
