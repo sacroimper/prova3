@@ -89,6 +89,11 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	spec.setContent(R.id.tab3);
 	spec.setIndicator("TAB3");
 	tabs.addTab(spec);
+	
+	//TabsColor
+	tabs.getTabWidget().getChildAt(0).setBackgroundColor(Color.parseColor("#3be0d0"));
+	tabs.getTabWidget().getChildAt(1).setBackgroundColor(Color.parseColor("#3be0d0"));
+	tabs.getTabWidget().getChildAt(2).setBackgroundColor(Color.parseColor("#3be0d0"));
 
 	int tabCount = tabs.getTabWidget().getTabCount();
 	for (int i = 0; i < tabCount; i++) {
@@ -206,15 +211,13 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
     public void switchTabs(boolean direction) {
 
 	if (direction) {
-	    if (tabs.getCurrentTab() == 0) {
-		tabs.setCurrentTab(tabs.getTabWidget().getTabCount() - 1);
-	    } else
+	    if (tabs.getCurrentTab() != 0) {
 		tabs.setCurrentTab(tabs.getCurrentTab() - 1);
+	    }
 	} else {
 	    if (tabs.getCurrentTab() != (tabs.getTabWidget().getTabCount() - 1)) {
 		tabs.setCurrentTab(tabs.getCurrentTab() + 1);
-	    } else
-		tabs.setCurrentTab(0);
+	    } 
 	}
     }
 
