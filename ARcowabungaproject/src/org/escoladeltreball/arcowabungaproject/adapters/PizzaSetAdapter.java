@@ -90,19 +90,13 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	ivIcon = (ImageView) convertView.findViewById(R.id.imageInSubItem);
 	llButton = (LinearLayout) convertView
 		.findViewById(R.id.pizzaButtonInSubItem);
-	
-	String description = "";
-	Ingredients ingredients= children.getIngredients();
-	for (Ingredient ingredient : ingredients.getIngredients()){
-	    description += ingredient.getName() + ", ";
-	}
-	description = description.substring(0, description.lastIndexOf(","));
-	tvDesc.setText(description);
-	
+
+	tvDesc.setText(children.getIngedientsDescription());
+
 	children.getIcon();
-	
+
 	llButton.setOnClickListener(new ARButtonClickListener(groupPosition));
-	
+
 	return convertView;
     }
 
@@ -129,7 +123,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
-	Pizza group = (Pizza)getGroup(groupPosition);
+	Pizza group = (Pizza) getGroup(groupPosition);
 	ImageView ivIcon;
 	TextView tvTitle;
 	TextView tvPrice;
@@ -144,16 +138,16 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	tvPrice = (TextView) convertView.findViewById(R.id.priceTextInItem);
 	tvDesc = (TextView) convertView.findViewById(R.id.descTextInItem);
 	ibAdd = (ImageButton) convertView.findViewById(R.id.imageButtonInItem);
-	String path = "";
 	DAOAndroid dao = DAOAndroid.getInstance();
 	Drawable icon = dao.getDrawableFromAssets(activity, group.getIcon());
 	ivIcon.setBackgroundDrawable(icon);
-	
+
 	tvTitle.setText(group.getName());
 	tvPrice.setText(group.getFormatedPrice());
-	
+	tvDesc.setText(group.getIngedientsDescription());
+
 	ibAdd.setOnClickListener(new AddButtonClickListener(groupPosition));
-	
+
 	return convertView;
     }
 
@@ -181,13 +175,13 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public void onClick(View v) {
-	    //Intent i = new Intent(activity, ARViewActivity.class);
+	    // Intent i = new Intent(activity, ARViewActivity.class);
 	    // Pasarle pizza
 	    // i.putExtra("pizza", pizzas.get(index));
-	    //activity.startActivity(i);
+	    // activity.startActivity(i);
 	}
     }
-    
+
     public class AddButtonClickListener implements OnClickListener {
 
 	private int index;
@@ -195,12 +189,12 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	public AddButtonClickListener(int index) {
 	    this.index = index;
 	}
-	
+
 	@Override
 	public void onClick(View v) {
-	   // System.
-	    
+	    // System.
+
 	}
-	
+
     }
 }
