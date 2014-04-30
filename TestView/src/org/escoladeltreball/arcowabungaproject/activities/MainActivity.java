@@ -36,13 +36,13 @@ public class MainActivity extends Activity implements OnClickListener{
 	bCarta.setOnClickListener(this);
 	
 	LinearLayout bOrder = (LinearLayout) findViewById(R.id.linearButtonPedidoActual);
-	bCarta.setOnClickListener(this);
+	bOrder.setOnClickListener(this);
 	
 	LinearLayout bLastOrders = (LinearLayout) findViewById(R.id.linearButtonPedidosAnteriores);
-	bCarta.setOnClickListener(this);
+	bLastOrders.setOnClickListener(this);
 	
 	LinearLayout bContact = (LinearLayout) findViewById(R.id.linearButtonContacto);
-	bCarta.setOnClickListener(this);
+	bContact.setOnClickListener(this);
 	
     }
 
@@ -65,12 +65,10 @@ public class MainActivity extends Activity implements OnClickListener{
 	}else if ( v.getId() == R.id.linearButtonPedidosAnteriores ){
 	    Intent intent = new Intent(this.getApplicationContext(), LastOrdersActivity.class);
        	    startActivity(intent);
+	}else if ( v.getId() == R.id.linearButtonContacto ){
+	    Intent intent = new Intent(this.getApplicationContext(), ContactActivity.class);
+       	    startActivity(intent);
 	}
-	//To develope
-//	else if ( v.getId() == R.id.linearButtonContacto ){
-//	    Intent intent = new Intent(this.getApplicationContext(), LastOrdersActivity.class);
-//       	    startActivity(intent);
-//	}
 	
     }
 

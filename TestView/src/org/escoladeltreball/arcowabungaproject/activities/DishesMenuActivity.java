@@ -3,21 +3,36 @@ package org.escoladeltreball.arcowabungaproject.activities;
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
+import org.escoladeltreball.arcowabungaproject.visualeffects.TabsSwipeAnimation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TabHost.TabContentFactory;
+import android.widget.TabHost.TabSpec;
 
 public class DishesMenuActivity extends Activity implements OnTouchListener,
 	OnClickListener {
@@ -29,6 +44,7 @@ public class DishesMenuActivity extends Activity implements OnTouchListener,
     SparseArray<GrupoDeItems> grupos = new SparseArray<GrupoDeItems>();
     TabHost tabs;
     float lastX;
+    LinearLayout actualTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,39 +67,11 @@ public class DishesMenuActivity extends Activity implements OnTouchListener,
 	ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
 	Adaptador adapter = new Adaptador(this, grupos);
 	listView.setAdapter(adapter);
+	// Para añadir swipe action al la Expandable list
+	listView.setOnTouchListener(this);
 
 	// Pestañas
 	makeTabs();
-
-	
-	
-	// Listeners de tab para animación. (necesita extender de TabActivity)
-	
-	// getTabHost().setOnTabChangedListener(new OnTabChangeListener() {
-	// public void onTabChanged(String tabId)
-	// {
-	// View currentView = getTabHost().getCurrentView();
-	// if (getTabHost().getCurrentTab() > tabs.getCurrentTab())
-	// {
-	// currentView.setAnimation( inFromRightAnimation() );
-	// }
-	// else
-	// {
-	// currentView.setAnimation( outToRightAnimation() );
-	// }
-	// currentTab = getTabHost().getCurrentTab();
-	// }
-	// });
-
-	// añadiendo la posibilidad de arrastrar a la derecha tambien en los
-	// botones
-	// De momento solo hay una listview en la tab1 (listViewexp)
-	// ExpandableListView elv = (ExpandableListView)
-	// findViewById(R.id.listViewexp);
-	listView.setOnTouchListener(this);
-
-	// Button b = (Button) findViewById(R.id.pizzaButtonInSubItem);
-	// b.setOnClickListener(this);
 
     }
 
@@ -107,7 +95,71 @@ public class DishesMenuActivity extends Activity implements OnTouchListener,
 	spec.setIndicator("TAB3");
 	tabs.addTab(spec);
 
+	int tabCount = tabs.getTabWidget().getTabCount();
+	for (int i = 0; i < tabCount; i++) {
+	    final View view = tabs.getTabWidget().getChildTabViewAt(i);
+	    if (view != null) {
+		// reduce height of the tab
+		view.getLayoutParams().height *= 0.66;
+
+		// get title text view
+		final View textView = view.findViewById(android.R.id.title);
+		if (textView instanceof TextView) {
+		    // just in case check the type
+
+		    // center text
+		    ((TextView) textView).setGravity(Gravity.CENTER);
+		    // wrap text
+		    ((TextView) textView).setSingleLine(false);
+
+		    // explicitly set layout parameters
+		    textView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+		    textView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+		}
+	    }
+	}
 	tabs.setCurrentTab(0);
+
+	actualTab = (LinearLayout) findViewById(R.id.tab1);
+
+	tabs.setOnTabChangedListener(new OnTabChangeListener() {
+
+	    LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
+	    LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
+	    LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
+
+	    public void onTabChanged(String tabId) {
+		if (actualTab.equals(t1l) && tabId.equals("mitab2")) {
+		    t1l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
+		    t2l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
+		    actualTab = t2l;
+		} else if (actualTab.equals(t2l) && tabId.equals("mitab1")) {
+		    t2l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
+		    t1l.setAnimation(TabsSwipeAnimation
+			    .leftFromRightAnimation());
+		    actualTab = t1l;
+		} else if (actualTab.equals(t2l) && tabId.equals("mitab3")) {
+		    t2l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
+		    t3l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
+		    actualTab = t3l;
+		} else if (actualTab.equals(t3l) && tabId.equals("mitab2")) {
+		    t3l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
+		    t2l.setAnimation(TabsSwipeAnimation
+			    .leftFromRightAnimation());
+		    actualTab = t2l;
+		} else if (actualTab.equals(t1l) && tabId.equals("mitab3")) {
+		    t1l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
+		    t3l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
+		    actualTab = t3l;
+		} else if (actualTab.equals(t3l) && tabId.equals("mitab1")) {
+		    t3l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
+		    t1l.setAnimation(TabsSwipeAnimation
+			    .leftFromRightAnimation());
+		    actualTab = t1l;
+		}
+	    }
+	});
     }
 
     /**
@@ -152,20 +204,22 @@ public class DishesMenuActivity extends Activity implements OnTouchListener,
 	grupos.append(6, grupo6);
     }
 
+    /**
+     * Move swipe touch acction
+     * 
+     * @param direction
+     */
     public void switchTabs(boolean direction) {
 
-	if (direction) // true = move left
-	{
-	    if (tabs.getCurrentTab() == 0)
+	if (direction) {
+	    if (tabs.getCurrentTab() == 0) {
 		tabs.setCurrentTab(tabs.getTabWidget().getTabCount() - 1);
-	    else
+	    } else
 		tabs.setCurrentTab(tabs.getCurrentTab() - 1);
-	} else
-	// move right
-	{
-	    if (tabs.getCurrentTab() != (tabs.getTabWidget().getTabCount() - 1))
+	} else {
+	    if (tabs.getCurrentTab() != (tabs.getTabWidget().getTabCount() - 1)) {
 		tabs.setCurrentTab(tabs.getCurrentTab() + 1);
-	    else
+	    } else
 		tabs.setCurrentTab(0);
 	}
     }
@@ -216,28 +270,23 @@ public class DishesMenuActivity extends Activity implements OnTouchListener,
 	// startActivity(arPizza);
     }
 
-    // Para hacer animaciones de swipe.
-    
-    // public Animation inFromRightAnimation() {
-    // Animation inFromRight = new TranslateAnimation(
-    // Animation.RELATIVE_TO_PARENT, +1.0f,
-    // Animation.RELATIVE_TO_PARENT, 0.0f,
-    // Animation.RELATIVE_TO_PARENT, 0.0f,
-    // Animation.RELATIVE_TO_PARENT, 0.0f);
-    // inFromRight.setDuration(240);
-    // inFromRight.setInterpolator(new AccelerateInterpolator());
-    // return inFromRight;
-    // }
-    //
-    // public Animation outToRightAnimation() {
-    // Animation outtoLeft = new TranslateAnimation(
-    // Animation.RELATIVE_TO_PARENT, -1.0f,
-    // Animation.RELATIVE_TO_PARENT, 0.0f,
-    // Animation.RELATIVE_TO_PARENT, 0.0f,
-    // Animation.RELATIVE_TO_PARENT, 0.0f);
-    // outtoLeft.setDuration(240);
-    // outtoLeft.setInterpolator(new AccelerateInterpolator());
-    // return outtoLeft;
-    // }
+//    private void setupTab(final View view, final String tag, int id) {
+//	View tabview = createTabView(tabs.getContext(), tag);
+//	TabSpec setContent = tabs.newTabSpec(tag).setIndicator(tabview)
+//		.setContent(new TabContentFactory() {
+//		    public View createTabContent(String tag) {
+//			return view;
+//		    }
+//		});
+//	tabs.addTab(setContent);
+//    }
+
+//    private static View createTabView(final Context context, final String text) {
+//	View view = LayoutInflater.from(context)
+//		.inflate(R.layout.tabs_bg, null);
+//	TextView tv = (TextView) view.findViewById(R.id.tabsText);
+//	tv.setText(text);
+//	return view;
+//    }
 
 }

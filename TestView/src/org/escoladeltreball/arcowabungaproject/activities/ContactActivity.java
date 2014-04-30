@@ -8,9 +8,8 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
+public class ContactActivity extends Activity{
 
-public class LastOrdersActivity extends Activity{
-    
     //====================
     // CONSTANTS
     //====================
@@ -48,21 +47,19 @@ public class LastOrdersActivity extends Activity{
 	this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-	
 	super.onCreate(savedInstanceState);
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_arpizza);
-	
-
 	
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater().inflate(R.menu.main, menu);
 	return true;
     }
-
+    
     //====================
     // GETTERS & SETTERS
     //====================

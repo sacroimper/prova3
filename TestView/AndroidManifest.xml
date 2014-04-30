@@ -35,6 +35,21 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="org.escoladeltreball.arcowabungaproject.activities.LastOrdersActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.escoladeltreball.arcowabungaproject.activities.OrderActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.escoladeltreball.arcowabungaproject.activities.ContactActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="org.escoladeltreball.arcowabungaproject.activities.ARViewActivity"
             android:screenOrientation="landscape" >
         </activity>
