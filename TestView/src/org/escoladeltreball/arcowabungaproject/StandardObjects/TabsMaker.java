@@ -43,13 +43,13 @@ public class TabsMaker {
     
     //STYLE
     
-    public static TabHost tabsAspectRatio(TabHost tabs) {
+    public static TabHost tabsAspectRatio(TabHost tabs, double heigth) {
    	int tabCount = tabs.getTabWidget().getTabCount();
    	for (int i = 0; i < tabCount; i++) {
    	    final View view = tabs.getTabWidget().getChildTabViewAt(i);
    	    if (view != null) {
    		// reduce height of the tab
-   		view.getLayoutParams().height *= 0.66;
+   		view.getLayoutParams().height *= heigth;
 
    		// get title text view
    		final View textView = view.findViewById(android.R.id.title);
