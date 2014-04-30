@@ -17,4 +17,18 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <!--  custom STYLE -->
+    <style name="MyCustomTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:tabWidgetStyle">@style/CustomTabWidget</item>
+    </style>
+
+    <style name="CustomTabWidget" parent="@android:style/Widget.TabWidget">
+        <item name="android:textAppearance">@style/CustomTabWidgetText</item>
+    </style>
+
+    <style name="CustomTabWidgetText" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
