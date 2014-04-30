@@ -22,7 +22,7 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class SecondActivity extends Activity {
+public class SecondActivity extends Activity implements OnTabChangeListener {
 	TabHost tabs;
 	LinearLayout actualTab;
 	float lastX;
@@ -128,43 +128,112 @@ public class SecondActivity extends Activity {
 			}
 		}
 
+		// tabs.getTabWidget().getChildAt(0).setBackgroundResource(R.layout.tab_bg_selector);
+		// tabs.getTabWidget().getChildAt(1).setBackgroundResource(R.layout.tab_bg_selector);
+		// tabs.getTabWidget().getChildAt(2).setBackgroundResource(R.layout.tab_bg_selector);
+
 		tabs.setCurrentTab(0);
 		actualTab = (LinearLayout) findViewById(R.id.tab1);
 
-		tabs.setOnTabChangedListener(new OnTabChangeListener() {
+		tabs.setOnTabChangedListener(this);
+		// tabs.setOnTabChangedListener(new OnTabChangeListener() {
+		//
+		//
+		// LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
+		// LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
+		// LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
+		//
+		// public void onTabChanged(String tabId) {
+		// if (actualTab.equals(t1l) && tabId.equals("mitab2")) {
+		// t1l.setAnimation(outToLeftAnimation());
+		// t2l.setAnimation(inFromRightAnimation());
+		// actualTab = t2l;
+		// } else if (actualTab.equals(t2l) && tabId.equals("mitab1")) {
+		// t2l.setAnimation(leftToLeftAnimation());
+		// t1l.setAnimation(leftFromRightAnimation());
+		// actualTab = t1l;
+		// } else if (actualTab.equals(t2l) && tabId.equals("mitab3")) {
+		// t2l.setAnimation(outToLeftAnimation());
+		// t3l.setAnimation(inFromRightAnimation());
+		// actualTab = t3l;
+		// } else if (actualTab.equals(t3l) && tabId.equals("mitab2")) {
+		// t3l.setAnimation(leftToLeftAnimation());
+		// t2l.setAnimation(leftFromRightAnimation());
+		// actualTab = t2l;
+		// } else if (actualTab.equals(t1l) && tabId.equals("mitab3")) {
+		// t1l.setAnimation(outToLeftAnimation());
+		// t3l.setAnimation(inFromRightAnimation());
+		// actualTab = t3l;
+		// } else if (actualTab.equals(t3l) && tabId.equals("mitab1")) {
+		// t3l.setAnimation(leftToLeftAnimation());
+		// t1l.setAnimation(leftFromRightAnimation());
+		// actualTab = t1l;
+		// }
+		// }
+		// });
+	}
 
-			LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
-			LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
-			LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
-
-			public void onTabChanged(String tabId) {
-				if (actualTab.equals(t1l) && tabId.equals("mitab2")) {
-					t1l.setAnimation(outToLeftAnimation());
-					t2l.setAnimation(inFromRightAnimation());
-					actualTab = t2l;
-				} else if (actualTab.equals(t2l) && tabId.equals("mitab1")) {
-					t2l.setAnimation(leftToLeftAnimation());
-					t1l.setAnimation(leftFromRightAnimation());
-					actualTab = t1l;
-				} else if (actualTab.equals(t2l) && tabId.equals("mitab3")) {
-					t2l.setAnimation(outToLeftAnimation());
-					t3l.setAnimation(inFromRightAnimation());
-					actualTab = t3l;
-				} else if (actualTab.equals(t3l) && tabId.equals("mitab2")) {
-					t3l.setAnimation(leftToLeftAnimation());
-					t2l.setAnimation(leftFromRightAnimation());
-					actualTab = t2l;
-				} else if (actualTab.equals(t1l) && tabId.equals("mitab3")) {
-					t1l.setAnimation(outToLeftAnimation());
-					t3l.setAnimation(inFromRightAnimation());
-					actualTab = t3l;
-				} else if (actualTab.equals(t3l) && tabId.equals("mitab1")) {
-					t3l.setAnimation(leftToLeftAnimation());
-					t1l.setAnimation(leftFromRightAnimation());
-					actualTab = t1l;
+	public void changeColor(int selection, boolean isSelected) {
+		int tabCount = tabs.getTabWidget().getTabCount();
+		for (int i = 0; i < tabCount; i++) {
+			final View view = tabs.getTabWidget().getChildTabViewAt(i);
+			if (view != null) {
+				// get title text view
+				final View textView = view.findViewById(android.R.id.title);
+				if (textView instanceof TextView) {
+					if (i == selection && !isSelected) {
+						((TextView) textView).setTextColor(Color.WHITE);
+					} else if (i == selection && isSelected) {
+						((TextView) textView).setTextColor(Color.GRAY);
+					}
 				}
 			}
-		});
+		}
+	}
+
+	@Override
+	public void onTabChanged(String tabId) {
+		LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
+		LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
+		LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
+
+		if (actualTab.equals(t1l) && tabId.equals("mitab2")) {
+			t1l.setAnimation(outToLeftAnimation());
+			t2l.setAnimation(inFromRightAnimation());
+			actualTab = t2l;
+			changeColor(0, false);
+			changeColor(1, true);
+		} else if (actualTab.equals(t2l) && tabId.equals("mitab1")) {
+			t2l.setAnimation(leftToLeftAnimation());
+			t1l.setAnimation(leftFromRightAnimation());
+			actualTab = t1l;
+			changeColor(1, false);
+			changeColor(0, true);
+		} else if (actualTab.equals(t2l) && tabId.equals("mitab3")) {
+			t2l.setAnimation(outToLeftAnimation());
+			t3l.setAnimation(inFromRightAnimation());
+			actualTab = t3l;
+			changeColor(1, false);
+			changeColor(2, true);
+		} else if (actualTab.equals(t3l) && tabId.equals("mitab2")) {
+			t3l.setAnimation(leftToLeftAnimation());
+			t2l.setAnimation(leftFromRightAnimation());
+			actualTab = t2l;
+			changeColor(2, false);
+			changeColor(1, true);
+		} else if (actualTab.equals(t1l) && tabId.equals("mitab3")) {
+			t1l.setAnimation(outToLeftAnimation());
+			t3l.setAnimation(inFromRightAnimation());
+			actualTab = t3l;
+			changeColor(0, false);
+			changeColor(2, true);
+		} else if (actualTab.equals(t3l) && tabId.equals("mitab1")) {
+			t3l.setAnimation(leftToLeftAnimation());
+			t1l.setAnimation(leftFromRightAnimation());
+			actualTab = t1l;
+			changeColor(2, false);
+			changeColor(0, true);
+		}
 	}
 
 	@Override
