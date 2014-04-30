@@ -37,6 +37,10 @@ public class Product extends IdObject {
     // PUBLIC METHODS
     // ====================
 
+    public String getFormatedPrice() {
+	return String.format("%.2f€", price);
+    }
+
     // ====================
     // PROTECTED METHODS
     // ====================

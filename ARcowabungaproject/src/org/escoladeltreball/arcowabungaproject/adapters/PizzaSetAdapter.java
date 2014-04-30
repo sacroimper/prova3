@@ -150,7 +150,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	ivIcon.setBackgroundDrawable(icon);
 	
 	tvTitle.setText(group.getName());
-	tvPrice.setText(String.format("%.2f€",group.getPrice()));
+	tvPrice.setText(group.getFormatedPrice());
 	
 	ibAdd.setOnClickListener(new AddButtonClickListener(groupPosition));
 	
