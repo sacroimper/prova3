@@ -10,6 +10,16 @@ public class Pizza extends Product {
 
     private static final long serialVersionUID = 3520483599417593606L;
 
+    private static final String MASSTYPE_THIN = "thin";
+    private static final String MASSTYPE_THICK = "thick";
+    private static final String TYPE_COSTUM_SAVED = "costumSaved";
+    private static final String TYPE_COSTUM_TEMPORARY = "costumTemporary";
+    private static final String TYPE_PREDEFINED = "predefined";
+    private static final int SIZE_SMALL = 1;
+    private static final int SIZE_MEDIUM = 2;
+    private static final int SIZE_LARGE = 3;
+    private static final int SIZE_COWABUNGA = 4;
+
     // ====================
     // ATTRIBUTES
     // ====================
