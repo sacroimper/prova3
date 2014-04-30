@@ -93,6 +93,18 @@ public abstract class DAOFactory {
 	return false;
     }
 
+    public void writeDataBase() {
+	writeIngredients(pizzeria.getIngredients());
+	writePizzas(pizzeria.getCustomSavedPizzas());
+	writePizzas(pizzeria.getPredefinedPizzas());
+	writeOffers(pizzeria.getOffers());
+	writeDrinks(pizzeria.getDrinks());
+	// writeShoppingCarts(pizzeria.getShoppingCart());
+	writeOrders(pizzeria.getOrdersSaved());
+	// writeAddres();
+	// writePreferences();
+    }
+
     // ====================
     // PROTECTED METHODS
     // ====================
@@ -128,9 +140,6 @@ public abstract class DAOFactory {
 
     protected abstract void writePreferences(Map<String, Object> preferences);
 
-    public void writeDataBase() {
-
-    }
     // ====================
     // PRIVATE METHODS
     // ====================
