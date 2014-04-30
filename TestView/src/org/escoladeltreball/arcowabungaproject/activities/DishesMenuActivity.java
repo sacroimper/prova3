@@ -1,27 +1,23 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.StandardObjects.TabsMaker;
 import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
-import org.escoladeltreball.arcowabungaproject.visualeffects.TabsAnimations;
-import org.escoladeltreball.arcowabungaproject.visualeffects.TabsStyle;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseArray;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TabHost.TabSpec;
 
 public class DishesMenuActivity extends Activity implements OnTouchListener {
 
@@ -72,33 +68,29 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	tabs = (TabHost) findViewById(android.R.id.tabhost);
 	tabs.setup();
 
-	// Number and Name
-	TabHost.TabSpec spec = tabs.newTabSpec("mytab1");
-	spec.setContent(R.id.tab1);
-	spec.setIndicator("TAB1");
-	tabs.addTab(spec);
-
-	spec = tabs.newTabSpec("mytab2");
-	spec.setContent(R.id.tab2);
-	spec.setIndicator("TAB2");
-	tabs.addTab(spec);
-
-	spec = tabs.newTabSpec("mytab3");
-	spec.setContent(R.id.tab3);
-	spec.setIndicator("TAB3");
-	tabs.addTab(spec);
+	//Make the neccesary tabs
+	TabSpec tab1 = TabsMaker.makeTab(tabs,"mytab1",R.id.tab1,"TAB1");
+	TabSpec tab2 = TabsMaker.makeTab(tabs,"mytab2",R.id.tab2,"TAB2");
+	TabSpec tab3 = TabsMaker.makeTab(tabs,"mytab3",R.id.tab3,"TAB3");
+	
+	//Add tabs to tabHost
+	tabs.addTab(tab1);
+	tabs.addTab(tab2);
+	tabs.addTab(tab3);
 
 	
 	// STYLE
 	// TabsColor
-	tabs = TabsStyle.tabsColor(tabs);
+	tabs = TabsMaker.tabsColor(tabs);
 	//Aspect Ratio
-	tabs = TabsStyle.tabsAspectRatio(tabs);
+	tabs = TabsMaker.tabsAspectRatio(tabs);
 
+	//BEHAVIOUR
 	// Default selected
 	tabs.setCurrentTab(0);
 	actualTab = (LinearLayout) findViewById(R.id.tab1);
 
+	//ANIMATION
 	// On change animation
 	tabs.setOnTabChangedListener(new OnTabChangeListener() {
 
@@ -107,7 +99,7 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	    LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
 
 	    public void onTabChanged(String tabId) {
-		actualTab = TabsAnimations.OnChangeTabAnimation(tabId, actualTab, t1l, t2l,t3l);
+		actualTab = TabsMaker.OnChangeTabAnimation(tabId, actualTab, t1l, t2l,t3l);
 	    }
 
 	});

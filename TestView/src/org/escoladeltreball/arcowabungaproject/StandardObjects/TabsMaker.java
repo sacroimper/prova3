@@ -1,11 +1,20 @@
-package org.escoladeltreball.arcowabungaproject.visualeffects;
+package org.escoladeltreball.arcowabungaproject.StandardObjects;
 
+import org.escoladeltreball.arcowabungaproject.R;
+
+import android.graphics.Color;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 
-public class TabsAnimations {
+public class TabsMaker {
 
     // ====================
     // CONSTANTS
@@ -22,6 +31,58 @@ public class TabsAnimations {
     // ====================
     // PUBLIC METHODS
     // ====================
+    
+    //MAKE A SINGLE TAB
+    public static TabSpec makeTab(TabHost tabs, String tabSpec, int content, String indicator) {
+	TabHost.TabSpec spec = tabs.newTabSpec(tabSpec);
+	spec.setContent(content);
+	spec.setIndicator(indicator);
+	return spec;
+    }
+    
+    
+    //STYLE
+    
+    public static TabHost tabsAspectRatio(TabHost tabs) {
+   	int tabCount = tabs.getTabWidget().getTabCount();
+   	for (int i = 0; i < tabCount; i++) {
+   	    final View view = tabs.getTabWidget().getChildTabViewAt(i);
+   	    if (view != null) {
+   		// reduce height of the tab
+   		view.getLayoutParams().height *= 0.66;
+
+   		// get title text view
+   		final View textView = view.findViewById(android.R.id.title);
+   		if (textView instanceof TextView) {
+   		    // just in case check the type
+
+   		    // center text
+   		    ((TextView) textView).setGravity(Gravity.CENTER);
+   		    // wrap text
+   		    ((TextView) textView).setSingleLine(false);
+
+   		    // explicitly set layout parameters
+   		    textView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+   		    textView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+   		}
+   	    }
+   	}
+   	return tabs;
+       }
+
+       public static TabHost tabsColor(TabHost tabs) {
+   	tabs.getTabWidget().getChildAt(0)
+   		.setBackgroundColor(Color.parseColor("#3be0d0"));
+   	tabs.getTabWidget().getChildAt(1)
+   		.setBackgroundColor(Color.parseColor("#3be0d0"));
+   	tabs.getTabWidget().getChildAt(2)
+   		.setBackgroundColor(Color.parseColor("#3be0d0"));
+   	return tabs;
+
+       }
+    
+    //ANIMATIONS
 
     public static Animation inFromRightAnimation() {
 
@@ -99,6 +160,8 @@ public class TabsAnimations {
 	}
 	return actualTab;
     }
+
+
 
     // ====================
     // PROTECTED METHODS
