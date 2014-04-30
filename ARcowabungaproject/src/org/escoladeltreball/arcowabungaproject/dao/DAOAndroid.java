@@ -23,8 +23,6 @@ import android.graphics.drawable.Drawable;
 
 public class DAOAndroid extends DAOFactory {
 
-    private Map<Integer,String> resources;
-    
     // ====================
     // CONSTANTS
     // ====================
@@ -32,60 +30,65 @@ public class DAOAndroid extends DAOFactory {
     // ====================
     // ATTRIBUTES
     // ====================
-private SQLiteDatabase database;
-private DataBaseHelper dbHepler;
+
+    private SQLiteDatabase database;
+    private DataBaseHelper dbHepler;
+
+    private Map<Integer, String> resources;
+
     // ====================
     // CONSTRUCTORS
     // ====================
 
-    protected DAOAndroid(Context context,Pizzeria pizzeria) {
+    protected DAOAndroid(Context context, Pizzeria pizzeria) {
 	super(pizzeria);
 	dbHepler = new DataBaseHelper(context);
-	
+
     }
-    
+
     // ====================
     // PUBLIC METHODS
     // ====================
 
-    public Drawable getDrawableFromAssets(Activity activity, String path){
+    public Drawable getDrawableFromAssets(Activity activity, String path) {
 	Drawable drawable = null;
 	try {
-	    drawable = Drawable.createFromStream(activity.getAssets().open(path), null);
+	    drawable = Drawable.createFromStream(activity.getAssets()
+		    .open(path), null);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	return drawable;
     }
-    
 
-    public Drawable getDrawableFromAssets(Activity activity, int resourceId){
+    public Drawable getDrawableFromAssets(Activity activity, int resourceId) {
 	return getDrawableFromAssets(activity, getResourcePath(resourceId));
     }
-    
-    public String getResourcePath(int resourceId){
+
+    public String getResourcePath(int resourceId) {
 	return resources.get(resourceId);
     }
-    
-    public static DAOAndroid getInstance(){
+
+    public static DAOAndroid getInstance() {
 	return (DAOAndroid) instance;
     }
-    
-    public static DAOAndroid getInstance(Context context, Pizzeria pizzeria){
-	if (instance == null){
-	    instance = new DAOAndroid(context,pizzeria);
+
+    public static DAOAndroid getInstance(Context context, Pizzeria pizzeria) {
+	if (instance == null) {
+	    instance = new DAOAndroid(context, pizzeria);
 	}
 	return (DAOAndroid) instance;
     }
-    
+
     public void open() throws SQLException {
 	database = dbHepler.getWritableDatabase();
     }
-    
-    public void close(){
+
+    public void close() {
 	dbHepler.close();
     }
+
     // ====================
     // PROTECTED METHODS
     // ====================
@@ -98,6 +101,17 @@ private DataBaseHelper dbHepler;
     // OVERRIDE METHODS
     // ====================
 
+
+    @Override
+    public boolean loadDemo() {
+	resources.put(150, "images/home_image.png");
+	resources.put(151, "images/home_image.png");
+	resources.put(152, "images/home_image.png");
+	resources.put(153, "images/home_image.png");
+	resources.put(154, "images/home_image.png");
+	return super.loadDemo();
+    }
+    
     @Override
     protected Set<Ingredient> readIngredient() {
 	// TODO Auto-generated method stub
@@ -149,10 +163,10 @@ private DataBaseHelper dbHepler;
     @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
 	// TODO Auto-generated method stub
-	for(Ingredient ingredient : ingredients){
-//	    ContentValues values = new ContentValues();
-//	    values.put
-//	    database.insert(table, nullColumnHack, values)
+	for (Ingredient ingredient : ingredients) {
+	    // ContentValues values = new ContentValues();
+	    // values.put
+	    // database.insert(table, nullColumnHack, values)
 	}
     }
 
