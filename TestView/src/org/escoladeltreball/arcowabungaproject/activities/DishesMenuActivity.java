@@ -50,8 +50,9 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 	setContentView(R.layout.activity_tabs);
-	
-	this.overridePendingTransition(R.anim.animation_enter,R.anim.animation_leave);
+
+	this.overridePendingTransition(R.anim.animation_enter,
+		R.anim.animation_leave);
 
 	// ELIMINAR CUANDO SE INCORORE BASE DE DATOS
 	// Incorpora datos ficticios
@@ -116,7 +117,6 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	tabs.setCurrentTab(0);
 
 	actualTab = (LinearLayout) findViewById(R.id.tab1);
-
 	tabs.setOnTabChangedListener(new OnTabChangeListener() {
 
 	    LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
