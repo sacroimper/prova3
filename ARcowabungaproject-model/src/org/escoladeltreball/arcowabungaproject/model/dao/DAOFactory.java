@@ -21,76 +21,119 @@ public abstract class DAOFactory {
 
     public static final String CREATE_DATA_BASE = "CREATE DATABASE cowabunga;";
 
+    /* TABLE NAMES */
+    public static final String TABLE_RESOURCES = "resources";
+    public static final String TABLE_INGREDIENT = "ingredient";
+    public static final String TABLE_INGREDIENTS = "ingredients";
+    public static final String TABLE_PIZZAS = "pizzas";
+    public static final String TABLE_DRINKS = "drinks";
+    public static final String TABLE_OFFERS = "offers";
+    public static final String TABLE_OFFERS_PRODUCTS = "offers_products";
+    public static final String TABLE_SHOPPINGCARTS = "shoppingcarts";
+    public static final String TABLE_SHOPPINGCART_PRODUCTS = "shoppingcart_products";
+    public static final String TABLE_ORDERS = "orders";
+    public static final String TABLE_ADDRESS = "address";
+    public static final String TABLE_PREFERENCES = "preferences";
+
     /* CREATE TABLES */
 
-    public static final String CREATE_TABLE_RESOURCES = "CREATE TABLE resources("
-	    + "id_resources INTEGER PRIMARY KEY," + "path VARCHAR(150));";
-    public static final String CREATE_TABLE_INGREDIENT = "CREATE TABLE ingredient("
-	    + "id_ingredient INTEGER PRIMARY KEY,"
-	    + "name VARCHAR(50), "
-	    + "icon SMALLINT FOREIGN KEY REFERENCES resources ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + "model SMALLINT FOREIGN KEY REFERENCES resources ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + "price NUMERIC);";
-    public static final String CREATE_TABLE_INGREDIENTS = "CREATE TABLE ingredients("
-	    + "id_ingredients INTEGER PRIMARY KEY,"
-	    + "ingredient INTEGER FOREIGN KEY REFERNECES ingredient ON DELETE CASCADE ON UPDATE CASCADE,"
+    public static final String CREATE_TABLE_RESOURCES = "CREATE TABLE "
+	    + TABLE_RESOURCES + "(" + "id_resources INTEGER PRIMARY KEY,"
+	    + "path VARCHAR(150));";
+    public static final String CREATE_TABLE_INGREDIENT = "CREATE TABLE "
+	    + TABLE_INGREDIENT + "(" + "id_ingredient INTEGER PRIMARY KEY,"
+	    + "name VARCHAR(50), " + "icon SMALLINT FOREIGN KEY REFERENCES "
+	    + TABLE_RESOURCES + "ON DELETE CASCADE ON UPDATE CASCADE,"
+	    + "model SMALLINT FOREIGN KEY REFERENCES " + TABLE_RESOURCES
+	    + " ON DELETE CASCADE ON UPDATE CASCADE," + "price NUMERIC);";
+    public static final String CREATE_TABLE_INGREDIENTS = "CREATE TABLE "
+	    + TABLE_INGREDIENTS + "(" + "id_ingredients INTEGER PRIMARY KEY,"
+	    + "ingredient INTEGER FOREIGN KEY REFERNECES " + TABLE_INGREDIENT
+	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
 	    + "num_ingredients SMALLINT NOT NULL);";
-    public static final String CREATE_TABLE_PIZZAS = "CREATE TABLE pizzas("
-	    + "id_pizza INTEGER PRIMARY KEY,"
-	    + "name VARCHAR(50),"
-	    + "price NUMERIC,"
-	    + "icon SMALLINT FOREIGN KEY REFERNCES resources ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + "massType VARCHAR(10)," + "type VARCHAR(10)," + "size SMALLINT,"
-	    + "discount NUMERIC);";
-    public static final String CREATE_TABLE_DRINKS = "CREATE TABLE drinks("
-	    + "id_drink INTEGER PRIMARY KEY,"
-	    + "name VARCHAR(50),"
-	    + "price NUMERIC,"
-	    + "icon SMALLINT FOREIGN KEY REFERENCES resources ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + "discount NUMERIC," + "size SMALLINT);";
-    public static final String CREATE_TABLE_OFFERS = "CREATE TABLE offers("
-	    + "id_offers INTEGER PRIMARY KEY,"
-	    + "name VARCHAR(30),"
-	    + "price NUMERIC,"
-	    + "icon SMALLINT FOREIGN KEY  REFERNCES resources ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + "discount NUMERIC);";
-    public static final String CREATE_TABLE_OFFERS_PRODUCTS = "CREATE TABLE offers_products("
-	    + "offer INTEGER FOREIGN KEY REFERENCES offers ON DELTE CASCADE ON UPDATE CASCADE,"
-	    + "pizza INTEGER FOREIGN KEY REFERNCES pizza ON DELTE CASCADE ON UPDATE CASCADE,"
-	    + "drink INTEGER FOREIGN KEY REFERNCES drink ON DELTE CASCADE ON UPDATE CASCADE"
-	    + ");";
-    public static final String CREATE_TABLE_SHOPPINGCARTS = "CREATE TABLE shoppingcarts(id_shoopingcart INTEGER PRIMARY KEY);";
-    public static final String CREATE_TABLE_SHOPPINCART_PRODUCTS = "CREATE TABLE shoopingcart_products("
-	    + "shoppincart INTEGER FOREIGN KEY REFERENCES shoppincart ON DELTE CASCADE ON UPDATE CASCADE "
-	    + "offer INTEGER FOREIGN KEY REFERENCES offers ON DELTE CASCADE ON UPDATE CASCADE,"
-	    + "pizza INTEGER FOREIGN KEY REFERNCES pizza ON DELTE CASCADE ON UPDATE CASCADE,"
-	    + "drink INTEGER FOREIGN KEY REFERNCES drink ON DELTE CASCADE ON UPDATE CASCADE);";
-    public static final String CREATE_TABLE_ORDERS = "CREATE TABLE orders("
-	    + "id_order PRIMARY KEY,"
-	    + "email VARCHAR(50),"
-	    + "date_time DATE,"
+    public static final String CREATE_TABLE_PIZZAS = "CREATE TABLE "
+	    + TABLE_PIZZAS + "(" + "id_pizza INTEGER PRIMARY KEY,"
+	    + "name VARCHAR(50)," + "price NUMERIC,"
+	    + "icon SMALLINT FOREIGN KEY REFERNCES " + TABLE_RESOURCES
+	    + " ON DELETE CASCADE ON UPDATE CASCADE," + "massType VARCHAR(10),"
+	    + "type VARCHAR(10)," + "size SMALLINT,"
+	    + "discount NUMERIC, ingredients INTEGER FOREIGN KEY REFERENCES "
+	    + TABLE_INGREDIENTS + "ON DELETE CASCADE ON UPDATE CASCADE);";
+    public static final String CREATE_TABLE_DRINKS = "CREATE TABLE "
+	    + TABLE_DRINKS + "(" + "id_drink INTEGER PRIMARY KEY,"
+	    + "name VARCHAR(50)," + "price NUMERIC,"
+	    + "icon SMALLINT FOREIGN KEY REFERENCES " + TABLE_RESOURCES
+	    + " ON DELETE CASCADE ON UPDATE CASCADE," + "discount NUMERIC,"
+	    + "size SMALLINT);";
+    public static final String CREATE_TABLE_OFFERS = "CREATE TABLE "
+	    + TABLE_OFFERS + "(" + "id_offers INTEGER PRIMARY KEY,"
+	    + "name VARCHAR(30)," + "price NUMERIC,"
+	    + "icon SMALLINT FOREIGN KEY  REFERNCES " + TABLE_RESOURCES
+	    + " ON DELETE CASCADE ON UPDATE CASCADE," + "discount NUMERIC);";
+    public static final String CREATE_TABLE_OFFERS_PRODUCTS = "CREATE TABLE "
+	    + TABLE_OFFERS_PRODUCTS + "("
+	    + "offer INTEGER FOREIGN KEY REFERENCES " + TABLE_OFFERS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE,"
+	    + "pizza INTEGER FOREIGN KEY REFERNCES " + TABLE_PIZZAS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE,"
+	    + "drink INTEGER FOREIGN KEY REFERNCES " + TABLE_DRINKS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE" + ");";
+    public static final String CREATE_TABLE_SHOPPINGCARTS = "CREATE TABLE "
+	    + TABLE_SHOPPINGCARTS + "(id_shoopingcart INTEGER PRIMARY KEY);";
+    public static final String CREATE_TABLE_SHOPPINCART_PRODUCTS = "CREATE TABLE "
+	    + TABLE_SHOPPINGCART_PRODUCTS
+	    + "("
+	    + "shoppincart INTEGER FOREIGN KEY REFERENCES "
+	    + TABLE_SHOPPINGCARTS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE "
+	    + "offer INTEGER FOREIGN KEY REFERENCES "
+	    + TABLE_OFFERS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE,"
+	    + "pizza INTEGER FOREIGN KEY REFERNCES "
+	    + TABLE_PIZZAS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE,"
+	    + "drink INTEGER FOREIGN KEY REFERNCES "
+	    + TABLE_DRINKS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE);";
+    public static final String CREATE_TABLE_ORDERS = "CREATE TABLE "
+	    + TABLE_ORDERS + "(" + "id_order PRIMARY KEY,"
+	    + "email VARCHAR(50)," + "date_time DATE,"
 	    + "payment_method VARCHAR(15),"
-	    + "addres SMALLINT FOREIGN KEY REFERENCES addres ON DELTE CASCADE ON UPDATE CASCADE)";
-    public static final String CREATE_TABLE_ADDRESS = "CREATE TABLE address("
-	    + "id_addres INTEGER PRIMARY KEY," + "number VARCHAR(3),"
-	    + "post_code VARCHAR(5)," + "floor VARCHAR(3)" + "stair CHAR,"
-	    + "door VARCHAR(2));";
-    public static final String CREATE_TABLE_PREFERENCES = "CREATE TABLE preferences(key VARCHAR(30) PRIMARY KEY,"
+	    + "addres SMALLINT FOREIGN KEY REFERENCES " + TABLE_ADDRESS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE)";
+    public static final String CREATE_TABLE_ADDRESS = "CREATE TABLE "
+	    + TABLE_ADDRESS + "(" + "id_addres INTEGER PRIMARY KEY,"
+	    + "number VARCHAR(3)," + "post_code VARCHAR(5),"
+	    + "floor VARCHAR(3)" + "stair CHAR," + "door VARCHAR(2));";
+    public static final String CREATE_TABLE_PREFERENCES = "CREATE TABLE "
+	    + TABLE_PREFERENCES + "(key VARCHAR(30) PRIMARY KEY,"
 	    + "value VARCHAR(50));";
 
     /* DROP TABLES */
-    public static final String DROP_TABLE_RESOURCES = "DROP TABLE resources;";
-    public static final String DROP_TABLE_INGREDIENT = "DROP TABLE ingredient;";
-    public static final String DROP_TABLE_INGREDIENTS = "DROP TABLE ingredients;";
-    public static final String DROP_TABLE_PIZZAS = "DROP TABLE pizzas;";
-    public static final String DROP_TABLE_DRINKS = "DROP TABLE drinks;";
-    public static final String DROP_TABLE_OFFERS = "DROP TABLE offers;";
-    public static final String DROP_TABLE_OFFERS_PRODUCTS = "DROP TABLE offers_products;";
-    public static final String DROP_TABLE_SHOPPINGCARTS = "DROP TABLE shoppingcarts;";
-    public static final String DROP_TABLE_SHOPPINGCARTS_PRODUCTS = "DROP TABLE shoppingcart_products;";
-    public static final String DROP_TABLE_ORDERS = "DROP TABLE orders;";
-    public static final String DROP_TABLE_ADDRESS = "DROP TABLE address;";
-    public static final String DROP_TABLE_PREFERENCES = "DROP TABLE preferences;";
+    public static final String DROP_TABLE_RESOURCES = "DROP TABLE "
+	    + TABLE_RESOURCES + ";";
+    public static final String DROP_TABLE_INGREDIENT = "DROP TABLE "
+	    + TABLE_INGREDIENT + ";";
+    public static final String DROP_TABLE_INGREDIENTS = "DROP TABLE "
+	    + TABLE_INGREDIENTS + ";";
+    public static final String DROP_TABLE_PIZZAS = "DROP TABLE " + TABLE_PIZZAS
+	    + ";";
+    public static final String DROP_TABLE_DRINKS = "DROP TABLE " + TABLE_DRINKS
+	    + ";";
+    public static final String DROP_TABLE_OFFERS = "DROP TABLE " + TABLE_OFFERS
+	    + ";";
+    public static final String DROP_TABLE_OFFERS_PRODUCTS = "DROP TABLE "
+	    + TABLE_OFFERS_PRODUCTS + ";";
+    public static final String DROP_TABLE_SHOPPINGCARTS = "DROP TABLE "
+	    + TABLE_SHOPPINGCARTS + ";";
+    public static final String DROP_TABLE_SHOPPINGCARTS_PRODUCTS = "DROP TABLE "
+	    + TABLE_SHOPPINGCART_PRODUCTS + ";";
+    public static final String DROP_TABLE_ORDERS = "DROP TABLE " + TABLE_ORDERS
+	    + ";";
+    public static final String DROP_TABLE_ADDRESS = "DROP TABLE "
+	    + TABLE_ADDRESS + ";";
+    public static final String DROP_TABLE_PREFERENCES = "DROP TABLE "
+	    + TABLE_PREFERENCES + ";";
 
     /* COLUMNS NAME */
     public static final String[] COLUMNS_NAME_RESOURCES = { "id_resources",
