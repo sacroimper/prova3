@@ -3,15 +3,12 @@ package org.escoladeltreball.arcowabungaproject.activities;
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
-import org.escoladeltreball.arcowabungaproject.visualeffects.TabsSwipeAnimation;
-
+import org.escoladeltreball.arcowabungaproject.visualeffects.TabsAnimations;
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +19,6 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.TabHost.TabContentFactory;
-import android.widget.TabHost.TabSpec;
 import android.widget.TabHost.OnTabChangeListener;
 
 public class DishesMenuActivity extends Activity implements OnTouchListener {
@@ -75,17 +70,18 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	tabs = (TabHost) findViewById(android.R.id.tabhost);
 	tabs.setup();
 
-	TabHost.TabSpec spec = tabs.newTabSpec("mitab1");
+	// Number and Name
+	TabHost.TabSpec spec = tabs.newTabSpec("mytab1");
 	spec.setContent(R.id.tab1);
 	spec.setIndicator("TAB1");
 	tabs.addTab(spec);
 
-	spec = tabs.newTabSpec("mitab2");
+	spec = tabs.newTabSpec("mytab2");
 	spec.setContent(R.id.tab2);
 	spec.setIndicator("TAB2");
 	tabs.addTab(spec);
 
-	spec = tabs.newTabSpec("mitab3");
+	spec = tabs.newTabSpec("mytab3");
 	spec.setContent(R.id.tab3);
 	spec.setIndicator("TAB3");
 	tabs.addTab(spec);
@@ -98,6 +94,7 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	tabs.getTabWidget().getChildAt(2)
 		.setBackgroundColor(Color.parseColor("#3be0d0"));
 
+	// Position
 	int tabCount = tabs.getTabWidget().getTabCount();
 	for (int i = 0; i < tabCount; i++) {
 	    final View view = tabs.getTabWidget().getChildTabViewAt(i);
@@ -122,46 +119,23 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 		}
 	    }
 	}
-	tabs.setCurrentTab(0);
 
-	 actualTab = (LinearLayout) findViewById(R.id.tab1);
-	 tabs.setOnTabChangedListener(new OnTabChangeListener() {
-	
-	 LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
-	 LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
-	 LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
-	
-	 public void onTabChanged(String tabId) {
-	 if (actualTab.equals(t1l) && tabId.equals("mitab2")) {
-	 t1l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
-	 t2l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
-	 actualTab = t2l;
-	 } else if (actualTab.equals(t2l) && tabId.equals("mitab1")) {
-	 t2l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
-	 t1l.setAnimation(TabsSwipeAnimation
-	 .leftFromRightAnimation());
-	 actualTab = t1l;
-	 } else if (actualTab.equals(t2l) && tabId.equals("mitab3")) {
-	 t2l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
-	 t3l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
-	 actualTab = t3l;
-	 } else if (actualTab.equals(t3l) && tabId.equals("mitab2")) {
-	 t3l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
-	 t2l.setAnimation(TabsSwipeAnimation
-	 .leftFromRightAnimation());
-	 actualTab = t2l;
-	 } else if (actualTab.equals(t1l) && tabId.equals("mitab3")) {
-	 t1l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
-	 t3l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
-	 actualTab = t3l;
-	 } else if (actualTab.equals(t3l) && tabId.equals("mitab1")) {
-	 t3l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
-	 t1l.setAnimation(TabsSwipeAnimation
-	 .leftFromRightAnimation());
-	 actualTab = t1l;
-	 }
-	 }
-	 });
+	// Default selected
+	tabs.setCurrentTab(0);
+	actualTab = (LinearLayout) findViewById(R.id.tab1);
+
+	// On change animation
+	tabs.setOnTabChangedListener(new OnTabChangeListener() {
+
+	    LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
+	    LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
+	    LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
+
+	    public void onTabChanged(String tabId) {
+		actualTab = TabsAnimations.OnChangeTabAnimation(tabId, actualTab, t1l, t2l,t3l);
+	    }
+
+	});
     }
 
     /**
@@ -201,24 +175,6 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	grupos.append(6, grupo6);
     }
 
-    // /**
-    // * Move swipe touch acction
-    // *
-    // * @param direction
-    // */
-    // public void switchTabs(boolean direction) {
-    //
-    // if (direction) {
-    // if (tabs.getCurrentTab() != 0) {
-    // tabs.setCurrentTab(tabs.getCurrentTab() - 1);
-    // }
-    // } else {
-    // if (tabs.getCurrentTab() != (tabs.getTabWidget().getTabCount() - 1)) {
-    // tabs.setCurrentTab(tabs.getCurrentTab() + 1);
-    // }
-    // }
-    // }
-
     // El onTouchEvent viene de serie con la Activity
     @Override
     public boolean onTouchEvent(MotionEvent touchevent) {
@@ -255,23 +211,24 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	return false;
     }
 
-    private void setupTab(final View view, final String tag, int id) {
-	View tabview = createTabView(tabs.getContext(), tag);
-	TabSpec setContent = tabs.newTabSpec(tag).setIndicator(tabview)
-		.setContent(new TabContentFactory() {
-		    public View createTabContent(String tag) {
-			return view;
-		    }
-		});
-	tabs.addTab(setContent);
-    }
-
-    private static View createTabView(final Context context, final String text) {
-	View view = LayoutInflater.from(context)
-		.inflate(R.layout.tabs_bg, null);
-	TextView tv = (TextView) view.findViewById(R.id.tabsText);
-	tv.setText(text);
-	return view;
-    }
+    // private void setupTab(final View view, final String tag, int id) {
+    // View tabview = createTabView(tabs.getContext(), tag);
+    // TabSpec setContent = tabs.newTabSpec(tag).setIndicator(tabview)
+    // .setContent(new TabContentFactory() {
+    // public View createTabContent(String tag) {
+    // return view;
+    // }
+    // });
+    // tabs.addTab(setContent);
+    // }
+    //
+    // private static View createTabView(final Context context, final String
+    // text) {
+    // View view = LayoutInflater.from(context)
+    // .inflate(R.layout.tabs_bg, null);
+    // TextView tv = (TextView) view.findViewById(R.id.tabsText);
+    // tv.setText(text);
+    // return view;
+    // }
 
 }
