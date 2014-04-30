@@ -84,7 +84,7 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	// TabsColor
 	tabs = TabsMaker.tabsColor(tabs, "#3be0d0");
 	// Aspect Ratio
-	tabs = TabsMaker.tabsAspectRatio(tabs);
+	tabs = TabsMaker.tabsAspectRatio(tabs, 0.66);
 
 	// BEHAVIOUR
 	// Default selected
@@ -95,19 +95,13 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	// On change animation
 	tabs.setOnTabChangedListener(new OnTabChangeListener() {
 
-	    // ESTA CREACION HABRA QUE ESTANDARIZARLA
+	    // Tabs definidas en el layout
 	    LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
 	    LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
 	    LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
 
-	    // OJO EL METODO ON TAB CHANGED AUN INCORPORA LOS NOMBRES DE LAS
-	    // TABS ESCRITOS
-	    // EN EL METODO... ESTO HABRA QUE ESTANDARIZARLO
-
 	    public void onTabChanged(String tabId) {
-
-		actualTab = TabsMaker.OnChangeTabAnimation(tabId, tabs,
-			actualTab, t1l, t2l, t3l);
+		actualTab = TabsMaker.OnChangeTabAnimation(tabId, tabs, actualTab, t1l, t2l, t3l);
 	    }
 
 	});
@@ -139,9 +133,9 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	case MotionEvent.ACTION_UP: {
 	    float currentX = event.getX();
 	    // if left to right swipe on screen
-	    if (lastX < currentX - 250) {
+	    if (lastX < currentX - SCREEN_TOUCH_RESISTENCE) {
 		tabs.setCurrentTab(tabs.getCurrentTab() - 1);
-	    } else if (lastX > currentX + 250) {
+	    } else if (lastX > currentX + SCREEN_TOUCH_RESISTENCE) {
 		tabs.setCurrentTab(tabs.getCurrentTab() + 1);
 	    }
 	    break;
