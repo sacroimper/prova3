@@ -4,6 +4,8 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
 import org.escoladeltreball.arcowabungaproject.visualeffects.TabsAnimations;
+import org.escoladeltreball.arcowabungaproject.visualeffects.TabsStyle;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -86,39 +88,12 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	spec.setIndicator("TAB3");
 	tabs.addTab(spec);
 
+	
+	// STYLE
 	// TabsColor
-	tabs.getTabWidget().getChildAt(0)
-		.setBackgroundColor(Color.parseColor("#3be0d0"));
-	tabs.getTabWidget().getChildAt(1)
-		.setBackgroundColor(Color.parseColor("#3be0d0"));
-	tabs.getTabWidget().getChildAt(2)
-		.setBackgroundColor(Color.parseColor("#3be0d0"));
-
-	// Position
-	int tabCount = tabs.getTabWidget().getTabCount();
-	for (int i = 0; i < tabCount; i++) {
-	    final View view = tabs.getTabWidget().getChildTabViewAt(i);
-	    if (view != null) {
-		// reduce height of the tab
-		view.getLayoutParams().height *= 0.66;
-
-		// get title text view
-		final View textView = view.findViewById(android.R.id.title);
-		if (textView instanceof TextView) {
-		    // just in case check the type
-
-		    // center text
-		    ((TextView) textView).setGravity(Gravity.CENTER);
-		    // wrap text
-		    ((TextView) textView).setSingleLine(false);
-
-		    // explicitly set layout parameters
-		    textView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
-		    textView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-		}
-	    }
-	}
+	tabs = TabsStyle.tabsColor(tabs);
+	//Aspect Ratio
+	tabs = TabsStyle.tabsAspectRatio(tabs);
 
 	// Default selected
 	tabs.setCurrentTab(0);
@@ -137,6 +112,7 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 
 	});
     }
+
 
     /**
      * ESTE CREAR DATOS DEBE SER SUBSTITUIDO POR LA CARGA DE DATOS DE BASE DE
