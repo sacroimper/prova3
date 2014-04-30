@@ -3,6 +3,8 @@ package org.escoladeltreball.arcowabungaproject.activities;
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
+import org.escoladeltreball.arcowabungaproject.visualeffects.TabsSwipeAnimation;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -22,6 +24,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
+import android.widget.TabHost.OnTabChangeListener;
 
 public class DishesMenuActivity extends Activity implements OnTouchListener {
 
@@ -121,44 +124,44 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	}
 	tabs.setCurrentTab(0);
 
-	// actualTab = (LinearLayout) findViewById(R.id.tab1);
-	// tabs.setOnTabChangedListener(new OnTabChangeListener() {
-	//
-	// LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
-	// LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
-	// LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
-	//
-	// public void onTabChanged(String tabId) {
-	// if (actualTab.equals(t1l) && tabId.equals("mitab2")) {
-	// t1l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
-	// t2l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
-	// actualTab = t2l;
-	// } else if (actualTab.equals(t2l) && tabId.equals("mitab1")) {
-	// t2l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
-	// t1l.setAnimation(TabsSwipeAnimation
-	// .leftFromRightAnimation());
-	// actualTab = t1l;
-	// } else if (actualTab.equals(t2l) && tabId.equals("mitab3")) {
-	// t2l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
-	// t3l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
-	// actualTab = t3l;
-	// } else if (actualTab.equals(t3l) && tabId.equals("mitab2")) {
-	// t3l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
-	// t2l.setAnimation(TabsSwipeAnimation
-	// .leftFromRightAnimation());
-	// actualTab = t2l;
-	// } else if (actualTab.equals(t1l) && tabId.equals("mitab3")) {
-	// t1l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
-	// t3l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
-	// actualTab = t3l;
-	// } else if (actualTab.equals(t3l) && tabId.equals("mitab1")) {
-	// t3l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
-	// t1l.setAnimation(TabsSwipeAnimation
-	// .leftFromRightAnimation());
-	// actualTab = t1l;
-	// }
-	// }
-	// });
+	 actualTab = (LinearLayout) findViewById(R.id.tab1);
+	 tabs.setOnTabChangedListener(new OnTabChangeListener() {
+	
+	 LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
+	 LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
+	 LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
+	
+	 public void onTabChanged(String tabId) {
+	 if (actualTab.equals(t1l) && tabId.equals("mitab2")) {
+	 t1l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
+	 t2l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
+	 actualTab = t2l;
+	 } else if (actualTab.equals(t2l) && tabId.equals("mitab1")) {
+	 t2l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
+	 t1l.setAnimation(TabsSwipeAnimation
+	 .leftFromRightAnimation());
+	 actualTab = t1l;
+	 } else if (actualTab.equals(t2l) && tabId.equals("mitab3")) {
+	 t2l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
+	 t3l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
+	 actualTab = t3l;
+	 } else if (actualTab.equals(t3l) && tabId.equals("mitab2")) {
+	 t3l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
+	 t2l.setAnimation(TabsSwipeAnimation
+	 .leftFromRightAnimation());
+	 actualTab = t2l;
+	 } else if (actualTab.equals(t1l) && tabId.equals("mitab3")) {
+	 t1l.setAnimation(TabsSwipeAnimation.outToLeftAnimation());
+	 t3l.setAnimation(TabsSwipeAnimation.inFromRightAnimation());
+	 actualTab = t3l;
+	 } else if (actualTab.equals(t3l) && tabId.equals("mitab1")) {
+	 t3l.setAnimation(TabsSwipeAnimation.leftToLeftAnimation());
+	 t1l.setAnimation(TabsSwipeAnimation
+	 .leftFromRightAnimation());
+	 actualTab = t1l;
+	 }
+	 }
+	 });
     }
 
     /**
