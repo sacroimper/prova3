@@ -18,7 +18,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-	db.execSQL(DAOFactory.CREATE_TABLE_ADDRES);
+	db.execSQL(DAOFactory.CREATE_TABLE_ADDRESS);
 	db.execSQL(DAOFactory.CREATE_TABLE_DRINKS);
 	db.execSQL(DAOFactory.CREATE_TABLE_INGREDIENT);
 	db.execSQL(DAOFactory.CREATE_TABLE_INGREDIENTS);
