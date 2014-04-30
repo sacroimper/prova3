@@ -6,7 +6,9 @@ import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
@@ -68,84 +70,49 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	tabs = (TabHost) findViewById(android.R.id.tabhost);
 	tabs.setup();
 
-	//Make the neccesary tabs
-	TabSpec tab1 = TabsMaker.makeTab(tabs,"mytab1",R.id.tab1,"TAB1");
-	TabSpec tab2 = TabsMaker.makeTab(tabs,"mytab2",R.id.tab2,"TAB2");
-	TabSpec tab3 = TabsMaker.makeTab(tabs,"mytab3",R.id.tab3,"TAB3");
-	
-	//Add tabs to tabHost
+	// Make the neccesary tabs
+	TabSpec tab1 = TabsMaker.makeTab(tabs, "mytab1", R.id.tab1, "TAB1");
+	TabSpec tab2 = TabsMaker.makeTab(tabs, "mytab2", R.id.tab2, "TAB2");
+	TabSpec tab3 = TabsMaker.makeTab(tabs, "mytab3", R.id.tab3, "TAB3");
+
+	// Add tabs to tabHost
 	tabs.addTab(tab1);
 	tabs.addTab(tab2);
 	tabs.addTab(tab3);
 
-	
 	// STYLE
 	// TabsColor
-	tabs = TabsMaker.tabsColor(tabs);
-	//Aspect Ratio
+	tabs = TabsMaker.tabsColor(tabs, "#3be0d0");
+	// Aspect Ratio
 	tabs = TabsMaker.tabsAspectRatio(tabs);
 
-	//BEHAVIOUR
+	// BEHAVIOUR
 	// Default selected
 	tabs.setCurrentTab(0);
 	actualTab = (LinearLayout) findViewById(R.id.tab1);
 
-	//ANIMATION
+	// ANIMATION
 	// On change animation
 	tabs.setOnTabChangedListener(new OnTabChangeListener() {
 
-	    //ESTA CREACION HABRA QUE ESTANDARIZARLA
+	    // ESTA CREACION HABRA QUE ESTANDARIZARLA
 	    LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
 	    LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
 	    LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
 
-	    //OJO EL METODO ON TAB CHANGED AUN INCORPORA LOS NOMBRES DE LAS TABS ESCRITOS
-	    //EN EL METODO... ESTO HABRA QUE ESTANDARIZARLO
-	    
+	    // OJO EL METODO ON TAB CHANGED AUN INCORPORA LOS NOMBRES DE LAS
+	    // TABS ESCRITOS
+	    // EN EL METODO... ESTO HABRA QUE ESTANDARIZARLO
+
 	    public void onTabChanged(String tabId) {
-		actualTab = TabsMaker.OnChangeTabAnimation(tabId, actualTab, t1l, t2l,t3l);
+
+		actualTab = TabsMaker.OnChangeTabAnimation(tabId, tabs,
+			actualTab, t1l, t2l, t3l);
 	    }
 
 	});
     }
 
-
-    /**
-     * ESTE CREAR DATOS DEBE SER SUBSTITUIDO POR LA CARGA DE DATOS DE BASE DE
-     * DATOS
-     */
-    public void crearDatos() {
-
-	GrupoDeItems grupo0 = new GrupoDeItems("Pizza Margarita");
-	grupo0.children
-		.add("Tomate, mozzarella, albahaca fresca, sal y aceite");
-	grupos.append(0, grupo0);
-
-	GrupoDeItems grupo1 = new GrupoDeItems("Pizza Caprichosa");
-	grupo1.children
-		.add("Tomate, mozzarella,alcachofas,champiñones, anchoas.");
-	grupos.append(1, grupo1);
-
-	GrupoDeItems grupo2 = new GrupoDeItems("Pizza Cuatro Estaciones");
-	grupo2.children.add("Champiñones, alcachofa, jamon de york, aceitunas");
-	grupos.append(2, grupo2);
-
-	GrupoDeItems grupo3 = new GrupoDeItems("Pizza Cuatro Quesos");
-	grupo3.children.add("Mozarrella, Gouda, Roquefort y Emental");
-	grupos.append(3, grupo3);
-
-	GrupoDeItems grupo4 = new GrupoDeItems("Pizza Calzone");
-	grupo4.children.add("Jamón, champiñones y huevo");
-	grupos.append(4, grupo4);
-
-	GrupoDeItems grupo5 = new GrupoDeItems("Pizza Frutti di Mare");
-	grupo5.children.add("Mejillones, gambas y albaca fresca");
-	grupos.append(5, grupo5);
-
-	GrupoDeItems grupo6 = new GrupoDeItems("Pizza Proschiutto e funghi");
-	grupo6.children.add("Jamón y Champiñones");
-	grupos.append(6, grupo6);
-    }
 
     // El onTouchEvent viene de serie con la Activity
     @Override
@@ -204,5 +171,43 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
     // tv.setText(text);
     // return view;
     // }
+    
+   
+    /**
+     * ESTE CREAR DATOS DEBE SER SUBSTITUIDO POR LA CARGA DE DATOS DE BASE DE
+     * DATOS
+     */
+    public void crearDatos() {
+
+	GrupoDeItems grupo0 = new GrupoDeItems("Pizza Margarita");
+	grupo0.children
+		.add("Tomate, mozzarella, albahaca fresca, sal y aceite");
+	grupos.append(0, grupo0);
+
+	GrupoDeItems grupo1 = new GrupoDeItems("Pizza Caprichosa");
+	grupo1.children
+		.add("Tomate, mozzarella,alcachofas,champiñones, anchoas.");
+	grupos.append(1, grupo1);
+
+	GrupoDeItems grupo2 = new GrupoDeItems("Pizza Cuatro Estaciones");
+	grupo2.children.add("Champiñones, alcachofa, jamon de york, aceitunas");
+	grupos.append(2, grupo2);
+
+	GrupoDeItems grupo3 = new GrupoDeItems("Pizza Cuatro Quesos");
+	grupo3.children.add("Mozarrella, Gouda, Roquefort y Emental");
+	grupos.append(3, grupo3);
+
+	GrupoDeItems grupo4 = new GrupoDeItems("Pizza Calzone");
+	grupo4.children.add("Jamón, champiñones y huevo");
+	grupos.append(4, grupo4);
+
+	GrupoDeItems grupo5 = new GrupoDeItems("Pizza Frutti di Mare");
+	grupo5.children.add("Mejillones, gambas y albaca fresca");
+	grupos.append(5, grupo5);
+
+	GrupoDeItems grupo6 = new GrupoDeItems("Pizza Proschiutto e funghi");
+	grupo6.children.add("Jamón y Champiñones");
+	grupos.append(6, grupo6);
+    }
 
 }
