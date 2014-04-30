@@ -3,8 +3,7 @@
     android:id="@+id/tabsLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center"
-    android:padding="10dip" >
+    android:gravity="center" >
 
     <TextView
         android:id="@+id/tabsText"
@@ -12,13 +11,5 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:textSize="15dip" />
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:adjustViewBounds="false"
-        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

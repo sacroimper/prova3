@@ -15,11 +15,15 @@ import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 
 public class DAOAndroid extends DAOFactory {
 
-    private Map<Integer,String> resources; 
+    private Map<Integer,String> resources;
     
     // ====================
     // CONSTANTS
@@ -28,13 +32,16 @@ public class DAOAndroid extends DAOFactory {
     // ====================
     // ATTRIBUTES
     // ====================
-
+private SQLiteDatabase database;
+private DataBaseHelper dbHepler;
     // ====================
     // CONSTRUCTORS
     // ====================
 
-    protected DAOAndroid(Pizzeria pizzeria) {
+    protected DAOAndroid(Context context,Pizzeria pizzeria) {
 	super(pizzeria);
+	dbHepler = new DataBaseHelper(context);
+	
     }
     
     // ====================
@@ -65,13 +72,20 @@ public class DAOAndroid extends DAOFactory {
 	return (DAOAndroid) instance;
     }
     
-    public static DAOAndroid getInstance(Pizzeria pizzeria){
+    public static DAOAndroid getInstance(Context context, Pizzeria pizzeria){
 	if (instance == null){
-	    instance = new DAOAndroid(pizzeria);
+	    instance = new DAOAndroid(context,pizzeria);
 	}
 	return (DAOAndroid) instance;
     }
     
+    public void open() throws SQLException {
+	database = dbHepler.getWritableDatabase();
+    }
+    
+    public void close(){
+	dbHepler.close();
+    }
     // ====================
     // PROTECTED METHODS
     // ====================
@@ -135,7 +149,11 @@ public class DAOAndroid extends DAOFactory {
     @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
 	// TODO Auto-generated method stub
-
+	for(Ingredient ingredient : ingredients){
+//	    ContentValues values = new ContentValues();
+//	    values.put
+//	    database.insert(table, nullColumnHack, values)
+	}
     }
 
     @Override

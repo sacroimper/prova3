@@ -8,6 +8,10 @@ public class Drink extends Product {
 
     private static final long serialVersionUID = 1298024289874646633L;
 
+    public static final int SIZE_SMALL = 1;
+    public static final int SIZE_MEDIUM = 2;
+    public static final int SIZE_LARGE = 3;
+
     // ====================
     // ATTRIBUTES
     // ====================
