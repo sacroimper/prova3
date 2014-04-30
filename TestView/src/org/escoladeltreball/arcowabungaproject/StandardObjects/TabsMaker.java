@@ -130,6 +130,8 @@ public class TabsMaker {
 	return outtoLeft;
     }
 
+    //OJO mytab2... y los demas Strings que se comparan
+    //TENDRAN QUE ENTRAR POR EL METODO
     public static LinearLayout OnChangeTabAnimation(String tabId,
 	    LinearLayout actualTab, LinearLayout t1l, LinearLayout t2l,
 	    LinearLayout t3l) {

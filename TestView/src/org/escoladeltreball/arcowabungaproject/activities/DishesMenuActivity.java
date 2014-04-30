@@ -94,10 +94,14 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	// On change animation
 	tabs.setOnTabChangedListener(new OnTabChangeListener() {
 
+	    //ESTA CREACION HABRA QUE ESTANDARIZARLA
 	    LinearLayout t1l = (LinearLayout) findViewById(R.id.tab1);
 	    LinearLayout t2l = (LinearLayout) findViewById(R.id.tab2);
 	    LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
 
+	    //OJO EL METODO ON TAB CHANGED AUN INCORPORA LOS NOMBRES DE LAS TABS ESCRITOS
+	    //EN EL METODO... ESTO HABRA QUE ESTANDARIZARLO
+	    
 	    public void onTabChanged(String tabId) {
 		actualTab = TabsMaker.OnChangeTabAnimation(tabId, actualTab, t1l, t2l,t3l);
 	    }
@@ -178,6 +182,8 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	}
 	return false;
     }
+
+    //BERNA ESTOS METODOS NO SE PARA QUE EXISTEN
 
     // private void setupTab(final View view, final String tag, int id) {
     // View tabview = createTabView(tabs.getContext(), tag);
