@@ -40,8 +40,8 @@ public class SecondActivity extends Activity {
 
 		setContentView(R.layout.activity_second);
 
-		this.overridePendingTransition(R.anim.animation_enter,
-				R.anim.animation_leave);
+		this.overridePendingTransition(R.anim.animation_horizontal_enter,
+				R.anim.animation_horizontal_leave);
 
 		makeTabs();
 
