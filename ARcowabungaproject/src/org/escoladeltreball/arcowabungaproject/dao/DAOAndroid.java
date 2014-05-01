@@ -11,6 +11,7 @@ import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
@@ -160,6 +161,12 @@ public class DAOAndroid extends DAOFactory {
 	// TODO Auto-generated method stub
 	return null;
     }
+    
+    @Override
+    protected Set<Product> readProducts() {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
     @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
@@ -272,6 +279,12 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected void writePreferences(Map<String, Object> preferences) {
+	
+    }
+
+    @Override
+    protected void writeProducts(Set<Product> products) {
+	// TODO Auto-generated method stub
 	
     }
 

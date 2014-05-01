@@ -11,6 +11,7 @@ import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.joda.time.DateTime;
@@ -24,6 +25,7 @@ public abstract class DAOFactory {
     public static final String CREATE_DATA_BASE = "CREATE DATABASE cowabunga;";
 
     /* TABLE NAMES */
+    public static final String TABLE_PRODUCTS = "products";
     public static final String TABLE_RESOURCES = "resources";
     public static final String TABLE_INGREDIENT = "ingredient";
     public static final String TABLE_INGREDIENTS = "ingredients";
@@ -39,6 +41,8 @@ public abstract class DAOFactory {
 
     /* CREATE TABLES */
 
+    public static final String CREATE_TABLE_PRODUCTS = " CREATE TABLE "
+	    + TABLE_PRODUCTS + "( id_product INTEGER PRIMARY KEY);";
     public static final String CREATE_TABLE_RESOURCES = "CREATE TABLE "
 	    + TABLE_RESOURCES + "(" + "id_resources INTEGER PRIMARY KEY,"
 	    + "path VARCHAR(150));";
@@ -54,32 +58,30 @@ public abstract class DAOFactory {
 	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
 	    + "num_ingredients SMALLINT NOT NULL);";
     public static final String CREATE_TABLE_PIZZAS = "CREATE TABLE "
-	    + TABLE_PIZZAS + "(" + "id_pizza INTEGER PRIMARY KEY,"
-	    + "name VARCHAR(50)," + "price NUMERIC,"
+	    + TABLE_PIZZAS + "(" + "id_pizza INTEGER FOREIGN KEY REFERENCES "
+	    + TABLE_PRODUCTS + "," + "name VARCHAR(50)," + "price NUMERIC,"
 	    + "icon SMALLINT FOREIGN KEY REFERNCES " + TABLE_RESOURCES
 	    + " ON DELETE CASCADE ON UPDATE CASCADE," + "massType VARCHAR(10),"
 	    + "type VARCHAR(10)," + "size SMALLINT,"
 	    + "discount NUMERIC, ingredients INTEGER FOREIGN KEY REFERENCES "
 	    + TABLE_INGREDIENTS + "ON DELETE CASCADE ON UPDATE CASCADE);";
     public static final String CREATE_TABLE_DRINKS = "CREATE TABLE "
-	    + TABLE_DRINKS + "(" + "id_drink INTEGER PRIMARY KEY,"
-	    + "name VARCHAR(50)," + "price NUMERIC,"
+	    + TABLE_DRINKS + "(" + "id_drink INTEGER FOREIGN KEY REFERENCES "
+	    + TABLE_PRODUCTS + "," + "name VARCHAR(50)," + "price NUMERIC,"
 	    + "icon SMALLINT FOREIGN KEY REFERENCES " + TABLE_RESOURCES
 	    + " ON DELETE CASCADE ON UPDATE CASCADE," + "discount NUMERIC,"
 	    + "size SMALLINT);";
     public static final String CREATE_TABLE_OFFERS = "CREATE TABLE "
-	    + TABLE_OFFERS + "(" + "id_offers INTEGER PRIMARY KEY,"
-	    + "name VARCHAR(30)," + "price NUMERIC,"
+	    + TABLE_OFFERS + "(" + "id_offers INTEGER FOREIGN KEY REFERENCES "
+	    + TABLE_PRODUCTS + "," + "name VARCHAR(30)," + "price NUMERIC,"
 	    + "icon SMALLINT FOREIGN KEY  REFERNCES " + TABLE_RESOURCES
 	    + " ON DELETE CASCADE ON UPDATE CASCADE," + "discount NUMERIC);";
     public static final String CREATE_TABLE_OFFERS_PRODUCTS = "CREATE TABLE "
 	    + TABLE_OFFERS_PRODUCTS + "("
 	    + "offer INTEGER FOREIGN KEY REFERENCES " + TABLE_OFFERS
 	    + " ON DELTE CASCADE ON UPDATE CASCADE,"
-	    + "pizza INTEGER FOREIGN KEY REFERNCES " + TABLE_PIZZAS
-	    + " ON DELTE CASCADE ON UPDATE CASCADE,"
-	    + "drink INTEGER FOREIGN KEY REFERNCES " + TABLE_DRINKS
-	    + " ON DELTE CASCADE ON UPDATE CASCADE" + ");";
+	    + "product INTEGER FOREIGN KEY REFERNCES " + TABLE_PRODUCTS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE);";
     public static final String CREATE_TABLE_SHOPPINGCARTS = "CREATE TABLE "
 	    + TABLE_SHOPPINGCARTS + "(id_shoopingcart INTEGER PRIMARY KEY);";
     public static final String CREATE_TABLE_SHOPPINCART_PRODUCTS = "CREATE TABLE "
@@ -88,14 +90,8 @@ public abstract class DAOFactory {
 	    + "shoppincart INTEGER FOREIGN KEY REFERENCES "
 	    + TABLE_SHOPPINGCARTS
 	    + " ON DELTE CASCADE ON UPDATE CASCADE "
-	    + "offer INTEGER FOREIGN KEY REFERENCES "
-	    + TABLE_OFFERS
-	    + " ON DELTE CASCADE ON UPDATE CASCADE,"
-	    + "pizza INTEGER FOREIGN KEY REFERNCES "
-	    + TABLE_PIZZAS
-	    + " ON DELTE CASCADE ON UPDATE CASCADE,"
-	    + "drink INTEGER FOREIGN KEY REFERNCES "
-	    + TABLE_DRINKS
+	    + "product INTEGER FOREIGN KEY REFERENCES "
+	    + TABLE_PRODUCTS
 	    + " ON DELTE CASCADE ON UPDATE CASCADE);";
     public static final String CREATE_TABLE_ORDERS = "CREATE TABLE "
 	    + TABLE_ORDERS + "(" + "id_order PRIMARY KEY,"
@@ -113,6 +109,8 @@ public abstract class DAOFactory {
 	    + "value VARCHAR(50));";
 
     /* DROP TABLES */
+    public static final String DROP_TABLE_PRODUCTS = "DROP TABLE "
+	    + TABLE_PRODUCTS + ";";
     public static final String DROP_TABLE_RESOURCES = "DROP TABLE "
 	    + TABLE_RESOURCES + ";";
     public static final String DROP_TABLE_INGREDIENT = "DROP TABLE "
@@ -139,6 +137,7 @@ public abstract class DAOFactory {
 	    + TABLE_PREFERENCES + ";";
 
     /* COLUMNS NAME */
+    public static final String[] COLUMNS_NAME_PRODUCTS = { "id_product" };
     public static final String[] COLUMNS_NAME_RESOURCES = { "id_resources",
 	    "path" };
     public static final String[] COLUMNS_NAME_INGREDIENT = { "id_ingredient",
@@ -384,6 +383,8 @@ public abstract class DAOFactory {
     // PROTECTED METHODS
     // ====================
 
+    protected abstract Set<Product> readProducts();
+
     protected abstract Set<Ingredient> readIngredient();
 
     protected abstract Set<Pizza> readPizza();
@@ -399,6 +400,8 @@ public abstract class DAOFactory {
     protected abstract Set<Address> readAddress();
 
     protected abstract Map<String, Object> readPreferences();
+
+    protected abstract void writeProducts(Set<Product> products);
 
     protected abstract void writeIngredients(Set<Ingredient> ingredients);
 
