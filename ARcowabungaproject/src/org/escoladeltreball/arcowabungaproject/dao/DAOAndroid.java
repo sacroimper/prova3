@@ -220,8 +220,16 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected Set<Drink> readDrink() {
-	// TODO Auto-generated method stub
-	return null;
+	Set<Drink> drinks = new HashSet<Drink>();
+	Cursor cDrinks = database.query(DAOFactory.TABLE_DRINKS, DAOFactory.COLUMNS_NAME_DRINKS, null , null, null, null, null);
+	int i = 0;
+	while(i < cDrinks.getCount()){
+	    cDrinks.move(i);
+	    Drink drink = new Drink(cDrinks.getInt(0),cDrinks.getString(1),cDrinks.getFloat(2),cDrinks.getInt(3),cDrinks.getFloat(4),cDrinks.getInt(5));
+	    drinks.add(drink);
+	    i++;
+	}
+	return drinks;
     }
 
     @Override
@@ -238,8 +246,16 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected Set<Address> readAddress() {
-	// TODO Auto-generated method stub
-	return null;
+	Set<Address> addresses = new HashSet<Address>();
+	Cursor cAddress = database.query(DAOFactory.TABLE_ADDRESS, DAOFactory.COLUMNS_NAME_ADDRESS, null, null, null, null, null);
+	int i = 0;
+	while(i < cAddress.getCount()){
+	    cAddress.move(i);
+	    Address address = new Address(cAddress.getInt(0), cAddress.getString(1), cAddress.getString(2), cAddress.getString(3), cAddress.getString(4), cAddress.getString(5), cAddress.getString(6));
+	    addresses.add(address);
+	    i++;
+	}
+	return addresses;
     }
 
     @Override
