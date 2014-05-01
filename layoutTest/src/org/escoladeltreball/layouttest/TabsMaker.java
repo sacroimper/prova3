@@ -160,6 +160,24 @@ public class TabsMaker {
 		return actualTab;
 	}
 
+	public static void changeColor(View view, boolean isSelected) {
+		int childCount = ((ViewGroup) view).getChildCount();
+		for (int i = 0; i < childCount; i++) {
+			View viewElement =((ViewGroup)view).getChildAt(i);
+			if (viewElement != null) {
+				// get title text view
+				final View textView = viewElement.findViewById(R.id.tabsText);
+				if (textView instanceof TextView) {
+					if (!isSelected) {
+						((TextView) textView).setTextColor(Color.WHITE);
+					} else if (isSelected) {
+						((TextView) textView).setTextColor(Color.GRAY);
+					}
+				}
+			}
+		}
+	}
+
 	// ====================
 	// PROTECTED METHODS
 	// ====================

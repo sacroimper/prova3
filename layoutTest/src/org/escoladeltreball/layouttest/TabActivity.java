@@ -8,16 +8,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TabActivity extends Activity implements OnTabChangeListener {
 
 	private TabHost mTabHost;
 	private View actualTab;
+	private int idTabCounter = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +34,16 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 
 		TextView tv = new TextView(this);
 		tv.setText("idioten");
-
 		setupTab(tv, "Tab 1");
+		tv.setText("adadsad");
 		setupTab(tv, "Tab 2");
+		tv.setText("gggggg");
 		setupTab(tv, "Tab 3");
 
+		mTabHost.setCurrentTab(0);
+
 		mTabHost.setOnTabChangedListener(this);
+		actualTab = mTabHost.findViewWithTag("Tab 1");
 	}
 
 	@Override
@@ -55,8 +62,17 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 						return view;
 					}
 				});
+		if (idTabCounter == 0) {
+			tabview.setTag("Tab 1");
+			idTabCounter++;
+		} else if (idTabCounter == 1) {
+			tabview.setTag("Tab 2");
+			idTabCounter++;
+		} else if (idTabCounter == 2) {
+			tabview.setTag("Tab 3");
+			idTabCounter++;
+		}
 		mTabHost.addTab(setContent);
-
 	}
 
 	private static View createTabView(final Context context, final String text) {
@@ -70,19 +86,45 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 
 	@Override
 	public void onTabChanged(String tabId) {
-		for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
-			View v = mTabHost.getTabWidget().getChildAt(i);
-			if (v instanceof TextView && ((TextView) v).getText().equals("Tab 1")) {
-				TextView tv = (TextView) v;
-				tv.setTextColor(Color.GRAY);
-			} else if (v instanceof TextView && ((TextView) v).getText().equals("Tab 1")) {
-				TextView tv = (TextView) v;
-				tv.setTextColor(Color.GRAY);
-			} else {
-				TextView tv = (TextView) v;
-				tv.setTextColor(Color.GRAY);
-			}
-
+		View vTab = null;
+		if (tabId.equals("Tab 1")) {
+			vTab = mTabHost.findViewWithTag("Tab 1");
+		} else if (tabId.equals("Tab 2")) {
+			vTab = mTabHost.findViewWithTag("Tab 2");
+		} else if (tabId.equals("Tab 3")) {
+			vTab = mTabHost.findViewWithTag("Tab 3");
 		}
+		TabsMaker.changeColor(vTab, true);
+		TabsMaker.changeColor(actualTab, false);
+
+		// set Animations
+		View tab1 = mTabHost.findViewWithTag("Tab 1");
+		View tab2 = mTabHost.findViewWithTag("Tab 2");
+		View tab3 = mTabHost.findViewWithTag("Tab 3");
+
+		if (actualTab.equals(tab1) && tabId.equals("Tab 2")) {
+			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
+			tab2.setAnimation(TabsMaker.inFromRightAnimation());
+			int childCount = ((ViewGroup) tab2).getChildCount();
+			for (int i = 0; i < childCount; i++) {
+				Log.i("======================", childCount + "");
+			}
+		} else if (actualTab.equals(tab2) && tabId.equals("Tab 1")) {
+			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
+			tab1.setAnimation(TabsMaker.inFromRightAnimation());
+		} else if (actualTab.equals(tab2) && tabId.equals("Tab 3")) {
+			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
+			tab3.setAnimation(TabsMaker.inFromRightAnimation());
+		} else if (actualTab.equals(tab3) && tabId.equals("Tab 2")) {
+			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
+			tab2.setAnimation(TabsMaker.inFromRightAnimation());
+		} else if (actualTab.equals(tab1) && tabId.equals("Tab 3")) {
+			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
+			tab3.setAnimation(TabsMaker.inFromRightAnimation());
+		} else if (actualTab.equals(tab3) && tabId.equals("Tab 1")) {
+			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
+			tab1.setAnimation(TabsMaker.inFromRightAnimation());
+		}
+		actualTab = vTab;
 	}
 }
