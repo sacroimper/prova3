@@ -105,10 +105,9 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 		if (actualTab.equals(tab1) && tabId.equals("Tab 2")) {
 			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
 			tab2.setAnimation(TabsMaker.inFromRightAnimation());
-			int childCount = ((ViewGroup) tab2).getChildCount();
-			for (int i = 0; i < childCount; i++) {
-				Log.i("======================", childCount + "");
-			}
+			
+			((ViewGroup) tab2).getChildAt(0);
+			
 		} else if (actualTab.equals(tab2) && tabId.equals("Tab 1")) {
 			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
 			tab1.setAnimation(TabsMaker.inFromRightAnimation());
