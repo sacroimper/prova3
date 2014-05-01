@@ -17,6 +17,7 @@ import android.widget.TextView;
 public class TabActivity extends Activity implements OnTabChangeListener {
 
 	private TabHost mTabHost;
+	private View actualTab;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
