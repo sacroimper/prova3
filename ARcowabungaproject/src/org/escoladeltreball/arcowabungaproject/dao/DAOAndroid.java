@@ -1,6 +1,7 @@
 package org.escoladeltreball.arcowabungaproject.dao;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Set;
 
@@ -198,38 +199,80 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected void writeOffers(Set<Offer> offers) {
-	// TODO Auto-generated method stub
+	for(Offer offer : offers ){
+	    ContentValues values = new ContentValues();
+	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[0], offer.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[1], offer.getName());
+	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[2], offer.getPrice());
+	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[3], offer.getIcon());
+	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[4], offer.getDiscount());
+	    
+	    database.insert(DAOFactory.TABLE_OFFERS, null, values);
+	}
 
     }
 
     @Override
     protected void writeDrinks(Set<Drink> drinks) {
-	// TODO Auto-generated method stub
-
+	for(Drink drink: drinks){
+	    ContentValues values = new ContentValues();
+	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[0], drink.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[1], drink.getName());
+	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[2], drink.getPrice());
+	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[3], drink.getIcon());
+	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[4], drink.getDiscount());
+	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[5], drink.getSize());
+	    
+	    database.insert(DAOFactory.TABLE_DRINKS, null, values);
+	}
     }
 
     @Override
     protected void writeShoppingCarts(Set<ShoppingCart> shoppingCarts) {
-	// TODO Auto-generated method stub
-
+	for(ShoppingCart shoppingCart : shoppingCarts){
+	    ContentValues values = new ContentValues();
+	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0], shoppingCart.getId());
+	    database.insert(DAOFactory.TABLE_SHOPPINGCARTS, null, values);
+	}
+	
     }
 
     @Override
     protected void writeOrders(Set<Order> orders) {
-	// TODO Auto-generated method stub
+	for(Order order : orders){
+	    ContentValues values = new ContentValues();
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[0], order.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[1], order.getEmail());
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"); 
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[2], dateFormat.format(order.getDateTime()));
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[3], order.getPaymentMethod());
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[4], order.getAddress().getId());
+	    
+	    database.insert(DAOFactory.TABLE_ORDERS, null, values);
+	}
 
     }
 
     @Override
-    protected void writeAddress(Set<Address> address) {
-	// TODO Auto-generated method stub
+    protected void writeAddresses(Set<Address> addresses) {
+	for(Address address : addresses){
+	    ContentValues values = new ContentValues();
+	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[0], address.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[1], address.getStreet());
+	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[2], address.getNumber());
+	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[3], address.getPostCode());
+	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[4], address.getFloor());
+	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[5], address.getStair());
+	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[6], address.getFloor());
+	    
+	    database.insert(DAOFactory.TABLE_ADDRESS, null, values);
+	}
 
     }
 
     @Override
     protected void writePreferences(Map<String, Object> preferences) {
-	// TODO Auto-generated method stub
-
+	
     }
 
     // ====================
