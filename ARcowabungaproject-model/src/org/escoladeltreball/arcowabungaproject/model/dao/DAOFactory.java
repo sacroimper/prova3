@@ -105,8 +105,9 @@ public abstract class DAOFactory {
 	    + " ON DELTE CASCADE ON UPDATE CASCADE)";
     public static final String CREATE_TABLE_ADDRESS = "CREATE TABLE "
 	    + TABLE_ADDRESS + "(" + "id_addres INTEGER PRIMARY KEY,"
-	    + "number VARCHAR(3)," + "post_code VARCHAR(5),"
-	    + "floor VARCHAR(3)" + "stair CHAR," + "door VARCHAR(2));";
+	    + "street VARCHAR(15)" + "number VARCHAR(3),"
+	    + "post_code VARCHAR(5)," + "floor VARCHAR(3)" + "stair CHAR,"
+	    + "door VARCHAR(2));";
     public static final String CREATE_TABLE_PREFERENCES = "CREATE TABLE "
 	    + TABLE_PREFERENCES + "(key VARCHAR(30) PRIMARY KEY,"
 	    + "value VARCHAR(50));";
@@ -158,7 +159,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_NAME_ORDERS = { "id_order", "email",
 	    "date_time", "payment_method", "addres" };
     public static final String[] COLUMNS_NAME_ADDRESS = { "id_address",
-	    "number", "post_code", "floor", "stair", "door" };
+	    "street", "number", "post_code", "floor", "stair", "door" };
     public static final String[] COLUMNS_NAME_PREFERENCES = { "key", "value" };
 
     // ====================
@@ -411,7 +412,7 @@ public abstract class DAOFactory {
 
     protected abstract void writeOrders(Set<Order> orders);
 
-    protected abstract void writeAddress(Set<Address> address);
+    protected abstract void writeAddresses(Set<Address> addresses);
 
     protected abstract void writePreferences(Map<String, Object> preferences);
 
