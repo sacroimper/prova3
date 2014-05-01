@@ -43,13 +43,13 @@ public class TabsMaker {
     
     //STYLE
     
-    public static TabHost tabsAspectRatio(TabHost tabs) {
+    public static TabHost tabsAspectRatio(TabHost tabs, double heigth) {
    	int tabCount = tabs.getTabWidget().getTabCount();
    	for (int i = 0; i < tabCount; i++) {
    	    final View view = tabs.getTabWidget().getChildTabViewAt(i);
    	    if (view != null) {
    		// reduce height of the tab
-   		view.getLayoutParams().height *= 0.66;
+   		view.getLayoutParams().height *= heigth;
 
    		// get title text view
    		final View textView = view.findViewById(android.R.id.title);
@@ -71,13 +71,11 @@ public class TabsMaker {
    	return tabs;
        }
 
-       public static TabHost tabsColor(TabHost tabs) {
-   	tabs.getTabWidget().getChildAt(0)
-   		.setBackgroundColor(Color.parseColor("#3be0d0"));
-   	tabs.getTabWidget().getChildAt(1)
-   		.setBackgroundColor(Color.parseColor("#3be0d0"));
-   	tabs.getTabWidget().getChildAt(2)
-   		.setBackgroundColor(Color.parseColor("#3be0d0"));
+       public static TabHost tabsColor(TabHost tabs, String color) {
+	   int numberOfTabs =  tabs.getTabWidget().getChildCount();
+	   for (int i = 0 ; i < numberOfTabs ; i++){
+	       tabs.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor(color));
+	   }
    	return tabs;
 
        }
@@ -133,7 +131,7 @@ public class TabsMaker {
     //OJO mytab2... y los demas Strings que se comparan
     //TENDRAN QUE ENTRAR POR EL METODO
     public static LinearLayout OnChangeTabAnimation(String tabId,
-	    LinearLayout actualTab, LinearLayout t1l, LinearLayout t2l,
+	    TabHost tabs, LinearLayout actualTab, LinearLayout t1l, LinearLayout t2l,
 	    LinearLayout t3l) {
 	if (actualTab.equals(t1l) && tabId.equals("mytab2")) {
 	    t1l.setAnimation(outToLeftAnimation());
