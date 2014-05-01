@@ -54,8 +54,12 @@ public class ShoppingCart extends IdObject {
 	return false;
     }
 
-    public List<Product> getProduct() {
+    public List<Product> getProducts() {
 	return productList;
+    }
+
+    public void setProducts(List<Product> productsList) {
+	productList = productsList;
     }
 
     public boolean hasInProducts(Product product) {
