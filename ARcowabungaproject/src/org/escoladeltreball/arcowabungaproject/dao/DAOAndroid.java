@@ -200,6 +200,13 @@ public class DAOAndroid extends DAOFactory {
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[8], pizza.getIngredients().getId());
 	    
 	    database.insert(DAOFactory.TABLE_PIZZAS, null, values);
+	    values.clear();
+	    for(Ingredient ingredient : pizza.getIngredientsSet()){
+		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[0], pizza.getIngredients().getId());
+		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[1], ingredient.getId());
+		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[2], pizza.getIngredients().get(ingredient));
+		database.insert(DAOFactory.TABLE_INGREDIENTS, null, values);
+	    }
 	}
 
     }
@@ -215,6 +222,13 @@ public class DAOAndroid extends DAOFactory {
 	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[4], offer.getDiscount());
 	    
 	    database.insert(DAOFactory.TABLE_OFFERS, null, values);
+	    values.clear();
+	    for(Product product : offer.getProduct()){
+		values.put(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[0], offer.getId());
+		values.put(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1], product.getId());
+		
+		database.insert(DAOFactory.TABLE_OFFERS_PRODUCTS, null, values);
+	    }
 	}
 
     }
@@ -240,6 +254,12 @@ public class DAOAndroid extends DAOFactory {
 	    ContentValues values = new ContentValues();
 	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0], shoppingCart.getId());
 	    database.insert(DAOFactory.TABLE_SHOPPINGCARTS, null, values);
+	    values.clear();
+	    for(Product product: shoppingCart.getProduct()){
+		values.put(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0], shoppingCart.getId());
+		values.put(COLUMNS_NAME_SHOPPINCART_PRODUCTS[1], product.getId());
+		database.insert(DAOFactory.TABLE_SHOPPINGCART_PRODUCTS,null, values);
+	    }
 	}
 	
     }
