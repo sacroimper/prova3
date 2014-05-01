@@ -2,12 +2,15 @@ package org.escoladeltreball.arcowabungaproject.dao;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.model.Address;
 import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
@@ -19,6 +22,7 @@ import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
@@ -103,7 +107,6 @@ public class DAOAndroid extends DAOFactory {
     // OVERRIDE METHODS
     // ====================
 
-
     @Override
     public boolean loadDemo() {
 	resources.put(150, "images/home_image.png");
@@ -113,17 +116,72 @@ public class DAOAndroid extends DAOFactory {
 	resources.put(154, "images/home_image.png");
 	return super.loadDemo();
     }
-    
+
     @Override
     protected Set<Ingredient> readIngredient() {
-	// TODO Auto-generated method stub
-	return null;
+	Set<Ingredient> ingredients = new HashSet<Ingredient>();
+	Cursor c = database.query(DAOFactory.TABLE_INGREDIENT,
+		DAOFactory.COLUMNS_NAME_INGREDIENT, null, null, null, null,
+		null);
+	int i = 0;
+	while (i < c.getCount()) {
+	    c.move(i);
+	    Ingredient ingredient = new Ingredient(c.getInt(0), c.getString(1),
+		    c.getInt(2), c.getInt(3), c.getInt(4));
+	    ingredients.add(ingredient);
+	    i++;
+	}
+	return ingredients;
     }
 
     @Override
     protected Set<Pizza> readPizza() {
-	// TODO Auto-generated method stub
-	return null;
+	Set<Pizza> pizzas = new HashSet<Pizza>();
+	/*Select all rows from pizzas table*/
+	Cursor cursorPizzas = database.query(DAOFactory.TABLE_PIZZAS,
+		DAOFactory.COLUMNS_NAME_PIZZAS, null, null, null, null, null);
+	int i = 0;
+	while (i < cursorPizzas.getCount()) {
+	    cursorPizzas.move(i);
+	    Pizza pizza = new Pizza(cursorPizzas.getInt(0),
+		    cursorPizzas.getString(1), cursorPizzas.getFloat(2),
+		    cursorPizzas.getInt(3), cursorPizzas.getFloat(4),
+		    cursorPizzas.getString(5), cursorPizzas.getString(6),
+		    cursorPizzas.getInt(7));
+	    Ingredients ingredients = new Ingredients(cursorPizzas.getInt(8));
+	    /*Select all rows with the same id_ingredients from ingredients table*/
+	    Cursor cursorIngredients = database.query(
+		    DAOFactory.TABLE_INGREDIENTS,
+		    DAOFactory.COLUMNS_NAME_INGREDIENTS, cursorPizzas.getInt(8)
+			    + "", null, null, null, null);
+	    int j = 0;
+	    while (j < cursorIngredients.getCount()) {
+		cursorIngredients.move(j);
+		/*Select all rows with the same id_ingredient from ingredient table and put in the map*/
+		Cursor cursorIngredient = database.query(
+			DAOFactory.TABLE_INGREDIENT, COLUMNS_NAME_INGREDIENT,
+			cursorIngredients.getInt(1) + "", null, null, null,
+			null);
+		int k = 0;
+		while (k < cursorIngredient.getCount()) {
+		    cursorIngredient.move(k);
+		    Ingredient ingredient = new Ingredient(
+			    cursorIngredient.getInt(0),
+			    cursorIngredient.getString(1),
+			    cursorIngredient.getInt(2),
+			    cursorIngredient.getInt(3),
+			    cursorIngredient.getInt(4));
+		    ingredients.put(ingredient, cursorIngredient.getInt(2));
+		    k++;
+		}
+		j++;
+	    }
+	    pizza.setIngredients(ingredients);
+	    pizza.setIngredients(ingredients);
+	    pizzas.add(pizza);
+	    i++;
+	}
+	return pizzas;
     }
 
     @Override
@@ -161,7 +219,7 @@ public class DAOAndroid extends DAOFactory {
 	// TODO Auto-generated method stub
 	return null;
     }
-    
+
     @Override
     protected Set<Product> readProducts() {
 	// TODO Auto-generated method stub
@@ -171,23 +229,27 @@ public class DAOAndroid extends DAOFactory {
     @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
 
-	
-	for(Ingredient ingredient : ingredients){
+	for (Ingredient ingredient : ingredients) {
 	    ContentValues values = new ContentValues();
-	    
-	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[0], ingredient.getId());
-	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[1], ingredient.getName());
-	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[2], ingredient.getIcon());
-	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[3], ingredient.getModel());
-	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[4], ingredient.getPrice());
-	    
+
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[0],
+		    ingredient.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[1],
+		    ingredient.getName());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[2],
+		    ingredient.getIcon());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[3],
+		    ingredient.getModel());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[4],
+		    ingredient.getPrice());
+
 	    database.insert(DAOFactory.TABLE_INGREDIENT, null, values);
 	}
     }
 
     @Override
     protected void writePizzas(Set<Pizza> pizzas) {
-	for(Pizza pizza : pizzas){
+	for (Pizza pizza : pizzas) {
 	    ContentValues values = new ContentValues();
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[0], pizza.getId());
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[1], pizza.getName());
@@ -197,14 +259,18 @@ public class DAOAndroid extends DAOFactory {
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[5], pizza.getType());
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[6], pizza.getSize());
 	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[7], pizza.getDiscount());
-	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[8], pizza.getIngredients().getId());
-	    
+	    values.put(DAOFactory.COLUMNS_NAME_PIZZAS[8], pizza
+		    .getIngredients().getId());
+
 	    database.insert(DAOFactory.TABLE_PIZZAS, null, values);
 	    values.clear();
-	    for(Ingredient ingredient : pizza.getIngredientsSet()){
-		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[0], pizza.getIngredients().getId());
-		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[1], ingredient.getId());
-		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[2], pizza.getIngredients().get(ingredient));
+	    for (Ingredient ingredient : pizza.getIngredientsSet()) {
+		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[0], pizza
+			.getIngredients().getId());
+		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[1],
+			ingredient.getId());
+		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[2], pizza
+			.getIngredients().get(ingredient));
 		database.insert(DAOFactory.TABLE_INGREDIENTS, null, values);
 	    }
 	}
@@ -213,20 +279,22 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected void writeOffers(Set<Offer> offers) {
-	for(Offer offer : offers ){
+	for (Offer offer : offers) {
 	    ContentValues values = new ContentValues();
 	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[0], offer.getId());
 	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[1], offer.getName());
 	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[2], offer.getPrice());
 	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[3], offer.getIcon());
 	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[4], offer.getDiscount());
-	    
+
 	    database.insert(DAOFactory.TABLE_OFFERS, null, values);
 	    values.clear();
-	    for(Product product : offer.getProduct()){
-		values.put(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[0], offer.getId());
-		values.put(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1], product.getId());
-		
+	    for (Product product : offer.getProduct()) {
+		values.put(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[0],
+			offer.getId());
+		values.put(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1],
+			product.getId());
+
 		database.insert(DAOFactory.TABLE_OFFERS_PRODUCTS, null, values);
 	    }
 	}
@@ -235,7 +303,7 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected void writeDrinks(Set<Drink> drinks) {
-	for(Drink drink: drinks){
+	for (Drink drink : drinks) {
 	    ContentValues values = new ContentValues();
 	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[0], drink.getId());
 	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[1], drink.getName());
@@ -243,38 +311,46 @@ public class DAOAndroid extends DAOFactory {
 	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[3], drink.getIcon());
 	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[4], drink.getDiscount());
 	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[5], drink.getSize());
-	    
+
 	    database.insert(DAOFactory.TABLE_DRINKS, null, values);
 	}
     }
 
     @Override
     protected void writeShoppingCarts(Set<ShoppingCart> shoppingCarts) {
-	for(ShoppingCart shoppingCart : shoppingCarts){
+	for (ShoppingCart shoppingCart : shoppingCarts) {
 	    ContentValues values = new ContentValues();
-	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0], shoppingCart.getId());
+	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0],
+		    shoppingCart.getId());
 	    database.insert(DAOFactory.TABLE_SHOPPINGCARTS, null, values);
 	    values.clear();
-	    for(Product product: shoppingCart.getProduct()){
-		values.put(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0], shoppingCart.getId());
-		values.put(COLUMNS_NAME_SHOPPINCART_PRODUCTS[1], product.getId());
-		database.insert(DAOFactory.TABLE_SHOPPINGCART_PRODUCTS,null, values);
+	    for (Product product : shoppingCart.getProduct()) {
+		values.put(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0],
+			shoppingCart.getId());
+		values.put(COLUMNS_NAME_SHOPPINCART_PRODUCTS[1],
+			product.getId());
+		database.insert(DAOFactory.TABLE_SHOPPINGCART_PRODUCTS, null,
+			values);
 	    }
 	}
-	
+
     }
 
     @Override
     protected void writeOrders(Set<Order> orders) {
-	for(Order order : orders){
+	for (Order order : orders) {
 	    ContentValues values = new ContentValues();
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[0], order.getId());
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[1], order.getEmail());
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"); 
-	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[2], dateFormat.format(order.getDateTime()));
-	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[3], order.getPaymentMethod());
-	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[4], order.getAddress().getId());
-	    
+	    SimpleDateFormat dateFormat = new SimpleDateFormat(
+		    "dd-MM-yyyy HH:mm:ss");
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[2],
+		    dateFormat.format(order.getDateTime()));
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[3],
+		    order.getPaymentMethod());
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[4], order.getAddress()
+		    .getId());
+
 	    database.insert(DAOFactory.TABLE_ORDERS, null, values);
 	}
 
@@ -282,16 +358,17 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected void writeAddresses(Set<Address> addresses) {
-	for(Address address : addresses){
+	for (Address address : addresses) {
 	    ContentValues values = new ContentValues();
 	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[0], address.getId());
 	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[1], address.getStreet());
 	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[2], address.getNumber());
-	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[3], address.getPostCode());
+	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[3],
+		    address.getPostCode());
 	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[4], address.getFloor());
 	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[5], address.getStair());
 	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[6], address.getFloor());
-	    
+
 	    database.insert(DAOFactory.TABLE_ADDRESS, null, values);
 	}
 
@@ -299,13 +376,13 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected void writePreferences(Map<String, Object> preferences) {
-	
+
     }
 
     @Override
     protected void writeProducts(Set<Product> products) {
 	// TODO Auto-generated method stub
-	
+
     }
 
     // ====================
