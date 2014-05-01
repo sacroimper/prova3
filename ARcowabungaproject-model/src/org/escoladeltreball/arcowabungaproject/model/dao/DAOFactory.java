@@ -48,7 +48,8 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_NAME_INGREDIENTS = { "id_ingredients",
 	    "ingredient", "num_ingredient" };
     public static final String[] COLUMNS_NAME_PIZZAS = { "id_pizza", "name",
-	    "price", "icon", "massType", "type", "size", "discount" };
+	    "price", "icon", "massType", "type", "size", "discount",
+	    "ingredients" };
     public static final String[] COLUMNS_NAME_DRINKS = { "id_drink", "name",
 	    "price", "icon", "discount", "size" };
     public static final String[] COLUMNS_NAME_OFFERS = { "id_offer", "name",
