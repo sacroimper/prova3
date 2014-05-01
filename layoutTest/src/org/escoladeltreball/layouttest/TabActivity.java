@@ -21,7 +21,10 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 	private View actualTab;
 	private int idTabCounter = 0;
 	private float lastX;
-
+	private View viewTab1;
+	private View viewTab2;
+	private View viewTab3;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,45 +33,27 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup();
 
-		// mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+		LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		viewTab1 = layoutInflater.inflate(R.layout.content_tab, null);
+		LayoutInflater layoutInflater2 = (LayoutInflater) getApplicationContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		viewTab2 = layoutInflater2.inflate(R.layout.content_second_tab, null);
+		LayoutInflater layoutInflater3 = (LayoutInflater) getApplicationContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		viewTab3 = layoutInflater3.inflate(R.layout.content_third_tab, null);
 
-		TextView tv = new TextView(this);
-		tv.setText("");
-		TextView tv2 = new TextView(this);
-		tv.setText("");
-		TextView tv3 = new TextView(this);
-		tv.setText("");
-		
-		setupTab(tv, "Tab 1");
-		setupTab(tv2, "Tab 2");
-		setupTab(tv3, "Tab 3");
-		
-		LinearLayout ly1 = (LinearLayout) findViewById(R.id.tab_dos_1);
-		tv = (TextView) ly1.findViewById(R.id.content_text_tab);
-		LinearLayout ly2 = (LinearLayout) findViewById(R.id.tab_dos_2);
-		tv2 = (TextView) ly2.findViewById(R.id.content_text_tab);
-		LinearLayout ly3 = (LinearLayout) findViewById(R.id.tab_dos_3);
-		tv3 = (TextView) ly3.findViewById(R.id.content_text_tab);
-		
-		tv.setText("hola que ase");
-		tv2.setText("asdasdoasdasd");
-		tv3.setText("HHHHHHHHHHH");
-		
-		
-		// tv.setText("adadsad");
-		// tv.setTag("Tab 2-text");
-		// setupTab(ly, "Tab 2");
-
-		// tv.setText("gggggg");
-		// tv.setTag("Tab 3-text");
-		// setupTab(ly, "Tab 3");
+		setupTab(viewTab1, "Tab 1");
+		setupTab(viewTab2, "Tab 2");
+		setupTab(viewTab3, "Tab 3");
 
 		mTabHost.setCurrentTab(0);
 		View tab1 = mTabHost.findViewWithTag("Tab 1");
 		TabsMaker.changeColor(tab1, true);
-
+		//
 		mTabHost.setOnTabChangedListener(this);
-		actualTab = mTabHost.findViewWithTag("Tab 1");
+//		actualTab = mTabHost.findViewWithTag("Tab 1");
+		actualTab = viewTab1;
 	}
 
 	@Override
@@ -111,50 +96,59 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 
 	@Override
 	public void onTabChanged(String tabId) {
-		View vTab = null;
-		if (tabId.equals("Tab 1")) {
-			vTab = mTabHost.findViewWithTag("Tab 1");
-		} else if (tabId.equals("Tab 2")) {
-			vTab = mTabHost.findViewWithTag("Tab 2");
-		} else if (tabId.equals("Tab 3")) {
-			vTab = mTabHost.findViewWithTag("Tab 3");
-		}
-		TabsMaker.changeColor(vTab, true);
-		TabsMaker.changeColor(actualTab, false);
-
-		// set Animations
+//		View vTab = null;
+//		if (tabId.equals("Tab 1")) {
+//			vTab = mTabHost.findViewWithTag("Tab 1");
+//		} else if (tabId.equals("Tab 2")) {
+//			vTab = mTabHost.findViewWithTag("Tab 2");
+//		} else if (tabId.equals("Tab 3")) {
+//			vTab = mTabHost.findViewWithTag("Tab 3");
+//		}
+//		TabsMaker.changeColor(vTab, true);
+//		TabsMaker.changeColor(actualTab, false);
+//
+//		// set Animations
 		View tab1 = mTabHost.findViewWithTag("Tab 1");
 		View tab2 = mTabHost.findViewWithTag("Tab 2");
 		View tab3 = mTabHost.findViewWithTag("Tab 3");
 
-		if (actualTab.equals(tab1) && tabId.equals("Tab 2")) {
-			// actualTab.setAnimation(TabsMaker.outToLeftAnimation());
-			// tab2.setAnimation(TabsMaker.inFromRightAnimation());
-			LinearLayout lyActual = (LinearLayout) findViewById(R.id.tab_dos_1);
-			LinearLayout lyNew = (LinearLayout) findViewById(R.id.tab_dos_2);
-			lyActual.setAnimation(TabsMaker.outToLeftAnimation());
-			lyNew.setAnimation(TabsMaker.inFromRightAnimation());
-		} else if (actualTab.equals(tab2) && tabId.equals("Tab 1")) {
-//			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
-//			tab1.setAnimation(TabsMaker.inFromRightAnimation());
-			LinearLayout lyActual = (LinearLayout) findViewById(R.id.tab_dos_2);
-			LinearLayout lyNew = (LinearLayout) findViewById(R.id.tab_dos_1);
-			lyActual.setAnimation(TabsMaker.inFromRightAnimation());
-			lyNew.setAnimation(TabsMaker.outToLeftAnimation());
-		} else if (actualTab.equals(tab2) && tabId.equals("Tab 3")) {
-//			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
-//			tab3.setAnimation(TabsMaker.inFromRightAnimation());
-		} else if (actualTab.equals(tab3) && tabId.equals("Tab 2")) {
-//			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
-//			tab2.setAnimation(TabsMaker.inFromRightAnimation());
-		} else if (actualTab.equals(tab1) && tabId.equals("Tab 3")) {
-//			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
-//			tab3.setAnimation(TabsMaker.inFromRightAnimation());
-		} else if (actualTab.equals(tab3) && tabId.equals("Tab 1")) {
-//			actualTab.setAnimation(TabsMaker.outToLeftAnimation());
-//			tab1.setAnimation(TabsMaker.inFromRightAnimation());
+		if (actualTab.equals(viewTab1) && tabId.equals("Tab 2")) {
+			viewTab1.setAnimation(TabsMaker.inFromRightAnimation());
+			viewTab2.setAnimation(TabsMaker.outToLeftAnimation());
+			TabsMaker.changeColor(tab1, false);
+			TabsMaker.changeColor(tab2, true);
+			actualTab = viewTab2;
+		} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 1")) {
+			viewTab2.setAnimation(TabsMaker.leftFromRightAnimation());
+			viewTab1.setAnimation(TabsMaker.leftToLeftAnimation());
+			TabsMaker.changeColor(tab2, false);
+			TabsMaker.changeColor(tab1, true);
+			actualTab = viewTab1;
+		} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 3")) {
+			viewTab2.setAnimation(TabsMaker.inFromRightAnimation());
+			viewTab3.setAnimation(TabsMaker.outToLeftAnimation());
+			TabsMaker.changeColor(tab2, false);
+			TabsMaker.changeColor(tab3, true);
+			actualTab = viewTab3;
+		} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 2")) {
+			viewTab3.setAnimation(TabsMaker.leftFromRightAnimation());
+			viewTab2.setAnimation(TabsMaker.leftToLeftAnimation());
+			TabsMaker.changeColor(tab3, false);
+			TabsMaker.changeColor(tab2, true);
+			actualTab = viewTab2;
+		} else if (actualTab.equals(viewTab1) && tabId.equals("Tab 3")) {
+			viewTab1.setAnimation(TabsMaker.inFromRightAnimation());
+			viewTab3.setAnimation(TabsMaker.outToLeftAnimation());
+			TabsMaker.changeColor(tab1, false);
+			TabsMaker.changeColor(tab3, true);
+			actualTab = viewTab3;
+		} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 1")) {
+			viewTab3.setAnimation(TabsMaker.leftFromRightAnimation());
+			viewTab1.setAnimation(TabsMaker.leftToLeftAnimation());
+			TabsMaker.changeColor(tab3, false);
+			TabsMaker.changeColor(tab1, true);
+			actualTab = viewTab1;
 		}
-		actualTab = vTab;
 	}
 
 	@Override
@@ -183,6 +177,5 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 		}
 		return false;
 	}
-	
-}
 
+}
