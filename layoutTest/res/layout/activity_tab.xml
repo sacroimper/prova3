@@ -26,20 +26,39 @@
                 android:layout_marginLeft="0dip"
                 android:layout_marginRight="0dip" />
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dip"
-                android:background="#696969" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dip"
-                android:background="#000" />
-
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+                android:layout_height="fill_parent" >
+
+                <!-- tab N°1 -->
+                <!-- Inclusion of the interface -->
+
+                <include
+                    android:id="@+id/tab_dos_1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    layout="@layout/content_tab" >
+                </include>
+                <!-- tab N°2 -->
+                <!-- Inclusion of the interface -->
+
+                <include
+                    android:id="@+id/tab_dos_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/content_tab" >
+                </include>
+                <!-- tab N°3 -->
+                <!-- Inclusion of the interface -->
+
+                <include
+                    android:id="@+id/tab_dos_3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/content_tab" >
+                </include>
+            </FrameLayout>
         </LinearLayout>
     </TabHost>
 
