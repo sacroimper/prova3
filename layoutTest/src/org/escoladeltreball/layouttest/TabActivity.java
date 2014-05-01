@@ -8,14 +8,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class TabActivity extends Activity implements OnTabChangeListener {
+public class TabActivity extends Activity {
 
 	private TabHost mTabHost;
 	private View actualTab;
@@ -28,8 +29,19 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// Remove title bar
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		// Remove notification bar
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		setContentView(R.layout.activity_tab);
 
+		this.overridePendingTransition(R.anim.animation_horizontal_enter,
+				R.anim.animation_horizontal_leave);
+
+		
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup();
 
@@ -51,11 +63,60 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 		View tab1 = mTabHost.findViewWithTag("Tab 1");
 		TabsMaker.changeColor(tab1, true);
 		//
-		mTabHost.setOnTabChangedListener(this);
+//		mTabHost.setOnTabChangedListener(this);
 //		actualTab = mTabHost.findViewWithTag("Tab 1");
 		actualTab = viewTab1;
+		
+		mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
+			@Override
+			public void onTabChanged(String tabId) {
+				View tab1 = mTabHost.findViewWithTag("Tab 1");
+				View tab2 = mTabHost.findViewWithTag("Tab 2");
+				View tab3 = mTabHost.findViewWithTag("Tab 3");
+
+				if (actualTab.equals(viewTab1) && tabId.equals("Tab 2")) {
+					viewTab1.setAnimation(TabsMaker.inFromRightAnimation());
+					viewTab2.setAnimation(TabsMaker.outToLeftAnimation());
+					TabsMaker.changeColor(tab1, false);
+					TabsMaker.changeColor(tab2, true);
+					actualTab = viewTab2;
+				} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 1")) {
+					viewTab2.setAnimation(TabsMaker.leftFromRightAnimation());
+					viewTab1.setAnimation(TabsMaker.leftToLeftAnimation());
+					TabsMaker.changeColor(tab2, false);
+					TabsMaker.changeColor(tab1, true);
+					actualTab = viewTab1;
+				} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 3")) {
+					viewTab2.setAnimation(TabsMaker.inFromRightAnimation());
+					viewTab3.setAnimation(TabsMaker.outToLeftAnimation());
+					TabsMaker.changeColor(tab2, false);
+					TabsMaker.changeColor(tab3, true);
+					actualTab = viewTab3;
+				} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 2")) {
+					viewTab3.setAnimation(TabsMaker.leftFromRightAnimation());
+					viewTab2.setAnimation(TabsMaker.leftToLeftAnimation());
+					TabsMaker.changeColor(tab3, false);
+					TabsMaker.changeColor(tab2, true);
+					actualTab = viewTab2;
+				} else if (actualTab.equals(viewTab1) && tabId.equals("Tab 3")) {
+					viewTab1.setAnimation(TabsMaker.inFromRightAnimation());
+					viewTab3.setAnimation(TabsMaker.outToLeftAnimation());
+					TabsMaker.changeColor(tab1, false);
+					TabsMaker.changeColor(tab3, true);
+					actualTab = viewTab3;
+				} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 1")) {
+					viewTab3.setAnimation(TabsMaker.leftFromRightAnimation());
+					viewTab1.setAnimation(TabsMaker.leftToLeftAnimation());
+					TabsMaker.changeColor(tab3, false);
+					TabsMaker.changeColor(tab1, true);
+					actualTab = viewTab1;
+				}
+			}
+		});
 	}
 
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -93,9 +154,9 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 		tv.setText(text);
 		return view;
 	}
-
-	@Override
-	public void onTabChanged(String tabId) {
+	
+//	@Override
+//	public void onTabChanged(String tabId) {
 //		View vTab = null;
 //		if (tabId.equals("Tab 1")) {
 //			vTab = mTabHost.findViewWithTag("Tab 1");
@@ -108,48 +169,7 @@ public class TabActivity extends Activity implements OnTabChangeListener {
 //		TabsMaker.changeColor(actualTab, false);
 //
 //		// set Animations
-		View tab1 = mTabHost.findViewWithTag("Tab 1");
-		View tab2 = mTabHost.findViewWithTag("Tab 2");
-		View tab3 = mTabHost.findViewWithTag("Tab 3");
-
-		if (actualTab.equals(viewTab1) && tabId.equals("Tab 2")) {
-			viewTab1.setAnimation(TabsMaker.inFromRightAnimation());
-			viewTab2.setAnimation(TabsMaker.outToLeftAnimation());
-			TabsMaker.changeColor(tab1, false);
-			TabsMaker.changeColor(tab2, true);
-			actualTab = viewTab2;
-		} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 1")) {
-			viewTab2.setAnimation(TabsMaker.leftFromRightAnimation());
-			viewTab1.setAnimation(TabsMaker.leftToLeftAnimation());
-			TabsMaker.changeColor(tab2, false);
-			TabsMaker.changeColor(tab1, true);
-			actualTab = viewTab1;
-		} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 3")) {
-			viewTab2.setAnimation(TabsMaker.inFromRightAnimation());
-			viewTab3.setAnimation(TabsMaker.outToLeftAnimation());
-			TabsMaker.changeColor(tab2, false);
-			TabsMaker.changeColor(tab3, true);
-			actualTab = viewTab3;
-		} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 2")) {
-			viewTab3.setAnimation(TabsMaker.leftFromRightAnimation());
-			viewTab2.setAnimation(TabsMaker.leftToLeftAnimation());
-			TabsMaker.changeColor(tab3, false);
-			TabsMaker.changeColor(tab2, true);
-			actualTab = viewTab2;
-		} else if (actualTab.equals(viewTab1) && tabId.equals("Tab 3")) {
-			viewTab1.setAnimation(TabsMaker.inFromRightAnimation());
-			viewTab3.setAnimation(TabsMaker.outToLeftAnimation());
-			TabsMaker.changeColor(tab1, false);
-			TabsMaker.changeColor(tab3, true);
-			actualTab = viewTab3;
-		} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 1")) {
-			viewTab3.setAnimation(TabsMaker.leftFromRightAnimation());
-			viewTab1.setAnimation(TabsMaker.leftToLeftAnimation());
-			TabsMaker.changeColor(tab3, false);
-			TabsMaker.changeColor(tab1, true);
-			actualTab = viewTab1;
-		}
-	}
+//	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
