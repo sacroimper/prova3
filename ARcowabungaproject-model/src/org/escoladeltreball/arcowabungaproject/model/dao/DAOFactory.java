@@ -427,7 +427,7 @@ public abstract class DAOFactory {
 
     protected abstract Map<String, Object> readPreferences();
 
-    protected abstract void writeProducts(Set<Product> products);
+    protected abstract void writeProduct(int idProduct);
 
     protected abstract void writeIngredients(Set<Ingredient> ingredients);
 
