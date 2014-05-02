@@ -105,6 +105,14 @@ public class DAOAndroid extends DAOFactory {
     // ====================
     // PRIVATE METHODS
     // ====================
+    /**
+     * Returns a map with Ingredient object as key and number of that ingredient
+     * as value by the id of ingredients table.
+     * 
+     * @param id
+     *            of ingredients table.
+     * @return Ingredients Object
+     */
     private Ingredients selectIngredientsById(int id) {
 	Ingredients ingredients = new Ingredients(id);
 	/*
@@ -140,9 +148,17 @@ public class DAOAndroid extends DAOFactory {
 	return ingredients;
     }
 
+    /**
+     * Returns a list of products that can have a offer by its id. the product
+     * offer can have a pizza or a drink
+     * 
+     * @param id
+     *            of product
+     * @return Return a list of products.
+     */
     private List<Product> selectProductsOffersById(int id) {
 	List<Product> productList = new ArrayList<Product>();
-	/* Select from offer_product table the rows with offer = id_offer */
+	// Select from offer_product table the rows with offer = id_offer
 	Cursor cOffersProduct = database.query(
 		DAOFactory.TABLE_OFFERS_PRODUCTS,
 		DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS,
@@ -152,7 +168,8 @@ public class DAOAndroid extends DAOFactory {
 	while (i < cOffersProduct.getCount()) {
 	    cOffersProduct.move(i);
 	    Product product = null;
-	    /* Product can be a pizza product or drink product */
+	    // Product can be a pizza product or drink product
+	    // Select pizza with the same id as product.
 	    Cursor cPizza = database.query(
 		    DAOFactory.TABLE_PIZZAS,
 		    DAOFactory.COLUMNS_NAME_PIZZAS,
@@ -165,6 +182,7 @@ public class DAOAndroid extends DAOFactory {
 			cPizza.getFloat(4), cPizza.getString(5),
 			cPizza.getString(6), cPizza.getInt(7));
 	    }
+	    // Select drink with the same id as product.
 	    Cursor cDrink = database.query(
 		    DAOFactory.TABLE_DRINKS,
 		    DAOFactory.COLUMNS_NAME_DRINKS,
@@ -182,8 +200,17 @@ public class DAOAndroid extends DAOFactory {
 	return productList;
     }
 
+    /**
+     * Returns a list of products that can have a shopping cart by its id. the
+     * product of shopping cart can have a pizza, a drink or a offer.
+     * 
+     * @param id
+     *            of product
+     * @return Return a list of products.
+     */
     private List<Product> selectShoppingCartProductsById(int id) {
 	List<Product> productsList = new ArrayList<Product>();
+	// Select all rows
 	Cursor cShoppingCartsProducts = database.query(
 		DAOFactory.TABLE_SHOPPINGCART_PRODUCTS,
 		DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS,
@@ -192,7 +219,8 @@ public class DAOAndroid extends DAOFactory {
 	int i = 0;
 	while (i < cShoppingCartsProducts.getCount()) {
 	    cShoppingCartsProducts.move(i);
-	    /* Product can be a pizza product, drink or offer product */
+	    // Product can be a pizza product, drink or offer
+	    // Select pizza with the same id as product.
 	    Cursor cPizza = database.query(DAOFactory.TABLE_PIZZAS,
 		    DAOFactory.COLUMNS_NAME_PIZZAS,
 		    DAOFactory.COLUMNS_NAME_PIZZAS[0] + " = "
@@ -204,8 +232,9 @@ public class DAOAndroid extends DAOFactory {
 			cPizza.getFloat(2), cPizza.getInt(3),
 			cPizza.getFloat(4), cPizza.getString(5),
 			cPizza.getString(6), cPizza.getInt(7));
-		 productsList.add(pizza);
+		productsList.add(pizza);
 	    }
+	    // Select drink with the same id as product.
 	    Cursor cDrink = database.query(DAOFactory.TABLE_DRINKS,
 		    DAOFactory.COLUMNS_NAME_DRINKS,
 		    DAOFactory.COLUMNS_NAME_DRINKS[0] + " = "
@@ -216,9 +245,10 @@ public class DAOAndroid extends DAOFactory {
 		Drink drink = new Drink(cDrink.getInt(0), cDrink.getString(1),
 			cDrink.getFloat(2), cDrink.getInt(3),
 			cDrink.getFloat(4), cDrink.getInt(5));
-		 productsList.add(drink);
-		
+		productsList.add(drink);
+
 	    }
+	    // Select offer with the same id as product.
 	    Cursor cOffer = database.query(DAOFactory.TABLE_OFFERS,
 		    DAOFactory.COLUMNS_NAME_OFFERS,
 		    DAOFactory.COLUMNS_NAME_OFFERS[0] + " = "
@@ -338,7 +368,8 @@ public class DAOAndroid extends DAOFactory {
 	    cShoppingCarts.move(i);
 	    ShoppingCart shoppingCart = new ShoppingCart(
 		    cShoppingCarts.getInt(0));
-	    List<Product> productsList = selectShoppingCartProductsById(cShoppingCarts.getInt(0));
+	    List<Product> productsList = selectShoppingCartProductsById(cShoppingCarts
+		    .getInt(0));
 	    shoppingCart.setProducts(productsList);
 	    shoppingCarts.add(shoppingCart);
 	    i++;
@@ -349,24 +380,40 @@ public class DAOAndroid extends DAOFactory {
     @Override
     protected Set<Order> readOrder() {
 	Set<Order> orders = new HashSet<Order>();
-	Cursor cOrder = database.query(DAOFactory.TABLE_ORDERS, DAOFactory.COLUMNS_NAME_ORDERS, null, null, null, null, null);
+	Cursor cOrder = database.query(DAOFactory.TABLE_ORDERS,
+		DAOFactory.COLUMNS_NAME_ORDERS, null, null, null, null, null);
 	int i = 0;
-	while(i < cOrder.getCount()){
-	   cOrder.move(i);
-	   DateTime dateTime = DateTime.parse(cOrder.getString(3));
-	   
-	   Cursor cAddress = database.query(DAOFactory.TABLE_ADDRESS, DAOFactory.COLUMNS_NAME_ADDRESS, DAOFactory.COLUMNS_NAME_ADDRESS[0] + "=" + cOrder.getInt(5), null, null, null, null);
-	   cAddress.moveToFirst();
-	   Address address = new Address(cAddress.getInt(0), cAddress.getString(1), cAddress.getString(2), cAddress.getString(3), cAddress.getString(4), cAddress.getString(5), cAddress.getString(6));
-	   
-	   Cursor cShoppingCart = database.query(DAOFactory.TABLE_SHOPPINGCARTS, DAOFactory.COLUMNS_NAME_SHOPPINGCARTS, DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0] + "=" + cOrder.getInt(6), null, null, null, null);
-	   cShoppingCart.moveToFirst();
-	   ShoppingCart shoppingCart = new ShoppingCart(cShoppingCart.getInt(0)); 
-	   List<Product> productsList = selectShoppingCartProductsById(cShoppingCart.getInt(0));
-	   shoppingCart.setProducts(productsList);
-	   Order order = new Order(cOrder.getInt(0), cOrder.getString(1), cOrder.getString(2), dateTime, cOrder.getString(4),address,shoppingCart);
-	   orders.add(order);
-	   i++;
+	while (i < cOrder.getCount()) {
+	    cOrder.move(i);
+	    DateTime dateTime = DateTime.parse(cOrder.getString(3));
+
+	    Cursor cAddress = database
+		    .query(DAOFactory.TABLE_ADDRESS,
+			    DAOFactory.COLUMNS_NAME_ADDRESS,
+			    DAOFactory.COLUMNS_NAME_ADDRESS[0] + "="
+				    + cOrder.getInt(5), null, null, null, null);
+	    cAddress.moveToFirst();
+	    Address address = new Address(cAddress.getInt(0),
+		    cAddress.getString(1), cAddress.getString(2),
+		    cAddress.getString(3), cAddress.getString(4),
+		    cAddress.getString(5), cAddress.getString(6));
+
+	    Cursor cShoppingCart = database.query(
+		    DAOFactory.TABLE_SHOPPINGCARTS,
+		    DAOFactory.COLUMNS_NAME_SHOPPINGCARTS,
+		    DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0] + "="
+			    + cOrder.getInt(6), null, null, null, null);
+	    cShoppingCart.moveToFirst();
+	    ShoppingCart shoppingCart = new ShoppingCart(
+		    cShoppingCart.getInt(0));
+	    List<Product> productsList = selectShoppingCartProductsById(cShoppingCart
+		    .getInt(0));
+	    shoppingCart.setProducts(productsList);
+	    Order order = new Order(cOrder.getInt(0), cOrder.getString(1),
+		    cOrder.getString(2), dateTime, cOrder.getString(4),
+		    address, shoppingCart);
+	    orders.add(order);
+	    i++;
 	}
 	return orders;
     }
@@ -491,7 +538,7 @@ public class DAOAndroid extends DAOFactory {
 
 	    database.insert(DAOFactory.TABLE_DRINKS, null, values);
 	    writeProduct(drink.getId());
-	    
+
 	}
     }
 
@@ -562,7 +609,7 @@ public class DAOAndroid extends DAOFactory {
     protected void writeProduct(int idProduct) {
 	ContentValues values = new ContentValues();
 	values.put(DAOFactory.COLUMNS_NAME_PRODUCTS[0], idProduct);
-	database.insert(DAOFactory.CREATE_TABLE_PRODUCTS,null,values);
+	database.insert(DAOFactory.CREATE_TABLE_PRODUCTS, null, values);
 
     }
 
