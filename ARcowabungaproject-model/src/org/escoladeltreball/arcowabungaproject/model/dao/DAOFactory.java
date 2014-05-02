@@ -156,8 +156,8 @@ public abstract class DAOFactory {
 	    + " CHAR," + COLUMNS_NAME_ADDRESS[6] + " VARCHAR(2));";
     public static final String CREATE_TABLE_PREFERENCES = "CREATE TABLE "
 	    + TABLE_PREFERENCES + " (" + COLUMNS_NAME_PREFERENCES[0]
-	    + " VARCHAR(30) PRIMARY KEY," + COLUMNS_NAME_ADDRESS[1]
-	    + " VARCHAR(50));";
+	    + " VARCHAR(30) PRIMARY KEY," + COLUMNS_NAME_PREFERENCES[1]
+	    + " INTEGER);";
 
     /* DROP TABLES */
     public static final String DROP_TABLE_PRODUCTS = "DROP TABLE "
