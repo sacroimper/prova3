@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.model.Address;
 import org.escoladeltreball.arcowabungaproject.model.Drink;
+import org.escoladeltreball.arcowabungaproject.model.IdObject;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
@@ -389,6 +390,10 @@ public abstract class DAOFactory {
 	pizzeria.setDrinks(drinks);
 	pizzeria.setOffers(offers);
 	pizzeria.setOrdersSaved(ordersSaved);
+
+	IdObject.setNextId(44);
+	IdObject.setNextId(10044);
+	currentVersion = -1;
 
 	return true;
     }
