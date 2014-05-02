@@ -6,8 +6,6 @@ import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
-import org.escoladeltreball.arcowabungaproject.model.Ingredient;
-import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
@@ -22,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
@@ -93,7 +92,9 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
 	tvDesc.setText(children.getIngedientsDescription());
 
-	children.getIcon();
+	DAOAndroid dao = DAOAndroid.getInstance();
+	Drawable icon = dao.getDrawableFromAssets(activity, children.getIcon());
+	ivIcon.setBackgroundDrawable(icon);
 
 	llButton.setOnClickListener(new ARButtonClickListener(groupPosition));
 
@@ -144,7 +145,11 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
 	tvTitle.setText(group.getName());
 	tvPrice.setText(group.getFormatedPrice());
-	tvDesc.setText(group.getIngedientsDescription());
+	String desc = group.getIngedientsDescription();
+	if (desc.length() > 20) {
+	    desc = desc.substring(0, 17) + "...";
+	}
+	tvDesc.setText(desc);
 
 	ibAdd.setOnClickListener(new AddButtonClickListener(groupPosition));
 
@@ -192,8 +197,8 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public void onClick(View v) {
-	    // System.
-
+	    Pizzeria.getInstance().getShoppingCart().addProduct(pizzas.get(index));
+	    Toast.makeText(activity, "S'ha afegit una producte al carro de la compra", Toast.LENGTH_SHORT).show();
 	}
 
     }
