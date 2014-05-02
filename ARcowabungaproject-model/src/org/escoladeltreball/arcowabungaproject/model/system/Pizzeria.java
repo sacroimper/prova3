@@ -1,6 +1,7 @@
 package org.escoladeltreball.arcowabungaproject.model.system;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.model.Drink;
@@ -32,6 +33,7 @@ public class Pizzeria {
     private Set<Drink> drinks;
     private Set<Offer> offers;
     private ShoppingCart shoppingCart;
+    private Map<String, Object> preferences;
     private DAOFactory dao;
 
     // ====================
@@ -355,5 +357,13 @@ public class Pizzeria {
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
 	this.shoppingCart = shoppingCart;
+    }
+
+    public Map<String, Object> getPreferences() {
+	return preferences;
+    }
+
+    public void setPreferences(Map<String, Object> preferences) {
+	this.preferences = preferences;
     }
 }
