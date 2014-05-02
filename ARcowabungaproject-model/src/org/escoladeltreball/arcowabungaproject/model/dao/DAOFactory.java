@@ -60,7 +60,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_NAME_SHOPPINCART_PRODUCTS = {
 	    "shoppingcart", "product" };
     public static final String[] COLUMNS_NAME_ORDERS = { "id_order", "email",
-	    "date_time", "payment_method", "addres" };
+	    "phone", "date_time", "payment_method", "addres", "shopping_cart" };
     public static final String[] COLUMNS_NAME_ADDRESS = { "id_address",
 	    "street", "number", "post_code", "floor", "stair", "door" };
     public static final String[] COLUMNS_NAME_PREFERENCES = { "key", "value" };
@@ -140,10 +140,13 @@ public abstract class DAOFactory {
 	    + " ON DELTE CASCADE ON UPDATE CASCADE);";
     public static final String CREATE_TABLE_ORDERS = "CREATE TABLE "
 	    + TABLE_ORDERS + "(" + COLUMNS_NAME_ORDERS[0] + " PRIMARY KEY,"
-	    + COLUMNS_NAME_OFFERS[1] + " VARCHAR(50)," + COLUMNS_NAME_OFFERS[2]
-	    + " DATE," + COLUMNS_NAME_OFFERS[3] + " VARCHAR(15),"
-	    + COLUMNS_NAME_OFFERS[4] + " SMALLINT FOREIGN KEY REFERENCES "
-	    + TABLE_ADDRESS + " ON DELTE CASCADE ON UPDATE CASCADE)";
+	    + COLUMNS_NAME_OFFERS[1] + " VARCHAR(9)," + COLUMNS_NAME_OFFERS[2]
+	    + " VARCHAR(50)," + COLUMNS_NAME_OFFERS[3] + " DATE,"
+	    + COLUMNS_NAME_OFFERS[4] + " VARCHAR(15)," + COLUMNS_NAME_OFFERS[5]
+	    + " INTEGER FOREIGN KEY REFERENCES " + TABLE_ADDRESS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE," + COLUMNS_NAME_OFFERS[6]
+	    + "INTEGER FOREIGN KEY REFERENCES" + TABLE_SHOPPINGCARTS
+	    + " ON DELTE CASCADE ON UPDATE CASCADE)";
     public static final String CREATE_TABLE_ADDRESS = "CREATE TABLE "
 	    + TABLE_ADDRESS + " (" + COLUMNS_NAME_ADDRESS[0]
 	    + " INTEGER PRIMARY KEY," + COLUMNS_NAME_ADDRESS[1]
