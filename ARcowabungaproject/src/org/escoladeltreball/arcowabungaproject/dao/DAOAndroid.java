@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -75,7 +76,8 @@ public class DAOAndroid extends DAOFactory {
     public Drawable getDrawableFromAssets(Activity activity, int resourceId) {
 	Drawable drawable = drawables.get(resourceId);
 	if (drawable == null) {
-	    drawable = getDrawableFromAssets(activity, getResourcePath(resourceId));
+	    drawable = getDrawableFromAssets(activity,
+		    getResourcePath(resourceId));
 	    if (drawable != null) {
 		drawables.put(resourceId, drawable);
 	    }
@@ -447,14 +449,18 @@ public class DAOAndroid extends DAOFactory {
     @Override
     protected Map<String, Object> readPreferences() {
 	Map<String, Object> preferences = new HashMap<String, Object>();
-	Cursor cPreferences = database.query(DAOFactory.TABLE_PREFERENCES, DAOFactory.COLUMNS_NAME_PREFERENCES, null, null, null, null, null);
+	Cursor cPreferences = database.query(DAOFactory.TABLE_PREFERENCES,
+		DAOFactory.COLUMNS_NAME_PREFERENCES, null, null, null, null,
+		null);
 	int i = 0;
-	while(i < cPreferences.getCount()){
+	while (i < cPreferences.getCount()) {
 	    cPreferences.move(i);
 	    /*
-	     * FALTA PART PER CODIFICAR, RESOLDRE EL TIPUS DE DADES QUE ES GUARDEN A PREFERENCIES
+	     * FALTA PART PER CODIFICAR, RESOLDRE EL TIPUS DE DADES QUE ES
+	     * GUARDEN A PREFERENCIES
 	     */
-	    //preferences.put(cPreferences.getString(0), cPreferences.getInt(1));
+	    // preferences.put(cPreferences.getString(0),
+	    // cPreferences.getInt(1));
 	    i++;
 	}
 	return preferences;
@@ -587,7 +593,7 @@ public class DAOAndroid extends DAOFactory {
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[0], order.getId());
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[1], order.getEmail());
 	    SimpleDateFormat dateFormat = new SimpleDateFormat(
-		    "dd-MM-yyyy HH:mm:ss");
+		    "dd-MM-yyyy HH:mm:ss", Locale.getDefault());
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[2],
 		    dateFormat.format(order.getDateTime()));
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[3],
