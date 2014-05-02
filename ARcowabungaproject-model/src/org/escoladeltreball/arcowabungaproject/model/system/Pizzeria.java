@@ -23,8 +23,8 @@ public class Pizzeria {
     // ATTRIBUTES
     // ====================
 
+    private static Pizzeria instance;
     private String role;
-    private Pizzeria instance;
     private Set<Pizza> predefinedPizzas;
     private Set<Pizza> customSavedPizzas;
     private Set<Pizza> customTemporaryPizzas;
@@ -39,6 +39,7 @@ public class Pizzeria {
     // ====================
     // CONSTRUCTORS
     // ====================
+
     private Pizzeria(DAOFactory dao) {
 	this.dao = dao;
     }
@@ -46,10 +47,15 @@ public class Pizzeria {
     // ====================
     // PUBLIC METHODS
     // ====================
-    public Pizzeria getInstance(DAOFactory dao) {
+
+    public static Pizzeria getInstance(DAOFactory dao) {
 	if (instance == null) {
 	    instance = new Pizzeria(dao);
 	}
+	return instance;
+    }
+
+    public static Pizzeria getInstance() {
 	return instance;
     }
 
