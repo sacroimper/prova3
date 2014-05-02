@@ -3,6 +3,7 @@ package org.escoladeltreball.arcowabungaproject.dao;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,6 @@ import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.joda.time.DateTime;
-import org.joda.time.JodaTimePermission;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -438,8 +438,18 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected Map<String, Object> readPreferences() {
-	// TODO Auto-generated method stub
-	return null;
+	Map<String, Object> preferences = new HashMap<String, Object>();
+	Cursor cPreferences = database.query(DAOFactory.TABLE_PREFERENCES, DAOFactory.COLUMNS_NAME_PREFERENCES, null, null, null, null, null);
+	int i = 0;
+	while(i < cPreferences.getCount()){
+	    cPreferences.move(i);
+	    /*
+	     * FALTA PART PER CODIFICAR, RESOLDRE EL TIPUS DE DADES QUE ES GUARDEN A PREFERENCIES
+	     */
+	    //preferences.put(cPreferences.getString(0), cPreferences.getInt(1));
+	    i++;
+	}
+	return preferences;
     }
 
     @Override
