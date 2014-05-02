@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="70dp"
     android:clickable="true"
     android:minHeight="130dp"
     android:paddingLeft="5dp"
@@ -58,9 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/separatorBottom"
         android:layout_below="@id/titleTextInItem"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
         android:layout_toLeftOf="@id/separatorRight"
         android:layout_toRightOf="@id/imageInItem"
         android:background="#33FF33" 
@@ -72,6 +71,8 @@
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@+id/imageButtonInItem"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:color/darker_gray" />
 
     <ImageButton
@@ -81,6 +82,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@drawable/home_image"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:contentDescription="" />
 
     <View
