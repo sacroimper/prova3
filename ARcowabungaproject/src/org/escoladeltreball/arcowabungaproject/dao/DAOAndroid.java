@@ -44,6 +44,7 @@ public class DAOAndroid extends DAOFactory {
     private DataBaseHelper dbHepler;
 
     private Map<Integer, String> resources;
+    private Map<Integer, Drawable> drawables;
 
     // ====================
     // CONSTRUCTORS
@@ -72,7 +73,14 @@ public class DAOAndroid extends DAOFactory {
     }
 
     public Drawable getDrawableFromAssets(Activity activity, int resourceId) {
-	return getDrawableFromAssets(activity, getResourcePath(resourceId));
+	Drawable drawable = drawables.get(resourceId);
+	if (drawable == null) {
+	    drawable = getDrawableFromAssets(activity, getResourcePath(resourceId));
+	    if (drawable != null) {
+		drawables.put(resourceId, drawable);
+	    }
+	}
+	return drawable;
     }
 
     public String getResourcePath(int resourceId) {
