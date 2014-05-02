@@ -438,6 +438,7 @@ public class DAOAndroid extends DAOFactory {
 		    .getIngredients().getId());
 
 	    database.insert(DAOFactory.TABLE_PIZZAS, null, values);
+	    writeProduct(pizza.getId());
 	    values.clear();
 	    for (Ingredient ingredient : pizza.getIngredientsSet()) {
 		values.put(DAOFactory.COLUMNS_NAME_INGREDIENTS[0], pizza
@@ -463,6 +464,7 @@ public class DAOAndroid extends DAOFactory {
 	    values.put(DAOFactory.COLUMNS_NAME_OFFERS[4], offer.getDiscount());
 
 	    database.insert(DAOFactory.TABLE_OFFERS, null, values);
+	    writeProduct(offer.getId());
 	    values.clear();
 	    for (Product product : offer.getProduct()) {
 		values.put(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[0],
@@ -488,6 +490,8 @@ public class DAOAndroid extends DAOFactory {
 	    values.put(DAOFactory.COLUMNS_NAME_DRINKS[5], drink.getSize());
 
 	    database.insert(DAOFactory.TABLE_DRINKS, null, values);
+	    writeProduct(drink.getId());
+	    
 	}
     }
 
@@ -555,8 +559,10 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected void writeProducts(Set<Product> products) {
-	// TODO Auto-generated method stub
+    protected void writeProduct(int idProduct) {
+	ContentValues values = new ContentValues();
+	values.put(DAOFactory.COLUMNS_NAME_PRODUCTS[0], idProduct);
+	database.insert(DAOFactory.CREATE_TABLE_PRODUCTS,null,values);
 
     }
 
