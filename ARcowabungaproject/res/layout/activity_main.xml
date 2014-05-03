@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
@@ -8,23 +8,25 @@
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="15"
+        android:layout_height="250dp"
+        android:layout_above="@+id/linearButtonMenu"
+        android:layout_alignParentTop="true"
         android:background="@drawable/home_image" />
 
     <LinearLayout
-        android:id="@+id/button"
+        android:id="@id/linearButtonMenu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FE2E2E"
+        android:layout_above="@+id/linearButtonPedidoActual"
+        android:background="#ad2334"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:src="@drawable/ic_launcher" />
@@ -35,22 +37,25 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="Do stuff" />
+            android:text="CARTA"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/button"
+        android:id="@id/linearButtonPedidoActual"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FE2E2E"
+        android:layout_above="@+id/linearButtonContacto"
+        android:layout_alignParentLeft="true"
+        android:background="#8d1f2a"
         android:clickable="true"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"  >
+        android:paddingLeft="20dp" >
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:src="@drawable/ic_launcher" />
@@ -61,22 +66,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="Do stuff" />
+            android:text="PEDIDO ACTUAL"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/button"
+        android:id="@+id/linearButtonContacto"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FE2E2E"
+        android:layout_above="@+id/linearButtonPedidosAnteriores"
+        android:background="#711b23"
         android:clickable="true"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"  >
+        android:paddingLeft="20dp" >
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:src="@drawable/ic_launcher" />
@@ -87,22 +94,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="Do stuff" />
+            android:text="CONTACTO"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/button"
+        android:id="@+id/linearButtonPedidosAnteriores"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FE2E2E"
+        android:layout_alignParentBottom="true"
+        android:background="#5a1b22"
         android:clickable="true"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"  >
+        android:paddingLeft="20dp" >
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:src="@drawable/ic_launcher" />
@@ -113,7 +122,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="Do stuff" />
+            android:text="PEDIDOS ANTERIORES"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
-</LinearLayout>
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/linearButtonMenu"
+        android:background="@drawable/gradient3" />
+
+</RelativeLayout>

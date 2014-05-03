@@ -1,4 +1,6 @@
-package org.escoladeltreball.arcowabungaproject;
+package org.escoladeltreball.arcowabungaproject.activities;
+
+import org.escoladeltreball.arcowabungaproject.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,7 +8,7 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class MainActivity extends Activity {
+public class MainMenuActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
