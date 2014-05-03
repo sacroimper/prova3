@@ -30,7 +30,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.escoladeltreball.arcowabungaproject.activities.DishesMenuActivity"
+            android:name="org.escoladeltreball.arcowabungaproject.activities.PizzaMenuActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" >
         </activity>
