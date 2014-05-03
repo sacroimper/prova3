@@ -32,16 +32,16 @@ public class MainActivity extends Activity implements OnClickListener{
 	
 	
 	//Buttons
-	LinearLayout bCarta = (LinearLayout) findViewById(R.id.linearButtonMenu);
+	LinearLayout bCarta = (LinearLayout) findViewById(R.id.linearButton1);
 	bCarta.setOnClickListener(this);
 	
-	LinearLayout bOrder = (LinearLayout) findViewById(R.id.linearButtonPedidoActual);
+	LinearLayout bOrder = (LinearLayout) findViewById(R.id.linearButton2);
 	bOrder.setOnClickListener(this);
 	
-	LinearLayout bLastOrders = (LinearLayout) findViewById(R.id.linearButtonPedidosAnteriores);
+	LinearLayout bLastOrders = (LinearLayout) findViewById(R.id.linearButton3);
 	bLastOrders.setOnClickListener(this);
 	
-	LinearLayout bContact = (LinearLayout) findViewById(R.id.linearButtonContacto);
+	LinearLayout bContact = (LinearLayout) findViewById(R.id.linearButton4);
 	bContact.setOnClickListener(this);
 	
 	this.overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
@@ -58,16 +58,17 @@ public class MainActivity extends Activity implements OnClickListener{
     @Override
     public void onClick(View v) {
 	
-	if ( v.getId() == R.id.linearButtonMenu ){
-	    Intent intent = new Intent(this.getApplicationContext(), DishesMenuActivity.class);
+	if ( v.getId() == R.id.linearButton1 ){
+//	    Intent intent = new Intent(this.getApplicationContext(), DishesMenuActivity.class);
+	    Intent intent = new Intent(this.getApplicationContext(), TabActivity.class);
        	    startActivity(intent);
-	}else if ( v.getId() == R.id.linearButtonPedidoActual ){
+	}else if ( v.getId() == R.id.linearButton2 ){
 	    Intent intent = new Intent(this.getApplicationContext(), OrderActivity.class);
        	    startActivity(intent);
-	}else if ( v.getId() == R.id.linearButtonPedidosAnteriores ){
+	}else if ( v.getId() == R.id.linearButton3 ){
 	    Intent intent = new Intent(this.getApplicationContext(), LastOrdersActivity.class);
        	    startActivity(intent);
-	}else if ( v.getId() == R.id.linearButtonContacto ){
+	}else if ( v.getId() == R.id.linearButton4 ){
 	    Intent intent = new Intent(this.getApplicationContext(), ContactActivity.class);
        	    startActivity(intent);
 	}
