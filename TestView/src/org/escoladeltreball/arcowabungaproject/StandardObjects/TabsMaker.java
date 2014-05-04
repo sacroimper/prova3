@@ -2,180 +2,201 @@ package org.escoladeltreball.arcowabungaproject.StandardObjects;
 
 import org.escoladeltreball.arcowabungaproject.R;
 
+import android.content.Context;
 import android.graphics.Color;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.LinearLayout;
 import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+import android.widget.TabHost.TabContentFactory;
+import android.widget.TabHost.TabSpec;
 
 public class TabsMaker {
 
-    // ====================
-    // CONSTANTS
-    // ====================
+	// ====================
+	// CONSTANTS
+	// ====================
 
-    // ====================
-    // ATTRIBUTES
-    // ====================
+	// ====================
+	// ATTRIBUTES
+	// ====================
 
-    // ====================
-    // CONSTRUCTORS
-    // ====================
+	// ====================
+	// CONSTRUCTORS
+	// ====================
 
-    // ====================
-    // PUBLIC METHODS
-    // ====================
-    
-    //MAKE A SINGLE TAB
-    public static TabSpec makeTab(TabHost tabs, String tabSpec, int content, String indicator) {
-	TabHost.TabSpec spec = tabs.newTabSpec(tabSpec);
-	spec.setContent(content);
-	spec.setIndicator(indicator);
-	return spec;
-    }
-    
-    
-    //STYLE
-    
-    public static TabHost tabsAspectRatio(TabHost tabs, double heigth) {
-   	int tabCount = tabs.getTabWidget().getTabCount();
-   	for (int i = 0; i < tabCount; i++) {
-   	    final View view = tabs.getTabWidget().getChildTabViewAt(i);
-   	    if (view != null) {
-   		// reduce height of the tab
-   		view.getLayoutParams().height *= heigth;
+	// ====================
+	// PUBLIC METHODS
+	// ====================
 
-   		// get title text view
-   		final View textView = view.findViewById(android.R.id.title);
-   		if (textView instanceof TextView) {
-   		    // just in case check the type
-
-   		    // center text
-   		    ((TextView) textView).setGravity(Gravity.CENTER);
-   		    // wrap text
-   		    ((TextView) textView).setSingleLine(false);
-
-   		    // explicitly set layout parameters
-   		    textView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
-   		    textView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-   		}
-   	    }
-   	}
-   	return tabs;
-       }
-
-       public static TabHost tabsColor(TabHost tabs, String color) {
-	   int numberOfTabs =  tabs.getTabWidget().getChildCount();
-	   for (int i = 0 ; i < numberOfTabs ; i++){
-	       tabs.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor(color));
-	   }
-   	return tabs;
-
-       }
-    
-    //ANIMATIONS
-
-    public static Animation inFromRightAnimation() {
-
-	Animation inFromRight = new TranslateAnimation(
-		Animation.RELATIVE_TO_PARENT, +1.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f);
-	inFromRight.setDuration(400);
-	inFromRight.setInterpolator(new AccelerateInterpolator());
-	return inFromRight;
-    }
-
-    public static Animation leftToLeftAnimation() {
-	Animation outtoLeft = new TranslateAnimation(
-		Animation.RELATIVE_TO_PARENT, 0.0f,
-		Animation.RELATIVE_TO_PARENT, +1.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f);
-	outtoLeft.setDuration(400);
-	outtoLeft.setInterpolator(new AccelerateInterpolator());
-	return outtoLeft;
-    }
-
-    public static Animation leftFromRightAnimation() {
-
-	Animation inFromRight = new TranslateAnimation(
-		Animation.RELATIVE_TO_PARENT, -1.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f);
-	inFromRight.setDuration(400);
-	inFromRight.setInterpolator(new AccelerateInterpolator());
-	return inFromRight;
-    }
-
-    public static Animation outToLeftAnimation() {
-	Animation outtoLeft = new TranslateAnimation(
-		Animation.RELATIVE_TO_PARENT, 0.0f,
-		Animation.RELATIVE_TO_PARENT, -1.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f,
-		Animation.RELATIVE_TO_PARENT, 0.0f);
-	outtoLeft.setDuration(400);
-	outtoLeft.setInterpolator(new AccelerateInterpolator());
-	return outtoLeft;
-    }
-
-    //OJO mytab2... y los demas Strings que se comparan
-    //TENDRAN QUE ENTRAR POR EL METODO
-    public static LinearLayout OnChangeTabAnimation(String tabId,
-	    TabHost tabs, LinearLayout actualTab, LinearLayout t1l, LinearLayout t2l,
-	    LinearLayout t3l) {
-	if (actualTab.equals(t1l) && tabId.equals("mytab2")) {
-	    t1l.setAnimation(outToLeftAnimation());
-	    t2l.setAnimation(inFromRightAnimation());
-	    actualTab = t2l;
-	} else if (actualTab.equals(t2l) && tabId.equals("mytab1")) {
-	    t2l.setAnimation(leftToLeftAnimation());
-	    t1l.setAnimation(leftFromRightAnimation());
-	    actualTab = t1l;
-	} else if (actualTab.equals(t2l) && tabId.equals("mytab3")) {
-	    t2l.setAnimation(outToLeftAnimation());
-	    t3l.setAnimation(inFromRightAnimation());
-	    actualTab = t3l;
-	} else if (actualTab.equals(t3l) && tabId.equals("mytab2")) {
-	    t3l.setAnimation(leftToLeftAnimation());
-	    t2l.setAnimation(leftFromRightAnimation());
-	    actualTab = t2l;
-	} else if (actualTab.equals(t1l) && tabId.equals("mytab3")) {
-	    t1l.setAnimation(outToLeftAnimation());
-	    t3l.setAnimation(inFromRightAnimation());
-	    actualTab = t3l;
-	} else if (actualTab.equals(t3l) && tabId.equals("mytab1")) {
-	    t3l.setAnimation(leftToLeftAnimation());
-	    t1l.setAnimation(leftFromRightAnimation());
-	    actualTab = t1l;
+	
+    /**
+	 * Custom animation that animates in from right
+	 * 
+	 * @return Animation the Animation object
+	 */
+    	public static Animation inFromRightAnimation(int ANIMATION_TIME) {
+		Animation inFromRight = new TranslateAnimation(
+				Animation.RELATIVE_TO_PARENT, 1.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f);
+		return setProperties(inFromRight, ANIMATION_TIME);
 	}
-	return actualTab;
-    }
 
+	/**
+	 * Custom animation that animates out to the right
+	 * 
+	 * @return Animation the Animation object
+	 */
+	public static Animation outToRightAnimation(int ANIMATION_TIME) {
+		Animation outToRight = new TranslateAnimation(
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 1.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f);
+		return setProperties(outToRight, ANIMATION_TIME);
+	}
 
+	/**
+	 * Custom animation that animates in from left
+	 * 
+	 * @return Animation the Animation object
+	 */
+	public static Animation inFromLeftAnimation(int ANIMATION_TIME) {
+		Animation inFromLeft = new TranslateAnimation(
+				Animation.RELATIVE_TO_PARENT, -1.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f);
+		return setProperties(inFromLeft, ANIMATION_TIME);
+	}
 
-    // ====================
-    // PROTECTED METHODS
-    // ====================
+	/**
+	 * Custom animation that animates out to the left
+	 * 
+	 * @return Animation the Animation object
+	 */
+	public static Animation outToLeftAnimation(int ANIMATION_TIME) {
+		Animation outtoLeft = new TranslateAnimation(
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, -1.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f);
+		return setProperties(outtoLeft, ANIMATION_TIME);
+	}
 
-    // ====================
-    // PRIVATE METHODS
-    // ====================
+	public static void changeColor(View view, boolean isSelected) {
+		int childCount = ((ViewGroup) view).getChildCount();
+		for (int i = 0; i < childCount; i++) {
+			View viewElement =((ViewGroup)view).getChildAt(i);
+			if (viewElement != null) {
+				// get title text view
+				final View textView = viewElement.findViewById(R.id.tabsText);
+				if (textView instanceof TextView) {
+					if (!isSelected) {
+						((TextView) textView).setTextColor(Color.WHITE);
+					} else if (isSelected) {
+						((TextView) textView).setTextColor(Color.GRAY);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Helper method that sets some common properties
+	 * 
+	 * @param animation
+	 *            the animation to give common properties
+	 * @return the animation with common properties
+	 */
+	private static Animation setProperties(Animation animation, int ANIMATION_TIME) {
+		animation.setDuration(ANIMATION_TIME);
+		animation.setInterpolator(new AccelerateInterpolator());
+		return animation;
+	}
+	
+	public static TabHost setTab(TabHost mTabHost, int idTabCounter, final View view, final String tag, int initialColor) {
+		View tabview = createTabView(mTabHost.getContext(), tag, initialColor);
 
-    // ====================
-    // OVERRIDE METHODS
-    // ====================
+		TabSpec setContent = mTabHost.newTabSpec(tag).setIndicator(tabview)
+			.setContent(new TabContentFactory() {
+			    public View createTabContent(String tag) {
+				return view;
+			    }
+			});
 
-    // ====================
-    // GETTERS & SETTERS
-    // ====================
+		if (idTabCounter == 0) {
+		    tabview.setTag("Tab 1");
+		    idTabCounter++;
+		} else if (idTabCounter == 1) {
+		    tabview.setTag("Tab 2");
+		    idTabCounter++;
+		} else if (idTabCounter == 2) {
+		    tabview.setTag("Tab 3");
+		}
+		mTabHost.addTab(setContent);
+		return mTabHost;
+	    }
+	
+	 private static View createTabView(final Context context, final String text, int initialColor) {
+		View view = LayoutInflater.from(context)
+			.inflate(R.layout.tabs_bg, null);
+		TextView tv = (TextView) view.findViewById(R.id.tabsText);
+		tv.setTextColor(initialColor);
+		tv.setText(text);
+		return view;
+	    }
+	 
+	 public static View setTabColor(String tabId,View actualTab, final View viewTab1, final View viewTab2,
+		    final View viewTab3, View tab1, View tab2,
+		    View tab3) {
+		if (actualTab.equals(viewTab1) && tabId.equals("Tab 2")) {
+		    TabsMaker.changeColor(tab1, false);
+		    TabsMaker.changeColor(tab2, true);
+		    actualTab = viewTab2;
+		} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 1")) {
+		    TabsMaker.changeColor(tab2, false);
+		    TabsMaker.changeColor(tab1, true);
+		    actualTab = viewTab1;
+		} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 3")) {
+		    TabsMaker.changeColor(tab2, false);
+		    TabsMaker.changeColor(tab3, true);
+		    actualTab = viewTab3;
+		} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 2")) {
+		    TabsMaker.changeColor(tab3, false);
+		    TabsMaker.changeColor(tab2, true);
+		    actualTab = viewTab2;
+		} else if (actualTab.equals(viewTab1) && tabId.equals("Tab 3")) {
+		    TabsMaker.changeColor(tab1, false);
+		    TabsMaker.changeColor(tab3, true);
+		    actualTab = viewTab3;
+		} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 1")) {
+		    TabsMaker.changeColor(tab3, false);
+		    TabsMaker.changeColor(tab1, true);
+		    actualTab = viewTab1;
+		}
+		return actualTab;
+	    }
+
+	// ====================
+	// PROTECTED METHODS
+	// ====================
+
+	// ====================
+	// PRIVATE METHODS
+	// ====================
+
+	// ====================
+	// OVERRIDE METHODS
+	// ====================
+
+	// ====================
+	// GETTERS & SETTERS
+	// ====================
 }

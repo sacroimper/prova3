@@ -1,7 +1,7 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
-import org.escoladeltreball.arcowabungaproject.StandardObjects.TabsMaker;
+import org.escoladeltreball.arcowabungaproject.StandardObjects.TabsMaker_OLD;
 import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
 
@@ -21,7 +21,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
-public class DishesMenuActivity extends Activity implements OnTouchListener {
+public class PizzaMenuActivity_OLD extends Activity implements OnTouchListener {
 
     // Esta variable guarda el valor de resistencia al touch swipe
     // Cuando esta a 0 con mover un milimetro el dedo salta de tab
@@ -71,9 +71,9 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	tabs.setup();
 
 	// Make the neccesary tabs
-	TabSpec tab1 = TabsMaker.makeTab(tabs, "mytab1", R.id.tab1, "TAB1");
-	TabSpec tab2 = TabsMaker.makeTab(tabs, "mytab2", R.id.tab2, "TAB2");
-	TabSpec tab3 = TabsMaker.makeTab(tabs, "mytab3", R.id.tab3, "TAB3");
+	TabSpec tab1 = TabsMaker_OLD.makeTab(tabs, "mytab1", R.id.tab1, "TAB1");
+	TabSpec tab2 = TabsMaker_OLD.makeTab(tabs, "mytab2", R.id.tab2, "TAB2");
+	TabSpec tab3 = TabsMaker_OLD.makeTab(tabs, "mytab3", R.id.tab3, "TAB3");
 
 	// Add tabs to tabHost
 	tabs.addTab(tab1);
@@ -82,9 +82,9 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 
 	// STYLE
 	// TabsColor
-	tabs = TabsMaker.tabsColor(tabs, "#3be0d0");
+	tabs = TabsMaker_OLD.tabsColor(tabs, "#3be0d0");
 	// Aspect Ratio
-	tabs = TabsMaker.tabsAspectRatio(tabs, 0.66);
+	tabs = TabsMaker_OLD.tabsAspectRatio(tabs, 0.66);
 
 	// BEHAVIOUR
 	// Default selected
@@ -101,7 +101,7 @@ public class DishesMenuActivity extends Activity implements OnTouchListener {
 	    LinearLayout t3l = (LinearLayout) findViewById(R.id.tab3);
 
 	    public void onTabChanged(String tabId) {
-		actualTab = TabsMaker.OnChangeTabAnimation(tabId, tabs, actualTab, t1l, t2l, t3l);
+		actualTab = TabsMaker_OLD.OnChangeTabAnimation(tabId, tabs, actualTab, t1l, t2l, t3l);
 	    }
 
 	});

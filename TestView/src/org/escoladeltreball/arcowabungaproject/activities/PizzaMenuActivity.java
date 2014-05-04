@@ -1,7 +1,7 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
-import org.escoladeltreball.arcowabungaproject.StandardObjects.TabsMaker2;
+import org.escoladeltreball.arcowabungaproject.StandardObjects.TabsMaker;
 import org.escoladeltreball.arcowabungaproject.adapters.Adaptador;
 import org.escoladeltreball.arcowabungaproject.model.GrupoDeItems;
 
@@ -29,7 +29,7 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class TabActivity extends Activity implements OnTouchListener {
+public class PizzaMenuActivity extends Activity implements OnTouchListener {
 
 
     // Este atributo no hara falta con el nuevo adaptador
@@ -41,7 +41,7 @@ public class TabActivity extends Activity implements OnTouchListener {
     static final int SCREEN_TOUCH_RESISTENCE = 200;	//Resitence of the swipe touch detection
     
     //TAB FUNCTIONALLITIES
-    private static final int ANIMATION_TIME = 400;    	//Animation speed
+    private static final int ANIMATION_TIME = 700;    	//Animation speed
     private TabHost mTabHost;				
     private View previousView;
     private View currentView;
@@ -102,13 +102,13 @@ public class TabActivity extends Activity implements OnTouchListener {
 	final View viewTab3 = layoutInflater.inflate(R.layout.content_third_tab, null);
 
 	//Add The tabs to host
-	mTabHost = TabsMaker2.setTab(mTabHost, 0, viewTab1, "Tab 1", Color.WHITE);
-	mTabHost = TabsMaker2.setTab(mTabHost, 1, viewTab2, "Tab 2", Color.WHITE);
-	mTabHost = TabsMaker2.setTab(mTabHost, 2, viewTab3, "Tab 3", Color.WHITE);
+	mTabHost = TabsMaker.setTab(mTabHost, 0, viewTab1, "Tab 1", Color.WHITE);
+	mTabHost = TabsMaker.setTab(mTabHost, 1, viewTab2, "Tab 2", Color.WHITE);
+	mTabHost = TabsMaker.setTab(mTabHost, 2, viewTab3, "Tab 3", Color.WHITE);
 
 	mTabHost.setCurrentTab(0);			//Set init tab
 	View tab1 = mTabHost.findViewWithTag("Tab 1");
-	TabsMaker2.changeColor(tab1, true);		//add color gray to the inint selected tab
+	TabsMaker.changeColor(tab1, true);		//add color gray to the inint selected tab
 	
 	currentTabView = viewTab1;			//set current tab
 	previousView = mTabHost.getCurrentView();
@@ -124,14 +124,14 @@ public class TabActivity extends Activity implements OnTouchListener {
 		currentView = mTabHost.getCurrentView();
 
 		if (mTabHost.getCurrentTab() >= currentTab) {
-		    previousView.setAnimation(TabsMaker2
+		    previousView.setAnimation(TabsMaker
 			    .outToLeftAnimation(ANIMATION_TIME));
-		    currentView.setAnimation(TabsMaker2
+		    currentView.setAnimation(TabsMaker
 			    .inFromRightAnimation(ANIMATION_TIME));
 		} else if (mTabHost.getCurrentTab() < currentTab) {
-		    previousView.setAnimation(TabsMaker2
+		    previousView.setAnimation(TabsMaker
 			    .outToRightAnimation(ANIMATION_TIME));
-		    currentView.setAnimation(TabsMaker2
+		    currentView.setAnimation(TabsMaker
 			    .inFromLeftAnimation(ANIMATION_TIME));
 		}
 
@@ -143,7 +143,7 @@ public class TabActivity extends Activity implements OnTouchListener {
 		View tab2 = mTabHost.findViewWithTag("Tab 2");
 		View tab3 = mTabHost.findViewWithTag("Tab 3");
 
-		currentTabView = TabsMaker2.setTabColor(tabId, currentTabView, viewTab1, viewTab2, viewTab3, tab1, tab2, tab3);
+		currentTabView = TabsMaker.setTabColor(tabId, currentTabView, viewTab1, viewTab2, viewTab3, tab1, tab2, tab3);
 	    }
 
 	    

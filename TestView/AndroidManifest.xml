@@ -30,21 +30,9 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.escoladeltreball.arcowabungaproject.activities.TabActivity"
+            android:name="org.escoladeltreball.arcowabungaproject.activities.PizzaMenuActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="org.escoladeltreball.layouttest.Tab1"
-            android:label="@string/title_activity_tab1" >
-        </activity>
-        <activity
-            android:name="org.escoladeltreball.layouttest.Tab2"
-            android:label="@string/title_activity_tab2" >
-        </activity>
-        <activity
-            android:name="org.escoladeltreball.layouttest.Tab3"
-            android:label="@string/title_activity_tab3" >
         </activity>
         <activity
             android:name="org.escoladeltreball.arcowabungaproject.activities.LastOrdersActivity"

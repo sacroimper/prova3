@@ -9,17 +9,7 @@
             android:id="@+id/listViewexp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" 
-            android:headerDividersEnabled="true"
-			android:footerDividersEnabled="true">
-            
-<!--             android:divider="#000000" -->
-<!--   			android:dividerHeight="1sp" -->
-<!--     		android:childDivider="#000000" -->
-<!-- 		    android:headerDividersEnabled="true" -->
-<!-- 		    android:footerDividersEnabled="true" -->
-<!-- 		    android:scrollingCache="false" -->
-<!-- 		    android:cacheColorHint="#00000000" -->
-<!-- 		    android:drawSelectorOnTop="true"> -->
+            android:cacheColorHint="#FFFFFF">  
         </ExpandableListView>
 
 </LinearLayout>

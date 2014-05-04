@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	
 	if ( v.getId() == R.id.linearButton1 ){
 //	    Intent intent = new Intent(this.getApplicationContext(), DishesMenuActivity.class);
-	    Intent intent = new Intent(this.getApplicationContext(), TabActivity.class);
+	    Intent intent = new Intent(this.getApplicationContext(), PizzaMenuActivity.class);
        	    startActivity(intent);
 	}else if ( v.getId() == R.id.linearButton2 ){
 	    Intent intent = new Intent(this.getApplicationContext(), OrderActivity.class);
