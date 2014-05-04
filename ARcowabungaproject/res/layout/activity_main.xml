@@ -6,46 +6,44 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/mainScreenLogo"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_above="@+id/linearButtonMenu"
+        android:layout_above="@+id/menu_selection_menu"
         android:layout_alignParentTop="true"
         android:background="@drawable/home_image" />
 
     <LinearLayout
-        android:id="@id/linearButtonMenu"
+        android:id="@id/menu_selection_menu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@+id/linearButtonPedidoActual"
+        android:layout_above="@+id/menu_selection_actualorder"
         android:background="#ad2334"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
 
         <ImageView
-            android:id="@+id/img"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/home_menu_menu" />
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="CARTA"
+            android:text="@string/menu_esp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@id/linearButtonPedidoActual"
+        android:id="@id/menu_selection_actualorder"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@+id/linearButtonContacto"
+        android:layout_above="@+id/menu_selection_contact"
         android:layout_alignParentLeft="true"
         android:background="#8d1f2a"
         android:clickable="true"
@@ -53,53 +51,49 @@
         android:paddingLeft="20dp" >
 
         <ImageView
-            android:id="@+id/img"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/home_menu_actualorder" />
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="PEDIDO ACTUAL"
+            android:text="@string/menu_actual_order_esp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearButtonContacto"
+        android:id="@id/menu_selection_contact"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@+id/linearButtonPedidosAnteriores"
+        android:layout_above="@+id/menu_selection_lastorders"
         android:background="#711b23"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
 
         <ImageView
-            android:id="@+id/img"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/home_menu_contact" />
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="CONTACTO"
+            android:text="@string/menu_contact_esp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearButtonPedidosAnteriores"
+        android:id="@id/menu_selection_lastorders"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -109,29 +103,27 @@
         android:paddingLeft="20dp" >
 
         <ImageView
-            android:id="@+id/img"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/home_menu_lastorders" />
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="PEDIDOS ANTERIORES"
+            android:text="@string/menu_last_orders_esp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="6dp"
+        android:layout_height="7dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/linearButtonMenu"
-        android:background="@drawable/gradient3" />
+        android:layout_alignTop="@+id/linearButton1"
+        android:background="@drawable/gradient4" />
 
 </RelativeLayout>
