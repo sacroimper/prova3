@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="140dp"
     android:clickable="true"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:minHeight="130dp" >
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:minHeight="130dp"
+    android:background="#F0F0F0" >
 
     <View
         android:id="@+id/separatorTop"
@@ -16,13 +17,14 @@
 
     <ImageView
         android:id="@+id/imageInSubItem"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:contentDescription="@string/pizzaIcon"
-        android:padding="5dp"
-        android:src="@drawable/home_image" />
+        android:layout_margin="5dp"
+        android:src="@drawable/home_image"
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/textInSubItem"
@@ -32,7 +34,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/separatorTop"
         android:layout_above="@+id/pizzaButtonInSubItem"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
         android:background="#33FF33" >
@@ -47,7 +49,7 @@
         android:layout_above="@+id/separatorBottom"
         android:orientation="horizontal"
         android:background="#e73445" 
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="18dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         android:gravity="center"

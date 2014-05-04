@@ -12,6 +12,7 @@ import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -150,7 +151,10 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	if (desc.length() > 20) {
 	    desc = desc.substring(0, 17) + "...";
 	}
-	tvDesc.setText(desc);
+	String showMore = "<font color='#FF0000'>"
+		+ activity.getResources().getString(R.string.showMore)
+		+ "</font>";
+	tvDesc.setText(Html.fromHtml(desc + showMore));
 
 	ibAdd.setOnClickListener(new AddButtonClickListener(group));
 
@@ -200,7 +204,9 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	@Override
 	public void onClick(View v) {
 	    Pizzeria.getInstance().getShoppingCart().addProduct(product);
-	    Toast.makeText(activity, "S'ha afegit una producte al carro de la compra", Toast.LENGTH_SHORT).show();
+	    Toast.makeText(activity,
+		    "S'ha afegit una producte al carro de la compra",
+		    Toast.LENGTH_SHORT).show();
 	}
 
     }

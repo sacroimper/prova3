@@ -30,12 +30,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/separatorTop"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="13dp"
         android:layout_toLeftOf="@+id/priceTextInItem"
         android:layout_toRightOf="@id/imageInItem"
         android:background="#335533"
+        android:textColor="#E63444"
         android:text="titol" >
     </TextView>
 
@@ -45,10 +46,11 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/separatorRight"
         android:layout_below="@id/separatorTop"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
-        android:background="#FF3333" 
+        android:layout_marginTop="13dp"
+        android:background="#FF3333"
+        android:textColor="#E63444"
         android:text="preu">
     </TextView>
 
@@ -58,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/separatorBottom"
         android:layout_below="@id/titleTextInItem"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="13dp"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@id/separatorRight"
         android:layout_toRightOf="@id/imageInItem"
