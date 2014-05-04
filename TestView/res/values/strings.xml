@@ -8,5 +8,11 @@
     <string name="title_activity_tab1">Tab1</string>
     <string name="title_activity_tab2">Tab2</string>
     <string name="title_activity_tab3">Tab3</string>
+    
+    <!-- Buttons -->
+    <string name="button_main_menu">Tab1</string>
+    <string name="button_cart">Tab2</string>
+
+    
 
 </resources>
