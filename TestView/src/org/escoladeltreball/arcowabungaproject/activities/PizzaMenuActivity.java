@@ -97,7 +97,7 @@ public class PizzaMenuActivity extends Activity implements OnTouchListener {
 	//Inflate Tabs
 	LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	final View viewTab1 = layoutInflater.inflate(R.layout.content_tab, null);
+	final View viewTab1 = layoutInflater.inflate(R.layout.content_first_tab, null);
 	final View viewTab2 = layoutInflater.inflate(R.layout.content_second_tab, null);
 	final View viewTab3 = layoutInflater.inflate(R.layout.content_third_tab, null);
 

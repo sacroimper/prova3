@@ -53,7 +53,7 @@ public class Adaptador extends BaseExpandableListAdapter {
 	final String children = (String) getChild(groupPosition, childPosition);
 	TextView textvw = null;
 	if (convertView == null) {
-	    convertView = inflater.inflate(R.layout.subitems_layout, null);
+	    convertView = inflater.inflate(R.layout.pizza_menu_subitems_layout, null);
 	}
 	textvw = (TextView) convertView.findViewById(R.id.textView1);
 	textvw.setText(children);
@@ -150,7 +150,7 @@ public class Adaptador extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
 	if (convertView == null) {
-	    convertView = inflater.inflate(R.layout.items_layout, null);
+	    convertView = inflater.inflate(R.layout.pizza_menu_items_layout, null);
 	}
 	GrupoDeItems grupo = (GrupoDeItems) getGroup(groupPosition);
 	((CheckedTextView) convertView).setText(grupo.string);
