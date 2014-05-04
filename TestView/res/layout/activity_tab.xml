@@ -4,10 +4,13 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <!-- TABS -->
+
     <TabHost
         android:id="@android:id/tabhost"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -30,10 +33,72 @@
                 android:id="@android:id/tabcontent"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" >
-
-             
             </FrameLayout>
         </LinearLayout>
     </TabHost>
+
+    <!-- BUTTONS -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="8"
+        android:background="#EE4052"
+        android:baselineAligned="false"
+        android:clickable="true"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/button_menu"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:paddingLeft="20dp" >
+
+            <ImageView
+                android:id="@+id/buton_menu_img"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:contentDescription="@string/button_main_menu"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/buton_menu_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="@string/button_main_menu"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_cart"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:paddingLeft="20dp" >
+
+            <ImageView
+                android:id="@+id/buton_cart_img"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:contentDescription="@string/button_cart"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/button_cart_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="@string/button_cart"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
