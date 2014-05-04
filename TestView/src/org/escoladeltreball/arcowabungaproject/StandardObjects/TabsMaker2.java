@@ -2,13 +2,18 @@ package org.escoladeltreball.arcowabungaproject.StandardObjects;
 
 import org.escoladeltreball.arcowabungaproject.R;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.TabHost.TabContentFactory;
+import android.widget.TabHost.TabSpec;
 
 public class TabsMaker2 {
 
@@ -115,6 +120,69 @@ public class TabsMaker2 {
 		animation.setInterpolator(new AccelerateInterpolator());
 		return animation;
 	}
+	
+	public static TabHost setTab(TabHost mTabHost, int idTabCounter, final View view, final String tag, int initialColor) {
+		View tabview = createTabView(mTabHost.getContext(), tag, initialColor);
+
+		TabSpec setContent = mTabHost.newTabSpec(tag).setIndicator(tabview)
+			.setContent(new TabContentFactory() {
+			    public View createTabContent(String tag) {
+				return view;
+			    }
+			});
+
+		if (idTabCounter == 0) {
+		    tabview.setTag("Tab 1");
+		    idTabCounter++;
+		} else if (idTabCounter == 1) {
+		    tabview.setTag("Tab 2");
+		    idTabCounter++;
+		} else if (idTabCounter == 2) {
+		    tabview.setTag("Tab 3");
+		}
+		mTabHost.addTab(setContent);
+		return mTabHost;
+	    }
+	
+	 private static View createTabView(final Context context, final String text, int initialColor) {
+		View view = LayoutInflater.from(context)
+			.inflate(R.layout.tabs_bg, null);
+		TextView tv = (TextView) view.findViewById(R.id.tabsText);
+		tv.setTextColor(initialColor);
+		tv.setText(text);
+		return view;
+	    }
+	 
+	 public static View setTabColor(String tabId,View actualTab, final View viewTab1, final View viewTab2,
+		    final View viewTab3, View tab1, View tab2,
+		    View tab3) {
+		if (actualTab.equals(viewTab1) && tabId.equals("Tab 2")) {
+		    TabsMaker2.changeColor(tab1, false);
+		    TabsMaker2.changeColor(tab2, true);
+		    actualTab = viewTab2;
+		} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 1")) {
+		    TabsMaker2.changeColor(tab2, false);
+		    TabsMaker2.changeColor(tab1, true);
+		    actualTab = viewTab1;
+		} else if (actualTab.equals(viewTab2) && tabId.equals("Tab 3")) {
+		    TabsMaker2.changeColor(tab2, false);
+		    TabsMaker2.changeColor(tab3, true);
+		    actualTab = viewTab3;
+		} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 2")) {
+		    TabsMaker2.changeColor(tab3, false);
+		    TabsMaker2.changeColor(tab2, true);
+		    actualTab = viewTab2;
+		} else if (actualTab.equals(viewTab1) && tabId.equals("Tab 3")) {
+		    TabsMaker2.changeColor(tab1, false);
+		    TabsMaker2.changeColor(tab3, true);
+		    actualTab = viewTab3;
+		} else if (actualTab.equals(viewTab3) && tabId.equals("Tab 1")) {
+		    TabsMaker2.changeColor(tab3, false);
+		    TabsMaker2.changeColor(tab1, true);
+		    actualTab = viewTab1;
+		}
+		return actualTab;
+	    }
 
 	// ====================
 	// PROTECTED METHODS
