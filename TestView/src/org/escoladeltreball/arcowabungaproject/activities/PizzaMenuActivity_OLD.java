@@ -43,7 +43,7 @@ public class PizzaMenuActivity_OLD extends Activity implements OnTouchListener {
 	this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-	setContentView(R.layout.activity_tabs);
+	setContentView(R.layout.activity_tabs_old);
 
 	this.overridePendingTransition(R.anim.animation_enter,
 		R.anim.animation_leave);
