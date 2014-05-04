@@ -28,11 +28,11 @@ public class MainMenuActivity extends Activity implements OnClickListener {
 	this.setContentView(R.layout.activity_main);
 
 	// Buttons
-	LinearLayout bCarta = (LinearLayout) findViewById(R.id.menu_selection_menu);
-	bCarta.setOnClickListener(this);
+	LinearLayout bMenu = (LinearLayout) findViewById(R.id.menu_selection_menu);
+	bMenu.setOnClickListener(this);
 
-	LinearLayout bOrder = (LinearLayout) findViewById(R.id.menu_selection_actualorder);
-	bOrder.setOnClickListener(this);
+	LinearLayout bActualOrder = (LinearLayout) findViewById(R.id.menu_selection_actualorder);
+	bActualOrder.setOnClickListener(this);
 
 	LinearLayout bLastOrders = (LinearLayout) findViewById(R.id.menu_selection_contact);
 	bLastOrders.setOnClickListener(this);
