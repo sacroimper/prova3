@@ -11,7 +11,8 @@
         android:layout_height="250dp"
         android:layout_above="@+id/menu_selection_menu"
         android:layout_alignParentTop="true"
-        android:background="@drawable/home_image" />
+        android:background="@drawable/home_image"
+        android:contentDescription="@string/content_description_img" />
 
     <LinearLayout
         android:id="@id/menu_selection_menu"
@@ -24,18 +25,20 @@
         android:paddingLeft="20dp" >
 
         <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/home_menu_menu" />
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/iconmenu"
+            android:contentDescription="@string/content_description_img" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/menu_esp"
+            android:textSize="17sp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
@@ -51,18 +54,20 @@
         android:paddingLeft="20dp" >
 
         <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/home_menu_actualorder" />
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/iconactualorder"
+            android:contentDescription="@string/content_description_img" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/menu_actual_order_esp"
+            android:textSize="17sp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
@@ -77,18 +82,20 @@
         android:paddingLeft="20dp" >
 
         <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/home_menu_contact" />
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/iconcontact"
+            android:contentDescription="@string/content_description_img" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/menu_contact_esp"
+            android:textSize="17sp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
@@ -103,27 +110,29 @@
         android:paddingLeft="20dp" >
 
         <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/home_menu_lastorders" />
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/iconlastorders"
+            android:contentDescription="@string/content_description_img" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/menu_last_orders_esp"
+            android:textSize="17sp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
     <View
-        android:id="@+id/view1"
+        android:id="@+id/shadow"
         android:layout_width="match_parent"
         android:layout_height="7dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/linearButton1"
+        android:layout_alignTop="@id/menu_selection_menu"
         android:background="@drawable/gradient4" />
 
 </RelativeLayout>
