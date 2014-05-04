@@ -28,16 +28,16 @@ public class MainMenuActivity extends Activity implements OnClickListener {
 	this.setContentView(R.layout.activity_main);
 
 	// Buttons
-	LinearLayout bCarta = (LinearLayout) findViewById(R.id.linearButtonMenu);
+	LinearLayout bCarta = (LinearLayout) findViewById(R.id.menu_selection_menu);
 	bCarta.setOnClickListener(this);
 
-	LinearLayout bOrder = (LinearLayout) findViewById(R.id.linearButtonPedidoActual);
+	LinearLayout bOrder = (LinearLayout) findViewById(R.id.menu_selection_actualorder);
 	bOrder.setOnClickListener(this);
 
-	LinearLayout bLastOrders = (LinearLayout) findViewById(R.id.linearButtonPedidosAnteriores);
+	LinearLayout bLastOrders = (LinearLayout) findViewById(R.id.menu_selection_contact);
 	bLastOrders.setOnClickListener(this);
 
-	LinearLayout bContact = (LinearLayout) findViewById(R.id.linearButtonContacto);
+	LinearLayout bContact = (LinearLayout) findViewById(R.id.menu_selection_lastorders);
 	bContact.setOnClickListener(this);
 
 	this.overridePendingTransition(R.anim.animation_enter,
@@ -54,19 +54,19 @@ public class MainMenuActivity extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
 
-	if (v.getId() == R.id.linearButtonMenu) {
+	if (v.getId() == R.id.menu_selection_menu) {
 	    Intent intent = new Intent(this.getApplicationContext(),
 		    PizzaMenuActivity.class);
 	    startActivity(intent);
-	} else if (v.getId() == R.id.linearButtonPedidoActual) {
+	} else if (v.getId() == R.id.menu_selection_actualorder) {
 	    Intent intent = new Intent(this.getApplicationContext(),
 		    OrderActivity.class);
 	    startActivity(intent);
-	} else if (v.getId() == R.id.linearButtonPedidosAnteriores) {
+	} else if (v.getId() == R.id.menu_selection_contact) {
 	    Intent intent = new Intent(this.getApplicationContext(),
 		    LastOrdersActivity.class);
 	    startActivity(intent);
-	} else if (v.getId() == R.id.linearButtonContacto) {
+	} else if (v.getId() == R.id.menu_selection_lastorders) {
 	    Intent intent = new Intent(this.getApplicationContext(),
 		    ContactActivity.class);
 	    startActivity(intent);
