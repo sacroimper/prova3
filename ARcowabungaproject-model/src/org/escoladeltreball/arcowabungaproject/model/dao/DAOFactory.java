@@ -210,6 +210,34 @@ public abstract class DAOFactory {
     // ====================
 
     public boolean loadData() {
+	Map<String, String> preferences = readPreferences();
+	for (Map.Entry<String, String> entry : preferences.entrySet()) {
+	    if (entry.getKey().equals("next_id")) {
+		IdObject.setNextId(Integer.parseInt(entry.getValue()));
+	    } else if (entry.getKey().equals("next_custom_id")) {
+		IdObject.setNextCostumId(Integer.parseInt(entry.getValue()));
+	    } else if (entry.getKey().equals("current_version")) {
+		currentVersion = Integer.parseInt(entry.getValue());
+	    }
+	}
+	// INCOMPLETE
+	return false;
+    }
+
+    public boolean loadLocalData() {
+	Set<Pizza> pizzes = readPizza();
+	for (Pizza pizza : pizzes) {
+	    if (pizza.getType().equals(Pizza.TYPE_COSTUM_SAVED)) {
+		pizzeria.addCustomSavedPizza(pizza);
+	    } else if (pizza.getType().equals(Pizza.TYPE_PREDEFINED)) {
+		pizzeria.addPredefinedPizza(pizza);
+	    }
+	}
+
+	pizzeria.setDrinks(readDrink());
+	pizzeria.setIngredients(readIngredient());
+	pizzeria.setOffers(readOffer());
+	pizzeria.setOrdersSaved(readOrder());
 
 	return false;
     }
