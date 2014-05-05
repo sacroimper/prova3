@@ -404,9 +404,7 @@ public abstract class DAOFactory {
 	writePizzas(pizzeria.getPredefinedPizzas());
 	writeOffers(pizzeria.getOffers());
 	writeDrinks(pizzeria.getDrinks());
-	// writeShoppingCarts(pizzeria.getShoppingCart());
 	writeOrders(pizzeria.getOrdersSaved());
-	// writeAddres();
 	// writePreferences();
     }
 
@@ -424,11 +422,11 @@ public abstract class DAOFactory {
 
     protected abstract Set<Drink> readDrink();
 
-    protected abstract Set<ShoppingCart> readShoppingCart();
+    protected abstract ShoppingCart readShoppingCart(int idShoppingCart);
 
     protected abstract Set<Order> readOrder();
 
-    protected abstract Set<Address> readAddress();
+    protected abstract Address readAddress(int idAddress);
 
     protected abstract Map<String, String> readPreferences();
 
@@ -442,11 +440,11 @@ public abstract class DAOFactory {
 
     protected abstract void writeDrinks(Set<Drink> drinks);
 
-    protected abstract void writeShoppingCarts(Set<ShoppingCart> shoppingCarts);
+    protected abstract void writeShoppingCarts(ShoppingCart shoppingCart);
 
     protected abstract void writeOrders(Set<Order> orders);
 
-    protected abstract void writeAddresses(Set<Address> addresses);
+    protected abstract void writeAddresses(Address address);
 
     protected abstract void writePreferences(Map<String, String> preferences);
 
