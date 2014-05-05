@@ -1,5 +1,6 @@
 package org.escoladeltreball.arcowabungaproject.model.dao;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -405,7 +406,12 @@ public abstract class DAOFactory {
 	writeOffers(pizzeria.getOffers());
 	writeDrinks(pizzeria.getDrinks());
 	writeOrders(pizzeria.getOrdersSaved());
-	// writePreferences();
+	Map<String, String> preferences = new HashMap<String, String>();
+	preferences.put("current_version", currentVersion + "");
+	preferences.put("next_id", IdObject.getNextId() + "");
+	preferences.put("next_custom_id", IdObject.getNextCustomId() + "");
+
+	writePreferences(preferences);
     }
 
     // ====================
