@@ -53,7 +53,6 @@ public class MainMenuActivity extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-
 	if (v.getId() == R.id.menu_selection_menu) {
 	    Intent intent = new Intent(this.getApplicationContext(),
 		    PizzaMenuActivity.class);
