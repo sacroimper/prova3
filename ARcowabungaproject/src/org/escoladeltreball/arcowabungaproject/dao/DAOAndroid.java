@@ -368,23 +368,24 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected Set<ShoppingCart> readShoppingCart() {
-	Set<ShoppingCart> shoppingCarts = new HashSet<ShoppingCart>();
+    protected ShoppingCart readShoppingCart(int idShoppingCart) {
 	Cursor cShoppingCarts = database.query(DAOFactory.TABLE_SHOPPINGCARTS,
 		DAOFactory.COLUMNS_NAME_SHOPPINGCARTS, null, null, null, null,
 		null);
+	ShoppingCart shoppingCart = null;
 	int i = 0;
 	while (i < cShoppingCarts.getCount()) {
 	    cShoppingCarts.move(i);
-	    ShoppingCart shoppingCart = new ShoppingCart(
-		    cShoppingCarts.getInt(0));
-	    List<Product> productsList = selectShoppingCartProductsById(cShoppingCarts
-		    .getInt(0));
-	    shoppingCart.setProducts(productsList);
-	    shoppingCarts.add(shoppingCart);
+	    if (cShoppingCarts.getInt(0) == idShoppingCart) {
+		shoppingCart = new ShoppingCart(cShoppingCarts.getInt(0));
+		List<Product> productsList = selectShoppingCartProductsById(cShoppingCarts
+			.getInt(0));
+		shoppingCart.setProducts(productsList);
+		i = cShoppingCarts.getCount();
+	    }
 	    i++;
 	}
-	return shoppingCarts;
+	return shoppingCart;
     }
 
     @Override
@@ -396,29 +397,8 @@ public class DAOAndroid extends DAOFactory {
 	while (i < cOrder.getCount()) {
 	    cOrder.move(i);
 	    DateTime dateTime = DateTime.parse(cOrder.getString(3));
-
-	    Cursor cAddress = database
-		    .query(DAOFactory.TABLE_ADDRESS,
-			    DAOFactory.COLUMNS_NAME_ADDRESS,
-			    DAOFactory.COLUMNS_NAME_ADDRESS[0] + "="
-				    + cOrder.getInt(5), null, null, null, null);
-	    cAddress.moveToFirst();
-	    Address address = new Address(cAddress.getInt(0),
-		    cAddress.getString(1), cAddress.getString(2),
-		    cAddress.getString(3), cAddress.getString(4),
-		    cAddress.getString(5), cAddress.getString(6));
-
-	    Cursor cShoppingCart = database.query(
-		    DAOFactory.TABLE_SHOPPINGCARTS,
-		    DAOFactory.COLUMNS_NAME_SHOPPINGCARTS,
-		    DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0] + "="
-			    + cOrder.getInt(6), null, null, null, null);
-	    cShoppingCart.moveToFirst();
-	    ShoppingCart shoppingCart = new ShoppingCart(
-		    cShoppingCart.getInt(0));
-	    List<Product> productsList = selectShoppingCartProductsById(cShoppingCart
-		    .getInt(0));
-	    shoppingCart.setProducts(productsList);
+	    Address address = readAddress(cOrder.getInt(5));
+	    ShoppingCart shoppingCart = readShoppingCart(cOrder.getInt(6));
 	    Order order = new Order(cOrder.getInt(0), cOrder.getString(1),
 		    cOrder.getString(2), dateTime, cOrder.getString(4),
 		    address, shoppingCart);
@@ -429,21 +409,23 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected Set<Address> readAddress() {
-	Set<Address> addresses = new HashSet<Address>();
+    protected Address readAddress(int idAddress) {
 	Cursor cAddress = database.query(DAOFactory.TABLE_ADDRESS,
 		DAOFactory.COLUMNS_NAME_ADDRESS, null, null, null, null, null);
+	Address address = null;
 	int i = 0;
 	while (i < cAddress.getCount()) {
 	    cAddress.move(i);
-	    Address address = new Address(cAddress.getInt(0),
-		    cAddress.getString(1), cAddress.getString(2),
-		    cAddress.getString(3), cAddress.getString(4),
-		    cAddress.getString(5), cAddress.getString(6));
-	    addresses.add(address);
+	    if (cAddress.getInt(0) == idAddress) {
+		address = new Address(cAddress.getInt(0),
+			cAddress.getString(1), cAddress.getString(2),
+			cAddress.getString(3), cAddress.getString(4),
+			cAddress.getString(5), cAddress.getString(6));
+		i = cAddress.getCount();
+	    }
 	    i++;
 	}
-	return addresses;
+	return address;
     }
 
     @Override
@@ -563,23 +545,19 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected void writeShoppingCarts(Set<ShoppingCart> shoppingCarts) {
-	for (ShoppingCart shoppingCart : shoppingCarts) {
-	    ContentValues values = new ContentValues();
-	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0],
+    protected void writeShoppingCarts(ShoppingCart shoppingCart) {
+	ContentValues values = new ContentValues();
+	values.put(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0],
+		shoppingCart.getId());
+	database.insert(DAOFactory.TABLE_SHOPPINGCARTS, null, values);
+	values.clear();
+	for (Product product : shoppingCart.getProducts()) {
+	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0],
 		    shoppingCart.getId());
-	    database.insert(DAOFactory.TABLE_SHOPPINGCARTS, null, values);
-	    values.clear();
-	    for (Product product : shoppingCart.getProducts()) {
-		values.put(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0],
-			shoppingCart.getId());
-		values.put(COLUMNS_NAME_SHOPPINCART_PRODUCTS[1],
-			product.getId());
-		database.insert(DAOFactory.TABLE_SHOPPINGCART_PRODUCTS, null,
-			values);
-	    }
+	    values.put(COLUMNS_NAME_SHOPPINCART_PRODUCTS[1], product.getId());
+	    database.insert(DAOFactory.TABLE_SHOPPINGCART_PRODUCTS, null,
+		    values);
 	}
-
     }
 
     @Override
@@ -603,21 +581,17 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected void writeAddresses(Set<Address> addresses) {
-	for (Address address : addresses) {
-	    ContentValues values = new ContentValues();
-	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[0], address.getId());
-	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[1], address.getStreet());
-	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[2], address.getNumber());
-	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[3],
-		    address.getPostCode());
-	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[4], address.getFloor());
-	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[5], address.getStair());
-	    values.put(DAOFactory.COLUMNS_NAME_ADDRESS[6], address.getFloor());
+    protected void writeAddresses(Address address) {
+	ContentValues values = new ContentValues();
+	values.put(DAOFactory.COLUMNS_NAME_ADDRESS[0], address.getId());
+	values.put(DAOFactory.COLUMNS_NAME_ADDRESS[1], address.getStreet());
+	values.put(DAOFactory.COLUMNS_NAME_ADDRESS[2], address.getNumber());
+	values.put(DAOFactory.COLUMNS_NAME_ADDRESS[3], address.getPostCode());
+	values.put(DAOFactory.COLUMNS_NAME_ADDRESS[4], address.getFloor());
+	values.put(DAOFactory.COLUMNS_NAME_ADDRESS[5], address.getStair());
+	values.put(DAOFactory.COLUMNS_NAME_ADDRESS[6], address.getFloor());
 
-	    database.insert(DAOFactory.TABLE_ADDRESS, null, values);
-	}
-
+	database.insert(DAOFactory.TABLE_ADDRESS, null, values);
     }
 
     @Override
