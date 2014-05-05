@@ -455,12 +455,8 @@ public class DAOAndroid extends DAOFactory {
 	int i = 0;
 	while (i < cPreferences.getCount()) {
 	    cPreferences.move(i);
-	    /*
-	     * FALTA PART PER CODIFICAR, RESOLDRE EL TIPUS DE DADES QUE ES
-	     * GUARDEN A PREFERENCIES
-	     */
-	    // preferences.put(cPreferences.getString(0),
-	    // cPreferences.getInt(1));
+	    preferences.put(cPreferences.getString(0),
+		    cPreferences.getString(1));
 	    i++;
 	}
 	return preferences;
@@ -626,7 +622,12 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected void writePreferences(Map<String, String> preferences) {
-
+	for (Map.Entry<String, String> entry : preferences.entrySet()) {
+	    ContentValues values = new ContentValues();
+	    values.put(DAOFactory.COLUMNS_NAME_PREFERENCES[0], entry.getKey());
+	    values.put(DAOFactory.COLUMNS_NAME_PREFERENCES[1], entry.getValue());
+	    database.insert(DAOFactory.TABLE_PREFERENCES, null, values);
+	}
     }
 
     @Override
