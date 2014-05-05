@@ -159,8 +159,19 @@ public class TabActivity extends Activity {
 	}
 
 	private static View createTabView(final Context context, final String text) {
-		View view = LayoutInflater.from(context)
-				.inflate(R.layout.tabs_bg, null);
+		View view;
+		if (text.equals("Tab 1")) {
+			view = LayoutInflater.from(context)
+					.inflate(R.layout.tab_menu, null);
+		} else if (text.equals("Tab 2")) {
+			view = LayoutInflater.from(context)
+					.inflate(R.layout.tab_drinks, null);
+		} else {
+			view = LayoutInflater.from(context)
+					.inflate(R.layout.tab_offers, null);
+		}
+//		View view = LayoutInflater.from(context)
+//				.inflate(R.layout.tabs_bg, null);
 		TextView tv = (TextView) view.findViewById(R.id.tabsText);
 		tv.setTextColor(Color.WHITE);
 		tv.setText(text);

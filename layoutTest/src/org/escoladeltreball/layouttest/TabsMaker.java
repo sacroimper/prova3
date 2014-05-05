@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TabsMaker {
@@ -80,11 +81,32 @@ public class TabsMaker {
 			if (viewElement != null) {
 				// get title text view
 				final View textView = viewElement.findViewById(R.id.tabsText);
+				final View imageView = viewElement.findViewById(R.id.imageView1);
 				if (textView instanceof TextView) {
 					if (!isSelected) {
 						((TextView) textView).setTextColor(Color.WHITE);
 					} else if (isSelected) {
 						((TextView) textView).setTextColor(Color.GRAY);
+					}
+				} else if (imageView instanceof ImageView) {
+					if (imageView.getTag().equals("drink_image")) {
+						if (!isSelected) {
+							((ImageView) imageView).setImageResource(R.drawable.ic_launcher);
+						} else {
+							((ImageView) imageView).setImageResource(R.drawable.icono_pedidosanteriores);
+						}
+					} else if (imageView.getTag().equals("menu_image")) {
+						if (!isSelected) {
+							((ImageView) imageView).setImageResource(R.drawable.ic_launcher);
+						} else {
+							((ImageView) imageView).setImageResource(R.drawable.icono_carta);
+						}
+					} else if (imageView.getTag().equals("offers_image")) {
+						if (!isSelected) {
+							((ImageView) imageView).setImageResource(R.drawable.ic_launcher);
+						} else {
+							((ImageView) imageView).setImageResource(R.drawable.icono_contacto);
+						}
 					}
 				}
 			}
