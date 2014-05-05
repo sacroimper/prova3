@@ -566,15 +566,19 @@ public class DAOAndroid extends DAOFactory {
 	    ContentValues values = new ContentValues();
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[0], order.getId());
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[1], order.getEmail());
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[2], order.getPhone());
 	    SimpleDateFormat dateFormat = new SimpleDateFormat(
 		    "dd-MM-yyyy HH:mm:ss", Locale.getDefault());
-	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[2],
-		    dateFormat.format(order.getDateTime()));
 	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[3],
+		    dateFormat.format(order.getDateTime()));
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[4],
 		    order.getPaymentMethod());
-	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[4], order.getAddress()
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[5], order.getAddress()
 		    .getId());
-
+	    values.put(DAOFactory.COLUMNS_NAME_ORDERS[6], order
+		    .getShoppingCart().getId());
+	    writeShoppingCarts(order.getShoppingCart());
+	    writeAddresses(order.getAddress());
 	    database.insert(DAOFactory.TABLE_ORDERS, null, values);
 	}
 
