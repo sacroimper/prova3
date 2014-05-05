@@ -447,8 +447,8 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected Map<String, Object> readPreferences() {
-	Map<String, Object> preferences = new HashMap<String, Object>();
+    protected Map<String, String> readPreferences() {
+	Map<String, String> preferences = new HashMap<String, String>();
 	Cursor cPreferences = database.query(DAOFactory.TABLE_PREFERENCES,
 		DAOFactory.COLUMNS_NAME_PREFERENCES, null, null, null, null,
 		null);
@@ -625,7 +625,7 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected void writePreferences(Map<String, Object> preferences) {
+    protected void writePreferences(Map<String, String> preferences) {
 
     }
 

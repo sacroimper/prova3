@@ -392,7 +392,7 @@ public abstract class DAOFactory {
 	pizzeria.setOrdersSaved(ordersSaved);
 
 	IdObject.setNextId(44);
-	IdObject.setNextId(10044);
+	IdObject.setNextCostumId(10044);
 	currentVersion = -1;
 
 	return true;
@@ -430,7 +430,7 @@ public abstract class DAOFactory {
 
     protected abstract Set<Address> readAddress();
 
-    protected abstract Map<String, Object> readPreferences();
+    protected abstract Map<String, String> readPreferences();
 
     protected abstract void writeProduct(int idProduct);
 
@@ -448,7 +448,7 @@ public abstract class DAOFactory {
 
     protected abstract void writeAddresses(Set<Address> addresses);
 
-    protected abstract void writePreferences(Map<String, Object> preferences);
+    protected abstract void writePreferences(Map<String, String> preferences);
 
     // ====================
     // PRIVATE METHODS
