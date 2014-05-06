@@ -55,7 +55,7 @@ public class MainMenuActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
 	if (v.getId() == R.id.menu_selection_menu) {
 	    Intent intent = new Intent(this.getApplicationContext(),
-		    PizzaMenuActivity.class);
+		    MenuActivity.class);
 	    startActivity(intent);
 	} else if (v.getId() == R.id.menu_selection_actualorder) {
 	    Intent intent = new Intent(this.getApplicationContext(),

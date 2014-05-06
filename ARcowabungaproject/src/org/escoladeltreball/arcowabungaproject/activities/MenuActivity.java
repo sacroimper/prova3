@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class PizzaMenuActivity extends Activity {
+public class MenuActivity extends Activity {
 
     // ====================
     // CONSTANTS
