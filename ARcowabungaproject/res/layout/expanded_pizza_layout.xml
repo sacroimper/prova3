@@ -21,7 +21,7 @@
         android:layout_height="100dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:contentDescription="@string/pizzaIcon"
+        android:contentDescription="@string/pizza_icon"
         android:layout_margin="5dp"
         android:src="@drawable/home_image"
         android:scaleType="fitXY" />
@@ -58,14 +58,14 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:contentDescription="@string/pizzaIcon"
+            android:contentDescription="@string/pizza_icon"
             android:paddingRight="5dp"
             android:src="@drawable/home_image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/thirdDView" />
+            android:text="@string/third_D_view" />
     </LinearLayout>
 
     <View

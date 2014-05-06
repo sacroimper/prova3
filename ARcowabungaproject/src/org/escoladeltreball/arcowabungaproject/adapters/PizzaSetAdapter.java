@@ -152,7 +152,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    desc = desc.substring(0, 17) + "...";
 	}
 	String showMore = "<font color='#FF0000'>"
-		+ activity.getResources().getString(R.string.showMore)
+		+ activity.getResources().getString(R.string.show_more)
 		+ "</font>";
 	tvDesc.setText(Html.fromHtml(desc + showMore));
 

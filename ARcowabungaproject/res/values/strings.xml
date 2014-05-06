@@ -3,14 +3,14 @@
 
     <string name="app_name">ARcowabungaproject</string>
     <string name="action_settings">Settings</string>
-    <string name="thirdDView">3D View!</string>
-    <string name="pizzaIcon">Pizza icon</string>
-    <string name="showMore">show more</string>
-    <!-- MAIN ESP-->
+    <string name="third_D_view">3D View!</string>
+    <string name="pizza_icon">Pizza icon</string>
+    <string name="show_more">show more</string>
     <string name="menu_esp">CARTA</string>
     <string name="menu_actual_order_esp">PEDIDO ACTUAL</string>
     <string name="menu_contact_esp">CONTACTO</string>
     <string name="menu_last_orders_esp">PEDIDOS ANTERIORES</string>
     <string name="content_description_img">iconmenu</string>
+    <string name="or_choose" >Or choose of this</string>
 </resources>
 
