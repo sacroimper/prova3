@@ -9,21 +9,23 @@
     <ImageView
         android:id="@+id/tabImg"
         android:layout_width="20dp"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/tabTittle"
         android:contentDescription="@string/content_description_img"
         android:scaleType="fitXY"
         android:src="@drawable/icontabdrinks"
-        android:tag="drink_image" />
+        android:tag="drink_image"
+        android:paddingBottom="5dp" />
 
     <TextView
         android:id="@id/tabTittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tab_offers"
+        android:text="@string/tab_drinks"
         android:textSize="20sp"
         android:textColor="@android:color/white"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="7dp"/>
 
 </RelativeLayout>
