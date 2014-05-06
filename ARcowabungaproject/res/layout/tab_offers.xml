@@ -3,17 +3,16 @@
     android:id="@+id/tabsLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#3be0d0"
-    android:orientation="vertical" >
+    android:background="#3be0d0" >
 
     <ImageView
         android:id="@+id/tabImg"
-        android:layout_width="55dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/tabTittle"
         android:contentDescription="@string/content_description_img"
-        android:scaleType="center"
+        android:scaleType="fitCenter"
         android:src="@drawable/icontaboffers"
         android:tag="offers_image" />
 
@@ -21,10 +20,12 @@
         android:id="@id/tabTittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
         android:text="@string/tab_offers"
-        android:textSize="20sp"
         android:textColor="@android:color/white"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="5dp"/>
+        android:textSize="15sp"
+        android:layout_marginLeft="5dp" />
 
 </RelativeLayout>
