@@ -187,7 +187,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	public void onClick(View v) {
 	    // Intent i = new Intent(activity, ARViewActivity.class);
 	    // Pasarle pizza
-	    // i.putExtra("pizza", pizzas.get(index));
+	    // i.putExtra("pizza", pizzas.get(index).getId);
 	    // activity.startActivity(i);
 	    pizzas.get(index);
 	}
