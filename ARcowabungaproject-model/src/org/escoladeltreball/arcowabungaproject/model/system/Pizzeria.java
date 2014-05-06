@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.model.Drink;
+import org.escoladeltreball.arcowabungaproject.model.IdObject;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
@@ -42,6 +43,8 @@ public class Pizzeria {
 
     private Pizzeria(DAOFactory dao) {
 	this.dao = dao;
+	dao.loadDemo();
+	shoppingCart = new ShoppingCart(IdObject.nextCustomId());
     }
 
     // ====================
