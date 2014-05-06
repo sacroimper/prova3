@@ -10,10 +10,10 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-public class LastOrdersAdapter extends BaseAdapter {
+public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     // ====================
     // CONSTANTS
@@ -31,7 +31,7 @@ public class LastOrdersAdapter extends BaseAdapter {
     // CONSTRUCTORS
     // ====================
 
-    public LastOrdersAdapter(Activity activity, Set<Order> orders) {
+    public OrderSetAdapter(Activity activity, Set<Order> orders) {
 	this.activity = activity;
 	for (Order order : orders) {
 	    this.orders.add(order);
@@ -57,36 +57,80 @@ public class LastOrdersAdapter extends BaseAdapter {
     // ====================
 
     @Override
-    public int getCount() {
-	// TODO Auto-generated method stub
-	return 0;
-    }
-
-    @Override
-    public Object getItem(int arg0) {
+    public Object getChild(int groupPosition, int childPosition) {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getChildId(int groupPosition, int childPosition) {
 	// TODO Auto-generated method stub
 	return 0;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, int childPosition,
+	    boolean isLastChild, View convertView, ViewGroup parent) {
 	// TODO Auto-generated method stub
 	return null;
     }
 
-    static class ViewHolder {
-	TextView dateTime;
-	TextView numberOfProducts;
-	TextView price;
+    @Override
+    public int getChildrenCount(int groupPosition) {
+	// TODO Auto-generated method stub
+	return 0;
+    }
+
+    @Override
+    public Object getGroup(int groupPosition) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public int getGroupCount() {
+	// TODO Auto-generated method stub
+	return 0;
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+	// TODO Auto-generated method stub
+	return 0;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded,
+	    View convertView, ViewGroup parent) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+	// TODO Auto-generated method stub
+	return false;
+    }
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+	// TODO Auto-generated method stub
+	return false;
     }
 
     // ====================
     // GETTERS & SETTERS
     // ====================
+
+    static class ChildViewHolder {
+	TextView dateTime;
+	TextView numberOfProducts;
+	TextView price;
+    }
+
+    static class GroupViewHolder {
+	TextView dateTime;
+	TextView numberOfProducts;
+	TextView price;
+    }
 }
