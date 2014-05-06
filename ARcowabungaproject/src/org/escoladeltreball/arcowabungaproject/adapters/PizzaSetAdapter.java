@@ -80,25 +80,30 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition,
 	    boolean isLastChild, View convertView, ViewGroup parent) {
 	final Pizza children = (Pizza) getChild(groupPosition, childPosition);
-	TextView tvDesc;
-	ImageView ivIcon;
-	LinearLayout llButton;
+	ChildViewHolder holder = null;
 	if (convertView == null) {
+	    holder = new ChildViewHolder();
 	    convertView = inflater
 		    .inflate(R.layout.expanded_pizza_layout, null);
+	    holder.tvDesc = (TextView) convertView
+		    .findViewById(R.id.textInSubItem);
+	    holder.ivIcon = (ImageView) convertView
+		    .findViewById(R.id.imageInSubItem);
+	    holder.llButton = (LinearLayout) convertView
+		    .findViewById(R.id.pizzaButtonInSubItem);
+	    convertView.setTag(holder);
+	} else {
+	    holder = (ChildViewHolder) convertView.getTag();
 	}
-	tvDesc = (TextView) convertView.findViewById(R.id.textInSubItem);
-	ivIcon = (ImageView) convertView.findViewById(R.id.imageInSubItem);
-	llButton = (LinearLayout) convertView
-		.findViewById(R.id.pizzaButtonInSubItem);
 
-	tvDesc.setText(children.getIngedientsDescription());
+	holder.tvDesc.setText(children.getIngedientsDescription());
 
 	DAOAndroid dao = DAOAndroid.getInstance();
 	Drawable icon = dao.getDrawableFromAssets(activity, children.getIcon());
-	ivIcon.setBackgroundDrawable(icon);
+	holder.ivIcon.setBackgroundDrawable(icon);
 
-	llButton.setOnClickListener(new ARButtonClickListener(groupPosition));
+	holder.llButton.setOnClickListener(new ARButtonClickListener(
+		groupPosition));
 
 	return convertView;
     }
@@ -127,36 +132,42 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
 	Pizza group = (Pizza) getGroup(groupPosition);
-	ImageView ivIcon;
-	TextView tvTitle;
-	TextView tvPrice;
-	TextView tvDesc;
-	ImageButton ibAdd;
+
+	GroupViewHolder holder = null;
 	if (convertView == null) {
+	    holder = new GroupViewHolder();
 	    convertView = inflater
 		    .inflate(R.layout.listitem_pizza_layout, null);
+	    holder.ivIcon = (ImageView) convertView
+		    .findViewById(R.id.imageInItem);
+	    holder.tvTitle = (TextView) convertView
+		    .findViewById(R.id.titleTextInItem);
+	    holder.tvPrice = (TextView) convertView
+		    .findViewById(R.id.priceTextInItem);
+	    holder.tvDesc = (TextView) convertView
+		    .findViewById(R.id.descTextInItem);
+	    holder.ibAdd = (ImageButton) convertView
+		    .findViewById(R.id.imageButtonInItem);
+	    convertView.setTag(holder);
+	} else {
+	    holder = (GroupViewHolder) convertView.getTag();
 	}
-	ivIcon = (ImageView) convertView.findViewById(R.id.imageInItem);
-	tvTitle = (TextView) convertView.findViewById(R.id.titleTextInItem);
-	tvPrice = (TextView) convertView.findViewById(R.id.priceTextInItem);
-	tvDesc = (TextView) convertView.findViewById(R.id.descTextInItem);
-	ibAdd = (ImageButton) convertView.findViewById(R.id.imageButtonInItem);
 	DAOAndroid dao = DAOAndroid.getInstance();
 	Drawable icon = dao.getDrawableFromAssets(activity, group.getIcon());
-	ivIcon.setBackgroundDrawable(icon);
+	holder.ivIcon.setBackgroundDrawable(icon);
 
-	tvTitle.setText(group.getName());
-	tvPrice.setText(group.getFormatedPrice());
+	holder.tvTitle.setText(group.getName());
+	holder.tvPrice.setText(group.getFormatedPrice());
 	String desc = group.getIngedientsDescription();
 	if (desc.length() > 20) {
 	    desc = desc.substring(0, 17) + "...";
 	}
 	String showMore = "<font color='#FF0000'>"
-		+ activity.getResources().getString(R.string.showMore)
+		+ activity.getResources().getString(R.string.show_more)
 		+ "</font>";
-	tvDesc.setText(Html.fromHtml(desc + showMore));
+	holder.tvDesc.setText(Html.fromHtml(desc + showMore));
 
-	ibAdd.setOnClickListener(new AddButtonClickListener(group));
+	holder.ibAdd.setOnClickListener(new AddButtonClickListener(group));
 
 	return convertView;
     }
@@ -187,7 +198,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	public void onClick(View v) {
 	    // Intent i = new Intent(activity, ARViewActivity.class);
 	    // Pasarle pizza
-	    // i.putExtra("pizza", pizzas.get(index));
+	    // i.putExtra("pizza", pizzas.get(index).getId);
 	    // activity.startActivity(i);
 	    pizzas.get(index);
 	}
@@ -209,5 +220,19 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 		    Toast.LENGTH_SHORT).show();
 	}
 
+    }
+
+    public static class ChildViewHolder {
+	public TextView tvDesc;
+	public ImageView ivIcon;
+	public LinearLayout llButton;
+    }
+
+    public static class GroupViewHolder {
+	public ImageView ivIcon;
+	public TextView tvTitle;
+	public TextView tvPrice;
+	public TextView tvDesc;
+	public ImageButton ibAdd;
     }
 }

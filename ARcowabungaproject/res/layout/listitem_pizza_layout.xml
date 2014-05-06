@@ -21,7 +21,7 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:contentDescription="@string/pizzaIcon"
+        android:contentDescription="@string/pizza_icon"
         android:paddingRight="5dp"
         android:src="@drawable/home_image" />
 
