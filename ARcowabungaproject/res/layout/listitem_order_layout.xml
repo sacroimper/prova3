@@ -16,12 +16,12 @@
         android:background="@android:color/darker_gray" />
 
     <ImageButton
-        android:id="@+id/imageInItem"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/imageInOrderItem"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dateTextInOrderItem"
-        android:background="@drawable/home_image"
+        android:background="@drawable/iconorderlist"
         android:contentDescription="@string/pizza_icon"
         android:paddingRight="5dp" />
 
@@ -47,36 +47,37 @@
         android:layout_below="@id/dateTextInOrderItem"
         android:layout_marginBottom="13dp"
         android:layout_marginRight="5dp"
-        android:layout_toRightOf="@id/imageInItem"
-        android:background="#33FF33"
+        android:layout_toRightOf="@id/imageInOrderItem"
+        android:layout_toLeftOf="@+id/priceTextInOrderItem"
+        android:background="#338888"
         android:text="desc" >
     </TextView>
 
     <TextView
-        android:id="@+id/priceTextInOrderItem"
+        android:id="@id/priceTextInOrderItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/separatorTop"
-        android:layout_marginBottom="2dp"
+        android:layout_below="@id/dateTextInOrderItem"
+        android:layout_marginBottom="13dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="13dp"
-        android:layout_toLeftOf="@+id/separatorRight"
+        android:layout_toLeftOf="@+id/cursorTextInOrderItem"
         android:background="#FF3333"
         android:text="preu"
         android:textColor="#E63444" >
     </TextView>
     <TextView
-        android:id="@+id/descTextInItem"
+        android:id="@id/cursorTextInOrderItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/separatorBottom"
-        android:layout_below="@id/titleTextInItem"
+        android:layout_above="@id/separatorBottom"
+        android:layout_below="@id/dateTextInOrderItem"
         android:layout_marginBottom="13dp"
         android:layout_marginRight="5dp"
-        android:layout_toLeftOf="@id/separatorRight"
-        android:layout_toRightOf="@id/imageInItem"
+        android:layout_alignParentRight="true"
         android:background="#33FF33"
-        android:text="desc" >
+        android:text="@string/cursor"
+        android:textColor="#e73445"
+        android:paddingTop="10dp" >
     </TextView>
 
     <View

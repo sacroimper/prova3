@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="third_D_view">3D View!</string>
     <string name="pizza_icon">Pizza icon</string>
-    <string name="show_more">show more</string>
+    <string name="show_more">show more &#9660;</string>
     <string name="menu">MENU</string>
     <string name="menu_actual_order">ACTUAL ORDER</string>
     <string name="menu_contact">CONTACT</string>
@@ -17,5 +17,6 @@
     <string name="tab_pizza">PIZZAS</string>
     <string name="tab_drinks">DRINKS</string>
     <string name="tab_offers">OFFERS</string>
+    <string name="cursor">&#9660;</string>
 </resources>
 
