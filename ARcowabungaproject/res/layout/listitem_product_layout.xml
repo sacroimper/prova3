@@ -49,11 +49,11 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/priceTextInProductItem"
-            android:layout_toRightOf="@+id/titleTextInProductItem"
             android:background="#FF3333"
             android:src="@drawable/iconpizza"
             android:text="trash"
             android:textColor="#E63444" />
+        <!-- android:layout_toRightOf="@+id/titleTextInProductItem" -->
 
         <TextView
             android:id="@+id/priceTextInProductItem"
