@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabsLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#3be0d0"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/tabImg"
+        android:layout_width="20dp"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tabTittle"
+        android:contentDescription="@string/content_description_img"
+        android:scaleType="fitXY"
+        android:src="@drawable/icontabdrinks"
+        android:tag="drink_image" />
+
+    <TextView
+        android:id="@id/tabTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tab_offers"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
