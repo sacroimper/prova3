@@ -1,8 +1,6 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
-import org.escoladeltreball.arcowabungaproject.R.layout;
-import org.escoladeltreball.arcowabungaproject.R.menu;
 
 import android.app.Activity;
 import android.os.Bundle;
