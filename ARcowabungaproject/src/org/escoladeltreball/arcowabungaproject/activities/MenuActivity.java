@@ -94,7 +94,8 @@ public class MenuActivity extends Activity {
 	}
 	TextView tv = (TextView) view.findViewById(R.id.tabTittle);
 	tv.setTextColor(Color.WHITE);
-	tv.setText(text);
+	String finalText = text.toUpperCase();
+	tv.setText(finalText);
 	return view;
     }
 

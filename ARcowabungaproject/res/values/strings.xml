@@ -6,14 +6,16 @@
     <string name="third_D_view">3D View!</string>
     <string name="pizza_icon">Pizza icon</string>
     <string name="show_more">show more</string>
-    <string name="menu_esp">CARTA</string>
-    <string name="menu_actual_order_esp">PEDIDO ACTUAL</string>
-    <string name="menu_contact_esp">CONTACTO</string>
-    <string name="menu_last_orders_esp">PEDIDOS ANTERIORES</string>
+    <string name="menu">MENU</string>
+    <string name="menu_actual_order">ACTUAL ORDER</string>
+    <string name="menu_contact">CONTACT</string>
+    <string name="menu_last_orders">LAST ORDERS</string>
     <string name="content_description_img">iconmenu</string>
     <string name="or_choose" >Or choose one of this</string>
     <string name="create_your_own_pizza" >Create your own pizza</string>
     <string name="create_your_own_pizza_desc" >To your taste with your favorite ingredients and your preferred mass!</string>
-    
+    <string name="tab_pizza">PIZZAS</string>
+    <string name="tab_drinks">DRINKS</string>
+    <string name="tab_offers">OFFERS</string>
 </resources>
 

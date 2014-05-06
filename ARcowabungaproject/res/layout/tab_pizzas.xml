@@ -4,24 +4,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#3be0d0"
-    android:gravity="center"
     android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/tabImg"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/icontabpizzasoff"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tabTittle"
+        android:contentDescription="@string/content_description_img"
+        android:scaleType="fitXY"
+        android:src="@drawable/icontabpizzas"
         android:tag="pizza_image" />
 
     <TextView
-        android:id="@+id/tabTittle"
+        android:id="@id/tabTittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tabImg"
-        android:layout_toRightOf="@+id/tabImg"
-        android:gravity="center_vertical"
-        android:text="Title"
-        android:textSize="25dip" />
+        android:text="@string/tab_offers"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
