@@ -7,9 +7,28 @@
     <LinearLayout
         android:id="@+id/makeYourPizza"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:background="#e73445"
         android:orientation="vertical"
-        android:background="#e73445" >
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:text="@string/create_your_own_pizza"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:text="@string/create_your_own_pizza_desc"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
     </LinearLayout>
 
     <TextView

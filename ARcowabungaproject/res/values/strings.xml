@@ -12,5 +12,8 @@
     <string name="menu_last_orders_esp">PEDIDOS ANTERIORES</string>
     <string name="content_description_img">iconmenu</string>
     <string name="or_choose" >Or choose one of this</string>
+    <string name="create_your_own_pizza" >Create your own pizza</string>
+    <string name="create_your_own_pizza_desc" >To your taste with your favorite ingredients and your preferred mass!</string>
+    
 </resources>
 
