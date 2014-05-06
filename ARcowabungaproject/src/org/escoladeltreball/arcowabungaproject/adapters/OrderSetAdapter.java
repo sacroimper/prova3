@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class OrderSetAdapter extends BaseExpandableListAdapter {
@@ -59,62 +62,56 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int groupPosition, int childPosition) {
 	// TODO Auto-generated method stub
-	return null;
+	return orders.get(groupPosition).getShoppingCart().getProducts()
+		.get(childPosition);
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-	// TODO Auto-generated method stub
-	return 0;
+	return ((Product) getChild(groupPosition, childPosition)).getId();
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition,
 	    boolean isLastChild, View convertView, ViewGroup parent) {
-	// TODO Auto-generated method stub
-	return null;
+
+	return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-	// TODO Auto-generated method stub
-	return 0;
+	return orders.get(groupPosition).getShoppingCart().getProducts().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-	// TODO Auto-generated method stub
-	return null;
+	return orders.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-	// TODO Auto-generated method stub
-	return 0;
+	return orders.size();
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-	// TODO Auto-generated method stub
-	return 0;
+	return orders.get(groupPosition).getId();
     }
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
-	// TODO Auto-generated method stub
-	return null;
+
+	return convertView;
     }
 
     @Override
     public boolean hasStableIds() {
-	// TODO Auto-generated method stub
 	return false;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-	// TODO Auto-generated method stub
 	return false;
     }
 
@@ -123,14 +120,15 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     // ====================
 
     static class ChildViewHolder {
-	TextView dateTime;
-	TextView numberOfProducts;
-	TextView price;
+	ImageView ivIcon;
+	TextView tvTitle;
+	TextView tvPrice;
+	LinearLayout llIngredients;
     }
 
     static class GroupViewHolder {
-	TextView dateTime;
-	TextView numberOfProducts;
-	TextView price;
+	TextView tvDateTime;
+	TextView tvNumberOfProducts;
+	TextView tvPrice;
     }
 }
