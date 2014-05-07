@@ -1,6 +1,7 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.adapters.CustomTextView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -96,6 +97,7 @@ public class MenuActivity extends Activity {
 	tv.setTextColor(Color.WHITE);
 	String finalText = text.toUpperCase();
 	tv.setText(finalText);
+	CustomTextView.customTextView(context, tv);
 	return view;
     }
 
