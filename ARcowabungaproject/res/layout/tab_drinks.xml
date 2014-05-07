@@ -3,29 +3,28 @@
     android:id="@+id/tabsLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#3be0d0"
-    android:orientation="vertical" >
+    android:background="#3be0d0" >
+
+    <TextView
+        android:id="@+id/tabTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/tab_drinks"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:layout_marginLeft="5dp" />
 
     <ImageView
         android:id="@+id/tabImg"
         android:layout_width="20dp"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/tabTittle"
+        android:layout_toLeftOf="@id/tabTittle"
         android:contentDescription="@string/content_description_img"
         android:scaleType="fitXY"
         android:src="@drawable/icontabdrinks"
-        android:tag="drink_image"
-        android:paddingBottom="5dp" />
-
-    <TextView
-        android:id="@id/tabTittle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tab_drinks"
-        android:textSize="15sp"
-        android:textColor="@android:color/white"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="7dp"/>
+        android:tag="drink_image" />
 
 </RelativeLayout>
