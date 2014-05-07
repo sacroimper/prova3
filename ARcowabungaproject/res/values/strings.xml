@@ -20,15 +20,25 @@
     <string name="cursor">&#9660;</string>
     
     <!-- List Views -->
+    
+    <!-- Shopping cart layout -->
     <string name="remeber_advertice_title">¡RECUERDA!</string>
     <string name="remeber_advertice_message">Gastos de envío grátis para pedidos superiores a 15€</string>
     <string name="extra_ingredient_in_product_item">Suplemento ingredientes extra</string>
+    <string name="total_text">TOTAL</string>
+    <string name="total_price">30,70€</string>
+    <string name="subtotal_text">SUBTOTAL</string>
+    <string name="subtotal_value">25,35€</string>
+    <string name="taxes_text">+ 21% de IVA</string>
+    <string name="taxes_value">5,35€</string>
+    <string name="shipping_cost_text">+ Gastos de envio</string>
+    <string name="shipping_cost_value">0,00€</string>
     
     <!-- Image Content Descriptions -->
     <string name="chef_icon">Chef Icon</string>
     <string name="basket_icon">Basket Icon</string>
     
-    <!-- To Earse Examples -->
-    <string name="example_price">32,00€</string>
+    <!-- End Layout Buttons -->
+    <string name="button_price">32,00€</string>
 </resources>
 
