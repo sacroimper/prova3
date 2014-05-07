@@ -3,14 +3,92 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
+    
+    <RelativeLayout 
+        android:id="@+id/blue_subtotal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+     	android:background="#01DFD7"  
+    >
+    	<TextView 
+    	    android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentLeft="true"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="10dp"
+	        android:text="@string/subtotal_text"
+	        android:textColor="@android:color/white"
+	        android:textSize="20sp" />
+    	<TextView 
+    	    android:id="@+id/subtotal_price"
+    	    android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="10dp"
+	        android:text="@string/subtotal_value"
+	        android:textColor="@android:color/white"
+	        android:textSize="20sp" />
+    </RelativeLayout>
 
+    <TextView
+        android:id="@+id/taxes_text"
+        android:layout_below="@id/blue_subtotal_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/taxes_text"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_below="@id/blue_subtotal_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/taxes_value"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/shipping_cost_text"
+        android:layout_below="@id/taxes_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/shipping_cost_text"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_below="@id/taxes_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/shipping_cost_value"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+    
+    
     <View
-        android:id="@id/separatorBottom"
+        android:layout_below="@id/shipping_cost_text"
+        android:id="@+id/separator_total_bottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="20dp"
         android:background="#FF3333" />
 
     <TextView
+        android:layout_below="@id/separator_total_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -21,6 +99,7 @@
         android:textSize="20sp" />
 
     <TextView
+        android:layout_below="@id/separator_total_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -29,5 +108,6 @@
         android:text="@string/total_price"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
+    
 
 </RelativeLayout>
