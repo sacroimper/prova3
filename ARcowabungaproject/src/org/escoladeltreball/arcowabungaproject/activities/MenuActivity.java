@@ -232,8 +232,8 @@ public class MenuActivity extends Activity {
 	this.setContentView(R.layout.activity_menu);
 
 	// Set transition animation
-	// this.overridePendingTransition(R.anim.animation_horizontal_enter,
-	// R.anim.animation_horizontal_leave);
+	this.overridePendingTransition(R.anim.animation_horizontal_enter,
+		R.anim.animation_horizontal_leave);
 
 	// Up tabhost
 	tabHost = (TabHost) findViewById(android.R.id.tabhost);
