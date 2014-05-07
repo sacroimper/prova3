@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/remeberAdvertice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#888888"
+        android:orientation="vertical">
+
+        <ImageView 
+          android:id="@+id/chef_icon"  
+          android:layout_alignParentLeft="true"
+          android:layout_width="90dp"
+          android:layout_height="70dp"
+          android:layout_marginLeft="15dp" 
+          android:layout_marginRight="15dp"
+          android:scaleType="fitXY"
+          android:src="@drawable/home_image"
+          android:contentDescription="@string/chef_icon"
+        />
+        <TextView
+            android:id="@+id/remember_advertice_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/chef_icon"
+            android:text="@string/remeber_advertice_title"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:layout_below="@id/remember_advertice_title"
+            android:layout_toRightOf="@id/chef_icon"
+            android:text="@string/remeber_advertice_message"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/pizzaList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </ListView>
+
+</LinearLayout>
