@@ -33,6 +33,7 @@
     <string name="taxes_value">5,35€</string>
     <string name="shipping_cost_text">+ Gastos de envio</string>
     <string name="shipping_cost_value">0,00€</string>
+    <string name="shipping_begin_value">(0) 0,00€</string>
     
     <!-- Image Content Descriptions -->
     <string name="chef_icon">Chef Icon</string>
