@@ -9,44 +9,106 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#888888"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
-        <ImageView 
-          android:id="@+id/chef_icon"  
-          android:layout_alignParentLeft="true"
-          android:layout_width="90dp"
-          android:layout_height="70dp"
-          android:layout_marginLeft="15dp" 
-          android:layout_marginRight="15dp"
-          android:scaleType="fitXY"
-          android:src="@drawable/home_image"
-          android:contentDescription="@string/chef_icon"
-        />
+        <ImageView
+            android:id="@+id/chef_icon"
+            android:layout_width="90dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@string/chef_icon"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_image" />
+
         <TextView
             android:id="@+id/remember_advertice_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/chef_icon"
             android:text="@string/remeber_advertice_title"
-            android:textSize="15sp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
             android:layout_below="@id/remember_advertice_title"
             android:layout_toRightOf="@id/chef_icon"
             android:text="@string/remeber_advertice_message"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/pizzaList"
+     <ListView
+         android:id="@+id/pizzaList"
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         android:layout_weight="1" >
+     </ListView>
+    
+   <!-- BUTTONS -->
+   <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
-    </ListView>
+        android:layout_height="40dp"
+        android:background="#EE4052"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:baselineAligned="false" >
+
+        <LinearLayout
+            android:id="@+id/button_menu"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:paddingLeft="20dp" >
+
+            <ImageView
+                android:id="@+id/buton_menu_img"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:contentDescription="@string/menu"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/buton_menu_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="@string/menu"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_cart"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:paddingLeft="20dp" >
+
+            <ImageView
+                android:id="@+id/buton_cart_img"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:contentDescription="@string/example_price"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/button_cart_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="@string/example_price"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
