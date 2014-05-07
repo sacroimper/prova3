@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -318,6 +319,33 @@ public class MenuActivity extends Activity {
 		}
 	    }
 	});
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+	switch (event.getAction()) {
+	// when user first touches the screen to swap
+	case MotionEvent.ACTION_DOWN: {
+	    lastX = event.getX();
+	    break;
+	}
+	case MotionEvent.ACTION_UP: {
+	    float currentX = event.getX();
+
+	    // if left to right swipe on screen
+	    if (lastX < currentX - 250) {
+		tabHost.setCurrentTab(tabHost.getCurrentTab() - 1);
+	    }
+
+	    // if right to left swipe on screen
+	    if (lastX > currentX + 250) {
+		tabHost.setCurrentTab(tabHost.getCurrentTab() + 1);
+	    }
+
+	    break;
+	}
+	}
+	return false;
     }
 
     @Override
