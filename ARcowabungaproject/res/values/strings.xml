@@ -20,6 +20,10 @@
     <string name="cursor">&#9660;</string>
     
     <!-- List Views -->
-    <string name="extraIngredientInProductItem">Suplemento ingredientes extra</string>
+    <string name="remeber_advertice_title">¡RECUERDA!</string>
+    <string name="remeber_advertice_message">Gastos de envío grátis para pedidos superiores a 15€</string>
+    <string name="extra_ingredient_in_product_item">Suplemento ingredientes extra</string>
+    <!-- Image Content Descriptions -->
+    <string name="chef_icon">Chef Icon</string>
 </resources>
 

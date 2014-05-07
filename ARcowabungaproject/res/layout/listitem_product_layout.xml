@@ -77,7 +77,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
             android:background="#FF3333"
-            android:text="@string/extraIngredientInProductItem"
+            android:text="@string/extra_ingredient_in_product_item"
             android:textColor="#FFFFFF"
             android:textSize="10sp" />
     </LinearLayout>
