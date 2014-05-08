@@ -81,7 +81,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:background="#33FF33"
-        android:text="@string/cursor"
+        android:text="@string/cursor_down"
         android:textColor="#e73445" >
     </TextView>
 
