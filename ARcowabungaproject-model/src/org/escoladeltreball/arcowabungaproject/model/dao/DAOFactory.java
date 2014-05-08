@@ -225,8 +225,8 @@ public abstract class DAOFactory {
     // CONSTRUCTORS
     // ====================
 
-    protected DAOFactory(Pizzeria pizzeria) {
-	this.pizzeria = pizzeria;
+    protected DAOFactory() {
+	this.pizzeria = Pizzeria.getInstance(this);
     }
 
     // ====================
@@ -517,5 +517,9 @@ public abstract class DAOFactory {
     // ====================
     // GETTERS & SETTERS
     // ====================
+
+    public void setPizzeria(Pizzeria pizzeria) {
+	this.pizzeria = pizzeria;
+    }
 
 }

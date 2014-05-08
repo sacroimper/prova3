@@ -76,9 +76,8 @@ public class DAOAndroid extends DAOFactory {
     // ====================
 
     protected DAOAndroid(Context context, Pizzeria pizzeria) {
-	super(pizzeria);
+	super();
 	dbHepler = new DataBaseHelper(context);
-
     }
 
     // ====================
