@@ -33,11 +33,13 @@ public class MenuActivity extends Activity {
     // ====================
     // CONSTANTS
     // ====================
+
     private static final int ANIMATION_TIME = 700;
 
     // ====================
     // ATTRIBUTES
     // ====================
+
     private TabHost tabHost;
     private View viewMenuPizza;
     private View viewMenuDrinks;
@@ -64,6 +66,7 @@ public class MenuActivity extends Activity {
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void setupTab(final View view, final String tag) {
 	View tabview = createTabView(tabHost.getContext(), tag);
 
