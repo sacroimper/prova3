@@ -1,4 +1,4 @@
-package org.escoladeltreball.arcowabungaproject.adapters;
+package org.escoladeltreball.arcowabungaproject.utils;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -10,6 +10,7 @@ public class CustomTextView {
     // CONSTANTS
     // ====================
     private static final String FONT_TYPE = "gnuolane.ttf";
+    private static Typeface tf;
 
     // ====================
     // ATTRIBUTES
@@ -27,7 +28,10 @@ public class CustomTextView {
 	String fontPath = "fonts/" + FONT_TYPE;
 
 	// Loading Font Face
-	Typeface tf = Typeface.createFromAsset(context.getAssets(), fontPath);
+	if (tf == null) {
+	    Typeface tf = Typeface.createFromAsset(context.getAssets(),
+		    fontPath);
+	}
 
 	// Applying font
 	tv.setTypeface(tf);
