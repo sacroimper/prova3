@@ -128,7 +128,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
 	DAOAndroid dao = DAOAndroid.getInstance();
 	Drawable icon = dao.getDrawableFromAssets(activity, children.getIcon());
-	holder.ivIcon.setBackgroundDrawable(icon);
+	holder.ivIcon.setImageDrawable(icon);
 
 	holder.llButton.setOnClickListener(new ARButtonClickListener(
 		groupPosition));
@@ -185,7 +185,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	}
 	DAOAndroid dao = DAOAndroid.getInstance();
 	Drawable icon = dao.getDrawableFromAssets(activity, group.getIcon());
-	holder.ivIcon.setBackgroundDrawable(icon);
+	holder.ivIcon.setImageDrawable(icon);
 
 	holder.tvTitle.setText(group.getName());
 	holder.tvPrice.setText(group.getFormatedPrice());
