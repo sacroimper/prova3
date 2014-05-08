@@ -9,6 +9,7 @@ import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -91,6 +92,9 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 		    .findViewById(R.id.imageInSubItem);
 	    holder.llButton = (LinearLayout) convertView
 		    .findViewById(R.id.pizzaButtonInSubItem);
+	    CustomTextView.customTextView(activity, holder.tvDesc);
+	    CustomTextView.customTextView(activity, (TextView) convertView
+		    .findViewById(R.id.textButtonInPizzaSubItem));
 	    convertView.setTag(holder);
 	} else {
 	    holder = (ChildViewHolder) convertView.getTag();
@@ -148,6 +152,9 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 		    .findViewById(R.id.descTextInItem);
 	    holder.ibAdd = (ImageButton) convertView
 		    .findViewById(R.id.imageButtonInItem);
+	    CustomTextView.customTextView(activity, holder.tvTitle);
+	    CustomTextView.customTextView(activity, holder.tvPrice);
+	    CustomTextView.customTextView(activity, holder.tvDesc);
 	    convertView.setTag(holder);
 	} else {
 	    holder = (GroupViewHolder) convertView.getTag();
