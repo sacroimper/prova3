@@ -44,7 +44,6 @@ import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
-import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.joda.time.DateTime;
 
 import android.app.Activity;
@@ -75,7 +74,7 @@ public class DAOAndroid extends DAOFactory {
     // CONSTRUCTORS
     // ====================
 
-    protected DAOAndroid(Context context, Pizzeria pizzeria) {
+    protected DAOAndroid(Context context) {
 	super();
 	dbHepler = new DataBaseHelper(context);
     }
@@ -116,9 +115,9 @@ public class DAOAndroid extends DAOFactory {
 	return (DAOAndroid) instance;
     }
 
-    public static DAOAndroid getInstance(Context context, Pizzeria pizzeria) {
+    public static DAOAndroid getInstance(Context context) {
 	if (instance == null) {
-	    instance = new DAOAndroid(context, pizzeria);
+	    instance = new DAOAndroid(context);
 	}
 	return (DAOAndroid) instance;
     }
