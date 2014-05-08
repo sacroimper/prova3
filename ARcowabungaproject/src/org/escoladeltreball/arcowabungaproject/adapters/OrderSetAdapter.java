@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +65,9 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
+	if (getChildrenCount(groupPosition) == childPosition + 1) {
+	    return null;
+	}
 	return orders.get(groupPosition).getShoppingCart().getProducts()
 		.get(childPosition);
     }
@@ -75,13 +80,48 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition,
 	    boolean isLastChild, View convertView, ViewGroup parent) {
+	if (isLastChild) {
+	    convertView = inflater.inflate(
+		    R.layout.listitem_product_final_layout, null);
+	} else {
+	    final Product children = (Product) getChild(groupPosition,
+		    childPosition);
+	    ChildViewHolder holder = null;
+	    if (convertView == null) {
+		holder = new ChildViewHolder();
+		convertView = inflater.inflate(R.layout.expanded_order_layout,
+			null);
+		holder.ivIcon = (ImageView) convertView
+			.findViewById(R.id.imageInOrderSubItem);
+		holder.tvTitle = (TextView) convertView
+			.findViewById(R.id.titleInOrderSubItem);
+		holder.tvPrice = (TextView) convertView
+			.findViewById(R.id.priceInOrderSubItem);
+		CustomTextView.customTextView(activity, holder.tvTitle);
+		CustomTextView.customTextView(activity, holder.tvPrice);
+		CustomTextView
+			.customTextView(
+				activity,
+				(TextView) convertView
+					.findViewById(R.id.additionalIngredientsTitleInOrderSubItem));
+		convertView.setTag(holder);
+	    } else {
+		holder = (ChildViewHolder) convertView.getTag();
+	    }
+	    Drawable icon = DAOAndroid.getInstance().getDrawableFromAssets(
+		    activity, children.getIcon());
+	    holder.ivIcon.setBackgroundDrawable(icon);
+	    holder.tvTitle.setText(children.getName());
+	    holder.tvPrice.setText(children.getFormatedPrice());
+
+	}
 
 	return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-	return orders.get(groupPosition).getShoppingCart().getProducts().size();
+	return orders.get(groupPosition).getShoppingCart().getProducts().size() + 1;
     }
 
     @Override
@@ -115,6 +155,8 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 		    .findViewById(R.id.descTextInOrderItem);
 	    holder.tvPrice = (TextView) convertView
 		    .findViewById(R.id.priceTextInOrderItem);
+	    holder.tvCursor = (TextView) convertView
+		    .findViewById(R.id.cursorTextInOrderItem);
 	    CustomTextView.customTextView(activity, holder.tvDateTime);
 	    CustomTextView.customTextView(activity, holder.tvNumberOfProducts);
 	    CustomTextView.customTextView(activity, holder.tvPrice);
@@ -127,7 +169,9 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 	holder.tvNumberOfProducts.setText(group.getShoppingCart()
 		.sizeProducts() + " " + activity.getString(R.string.products));
 	holder.tvPrice.setText(group.getFormatedPrice());
-
+	String cursor = isExpanded ? activity.getString(R.string.cursor_up)
+		: activity.getString(R.string.cursor_down);
+	holder.tvCursor.setText(cursor);
 	return convertView;
     }
 
@@ -156,5 +200,6 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 	TextView tvDateTime;
 	TextView tvNumberOfProducts;
 	TextView tvPrice;
+	TextView tvCursor;
     }
 }
