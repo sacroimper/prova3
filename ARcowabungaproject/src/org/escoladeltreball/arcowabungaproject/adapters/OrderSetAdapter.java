@@ -7,6 +7,7 @@ import java.util.Set;
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Product;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -114,6 +115,9 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 		    .findViewById(R.id.descTextInOrderItem);
 	    holder.tvPrice = (TextView) convertView
 		    .findViewById(R.id.priceTextInOrderItem);
+	    CustomTextView.customTextView(activity, holder.tvDateTime);
+	    CustomTextView.customTextView(activity, holder.tvNumberOfProducts);
+	    CustomTextView.customTextView(activity, holder.tvPrice);
 	    convertView.setTag(holder);
 	} else {
 	    holder = (GroupViewHolder) convertView.getTag();
