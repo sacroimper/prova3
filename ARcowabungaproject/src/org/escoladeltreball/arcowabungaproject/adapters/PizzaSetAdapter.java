@@ -92,6 +92,19 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     // ====================
 
     @Override
+    public int getGroupTypeCount() {
+	return 2;
+    }
+
+    @Override
+    public int getGroupType(int groupPosition) {
+	if (groupPosition == 0) {
+	    return 1;
+	}
+	return 0;
+    }
+
+    @Override
     public Object getChild(int groupPosition, int childPosition) {
 	if (groupPosition == 0) {
 	    return null;
@@ -170,6 +183,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    convertView = inflater.inflate(R.layout.pizza_list_intro_layout,
 		    null);
 	} else {
+
 	    Pizza group = (Pizza) getGroup(groupPosition);
 
 	    GroupViewHolder holder = null;
