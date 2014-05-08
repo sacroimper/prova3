@@ -18,6 +18,7 @@
     <string name="tab_drinks">DRINKS</string>
     <string name="tab_offers">OFFERS</string>
     <string name="products">PRODUCTS</string>
+    <string name="additional_ingredents">Additional ingredients</string>
     <string name="cursor">&#9660;</string>
     
     <!-- List Views -->
