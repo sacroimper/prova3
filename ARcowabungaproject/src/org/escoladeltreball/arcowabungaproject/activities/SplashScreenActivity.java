@@ -43,7 +43,7 @@ public class SplashScreenActivity extends Activity {
     // ***La duracion se ha de corresponder con el tiempo necesario de carga
     // ***(Hasta que no acabe de cargar no comnzara la Main Activity)
     // Set the duration of the splash screen
-    private static final long SPLASH_SCREEN_DELAY = 300;
+    private static final long SPLASH_SCREEN_DELAY = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
