@@ -296,7 +296,6 @@ public class MenuActivity extends Activity implements OnTouchListener {
 	PizzaSetAdapter adapter = new PizzaSetAdapter(this, pizzas);
 	lv.setAdapter(adapter);
 	// Set touch listener to view
-	viewMenuPizza.setOnTouchListener(this);
 	lv.setOnTouchListener(this);
 
 	LayoutInflater layoutInflater2 = (LayoutInflater) getApplicationContext()
@@ -380,6 +379,12 @@ public class MenuActivity extends Activity implements OnTouchListener {
 		}
 	    }
 	});
+
+	// Change font type on layout
+	TextView tv = (TextView) findViewById(R.id.buton_menu_text);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.button_cart_text);
+	CustomTextView.customTextView(this, tv);
     }
 
     @Override
