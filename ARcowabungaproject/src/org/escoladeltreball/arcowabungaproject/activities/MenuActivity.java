@@ -37,6 +37,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -44,6 +45,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
@@ -52,7 +54,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 @SuppressLint("NewApi")
-public class MenuActivity extends Activity {
+public class MenuActivity extends Activity implements OnTouchListener {
 
     // ====================
     // CONSTANTS
@@ -274,7 +276,14 @@ public class MenuActivity extends Activity {
 	// Create views by layout
 	LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	viewMenuPizza = layoutInflater.inflate(R.layout.content_tab, null);
+	// Inflate first tab content
+	viewMenuPizza = layoutInflater
+		.inflate(R.layout.pizza_list_layout, null);
+	ListView lv = (ListView) viewMenuPizza.findViewById(R.id.pizzaList);
+	// Set touch listener to view
+	viewMenuPizza.setOnTouchListener(this);
+	lv.setOnTouchListener(this);
+
 	LayoutInflater layoutInflater2 = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	viewMenuDrinks = layoutInflater2.inflate(R.layout.content_second_tab,
@@ -389,6 +398,12 @@ public class MenuActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
 	getMenuInflater().inflate(R.menu.main, menu);
 	return true;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+	onTouchEvent(event);
+	return false;
     }
 
     // ====================
