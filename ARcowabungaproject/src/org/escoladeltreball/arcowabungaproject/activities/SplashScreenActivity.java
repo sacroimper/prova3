@@ -28,6 +28,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -41,7 +43,7 @@ public class SplashScreenActivity extends Activity {
     // ***La duracion se ha de corresponder con el tiempo necesario de carga
     // ***(Hasta que no acabe de cargar no comnzara la Main Activity)
     // Set the duration of the splash screen
-    private static final long SPLASH_SCREEN_DELAY = 3000;
+    private static final long SPLASH_SCREEN_DELAY = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,10 @@ public class SplashScreenActivity extends Activity {
 
 	// Check the database
 	checkDataBase();
+
+	// Set up the system
+	DAOAndroid daoA = DAOAndroid.getInstance(this.getApplicationContext());
+	Pizzeria p = Pizzeria.getInstance();
 
     }
 

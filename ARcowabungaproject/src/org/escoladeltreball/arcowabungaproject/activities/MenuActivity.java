@@ -24,7 +24,13 @@
 
 package org.escoladeltreball.arcowabungaproject.activities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.adapters.PizzaSetAdapter;
+import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.annotation.SuppressLint;
@@ -44,8 +50,8 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
@@ -279,7 +285,15 @@ public class MenuActivity extends Activity implements OnTouchListener {
 	// Inflate first tab content
 	viewMenuPizza = layoutInflater
 		.inflate(R.layout.pizza_list_layout, null);
-	ListView lv = (ListView) viewMenuPizza.findViewById(R.id.pizzaList);
+	ExpandableListView lv = (ExpandableListView) viewMenuPizza
+		.findViewById(R.id.pizzaList);
+	Pizzeria p = Pizzeria.getInstance();
+	Set<Pizza> setCustomPizzas = p.getCustomSavedPizzas();
+	Set<Pizza> setPredefinedPizzas = p.getPredefinedPizzas();
+	Set<Pizza> pizzas = new HashSet<Pizza>(setCustomPizzas);
+	pizzas.addAll(setPredefinedPizzas);
+	PizzaSetAdapter adapter = new PizzaSetAdapter(this, pizzas);
+	lv.setAdapter(adapter);
 	// Set touch listener to view
 	viewMenuPizza.setOnTouchListener(this);
 	lv.setOnTouchListener(this);
