@@ -55,6 +55,18 @@ public class Order extends IdObject {
 	return false;
     }
 
+    public String getFormatedPrice() {
+	return String.format("%.2f€", getTotalPrice());
+    }
+
+    private float getTotalPrice() {
+	float totalPrice = 0;
+	for (Product product : getShoppingCart().getProducts()) {
+	    totalPrice += product.getPrice();
+	}
+	return totalPrice;
+    }
+
     // ====================
     // PROTECTED METHODS
     // ====================
