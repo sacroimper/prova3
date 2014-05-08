@@ -1,11 +1,13 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
-import org.escoladeltreball.arcowabungaproject.adapters.CustomTextView;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,8 +24,10 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
+@SuppressLint("NewApi")
 public class MenuActivity extends Activity {
 
     // ====================
@@ -257,6 +261,12 @@ public class MenuActivity extends Activity {
 	setupTab(viewMenuPizza, "pizzas");
 	setupTab(viewMenuDrinks, "drinks");
 	setupTab(viewMenuOffers, "offers");
+
+	// Set dividers
+	if (Build.VERSION.SDK_INT >= 11)
+	    tabHost.getTabWidget().setShowDividers(
+		    TabWidget.SHOW_DIVIDER_MIDDLE);
+	tabHost.getTabWidget().setDividerDrawable(R.drawable.pompon);
 
 	// Set default tab before first init and change his look&feel
 	tabHost.setCurrentTab(0);
