@@ -10,7 +10,7 @@ public class CustomTextView {
     // CONSTANTS
     // ====================
     private static final String FONT_TYPE = "gnuolane.ttf";
-    private static Typeface tf;
+    private static Typeface tf = null;
 
     // ====================
     // ATTRIBUTES
@@ -29,8 +29,7 @@ public class CustomTextView {
 
 	// Loading Font Face
 	if (tf == null) {
-	    Typeface tf = Typeface.createFromAsset(context.getAssets(),
-		    fontPath);
+	    tf = Typeface.createFromAsset(context.getAssets(), fontPath);
 	}
 
 	// Applying font
