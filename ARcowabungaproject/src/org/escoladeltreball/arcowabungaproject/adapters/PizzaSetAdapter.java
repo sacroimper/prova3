@@ -196,7 +196,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	String showMore = "<font color='#FF0000'>"
 		+ activity.getResources().getString(R.string.show_more)
 		+ "</font>";
-	holder.tvDesc.setText(Html.fromHtml(desc + showMore));
+	holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
 
 	holder.ibAdd.setOnClickListener(new AddButtonClickListener(group));
 
