@@ -201,9 +201,9 @@ public abstract class DAOFactory {
     // CONSTRUCTORS
     // ====================
 
-    // protected DAOFactory(Pizzeria pizzeria) {
-    // this.pizzeria = pizzeria;
-    // }
+    protected DAOFactory() {
+	this.pizzeria = Pizzeria.getInstance(this);
+    }
 
     // ====================
     // PUBLIC METHODS
