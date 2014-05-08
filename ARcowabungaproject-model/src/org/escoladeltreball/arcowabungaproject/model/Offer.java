@@ -52,7 +52,7 @@ public class Offer extends Product {
 
     public Offer(int id, String name, float price, int icon, float discount) {
 	super(id, name, price, icon, discount);
-	this.productList = new ArrayList<>();
+	this.productList = new ArrayList<Product>();
     }
 
     // ====================
