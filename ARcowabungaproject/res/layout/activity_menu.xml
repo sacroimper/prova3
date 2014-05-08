@@ -23,7 +23,7 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="0dip"
                 android:layout_marginRight="0dip" />
 
