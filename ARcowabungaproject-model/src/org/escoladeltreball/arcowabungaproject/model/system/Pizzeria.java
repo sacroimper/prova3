@@ -67,7 +67,6 @@ public class Pizzeria {
 
     private Pizzeria(DAOFactory dao) {
 	this.dao = dao;
-	dao.loadDemo();
 	shoppingCart = new ShoppingCart(IdObject.nextCustomId());
     }
 

@@ -53,12 +53,13 @@ public class SplashScreenActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.splash_screen);
 
-	// Check the database
-	checkDataBase();
-
 	// Set up the system
 	DAOAndroid daoA = DAOAndroid.getInstance(this.getApplicationContext());
 	Pizzeria p = Pizzeria.getInstance();
+	daoA.loadDemo();
+
+	// Check the database
+	checkDataBase();
 
     }
 
