@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="#F0F0F0"
+    android:minHeight="130dp" >
+
+    <View
+        android:id="@+id/separatorTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <ImageView
+        android:id="@+id/imageInOrderSubItem"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:contentDescription="@string/pizza_icon"
+        android:scaleType="fitXY"
+        android:src="@drawable/home_image" />
+
+    <TextView
+        android:id="@+id/titleInOrderSubItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/separatorTop"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_toLeftOf="@+id/priceInOrderSubItem"
+        android:layout_toRightOf="@id/imageInOrderSubItem"
+        android:background="#33FF88"
+        android:text="title" />
+
+    <TextView
+        android:id="@id/priceInOrderSubItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/titleInOrderSubItem"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/separatorTop"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="#33FF33"
+        android:text="price" />
+
+    <TextView
+        android:id="@+id/additionalIngredientsTitleInOrderSubItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleInOrderSubItem"
+        android:layout_marginBottom="2dp"
+        android:layout_toRightOf="@id/imageInOrderSubItem"
+        android:background="#335533"
+        android:textSize="8sp"
+        android:text="@string/additional_ingredents" />
+
+    <View
+        android:id="@+id/separatorAdditionalIngredientsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@id/additionalIngredientsTitleInOrderSubItem"
+        android:layout_alignRight="@id/additionalIngredientsTitleInOrderSubItem"
+        android:layout_below="@id/additionalIngredientsTitleInOrderSubItem"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/additionalIngredientsInOrderSubItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="3dp"
+        android:layout_below="@id/separatorAdditionalIngredientsTitle"
+        android:layout_alignLeft="@id/additionalIngredientsTitleInOrderSubItem"
+        android:layout_alignParentRight="true"
+        android:background="#e73445"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <View
+        android:id="@+id/separatorBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray" />
+
+</RelativeLayout>
