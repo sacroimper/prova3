@@ -3,23 +3,26 @@
     android:id="@+id/tabsLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#3be0d0" >
+    android:background="#3be0d0"
+    android:paddingLeft="15dp" >
 
     <TextView
         android:id="@+id/tabTittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tabImg"
+        android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="@string/tab_drinks"
         android:textColor="@android:color/white"
-        android:textSize="25sp"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="25dp"
+        android:textSize="23sp" />
 
     <ImageView
         android:id="@+id/tabImg"
-        android:layout_width="20dp"
-        android:layout_height="40dp"
+        android:layout_width="15dp"
+        android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/tabTittle"
         android:contentDescription="@string/content_description_img"
