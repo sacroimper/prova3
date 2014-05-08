@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 
@@ -61,7 +62,6 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-	// TODO Auto-generated method stub
 	return orders.get(groupPosition).getShoppingCart().getProducts()
 		.get(childPosition);
     }
@@ -101,6 +101,28 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
+
+	final Order group = (Order) getGroup(groupPosition);
+	GroupViewHolder holder = null;
+	if (convertView == null) {
+	    holder = new GroupViewHolder();
+	    convertView = inflater
+		    .inflate(R.layout.listitem_order_layout, null);
+	    holder.tvDateTime = (TextView) convertView
+		    .findViewById(R.id.dateTextInOrderItem);
+	    holder.tvNumberOfProducts = (TextView) convertView
+		    .findViewById(R.id.descTextInOrderItem);
+	    holder.tvPrice = (TextView) convertView
+		    .findViewById(R.id.priceTextInOrderItem);
+	    convertView.setTag(holder);
+	} else {
+	    holder = (GroupViewHolder) convertView.getTag();
+	}
+
+	holder.tvDateTime.setText(group.getDateTime().toDate().toString());
+	holder.tvNumberOfProducts.setText(group.getShoppingCart()
+		.sizeProducts() + " " + activity.getString(R.string.products));
+	holder.tvPrice.setText(group.getFormatedPrice());
 
 	return convertView;
     }
