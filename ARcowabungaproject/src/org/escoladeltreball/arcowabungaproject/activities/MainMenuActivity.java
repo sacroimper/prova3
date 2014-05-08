@@ -32,6 +32,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 public class MainMenuActivity extends Activity implements OnClickListener {
@@ -39,6 +41,13 @@ public class MainMenuActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+
+	// Remove title bar
+	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+	// Remove notification bar
+	this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_main);
