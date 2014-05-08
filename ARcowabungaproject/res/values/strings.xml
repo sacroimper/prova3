@@ -19,7 +19,8 @@
     <string name="tab_offers">OFFERS</string>
     <string name="products">PRODUCTS</string>
     <string name="additional_ingredents">Additional ingredients</string>
-    <string name="cursor">&#9660;</string>
+    <string name="cursor_down">&#9660;</string>
+    <string name="cursor_up">&#9650;</string>
     
     <!-- List Views -->
     
