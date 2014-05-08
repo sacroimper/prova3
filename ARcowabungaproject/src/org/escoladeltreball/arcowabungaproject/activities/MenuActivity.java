@@ -153,7 +153,8 @@ public class MenuActivity extends Activity implements OnTouchListener {
 		    if (!isSelected) {
 			((TextView) textView).setTextColor(Color.WHITE);
 		    } else if (isSelected) {
-			((TextView) textView).setTextColor(Color.GRAY);
+			((TextView) textView).setTextColor(Color
+				.parseColor("#269491"));
 		    }
 		} else if (imageView instanceof ImageView) {
 		    if (imageView.getTag().equals("drink_image")) {
