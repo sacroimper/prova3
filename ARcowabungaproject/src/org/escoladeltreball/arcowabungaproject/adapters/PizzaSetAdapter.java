@@ -93,7 +93,10 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-	return pizzas.get(groupPosition);
+	if (groupPosition == 0) {
+	    return null;
+	}
+	return pizzas.get(groupPosition - 1);
     }
 
     @Override
@@ -104,6 +107,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition,
 	    boolean isLastChild, View convertView, ViewGroup parent) {
+
 	final Pizza children = (Pizza) getChild(groupPosition, childPosition);
 	ChildViewHolder holder = null;
 	if (convertView == null) {
@@ -138,17 +142,20 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
+	if (groupPosition == 0) {
+	    return 0;
+	}
 	return 1;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-	return pizzas.get(groupPosition);
+	return pizzas.get(groupPosition - 1);
     }
 
     @Override
     public int getGroupCount() {
-	return pizzas.size();
+	return pizzas.size() + 1;
     }
 
     @Override
@@ -159,47 +166,52 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
-	Pizza group = (Pizza) getGroup(groupPosition);
-
-	GroupViewHolder holder = null;
-	if (convertView == null) {
-	    holder = new GroupViewHolder();
-	    convertView = inflater
-		    .inflate(R.layout.listitem_pizza_layout, null);
-	    holder.ivIcon = (ImageView) convertView
-		    .findViewById(R.id.imageInItem);
-	    holder.tvTitle = (TextView) convertView
-		    .findViewById(R.id.titleTextInItem);
-	    holder.tvPrice = (TextView) convertView
-		    .findViewById(R.id.priceTextInItem);
-	    holder.tvDesc = (TextView) convertView
-		    .findViewById(R.id.descTextInItem);
-	    holder.ibAdd = (ImageButton) convertView
-		    .findViewById(R.id.imageButtonInItem);
-	    CustomTextView.customTextView(activity, holder.tvTitle);
-	    CustomTextView.customTextView(activity, holder.tvPrice);
-	    CustomTextView.customTextView(activity, holder.tvDesc);
-	    convertView.setTag(holder);
+	if (groupPosition == 0) {
+	    convertView = inflater.inflate(R.layout.pizza_list_intro_layout,
+		    null);
 	} else {
-	    holder = (GroupViewHolder) convertView.getTag();
+	    Pizza group = (Pizza) getGroup(groupPosition);
+
+	    GroupViewHolder holder = null;
+	    if (convertView == null) {
+		holder = new GroupViewHolder();
+		convertView = inflater.inflate(R.layout.listitem_pizza_layout,
+			null);
+		holder.ivIcon = (ImageView) convertView
+			.findViewById(R.id.imageInItem);
+		holder.tvTitle = (TextView) convertView
+			.findViewById(R.id.titleTextInItem);
+		holder.tvPrice = (TextView) convertView
+			.findViewById(R.id.priceTextInItem);
+		holder.tvDesc = (TextView) convertView
+			.findViewById(R.id.descTextInItem);
+		holder.ibAdd = (ImageButton) convertView
+			.findViewById(R.id.imageButtonInItem);
+		CustomTextView.customTextView(activity, holder.tvTitle);
+		CustomTextView.customTextView(activity, holder.tvPrice);
+		CustomTextView.customTextView(activity, holder.tvDesc);
+		convertView.setTag(holder);
+	    } else {
+		holder = (GroupViewHolder) convertView.getTag();
+	    }
+	    DAOAndroid dao = DAOAndroid.getInstance();
+	    Drawable icon = dao
+		    .getDrawableFromAssets(activity, group.getIcon());
+	    holder.ivIcon.setImageDrawable(icon);
+
+	    holder.tvTitle.setText(group.getName());
+	    holder.tvPrice.setText(group.getFormatedPrice());
+	    String desc = group.getIngedientsDescription();
+	    if (desc.length() > 20) {
+		desc = desc.substring(0, 17) + "...";
+	    }
+	    String showMore = "<font color='#FF0000'>"
+		    + activity.getResources().getString(R.string.show_more)
+		    + "</font>";
+	    holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
+
+	    holder.ibAdd.setOnClickListener(new AddButtonClickListener(group));
 	}
-	DAOAndroid dao = DAOAndroid.getInstance();
-	Drawable icon = dao.getDrawableFromAssets(activity, group.getIcon());
-	holder.ivIcon.setImageDrawable(icon);
-
-	holder.tvTitle.setText(group.getName());
-	holder.tvPrice.setText(group.getFormatedPrice());
-	String desc = group.getIngedientsDescription();
-	if (desc.length() > 20) {
-	    desc = desc.substring(0, 17) + "...";
-	}
-	String showMore = "<font color='#FF0000'>"
-		+ activity.getResources().getString(R.string.show_more)
-		+ "</font>";
-	holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
-
-	holder.ibAdd.setOnClickListener(new AddButtonClickListener(group));
-
 	return convertView;
     }
 
