@@ -28,8 +28,10 @@
         android:id="@+id/titleTextInOfferItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_below="@id/separatorTop"
+        android:layout_marginBottom="2dp"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="9dp"
         android:layout_toLeftOf="@+id/priceTextInOfferItem"
         android:layout_toRightOf="@id/imageInOfferItem"
         android:background="#335533"
@@ -42,13 +44,31 @@
         android:id="@id/priceTextInOfferItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_below="@id/separatorTop"
+        android:layout_marginBottom="2dp"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="9dp"
         android:layout_toLeftOf="@+id/separatorRight"
         android:background="#222333"
         android:text="preu"
         android:textColor="#E63444"
         android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/descTextInItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/separatorBottom"
+        android:layout_below="@id/titleTextInOfferItem"
+        android:layout_marginBottom="9dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@id/separatorRight"
+        android:layout_toRightOf="@id/imageInOfferItem"
+        android:background="#33FF33"
+        android:text="desc"
+        android:textSize="10sp" >
+
+    </TextView>
 
     <View
         android:id="@id/separatorRight"
