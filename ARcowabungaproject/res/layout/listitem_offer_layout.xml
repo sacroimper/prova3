@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-   android:layout_height="60dp"
+    android:layout_height="60dp"
     android:clickable="true"
     android:minHeight="130dp"
     android:paddingLeft="5dp"
     android:paddingRight="5dp" >
-    
-      <View
+
+    <View
         android:id="@id/separatorTop"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentTop="true"
         android:background="@android:color/darker_gray" />
-      
-       <ImageView
-        android:id="@+id/imageInDrinkItem"
+
+    <ImageView
+        android:id="@+id/imageInOfferItem"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
@@ -23,15 +23,15 @@
         android:contentDescription="@string/pizza_icon"
         android:paddingRight="5dp"
         android:src="@drawable/home_image" />
-       
-       <TextView
-        android:id="@+id/titleTextInDrinkItem"
+
+    <TextView
+        android:id="@+id/titleTextInOfferItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:layout_toLeftOf="@+id/priceTextInDrinkItem"
-        android:layout_toRightOf="@id/imageInDrinkItem"
+        android:layout_toLeftOf="@+id/priceTextInOfferItem"
+        android:layout_toRightOf="@id/imageInOfferItem"
         android:background="#335533"
         android:text="titol"
         android:textColor="#E63444"
@@ -39,7 +39,7 @@
     </TextView>
 
     <TextView
-        android:id="@id/priceTextInDrinkItem"
+        android:id="@id/priceTextInOfferItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -56,11 +56,11 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/imageButtonInDrinkItem"
+        android:layout_toLeftOf="@+id/imageButtonInOfferItem"
         android:background="@android:color/darker_gray" />
 
     <ImageButton
-        android:id="@id/imageButtonInDrinkItem"
+        android:id="@id/imageButtonInOfferItem"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentRight="true"

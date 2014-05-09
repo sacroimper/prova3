@@ -29,13 +29,20 @@ import java.util.List;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
+import org.escoladeltreball.arcowabungaproject.listeners.AddButtonClickListener;
 import org.escoladeltreball.arcowabungaproject.model.Drink;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class DrinkSetAdapter extends BaseAdapter {
 
@@ -96,14 +103,43 @@ public class DrinkSetAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+	ViewHolder holder = null;
 	if (convertView == null) {
+	    holder = new ViewHolder();
 	    convertView = inflater
 		    .inflate(R.layout.listitem_drink_layout, null);
+	    holder.ivIcon = (ImageView) convertView
+		    .findViewById(R.id.imageInDrinkItem);
+	    holder.tvTitle = (TextView) convertView
+		    .findViewById(R.id.titleTextInDrinkItem);
+	    holder.tvPrice = (TextView) convertView
+		    .findViewById(R.id.priceTextInDrinkItem);
+	    holder.ibAdd = (ImageButton) convertView
+		    .findViewById(R.id.imageInDrinkItem);
+	    CustomTextView.customTextView(activity, holder.tvTitle);
+	    CustomTextView.customTextView(activity, holder.tvPrice);
+	    convertView.setTag(holder);
+	} else {
+	    holder = (ViewHolder) convertView.getTag();
 	}
-	return null;
+	Drink drink = (Drink) getItem(position);
+	Drawable icon = DAOAndroid.getInstance().getDrawableFromAssets(
+		activity, drink.getIcon());
+	holder.ivIcon.setImageDrawable(icon);
+	holder.tvTitle.setText(drink.getName());
+	holder.tvPrice.setText(drink.getFormatedPrice());
+	holder.ibAdd.setOnClickListener(new AddButtonClickListener(drink,
+		activity));
+
+	return convertView;
     }
 
+    static class ViewHolder {
+	public ImageView ivIcon;
+	public TextView tvTitle;
+	public TextView tvPrice;
+	public ImageButton ibAdd;
+    }
     // ====================
     // GETTERS & SETTERS
     // ====================

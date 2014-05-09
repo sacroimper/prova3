@@ -30,9 +30,8 @@ import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
+import org.escoladeltreball.arcowabungaproject.listeners.AddButtonClickListener;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
-import org.escoladeltreball.arcowabungaproject.model.Product;
-import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
@@ -47,7 +46,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
@@ -224,7 +222,8 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 		    + "</font>";
 	    holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
 
-	    holder.ibAdd.setOnClickListener(new AddButtonClickListener(group));
+	    holder.ibAdd.setOnClickListener(new AddButtonClickListener(group,
+		    activity));
 	}
 	return convertView;
     }
@@ -261,23 +260,23 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	}
     }
 
-    public class AddButtonClickListener implements OnClickListener {
-
-	private Product product;
-
-	public AddButtonClickListener(Product product) {
-	    this.product = product;
-	}
-
-	@Override
-	public void onClick(View v) {
-	    Pizzeria.getInstance().getShoppingCart().addProduct(product);
-	    Toast.makeText(activity,
-		    "S'ha afegit una producte al carro de la compra",
-		    Toast.LENGTH_SHORT).show();
-	}
-
-    }
+    // public class AddButtonClickListener implements OnClickListener {
+    //
+    // private Product product;
+    //
+    // public AddButtonClickListener(Product product) {
+    // this.product = product;
+    // }
+    //
+    // @Override
+    // public void onClick(View v) {
+    // Pizzeria.getInstance().getShoppingCart().addProduct(product);
+    // Toast.makeText(activity,
+    // "S'ha afegit una producte al carro de la compra",
+    // Toast.LENGTH_SHORT).show();
+    // }
+    //
+    // }
 
     public static class ChildViewHolder {
 	public TextView tvDesc;
