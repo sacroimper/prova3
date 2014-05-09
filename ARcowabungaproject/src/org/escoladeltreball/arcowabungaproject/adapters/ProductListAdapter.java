@@ -24,9 +24,7 @@
 
 package org.escoladeltreball.arcowabungaproject.adapters;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
@@ -43,13 +41,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ProductSetAdapter extends BaseAdapter {
+public class ProductListAdapter extends BaseAdapter {
 
     // ====================
     // CONSTANTS
     // ====================
 
-    private final List<Product> products = new ArrayList<Product>();
+    // private final List<Product> products = new ArrayList<Product>();
+    private final List<Product> products;
     public LayoutInflater inflater;
     public Activity activity;
 
@@ -61,12 +60,10 @@ public class ProductSetAdapter extends BaseAdapter {
     // CONSTRUCTORS
     // ====================
 
-    public ProductSetAdapter(Activity activity, Set<Product> products) {
+    public ProductListAdapter(Activity activity, List<Product> products) {
 	super();
 	this.activity = activity;
-	for (Product product : products) {
-	    this.products.add(product);
-	}
+	this.products = products;
 	inflater = activity.getLayoutInflater();
     }
 
