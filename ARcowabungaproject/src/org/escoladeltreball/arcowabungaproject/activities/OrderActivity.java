@@ -73,7 +73,7 @@ public class OrderActivity extends Activity {
 
 	super.onCreate(savedInstanceState);
 	// set content view AFTER ABOVE sequence (to avoid crash)
-	this.setContentView(R.layout.activity_main);
+	this.setContentView(R.layout.shooping_cart_layout);
     }
 
     @Override
