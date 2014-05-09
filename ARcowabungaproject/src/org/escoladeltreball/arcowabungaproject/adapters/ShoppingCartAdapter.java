@@ -43,7 +43,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ProductListAdapter extends BaseAdapter {
+public class ShoppingCartAdapter extends BaseAdapter {
 
     // ====================
     // CONSTANTS
@@ -63,7 +63,7 @@ public class ProductListAdapter extends BaseAdapter {
     // CONSTRUCTORS
     // ====================
 
-    public ProductListAdapter(Activity activity, ShoppingCart customShoppingCart) {
+    public ShoppingCartAdapter(Activity activity, ShoppingCart customShoppingCart) {
 	super();
 	this.activity = activity;
 	this.products = customShoppingCart.getProducts();

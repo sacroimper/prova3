@@ -25,7 +25,7 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
-import org.escoladeltreball.arcowabungaproject.adapters.ProductListAdapter;
+import org.escoladeltreball.arcowabungaproject.adapters.ShoppingCartAdapter;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
@@ -84,7 +84,7 @@ public class OrderActivity extends Activity {
 	// List<Product> products = setCustomShoppingCart.getProducts();
 
 	ListView listView = (ListView) findViewById(R.id.product_list);
-	ProductListAdapter adapter = new ProductListAdapter(this,
+	ShoppingCartAdapter adapter = new ShoppingCartAdapter(this,
 		customShoppingCart);
 	listView.setAdapter(adapter);
 
