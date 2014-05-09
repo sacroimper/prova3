@@ -118,21 +118,36 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition,
 	    boolean isLastChild, View convertView, ViewGroup parent) {
 	if (isLastChild) {
+	    Order order = (Order) getGroup(groupPosition);
 	    convertView = inflater.inflate(
 		    R.layout.expanded_order_ending_layout, null);
 	    int[] ids = { R.id.subtotalTextInOrderEndingSubItem,
-		    R.id.subtotalPriceInOrderEndingSubItem,
 		    R.id.taxasTextInOrderEndingSubItem,
-		    R.id.taxasValueInOrderEndingSubItem,
 		    R.id.shippingCostTextInOrderEndingSubItem,
-		    R.id.shippingCostValueInOrderEndingSubItem,
 		    R.id.totalTextInOrderEndingSubItem,
-		    R.id.totalValueInOrderEndingSubItem,
 		    R.id.textButtonInPizzaSubItem };
 	    for (int id : ids) {
 		CustomTextView.customTextView(activity,
 			(TextView) convertView.findViewById(id));
 	    }
+	    TextView tvSubTotal = (TextView) convertView
+		    .findViewById(R.id.subtotalPriceInOrderEndingSubItem);
+	    TextView tvTaxa = (TextView) convertView
+		    .findViewById(R.id.taxasValueInOrderEndingSubItem);
+	    TextView tvShipping = (TextView) convertView
+		    .findViewById(R.id.shippingCostValueInOrderEndingSubItem);
+	    TextView tvTotal = (TextView) convertView
+		    .findViewById(R.id.totalValueInOrderEndingSubItem);
+	    CustomTextView.customTextView(activity, tvSubTotal);
+	    CustomTextView.customTextView(activity, tvTaxa);
+	    CustomTextView.customTextView(activity, tvShipping);
+	    CustomTextView.customTextView(activity, tvTotal);
+
+	    tvSubTotal.setText(order.getShoppingCart().getFormatedPrice());
+	    tvSubTotal.setText(order.getShoppingCart().getFormatedPrice());
+	    tvSubTotal.setText(order.getShoppingCart().getFormatedPrice());
+	    tvSubTotal.setText(order.getShoppingCart().getFormatedPrice());
+	    // TODO
 	} else {
 	    final Product children = (Product) getChild(groupPosition,
 		    childPosition);
