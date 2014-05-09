@@ -36,6 +36,7 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -52,6 +54,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
@@ -60,7 +63,8 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 @SuppressLint("NewApi")
-public class MenuActivity extends Activity implements OnTouchListener {
+public class MenuActivity extends Activity implements OnTouchListener,
+	OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -283,7 +287,8 @@ public class MenuActivity extends Activity implements OnTouchListener {
 	// Create views by layout
 	LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	// Inflate first tab content
+
+	// INFLATE FIRST TAB CONTENT
 	viewMenuPizza = layoutInflater
 		.inflate(R.layout.pizza_list_layout, null);
 	ExpandableListView lv = (ExpandableListView) viewMenuPizza
@@ -295,13 +300,14 @@ public class MenuActivity extends Activity implements OnTouchListener {
 	pizzas.addAll(setPredefinedPizzas);
 	PizzaSetAdapter adapter = new PizzaSetAdapter(this, pizzas);
 	lv.setAdapter(adapter);
-	// Set touch listener to view
-	lv.setOnTouchListener(this);
 
+	// SECOND TAB CONTENT
 	LayoutInflater layoutInflater2 = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	viewMenuDrinks = layoutInflater2.inflate(R.layout.content_second_tab,
 		null);
+
+	// THIRD TAB CONTENT
 	LayoutInflater layoutInflater3 = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	viewMenuOffers = layoutInflater3.inflate(R.layout.content_third_tab,
@@ -329,7 +335,6 @@ public class MenuActivity extends Activity implements OnTouchListener {
 	tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 	    @Override
 	    public void onTabChanged(String tabId) {
-
 		currentView = tabHost.getCurrentView();
 
 		if (tabHost.getCurrentTab() >= currentTab) {
@@ -385,6 +390,12 @@ public class MenuActivity extends Activity implements OnTouchListener {
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);
+
+	// Add click listeners to LinearLayouts on bottom
+	LinearLayout lMenu = (LinearLayout) findViewById(R.id.button_menu);
+	lMenu.setOnClickListener(this);
+	LinearLayout lCart = (LinearLayout) findViewById(R.id.button_cart);
+	lCart.setOnClickListener(this);
     }
 
     @Override
@@ -425,6 +436,19 @@ public class MenuActivity extends Activity implements OnTouchListener {
 	onTouchEvent(event);
 	return false;
     }
+
+    @Override
+    public void onClick(View v) {
+	if (v.getId() == R.id.button_menu) {
+	    Intent intent = new Intent(this, MainMenuActivity.class);
+	    startActivity(intent);
+	} else if (v.getId() == R.id.button_cart) {
+	    Intent intent = new Intent(this, OrderActivity.class);
+	    startActivity(intent);
+	}
+    }
+
+    // }
 
     // ====================
     // GETTERS & SETTERS

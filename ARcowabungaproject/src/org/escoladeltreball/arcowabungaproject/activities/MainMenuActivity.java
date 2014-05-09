@@ -65,8 +65,8 @@ public class MainMenuActivity extends Activity implements OnClickListener {
 	LinearLayout bContact = (LinearLayout) findViewById(R.id.menu_selection_lastorders);
 	bContact.setOnClickListener(this);
 
-	this.overridePendingTransition(R.anim.animation_enter,
-		R.anim.animation_leave);
+	this.overridePendingTransition(R.anim.animation_horizontal_enter,
+		R.anim.animation_horizontal_leave);
     }
 
     @Override
