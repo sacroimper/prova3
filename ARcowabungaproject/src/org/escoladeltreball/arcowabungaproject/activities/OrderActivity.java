@@ -24,11 +24,8 @@
 
 package org.escoladeltreball.arcowabungaproject.activities;
 
-import java.util.List;
-
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.ProductListAdapter;
-import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
@@ -83,11 +80,12 @@ public class OrderActivity extends Activity {
 	this.setContentView(R.layout.shooping_cart_layout);
 
 	Pizzeria p = Pizzeria.getInstance();
-	ShoppingCart setCustomShoppingCart = p.getShoppingCart();
-	List<Product> products = setCustomShoppingCart.getProducts();
+	ShoppingCart customShoppingCart = p.getShoppingCart();
+	// List<Product> products = setCustomShoppingCart.getProducts();
 
 	ListView listView = (ListView) findViewById(R.id.product_list);
-	ProductListAdapter adapter = new ProductListAdapter(this, products);
+	ProductListAdapter adapter = new ProductListAdapter(this,
+		customShoppingCart);
 	listView.setAdapter(adapter);
 
 	// // Adding listeners
