@@ -88,11 +88,11 @@ public class MainMenuActivity extends Activity implements OnClickListener {
 	    startActivity(intent);
 	} else if (v.getId() == R.id.menu_selection_contact) {
 	    Intent intent = new Intent(this.getApplicationContext(),
-		    LastOrdersActivity.class);
+		    ContactActivity.class);
 	    startActivity(intent);
 	} else if (v.getId() == R.id.menu_selection_lastorders) {
 	    Intent intent = new Intent(this.getApplicationContext(),
-		    ContactActivity.class);
+		    LastOrdersActivity.class);
 	    startActivity(intent);
 	}
 

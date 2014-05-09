@@ -24,11 +24,13 @@
 
 package org.escoladeltreball.arcowabungaproject.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Product;
+import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -41,16 +43,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ProductListAdapter extends BaseAdapter {
+public class ShoppingCartAdapter extends BaseAdapter {
 
     // ====================
     // CONSTANTS
     // ====================
 
     // private final List<Product> products = new ArrayList<Product>();
-    private final List<Product> products;
+    private List<Product> products = new ArrayList<Product>();
     public LayoutInflater inflater;
     public Activity activity;
+    public String price;
 
     // ====================
     // ATTRIBUTES
@@ -60,10 +63,11 @@ public class ProductListAdapter extends BaseAdapter {
     // CONSTRUCTORS
     // ====================
 
-    public ProductListAdapter(Activity activity, List<Product> products) {
+    public ShoppingCartAdapter(Activity activity, ShoppingCart customShoppingCart) {
 	super();
 	this.activity = activity;
-	this.products = products;
+	this.products = customShoppingCart.getProducts();
+	this.price = customShoppingCart.getFormatedPrice();
 	inflater = activity.getLayoutInflater();
     }
 
@@ -119,20 +123,35 @@ public class ProductListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-	ViewHolder holder = null;
+	ProductViewHolder holder = null;
 
 	if (position == 0) {
 	    convertView = inflater.inflate(
 		    R.layout.listitem_product_intro_layout, null);
 	} else if (position == products.size() + 1) {
+
+	    // Fills the proper text prices in listitem_product_final_layout
 	    convertView = inflater.inflate(
 		    R.layout.listitem_product_final_layout, null);
+
+	    // Find the TextViews by id
+	    TextView subtotalPrice = (TextView) convertView
+		    .findViewById(R.id.subtotal_price);
+	    // TextView shippingCostPrice = (TextView) convertView
+	    // .findViewById(R.id.shipping_cost_value);
+	    // TextView taxesPrice = (TextView) convertView
+	    // .findViewById(R.id.taxes_value);
+
+	    // Set the prices
+	    subtotalPrice.setText(this.price + "€");
+	    // shippingCostPrice.setText(this.price + "€");
+	    // taxesPrice.setText(this.price + "€");
 	} else {
 	    if (convertView == null) {
 		convertView = this.inflater.inflate(
 			R.layout.listitem_product_layout, parent, false);
 
-		holder = new ViewHolder();
+		holder = new ProductViewHolder();
 
 		holder.productImage = (ImageView) convertView
 			.findViewById(R.id.imageInProductItem);
@@ -150,7 +169,7 @@ public class ProductListAdapter extends BaseAdapter {
 		convertView.setTag(holder);
 
 	    } else {
-		holder = (ViewHolder) convertView.getTag();
+		holder = (ProductViewHolder) convertView.getTag();
 	    }
 
 	    Product product = this.products.get(position - 1);
@@ -171,7 +190,7 @@ public class ProductListAdapter extends BaseAdapter {
 	return convertView;
     }
 
-    static class ViewHolder {
+    static class ProductViewHolder {
 	ImageView productImage;
 	TextView productTitle;
 	// Not implemented yet
