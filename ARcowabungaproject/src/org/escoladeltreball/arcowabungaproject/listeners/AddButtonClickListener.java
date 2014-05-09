@@ -23,12 +23,15 @@
  */
 package org.escoladeltreball.arcowabungaproject.listeners;
 
+import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.model.Product;
+import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 /**
  * @author local
@@ -60,11 +63,10 @@ public class AddButtonClickListener implements
     // ====================
     @Override
     public void onClick(View v) {
+	ShoppingCart s = Pizzeria.getInstance().getShoppingCart();
 	Pizzeria.getInstance().getShoppingCart().addProduct(product);
-	Toast.makeText(activity,
-		"S'ha afegit una producte al carro de la compra",
-		Toast.LENGTH_SHORT).show();
-
+	TextView tv = (TextView) activity.findViewById(R.id.button_cart_text);
+	CustomTextView.plusPriceOrder(tv);
     }
     // ====================
     // PROTECTED METHODS

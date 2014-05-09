@@ -307,9 +307,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	lv.setAdapter(pizzaAdapter);
 
 	// SECOND TAB CONTENT
-	LayoutInflater layoutInflater2 = (LayoutInflater) getApplicationContext()
-		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	viewMenuDrinks = layoutInflater2.inflate(R.layout.drink_list_layout,
+	viewMenuDrinks = layoutInflater.inflate(R.layout.drink_list_layout,
 		null);
 	ListView listView = (ListView) viewMenuDrinks
 		.findViewById(R.id.drinkList);
@@ -318,9 +316,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	listView.setAdapter(drinkAddapter);
 
 	// THIRD TAB CONTENT
-	LayoutInflater layoutInflater3 = (LayoutInflater) getApplicationContext()
-		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	viewMenuOffers = layoutInflater3.inflate(R.layout.content_third_tab,
+	viewMenuOffers = layoutInflater.inflate(R.layout.content_third_tab,
 		null);
 
 	// Inflate custom tabhost with custom views.
@@ -400,6 +396,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);
+	CustomTextView.plusPriceOrder(tv);
 
 	// Add click listeners to LinearLayouts on bottom
 	LinearLayout lMenu = (LinearLayout) findViewById(R.id.button_menu);
