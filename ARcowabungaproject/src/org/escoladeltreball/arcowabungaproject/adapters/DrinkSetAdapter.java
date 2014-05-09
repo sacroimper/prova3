@@ -115,7 +115,7 @@ public class DrinkSetAdapter extends BaseAdapter {
 	    holder.tvPrice = (TextView) convertView
 		    .findViewById(R.id.priceTextInDrinkItem);
 	    holder.ibAdd = (ImageButton) convertView
-		    .findViewById(R.id.imageInDrinkItem);
+		    .findViewById(R.id.imageButtonInDrinkItem);
 	    CustomTextView.customTextView(activity, holder.tvTitle);
 	    CustomTextView.customTextView(activity, holder.tvPrice);
 	    convertView.setTag(holder);
