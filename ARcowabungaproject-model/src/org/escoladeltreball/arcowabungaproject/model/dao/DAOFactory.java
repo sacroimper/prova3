@@ -444,6 +444,8 @@ public abstract class DAOFactory {
 	pizzeria.setOffers(offers);
 	pizzeria.setOrdersSaved(ordersSaved);
 
+	pizzeria.setShoppingCart(s2);
+
 	IdObject.setNextId(44);
 	IdObject.setNextCostumId(10044);
 	currentVersion = -1;
