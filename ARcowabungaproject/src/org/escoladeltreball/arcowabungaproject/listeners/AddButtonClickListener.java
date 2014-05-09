@@ -64,6 +64,7 @@ public class AddButtonClickListener implements
 	Toast.makeText(activity,
 		"S'ha afegit una producte al carro de la compra",
 		Toast.LENGTH_SHORT).show();
+
     }
     // ====================
     // PROTECTED METHODS
