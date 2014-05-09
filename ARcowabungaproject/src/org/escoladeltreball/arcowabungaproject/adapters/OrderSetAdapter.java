@@ -88,6 +88,19 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     // ====================
 
     @Override
+    public int getChildTypeCount() {
+	return 2;
+    }
+
+    @Override
+    public int getChildType(int groupPosition, int childPosition) {
+	if (getChildrenCount(groupPosition) == childPosition + 1) {
+	    return 1;
+	}
+	return 0;
+    }
+
+    @Override
     public Object getChild(int groupPosition, int childPosition) {
 	if (getChildrenCount(groupPosition) == childPosition + 1) {
 	    return null;
@@ -106,7 +119,20 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 	    boolean isLastChild, View convertView, ViewGroup parent) {
 	if (isLastChild) {
 	    convertView = inflater.inflate(
-		    R.layout.listitem_product_final_layout, null);
+		    R.layout.expanded_order_ending_layout, null);
+	    int[] ids = { R.id.subtotalTextInOrderEndingSubItem,
+		    R.id.subtotalPriceInOrderEndingSubItem,
+		    R.id.taxasTextInOrderEndingSubItem,
+		    R.id.taxasValueInOrderEndingSubItem,
+		    R.id.shippingCostTextInOrderEndingSubItem,
+		    R.id.shippingCostValueInOrderEndingSubItem,
+		    R.id.totalTextInOrderEndingSubItem,
+		    R.id.totalValueInOrderEndingSubItem,
+		    R.id.textButtonInPizzaSubItem };
+	    for (int id : ids) {
+		CustomTextView.customTextView(activity,
+			(TextView) convertView.findViewById(id));
+	    }
 	} else {
 	    final Product children = (Product) getChild(groupPosition,
 		    childPosition);
@@ -134,7 +160,7 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 	    }
 	    Drawable icon = DAOAndroid.getInstance().getDrawableFromAssets(
 		    activity, children.getIcon());
-	    holder.ivIcon.setBackgroundDrawable(icon);
+	    holder.ivIcon.setImageDrawable(icon);
 	    holder.tvTitle.setText(children.getName());
 	    holder.tvPrice.setText(children.getFormatedPrice());
 
