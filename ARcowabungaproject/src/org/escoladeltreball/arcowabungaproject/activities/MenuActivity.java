@@ -307,9 +307,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	lv.setAdapter(pizzaAdapter);
 
 	// SECOND TAB CONTENT
-	LayoutInflater layoutInflater2 = (LayoutInflater) getApplicationContext()
-		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	viewMenuDrinks = layoutInflater2.inflate(R.layout.drink_list_layout,
+	viewMenuDrinks = layoutInflater.inflate(R.layout.drink_list_layout,
 		null);
 	ListView listView = (ListView) viewMenuDrinks
 		.findViewById(R.id.drinkList);
@@ -318,9 +316,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	listView.setAdapter(drinkAddapter);
 
 	// THIRD TAB CONTENT
-	LayoutInflater layoutInflater3 = (LayoutInflater) getApplicationContext()
-		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	viewMenuOffers = layoutInflater3.inflate(R.layout.content_third_tab,
+	viewMenuOffers = layoutInflater.inflate(R.layout.content_third_tab,
 		null);
 
 	// Inflate custom tabhost with custom views.
