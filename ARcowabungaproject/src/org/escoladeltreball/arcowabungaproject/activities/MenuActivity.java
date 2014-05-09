@@ -390,6 +390,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);
+	CustomTextView.plusPriceOrder(tv);
 
 	// Add click listeners to LinearLayouts on bottom
 	LinearLayout lMenu = (LinearLayout) findViewById(R.id.button_menu);
