@@ -134,16 +134,9 @@ public class ProductSetAdapter extends BaseAdapter {
 	Product product = this.products.get(position);
 
 	DAOAndroid dao = DAOAndroid.getInstance();
-	Drawable titleIcon = dao.getDrawableFromAssets(activity,
-		product.getIcon());
-
-	holder.productImage.setBackgroundDrawable(titleIcon);
+	Drawable icon = dao.getDrawableFromAssets(activity, product.getIcon());
+	holder.productImage.setImageDrawable(icon);
 	holder.productTitle.setText(product.getName());
-
-	// IconPizza will be changed by trash icon when exists
-	Drawable trashIcon = dao.getDrawableFromAssets(activity,
-		R.drawable.iconpizza);
-	holder.productImage.setBackgroundDrawable(trashIcon);
 	holder.productPrice.setText(product.getFormatedPrice());
 
 	// It will be necessary to inflate this layout only if extra ingredients

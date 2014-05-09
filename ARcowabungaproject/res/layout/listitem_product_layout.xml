@@ -19,12 +19,12 @@
         android:id="@+id/imageInProductItem"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="fitXY"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/pizza_icon"
-        android:paddingRight="5dp"
-        android:src="@drawable/home_image" />
-
+        android:paddingRight="5dp"/>
+	<!--android:src="@drawable/icontabpizzasoff"-->
     <TextView
         android:id="@+id/titleTextInProductItem"
         android:layout_width="wrap_content"
@@ -41,11 +41,12 @@
         android:id="@+id/trashIcon"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:scaleType="fitXY"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:layout_toLeftOf="@+id/priceTextInProductItem"
         android:background="#FF3333"
-        android:src="@drawable/iconpizza"
+        android:src="@drawable/icontaboffersoff"
         android:text="trash"
         android:textColor="#E63444" />
 
