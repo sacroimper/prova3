@@ -24,6 +24,9 @@
 
 package org.escoladeltreball.arcowabungaproject.utils;
 
+import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.widget.TextView;
@@ -58,6 +61,13 @@ public class CustomTextView {
 
 	// Applying font
 	tv.setTypeface(tf);
+    }
+
+    public static void plusPriceOrder(TextView tv) {
+	ShoppingCart shopCart = Pizzeria.getInstance().getShoppingCart();
+	int numberProducts = shopCart.getProducts().size();
+	float price = shopCart.getPrice();
+	tv.setText("(" + numberProducts + ")" + price + "€");
     }
     // ====================
     // PROTECTED METHODS
