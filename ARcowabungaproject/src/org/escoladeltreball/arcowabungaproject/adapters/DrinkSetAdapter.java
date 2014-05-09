@@ -32,6 +32,7 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.listeners.AddButtonClickListener;
 import org.escoladeltreball.arcowabungaproject.model.Drink;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -115,6 +116,8 @@ public class DrinkSetAdapter extends BaseAdapter {
 		    .findViewById(R.id.priceTextInDrinkItem);
 	    holder.ibAdd = (ImageButton) convertView
 		    .findViewById(R.id.imageInDrinkItem);
+	    CustomTextView.customTextView(activity, holder.tvTitle);
+	    CustomTextView.customTextView(activity, holder.tvPrice);
 	    convertView.setTag(holder);
 	} else {
 	    holder = (ViewHolder) convertView.getTag();
