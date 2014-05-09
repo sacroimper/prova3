@@ -78,6 +78,18 @@ public class ShoppingCart extends IdObject {
 	return false;
     }
 
+    public float getPrice() {
+	float price = 0.0f;
+	for (Product product : productList) {
+	    price += product.getPrice();
+	}
+	return price;
+    }
+
+    public String getFormatedPrice() {
+	return String.format("%.2f€", getPrice());
+    }
+
     public List<Product> getProducts() {
 	return productList;
     }

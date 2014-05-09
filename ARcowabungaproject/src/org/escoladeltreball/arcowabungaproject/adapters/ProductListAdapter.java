@@ -84,13 +84,32 @@ public class ProductListAdapter extends BaseAdapter {
     // ====================
 
     @Override
+    public int getViewTypeCount() {
+	return 3;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+	if (position == 0) {
+	    return 1;
+	} else if (position == products.size() + 1) {
+	    return 2;
+	}
+	return 0;
+    }
+
+    @Override
     public int getCount() {
+
 	return (products.size() + 2);
     }
 
     @Override
     public Object getItem(int position) {
-	return products.get(position);
+	if (position == 0 || position == products.size() + 1) {
+	    return null;
+	}
+	return products.get(position - 1);
     }
 
     @Override
@@ -105,7 +124,10 @@ public class ProductListAdapter extends BaseAdapter {
 	if (position == 0) {
 	    convertView = inflater.inflate(
 		    R.layout.listitem_product_intro_layout, null);
-	} else if (position != products.size() + 1) {
+	} else if (position == products.size() + 1) {
+	    convertView = inflater.inflate(
+		    R.layout.listitem_product_final_layout, null);
+	} else {
 	    if (convertView == null) {
 		convertView = this.inflater.inflate(
 			R.layout.listitem_product_layout, parent, false);
@@ -121,9 +143,7 @@ public class ProductListAdapter extends BaseAdapter {
 		holder.productPrice = (TextView) convertView
 			.findViewById(R.id.priceTextInProductItem);
 		// Is necesary to develope this element to inflate the content
-		// of
-		// this LinearLayout
-		// Maybe it has another Adapter?
+		// of this LinearLayout Maybe it has another Adapter?
 		holder.extraIngrentsLayout = (LinearLayout) convertView
 			.findViewById(R.id.extraIngredientLayoutInProductItem);
 
@@ -143,14 +163,11 @@ public class ProductListAdapter extends BaseAdapter {
 	    holder.productPrice.setText(product.getFormatedPrice());
 
 	    // It will be necessary to inflate this layout only if extra
-	    // ingredients
-	    // were added
+	    // ingredients were added
 	    // holder.extraIngrentsLayout.
 	    // (R.id.extraIngredientLayoutInProductItem);
-	} else {
-	    convertView = inflater.inflate(
-		    R.layout.listitem_product_final_layout, null);
 	}
+
 	return convertView;
     }
 

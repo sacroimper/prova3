@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+   android:layout_height="60dp"
+    android:clickable="true"
+    android:minHeight="130dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp" >
     
+      <View
+        android:id="@id/separatorTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/darker_gray" />
+      
+       <ImageView
+        android:id="@+id/imageInDrinkItem"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/pizza_icon"
+        android:paddingRight="5dp"
+        android:src="@drawable/home_image" />
+       
+       <TextView
+        android:id="@+id/titleTextInDrinkItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/priceTextInDrinkItem"
+        android:layout_toRightOf="@id/imageInDrinkItem"
+        android:background="#335533"
+        android:text="titol"
+        android:textColor="#E63444"
+        android:textSize="18sp" >
+    </TextView>
+
+    <TextView
+        android:id="@id/priceTextInDrinkItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/separatorRight"
+        android:background="#222333"
+        android:text="preu"
+        android:textColor="#E63444"
+        android:textSize="15sp" />
+
+    <View
+        android:id="@id/separatorRight"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/imageButtonInDrinkItem"
+        android:background="@android:color/darker_gray" />
+
+    <ImageButton
+        android:id="@id/imageButtonInDrinkItem"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/iconorderlist"
+        android:contentDescription="" />
+
+    <View
+        android:id="@id/separatorBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray" />
 
 </RelativeLayout>
