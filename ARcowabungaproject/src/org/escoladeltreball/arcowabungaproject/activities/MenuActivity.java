@@ -455,8 +455,6 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	}
     }
 
-    // }
-
     // ====================
     // GETTERS & SETTERS
     // ====================
