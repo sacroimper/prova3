@@ -24,13 +24,19 @@
 
 package org.escoladeltreball.arcowabungaproject.activities;
 
+import java.util.Set;
+
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.adapters.OrderSetAdapter;
+import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ExpandableListView;
 
 public class LastOrdersActivity extends Activity {
 
@@ -73,7 +79,13 @@ public class LastOrdersActivity extends Activity {
 
 	super.onCreate(savedInstanceState);
 	// set content view AFTER ABOVE sequence (to avoid crash)
-	this.setContentView(R.layout.activity_main);
+	this.setContentView(R.layout.order_list_layout);
+
+	// Inflate content
+	ExpandableListView expandList = (ExpandableListView) findViewById(R.id.orderList);
+	Set<Order> orders = Pizzeria.getInstance().getOrdersSaved();
+	OrderSetAdapter orderSetAdapter = new OrderSetAdapter(this, orders);
+	expandList.setAdapter(orderSetAdapter);
     }
 
     @Override
