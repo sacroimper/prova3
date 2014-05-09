@@ -88,7 +88,7 @@ public class ProductSetAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-	return products.size();
+	return (products.size() + 2);
     }
 
     @Override
@@ -105,44 +105,55 @@ public class ProductSetAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 	ViewHolder holder = null;
 
-	if (convertView == null) {
-	    convertView = this.inflater.inflate(
-		    R.layout.listitem_product_layout, parent, false);
+	if (position == 0) {
+	    convertView = inflater.inflate(
+		    R.layout.listitem_product_intro_layout, null);
+	} else if (position != products.size() + 1) {
+	    if (convertView == null) {
+		convertView = this.inflater.inflate(
+			R.layout.listitem_product_layout, parent, false);
 
-	    holder = new ViewHolder();
+		holder = new ViewHolder();
 
-	    holder.productImage = (ImageView) convertView
-		    .findViewById(R.id.imageInProductItem);
-	    holder.productTitle = (TextView) convertView
-		    .findViewById(R.id.titleTextInProductItem);
-	    holder.trashIcon = (ImageButton) convertView
-		    .findViewById(R.id.trashIcon);
-	    holder.productPrice = (TextView) convertView
-		    .findViewById(R.id.priceTextInProductItem);
-	    // Is necesary to develope this element to inflate the content of
-	    // this LinearLayout
-	    // Maybe it has another Adapter?
-	    holder.extraIngrentsLayout = (LinearLayout) convertView
-		    .findViewById(R.id.extraIngredientLayoutInProductItem);
+		holder.productImage = (ImageView) convertView
+			.findViewById(R.id.imageInProductItem);
+		holder.productTitle = (TextView) convertView
+			.findViewById(R.id.titleTextInProductItem);
+		holder.trashIcon = (ImageButton) convertView
+			.findViewById(R.id.trashIcon);
+		holder.productPrice = (TextView) convertView
+			.findViewById(R.id.priceTextInProductItem);
+		// Is necesary to develope this element to inflate the content
+		// of
+		// this LinearLayout
+		// Maybe it has another Adapter?
+		holder.extraIngrentsLayout = (LinearLayout) convertView
+			.findViewById(R.id.extraIngredientLayoutInProductItem);
 
-	    convertView.setTag(holder);
+		convertView.setTag(holder);
 
+	    } else {
+		holder = (ViewHolder) convertView.getTag();
+	    }
+
+	    Product product = this.products.get(position - 1);
+
+	    DAOAndroid dao = DAOAndroid.getInstance();
+	    Drawable icon = dao.getDrawableFromAssets(activity,
+		    product.getIcon());
+	    holder.productImage.setImageDrawable(icon);
+	    holder.productTitle.setText(product.getName());
+	    holder.productPrice.setText(product.getFormatedPrice());
+
+	    // It will be necessary to inflate this layout only if extra
+	    // ingredients
+	    // were added
+	    // holder.extraIngrentsLayout.
+	    // (R.id.extraIngredientLayoutInProductItem);
 	} else {
-	    holder = (ViewHolder) convertView.getTag();
+	    convertView = inflater.inflate(
+		    R.layout.listitem_product_final_layout, null);
 	}
-
-	Product product = this.products.get(position);
-
-	DAOAndroid dao = DAOAndroid.getInstance();
-	Drawable icon = dao.getDrawableFromAssets(activity, product.getIcon());
-	holder.productImage.setImageDrawable(icon);
-	holder.productTitle.setText(product.getName());
-	holder.productPrice.setText(product.getFormatedPrice());
-
-	// It will be necessary to inflate this layout only if extra ingredients
-	// were added
-	// holder.extraIngrentsLayout.
-	// (R.id.extraIngredientLayoutInProductItem);
 	return convertView;
     }
 
