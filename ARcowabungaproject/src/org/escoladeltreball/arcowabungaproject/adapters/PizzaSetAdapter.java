@@ -36,7 +36,6 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -220,8 +219,9 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    String showMore = "<font color='#FF0000'>"
 		    + activity.getResources().getString(R.string.show_more)
 		    + "</font>";
-	    holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
-
+	    // holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
+	    holder.tvDesc
+		    .setText("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 	    holder.ibAdd.setOnClickListener(new AddButtonClickListener(group,
 		    activity));
 	}
