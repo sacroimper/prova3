@@ -24,13 +24,21 @@
 
 package org.escoladeltreball.arcowabungaproject.activities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.adapters.ProductSetAdapter;
+import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ListView;
 
 public class OrderActivity extends Activity {
 
@@ -74,6 +82,21 @@ public class OrderActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.shooping_cart_layout);
+
+	Pizzeria p = Pizzeria.getInstance();
+	Set<Pizza> setCustomPizzas = p.getCustomSavedPizzas();
+	Set<Pizza> setPredefinedPizzas = p.getPredefinedPizzas();
+	// Set<Pizza> pizzas = new HashSet<Pizza>(setCustomPizzas);
+	Set<Product> products = new HashSet<Product>(setCustomPizzas);
+	products.addAll(setPredefinedPizzas);
+
+	ListView listView = (ListView) findViewById(R.id.product_list);
+	ProductSetAdapter adapter = new ProductSetAdapter(this, products);
+	listView.setAdapter(adapter);
+
+	// // Adding listeners
+	// listView.setOnTouchListener(this);
+
     }
 
     @Override
