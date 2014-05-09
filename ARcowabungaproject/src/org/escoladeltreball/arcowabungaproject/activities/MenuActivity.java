@@ -28,7 +28,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.adapters.DrinkSetAdapter;
 import org.escoladeltreball.arcowabungaproject.adapters.PizzaSetAdapter;
+import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
@@ -55,6 +57,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
@@ -86,6 +89,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
     private int idTabCounter = 0;
     private float lastX;
     private int currentTab;
+    private Pizzeria pizzeria;
 
     // ====================
     // CONSTRUCTORS
@@ -288,24 +292,30 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+	pizzeria = Pizzeria.getInstance();
+
 	// INFLATE FIRST TAB CONTENT
 	viewMenuPizza = layoutInflater
 		.inflate(R.layout.pizza_list_layout, null);
 	ExpandableListView lv = (ExpandableListView) viewMenuPizza
 		.findViewById(R.id.pizzaList);
-	Pizzeria p = Pizzeria.getInstance();
-	Set<Pizza> setCustomPizzas = p.getCustomSavedPizzas();
-	Set<Pizza> setPredefinedPizzas = p.getPredefinedPizzas();
+	Set<Pizza> setCustomPizzas = pizzeria.getCustomSavedPizzas();
+	Set<Pizza> setPredefinedPizzas = pizzeria.getPredefinedPizzas();
 	Set<Pizza> pizzas = new HashSet<Pizza>(setCustomPizzas);
 	pizzas.addAll(setPredefinedPizzas);
-	PizzaSetAdapter adapter = new PizzaSetAdapter(this, pizzas);
-	lv.setAdapter(adapter);
+	PizzaSetAdapter pizzaAdapter = new PizzaSetAdapter(this, pizzas);
+	lv.setAdapter(pizzaAdapter);
 
 	// SECOND TAB CONTENT
 	LayoutInflater layoutInflater2 = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	viewMenuDrinks = layoutInflater2.inflate(R.layout.content_second_tab,
 		null);
+	ListView listView = (ListView) viewMenuDrinks
+		.findViewById(R.id.drinkList);
+	Set<Drink> drinks = pizzeria.getDrinks();
+	DrinkSetAdapter drinkAddapter = new DrinkSetAdapter(this, drinks);
+	listView.setAdapter(drinkAddapter);
 
 	// THIRD TAB CONTENT
 	LayoutInflater layoutInflater3 = (LayoutInflater) getApplicationContext()
