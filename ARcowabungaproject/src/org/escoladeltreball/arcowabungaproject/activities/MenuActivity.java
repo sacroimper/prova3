@@ -309,7 +309,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	// SECOND TAB CONTENT
 	LayoutInflater layoutInflater2 = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	viewMenuDrinks = layoutInflater2.inflate(R.layout.content_second_tab,
+	viewMenuDrinks = layoutInflater2.inflate(R.layout.drink_list_layout,
 		null);
 	ListView listView = (ListView) viewMenuDrinks
 		.findViewById(R.id.drinkList);
