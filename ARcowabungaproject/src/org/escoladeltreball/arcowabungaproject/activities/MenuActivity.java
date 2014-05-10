@@ -29,8 +29,10 @@ import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.DrinkSetAdapter;
+import org.escoladeltreball.arcowabungaproject.adapters.OfferSetAdapter;
 import org.escoladeltreball.arcowabungaproject.adapters.PizzaSetAdapter;
 import org.escoladeltreball.arcowabungaproject.model.Drink;
+import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
@@ -312,12 +314,17 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	ListView listView = (ListView) viewMenuDrinks
 		.findViewById(R.id.drinkList);
 	Set<Drink> drinks = pizzeria.getDrinks();
-	DrinkSetAdapter drinkAddapter = new DrinkSetAdapter(this, drinks);
-	listView.setAdapter(drinkAddapter);
+	DrinkSetAdapter drinkAdapter = new DrinkSetAdapter(this, drinks);
+	listView.setAdapter(drinkAdapter);
 
 	// THIRD TAB CONTENT
-	viewMenuOffers = layoutInflater.inflate(R.layout.content_third_tab,
+	viewMenuOffers = layoutInflater.inflate(R.layout.offer_list_layout,
 		null);
+	ExpandableListView elv = (ExpandableListView) viewMenuOffers
+		.findViewById(R.id.offerList);
+	Set<Offer> offers = pizzeria.getOffers();
+	OfferSetAdapter offerAdapter = new OfferSetAdapter(this, offers);
+	elv.setAdapter(offerAdapter);
 
 	// Inflate custom tabhost with custom views.
 	setupTab(viewMenuPizza, "pizzas");
