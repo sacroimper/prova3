@@ -43,30 +43,11 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:layout_toLeftOf="@+id/separatorRight"
+        android:layout_alignParentRight="true"
         android:background="#222333"
         android:text="preu"
         android:textColor="#E63444"
         android:textSize="15sp" />
-<View
-        android:id="@id/separatorRight"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/imageButtonInItem"
-        android:background="@android:color/darker_gray" />
-
-    <ImageButton
-        android:id="@id/imageButtonInItem"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/iconorderlist"
-        android:contentDescription="" />
     
  	<View
         android:id="@+id/separatorBottom"
