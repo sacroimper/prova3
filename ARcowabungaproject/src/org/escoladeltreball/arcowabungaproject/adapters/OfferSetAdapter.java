@@ -27,13 +27,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
+import org.escoladeltreball.arcowabungaproject.listeners.AddButtonClickListener;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
+import org.escoladeltreball.arcowabungaproject.model.Product;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class OfferSetAdapter extends BaseExpandableListAdapter {
 
@@ -77,67 +86,132 @@ public class OfferSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-	// TODO Auto-generated method stub
-	return null;
+	return offers.get(groupPosition).getProductList().get(childPosition);
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-	// TODO Auto-generated method stub
 	return 0;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition,
 	    boolean isLastChild, View convertView, ViewGroup parent) {
-	// TODO Auto-generated method stub
-	return null;
+	final Product children = (Product) getChild(groupPosition,
+		childPosition);
+	ChildViewHolder holder = null;
+	if (convertView == null) {
+	    holder = new ChildViewHolder();
+	    convertView = inflater
+		    .inflate(R.layout.expanded_offer_layout, null);
+	    holder.ivIcon = (ImageView) convertView
+		    .findViewById(R.id.imageInOfferSubItem);
+	    holder.tvPrice = (TextView) convertView
+		    .findViewById(R.id.priceTextInOfferSubItem);
+	    holder.tvTitle = (TextView) convertView
+		    .findViewById(R.id.titleTextInOfferSubItem);
+	    CustomTextView.customTextView(activity, holder.tvTitle);
+	    CustomTextView.customTextView(activity, holder.tvPrice);
+	    convertView.setTag(holder);
+	} else {
+	    holder = (ChildViewHolder) convertView.getTag();
+	}
+	holder.tvTitle.setText(children.getName());
+	holder.tvPrice.setText(children.getFormatedPrice());
+
+	DAOAndroid dao = DAOAndroid.getInstance();
+	Drawable icon = dao.getDrawableFromAssets(activity, children.getIcon());
+	holder.ivIcon.setImageDrawable(icon);
+
+	return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-	// TODO Auto-generated method stub
-	return 0;
+	return offers.get(groupPosition).getProductList().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-	// TODO Auto-generated method stub
-	return null;
+	return offers.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-	// TODO Auto-generated method stub
-	return 0;
+	return offers.size();
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-	// TODO Auto-generated method stub
 	return 0;
     }
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
-	// TODO Auto-generated method stub
-	return null;
+	Offer group = (Offer) getGroup(groupPosition);
+	GroupViewHolder holder = null;
+	if (convertView == null) {
+	    holder = new GroupViewHolder();
+	    convertView = inflater
+		    .inflate(R.layout.listitem_offer_layout, null);
+	    holder.ivIcon = (ImageView) convertView
+		    .findViewById(R.id.imageInItem);
+	    holder.tvTitle = (TextView) convertView
+		    .findViewById(R.id.titleTextInItem);
+	    holder.tvPrice = (TextView) convertView
+		    .findViewById(R.id.priceTextInItem);
+	    holder.tvDesc = (TextView) convertView
+		    .findViewById(R.id.descTextInItem);
+	    holder.ibAdd = (ImageButton) convertView
+		    .findViewById(R.id.imageButtonInItem);
+	    CustomTextView.customTextView(activity, holder.tvTitle);
+	    CustomTextView.customTextView(activity, holder.tvPrice);
+	    CustomTextView.customTextView(activity, holder.tvDesc);
+	    convertView.setTag(holder);
+
+	} else {
+	    holder = (GroupViewHolder) convertView.getTag();
+	}
+
+	DAOAndroid dao = DAOAndroid.getInstance();
+	Drawable icon = dao.getDrawableFromAssets(activity, group.getIcon());
+	holder.ivIcon.setImageDrawable(icon);
+	holder.tvTitle.setText(group.getName());
+	holder.tvPrice.setText(group.getFormatedPrice());
+	holder.tvDesc
+		.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	holder.ibAdd.setOnClickListener(new AddButtonClickListener(group,
+		activity));
+	return convertView;
     }
 
     @Override
     public boolean hasStableIds() {
-	// TODO Auto-generated method stub
 	return false;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-	// TODO Auto-generated method stub
 	return false;
     }
 
     // ====================
     // GETTERS & SETTERS
     // ====================
+
+    public static class ChildViewHolder {
+	public ImageView ivIcon;
+	public TextView tvTitle;
+	public TextView tvPrice;
+    }
+
+    public static class GroupViewHolder {
+	public ImageView ivIcon;
+	public TextView tvTitle;
+	public TextView tvPrice;
+	public TextView tvDesc;
+	public ImageButton ibAdd;
+    }
+
 }
