@@ -282,10 +282,6 @@ public class MenuActivity extends Activity implements OnTouchListener,
 
 	this.setContentView(R.layout.activity_menu);
 
-	// Set transition animation
-	this.overridePendingTransition(R.anim.animation_horizontal_enter,
-		R.anim.animation_horizontal_leave);
-
 	// Up tabhost
 	tabHost = (TabHost) findViewById(android.R.id.tabhost);
 	tabHost.setup();
