@@ -165,7 +165,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-	return pizzas.size() + 1;
+	return pizzas.size();
     }
 
     @Override
@@ -198,6 +198,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 			.findViewById(R.id.descTextInItem);
 		holder.ibAdd = (ImageButton) convertView
 			.findViewById(R.id.imageButtonInItem);
+		holder.ibAdd.setFocusable(false);
 		CustomTextView.customTextView(activity, holder.tvTitle);
 		CustomTextView.customTextView(activity, holder.tvPrice);
 		CustomTextView.customTextView(activity, holder.tvDesc);
