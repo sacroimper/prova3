@@ -24,15 +24,63 @@
 
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class ServerGUI extends JFrame {
+
+    private JButton startServer;
+    private Border border;
+    private JPanel panel;
+
+    public ServerGUI() {
+	this.initComponents();
+    }
+
+    private void initComponents() {
+	this.setSize(900, 700);
+	this.setResizable(true);
+	this.setTitle("Cowabunga Server");
+	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	this.setLocationRelativeTo(null);
+	this.setLayout(new BorderLayout());
+
+	this.panel = new JPanel();
+	this.panel.setLayout(new GridLayout(2, 2));
+	this.border = BorderFactory.createCompoundBorder();
+	this.panel.setBorder(BorderFactory.createTitledBorder("Orders"));
+	this.startServer = new JButton("Start Server");
+	this.panel.add(addOrder("order1"));
+	this.panel.add(addOrder("order2"));
+	this.panel.add(addOrder("order3"));
+	this.add(this.panel, BorderLayout.CENTER);
+	this.add(startServer, BorderLayout.SOUTH);
+	this.setVisible(true);
+    }
+
+    private JInternalFrame addOrder(String nameOrder) {
+	JInternalFrame orderFrame = new JInternalFrame();
+
+	JButton accept = new JButton("Accept Order");
+	orderFrame.setLayout(new BorderLayout());
+	orderFrame.setTitle(nameOrder);
+	orderFrame.add(accept, BorderLayout.SOUTH);
+	orderFrame.setVisible(true);
+	return orderFrame;
+    }
 
     /**
      * @param args
      */
     public static void main(String[] args) {
-	// TODO Auto-generated method stub
+	new ServerGUI();
 
     }
 
