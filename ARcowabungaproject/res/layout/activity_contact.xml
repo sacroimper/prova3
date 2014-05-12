@@ -4,27 +4,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5" >
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:orientation="vertical" >
 
-    <RelativeLayout
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:src="@drawable/home_image" />
+
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="@string/about_us_tittle" />
+
+        <TextView
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:text="@string/about_us" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5" >
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:background="#3be0d0"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TELEFONO: 324234234" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DIRECCION: 324234234" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="E-MAIL: 324234234" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:background="#EE4052" >
+        android:layout_weight="2"
+        android:background="#EE4052"
+        android:gravity="center" >
 
         <ImageView
-            android:id="@+id/buton_cart_img"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
@@ -32,7 +65,7 @@
             android:src="@drawable/iconmenulist" />
 
         <TextView
-            android:id="@+id/button_cart_text"
+            android:id="@+id/button_contact_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
