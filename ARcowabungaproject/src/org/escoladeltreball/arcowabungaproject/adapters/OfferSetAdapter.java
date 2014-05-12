@@ -156,15 +156,15 @@ public class OfferSetAdapter extends BaseExpandableListAdapter {
 	    convertView = inflater
 		    .inflate(R.layout.listitem_offer_layout, null);
 	    holder.ivIcon = (ImageView) convertView
-		    .findViewById(R.id.imageInItem);
+		    .findViewById(R.id.imageInOfferItem);
 	    holder.tvTitle = (TextView) convertView
-		    .findViewById(R.id.titleTextInItem);
+		    .findViewById(R.id.titleTextInOfferItem);
 	    holder.tvPrice = (TextView) convertView
-		    .findViewById(R.id.priceTextInItem);
+		    .findViewById(R.id.priceTextInOfferItem);
 	    holder.tvDesc = (TextView) convertView
-		    .findViewById(R.id.descTextInItem);
+		    .findViewById(R.id.descTextInOfferItem);
 	    holder.ibAdd = (ImageButton) convertView
-		    .findViewById(R.id.imageButtonInItem);
+		    .findViewById(R.id.imageButtonInOfferItem);
 	    CustomTextView.customTextView(activity, holder.tvTitle);
 	    CustomTextView.customTextView(activity, holder.tvPrice);
 	    CustomTextView.customTextView(activity, holder.tvDesc);
