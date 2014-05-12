@@ -12,7 +12,7 @@
     <string name="menu_last_orders">LAST ORDERS</string>
     <string name="content_description_img">iconmenu</string>
     <string name="or_choose" >Or choose one of this</string>
-    <string name="create_your_own_pizza" >Create your own pizza</string>
+    <string name="create_your_own_pizza" >CREATE YOUR OWN PIZZA</string>
     <string name="create_your_own_pizza_desc" >To your taste with your favorite ingredients and your preferred mass!</string>
     <string name="tab_pizza">PIZZAS</string>
     <string name="tab_drinks">DRINKS</string>
@@ -22,6 +22,8 @@
     <string name="cursor_down">&#9660;</string>
     <string name="cursor_up">&#9650;</string>
     <string name="redo_order">MAKE ORDER AGAIN</string>
+    <string name="about_us_tittle">About Us</string>
+    <string name="about_us">We are the fucking best awesome pizzeria in the fucking worl... no, wait. The fucking universe!</string>
     
     
     <!-- List Views -->
