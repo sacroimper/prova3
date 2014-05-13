@@ -1,5 +1,5 @@
 /*
- *  Server.java
+ *  DatabaseUpdateServer.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -29,7 +29,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server extends Thread {
+public class DatabaseUpdateServer extends Thread {
 
     // ====================
     // CONSTANTS
@@ -49,19 +49,16 @@ public class Server extends Thread {
     // CONSTRUCTORS
     // ====================
 
-    public Server() {
+    public DatabaseUpdateServer() {
 	super();
-	// TODO Auto-generated constructor stub
     }
 
-    public Server(String name) {
+    public DatabaseUpdateServer(String name) {
 	super(name);
-	// TODO Auto-generated constructor stub
     }
 
-    public Server(ThreadGroup group, String name) {
+    public DatabaseUpdateServer(ThreadGroup group, String name) {
 	super(group, name);
-	// TODO Auto-generated constructor stub
     }
 
     // ====================
@@ -124,4 +121,5 @@ public class Server extends Thread {
     // ====================
     // GETTERS & SETTERS
     // ====================
+
 }

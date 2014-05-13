@@ -1,5 +1,5 @@
 /*
- *  Server.java
+ *  OrderReceiverServer.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -29,7 +29,11 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server extends Thread {
+/**
+ * @author local
+ * 
+ */
+public class OrderReceiverServer extends Thread {
 
     // ====================
     // CONSTANTS
@@ -49,19 +53,16 @@ public class Server extends Thread {
     // CONSTRUCTORS
     // ====================
 
-    public Server() {
+    public OrderReceiverServer() {
 	super();
-	// TODO Auto-generated constructor stub
     }
 
-    public Server(String name) {
+    public OrderReceiverServer(String name) {
 	super(name);
-	// TODO Auto-generated constructor stub
     }
 
-    public Server(ThreadGroup group, String name) {
+    public OrderReceiverServer(ThreadGroup group, String name) {
 	super(group, name);
-	// TODO Auto-generated constructor stub
     }
 
     // ====================
@@ -124,4 +125,5 @@ public class Server extends Thread {
     // ====================
     // GETTERS & SETTERS
     // ====================
+
 }
