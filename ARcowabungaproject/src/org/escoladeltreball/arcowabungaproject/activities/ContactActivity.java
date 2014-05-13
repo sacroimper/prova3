@@ -25,14 +25,19 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class ContactActivity extends Activity {
+public class ContactActivity extends Activity implements OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -74,12 +79,42 @@ public class ContactActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_contact);
+
+	// Set custom text to all the TextView's
+	TextView tv = (TextView) findViewById(R.id.contact_text_description);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.contact_item_first);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.contact_item_second);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.contact_item_third);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.contact_item_four);
+	CustomTextView.customTextView(this, tv);
+
+	tv = (TextView) findViewById(R.id.contact_text_telephone);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.contact_text_address);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.contact_text_email);
+	CustomTextView.customTextView(this, tv);
+
+	tv = (TextView) findViewById(R.id.contact_text_menu_bottom);
+	CustomTextView.customTextView(this, tv);
+
+	LinearLayout ly = (LinearLayout) findViewById(R.id.contact_linear_bottom);
+	ly.setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 	getMenuInflater().inflate(R.menu.main, menu);
 	return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+	finish();
     }
 
     // ====================
