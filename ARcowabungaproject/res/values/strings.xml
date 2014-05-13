@@ -22,8 +22,7 @@
     <string name="cursor_down">&#9660;</string>
     <string name="cursor_up">&#9650;</string>
     <string name="redo_order">MAKE ORDER AGAIN</string>
-    <string name="about_us_tittle">About Us</string>
-    <string name="about_us">We are the fucking best awesome pizzeria in the fucking worl.. no, wait. The fucking universe!</string>
+    <string name="about_us">About Us: we are the fucking best awesome pizzeria in the fucking worl.. no, wait. The fucking universe!</string>
     
     <!-- List Views -->
     

@@ -29,13 +29,16 @@ import java.util.List;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.activities.ARViewActivity;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.listeners.AddButtonClickListener;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -179,7 +182,15 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	if (groupPosition == 0) {
 	    convertView = inflater.inflate(R.layout.pizza_list_intro_layout,
 		    null);
-
+	    TextView tv = (TextView) convertView
+		    .findViewById(R.id.makeYourPizza_tittle);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView
+		    .findViewById(R.id.makeYourPizza_description);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView
+		    .findViewById(R.id.makeYourPizza_description_second);
+	    CustomTextView.customTextView(activity, tv);
 	} else {
 
 	    Pizza group = (Pizza) getGroup(groupPosition);
@@ -221,9 +232,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    String showMore = "<font color='#FF0000'>"
 		    + activity.getResources().getString(R.string.show_more)
 		    + "</font>";
-	    // holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
-	    holder.tvDesc
-		    .setText("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+	    holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
 	    holder.ibAdd.setOnClickListener(new AddButtonClickListener(group,
 		    activity));
 	}
@@ -254,31 +263,12 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public void onClick(View v) {
-	    // Intent i = new Intent(activity, ARViewActivity.class);
-	    // Pasarle pizza
+	    Intent i = new Intent(activity, ARViewActivity.class);
 	    // i.putExtra("pizza", pizzas.get(index).getId);
-	    // activity.startActivity(i);
-	    pizzas.get(index);
+	    activity.startActivity(i);
+	    // pizzas.get(index);
 	}
     }
-
-    // public class AddButtonClickListener implements OnClickListener {
-    //
-    // private Product product;
-    //
-    // public AddButtonClickListener(Product product) {
-    // this.product = product;
-    // }
-    //
-    // @Override
-    // public void onClick(View v) {
-    // Pizzeria.getInstance().getShoppingCart().addProduct(product);
-    // Toast.makeText(activity,
-    // "S'ha afegit una producte al carro de la compra",
-    // Toast.LENGTH_SHORT).show();
-    // }
-    //
-    // }
 
     public static class ChildViewHolder {
 	public TextView tvDesc;
