@@ -30,6 +30,7 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.OrderSetAdapter;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 public class LastOrdersActivity extends Activity {
 
@@ -86,6 +88,12 @@ public class LastOrdersActivity extends Activity {
 	Set<Order> orders = Pizzeria.getInstance().getOrdersSaved();
 	OrderSetAdapter orderSetAdapter = new OrderSetAdapter(this, orders);
 	expandList.setAdapter(orderSetAdapter);
+
+	// Apply custom textview
+	TextView tv = (TextView) findViewById(R.id.button_menu_text);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.button_cart_text);
+	CustomTextView.customTextView(this, tv);
     }
 
     @Override
