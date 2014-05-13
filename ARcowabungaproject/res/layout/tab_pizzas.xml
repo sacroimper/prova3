@@ -3,7 +3,7 @@
     android:id="@+id/tabsLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#3be0d0" >
+    android:background="@color/light_cyan" >
 
     <ImageView
         android:id="@+id/tabImg"

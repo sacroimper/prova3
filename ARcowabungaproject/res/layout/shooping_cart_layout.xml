@@ -8,7 +8,7 @@
         android:id="@+id/remeberAdvertice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#888888"
+        android:background="@color/grey"
         android:orientation="vertical" >
 
         <ImageView
@@ -54,7 +54,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:background="#EE4052"
+        android:background="@color/red"
         android:baselineAligned="false"
         android:clickable="true"
         android:orientation="horizontal" >

@@ -63,9 +63,9 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/cursorTextInOrderItem"
-        android:background="#FF3333"
+        android:background="#333333"
         android:text="preu"
-        android:textColor="#E63444" >
+        android:textColor="@color/red" >
     </TextView>
 
     <TextView
@@ -77,9 +77,9 @@
         android:layout_marginBottom="13dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="#33FF33"
+        android:background="#335555"
         android:text="@string/cursor_down"
-        android:textColor="#e73445" >
+        android:textColor="@color/red" >
     </TextView>
 
     <View

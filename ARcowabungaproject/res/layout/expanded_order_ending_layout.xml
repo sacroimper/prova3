@@ -7,7 +7,7 @@
         android:id="@+id/blueSubtotalInOrderEndingSubItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#01DFD7" >
+        android:background="@color/light_cyan" >
 
         <TextView
             android:id="@+id/subtotalTextInOrderEndingSubItem"
@@ -91,7 +91,7 @@
         android:layout_height="1dp"
         android:layout_below="@id/shippingCostTextInOrderEndingSubItem"
         android:layout_marginTop="20dp"
-        android:background="#FF3333" />
+        android:background="@color/red" />
 
     <TextView
         android:id="@+id/totalTextInOrderEndingSubItem"
@@ -127,7 +127,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:background="#e73445"
+        android:background="@color/red"
         android:clickable="true"
         android:gravity="center"
         android:orientation="horizontal" >

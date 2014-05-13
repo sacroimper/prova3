@@ -37,7 +37,7 @@
         android:layout_toRightOf="@id/imageInPizzaItem"
         android:background="#335533"
         android:text="titol"
-        android:textColor="#E63444"
+        android:textColor="@color/red"
         android:textSize="18sp" >
     </TextView>
 
@@ -52,7 +52,7 @@
         android:layout_toLeftOf="@+id/separatorRight"
         android:background="#222333"
         android:text="preu"
-        android:textColor="#E63444"
+        android:textColor="@color/red"
         android:textSize="15sp" />
 
     <TextView
