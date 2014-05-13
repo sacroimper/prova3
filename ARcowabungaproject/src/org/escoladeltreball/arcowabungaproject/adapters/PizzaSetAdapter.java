@@ -128,11 +128,11 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    convertView = inflater
 		    .inflate(R.layout.expanded_pizza_layout, null);
 	    holder.tvDesc = (TextView) convertView
-		    .findViewById(R.id.textInSubItem);
+		    .findViewById(R.id.textInPizzaSubItem);
 	    holder.ivIcon = (ImageView) convertView
-		    .findViewById(R.id.imageInSubItem);
+		    .findViewById(R.id.imageInPizzaSubItem);
 	    holder.llButton = (LinearLayout) convertView
-		    .findViewById(R.id.pizzaButtonInSubItem);
+		    .findViewById(R.id.pizzaButtonInPizzaSubItem);
 	    CustomTextView.customTextView(activity, holder.tvDesc);
 	    CustomTextView.customTextView(activity, (TextView) convertView
 		    .findViewById(R.id.textButtonInPizzaSubItem));
@@ -201,15 +201,15 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 		convertView = inflater.inflate(R.layout.listitem_pizza_layout,
 			null);
 		holder.ivIcon = (ImageView) convertView
-			.findViewById(R.id.imageInItem);
+			.findViewById(R.id.imageInPizzaItem);
 		holder.tvTitle = (TextView) convertView
-			.findViewById(R.id.titleTextInItem);
+			.findViewById(R.id.titleTextInPizzaItem);
 		holder.tvPrice = (TextView) convertView
-			.findViewById(R.id.priceTextInItem);
+			.findViewById(R.id.priceTextInPizzaItem);
 		holder.tvDesc = (TextView) convertView
-			.findViewById(R.id.descTextInItem);
+			.findViewById(R.id.descTextInPizzaItem);
 		holder.ibAdd = (ImageButton) convertView
-			.findViewById(R.id.imageButtonInItem);
+			.findViewById(R.id.imageButtonInPizzaItem);
 		holder.ibAdd.setFocusable(false);
 		CustomTextView.customTextView(activity, holder.tvTitle);
 		CustomTextView.customTextView(activity, holder.tvPrice);

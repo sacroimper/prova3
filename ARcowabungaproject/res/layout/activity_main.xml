@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_above="@+id/menu_selection_actualorder"
-        android:background="#ad2334"
+        android:background="@color/dark_red_100"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
@@ -48,7 +48,7 @@
         android:layout_height="50dp"
         android:layout_above="@+id/menu_selection_contact"
         android:layout_alignParentLeft="true"
-        android:background="#8d1f2a"
+        android:background="@color/dark_red_200"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_above="@+id/menu_selection_lastorders"
-        android:background="#711b23"
+        android:background="@color/dark_red_300"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
@@ -104,7 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="#5a1b22"
+        android:background="@color/dark_red_400"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >

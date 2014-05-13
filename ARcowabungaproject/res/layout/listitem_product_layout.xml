@@ -35,7 +35,7 @@
         android:layout_toRightOf="@+id/imageInProductItem"
         android:background="#335533"
         android:text="PIZZA CALZONE"
-        android:textColor="#E63444" />
+        android:textColor="@color/red" />
 
     <ImageButton
         android:id="@+id/trashIcon"

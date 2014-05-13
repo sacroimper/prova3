@@ -8,7 +8,7 @@
         android:id="@+id/makeYourPizza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#e73445"
+        android:background="@color/red"
         android:orientation="vertical"
         android:padding="10dp" >
 
