@@ -2,78 +2,93 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="4"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:gravity="center"
         android:orientation="vertical" >
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:src="@drawable/home_image" />
+            android:layout_height="100dp"
+            android:src="@drawable/home_image"
+            android:contentDescription="@string/content_description_img" />
 
         <TextView
-            android:layout_width="210dp"
+            android:id="@+id/contact_text_description"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="@string/about_us" />
+            android:text="@string/about_us"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8"
+        android:layout_marginBottom="25dp"
         android:gravity="center" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/contact_item_first"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="holakease"
+            android:text="@string/contact_wood_oven"
             android:drawableTop="@drawable/ic_launcher"
-            android:layout_margin="5dp"
-            android:textColor="@color/red" />
+            android:textColor="@color/red"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:layout_margin="5dp" />
         
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/contact_item_second"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="holakease"
+            android:text="@string/contact_quality_gourmet"
             android:drawableTop="@drawable/ic_launcher"
-            android:layout_margin="5dp"
-            android:textColor="@color/red" />
+            android:textColor="@color/red"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:layout_margin="5dp" />
         
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/contact_item_third"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="holakease"
+            android:text="@string/contact_italian_chef"
             android:drawableTop="@drawable/ic_launcher"
-            android:layout_margin="5dp"
-            android:textColor="@color/red" />
+            android:textColor="@color/red"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:layout_margin="5dp" />
         
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/contact_item_four"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="holakease"
+            android:text="@string/contact_satisfaction"
             android:drawableTop="@drawable/ic_launcher"
-            android:layout_margin="5dp"
-            android:textColor="@color/red" />
+            android:textColor="@color/red"
+            android:textSize="11sp"
+            android:gravity="center" 
+            android:layout_margin="5dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="3"
-        android:background="#3be0d0"
+        android:background="@color/light_cyan"
         android:gravity="center"
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/contact_text_telephone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TELEFONO: 324234234"
+            android:text="@string/contact_telephone"
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp" />
@@ -86,9 +101,10 @@
             android:layout_marginRight="25dp"/>
 
         <TextView
+            android:id="@+id/contact_text_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DIRECCION: 324234234"
+            android:text="@string/contact_address"
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp"
@@ -102,9 +118,10 @@
             android:layout_marginRight="25dp"/>
 
         <TextView
+            android:id="@+id/contact_text_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="E-MAIL: 324234234"
+            android:text="@string/contact_email"
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp"
@@ -120,10 +137,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/contact_linear_bottom"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#EE4052"
-        android:gravity="center" >
+        android:background="@color/red"
+        android:gravity="center"
+        android:clickable="true" >
 
         <ImageView
             android:layout_width="20dp"
@@ -133,7 +152,7 @@
             android:src="@drawable/iconmenulist" />
 
         <TextView
-            android:id="@+id/button_contact_menu"
+            android:id="@+id/contact_text_menu_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
