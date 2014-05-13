@@ -165,12 +165,12 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-	return pizzas.size();
+	return pizzas.size() + 1;
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-	return pizzas.get(groupPosition).getId();
+	return 0;
     }
 
     @Override
@@ -179,6 +179,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	if (groupPosition == 0) {
 	    convertView = inflater.inflate(R.layout.pizza_list_intro_layout,
 		    null);
+
 	} else {
 
 	    Pizza group = (Pizza) getGroup(groupPosition);
