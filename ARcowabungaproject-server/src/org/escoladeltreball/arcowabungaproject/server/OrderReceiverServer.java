@@ -46,8 +46,8 @@ public class OrderReceiverServer extends Thread {
     private ServerSocket serverSocket;
     private Socket socketService;
 
-    private ObjectInputStream entrada;
-    private ObjectOutputStream sortida;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
     // ====================
     // CONSTRUCTORS
@@ -80,14 +80,14 @@ public class OrderReceiverServer extends Thread {
     private void waitClient() throws IOException {
 	System.out.println("Server> Esperant client ...");
 	socketService = serverSocket.accept();
-	sortida = new ObjectOutputStream(socketService.getOutputStream());
-	sortida.flush();
-	entrada = new ObjectInputStream(socketService.getInputStream());
+	out = new ObjectOutputStream(socketService.getOutputStream());
+	out.flush();
+	in = new ObjectInputStream(socketService.getInputStream());
     }
 
     private void closeClient() throws IOException {
-	sortida.close();
-	entrada.close();
+	out.close();
+	in.close();
 	socketService.close();
 	System.out.println("Server> Client tancat");
     }
