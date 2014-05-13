@@ -33,6 +33,7 @@
             android:contentDescription="@string/content_description_img" />
 
         <TextView
+            android:id="@+id/main_text_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -62,6 +63,7 @@
             android:contentDescription="@string/content_description_img" />
 
         <TextView
+            android:id="@+id/main_text_actualorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -90,6 +92,7 @@
             android:contentDescription="@string/content_description_img" />
 
         <TextView
+            android:id="@+id/main_text_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -118,6 +121,7 @@
             android:contentDescription="@string/content_description_img" />
 
         <TextView
+            android:id="@+id/main_text_lastorders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
