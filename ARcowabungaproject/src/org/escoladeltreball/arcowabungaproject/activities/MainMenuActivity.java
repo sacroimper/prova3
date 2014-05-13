@@ -25,6 +25,7 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainMenuActivity extends Activity implements OnClickListener {
 
@@ -51,6 +53,15 @@ public class MainMenuActivity extends Activity implements OnClickListener {
 
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_main);
+
+	TextView tv = (TextView) findViewById(R.id.main_text_menu);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.main_text_actualorder);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.main_text_contact);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.main_text_lastorders);
+	CustomTextView.customTextView(this, tv);
 
 	// Buttons
 	LinearLayout bMenu = (LinearLayout) findViewById(R.id.menu_selection_menu);
