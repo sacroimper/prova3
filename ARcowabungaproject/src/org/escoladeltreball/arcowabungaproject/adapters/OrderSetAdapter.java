@@ -111,7 +111,7 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-	return ((Product) getChild(groupPosition, childPosition)).getId();
+	return 0;
     }
 
     @Override
@@ -201,7 +201,7 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getGroupId(int groupPosition) {
-	return orders.get(groupPosition).getId();
+	return 0;
     }
 
     @Override
