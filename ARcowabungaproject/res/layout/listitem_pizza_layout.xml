@@ -16,7 +16,7 @@
         android:background="@android:color/darker_gray" />
 
     <ImageView
-        android:id="@+id/imageInItem"
+        android:id="@+id/imageInPizzaItem"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
@@ -26,15 +26,15 @@
         android:src="@drawable/home_image" />
 
     <TextView
-        android:id="@+id/titleTextInItem"
+        android:id="@+id/titleTextInPizzaItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/separatorTop"
         android:layout_marginBottom="2dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="13dp"
-        android:layout_toLeftOf="@+id/priceTextInItem"
-        android:layout_toRightOf="@id/imageInItem"
+        android:layout_toLeftOf="@+id/priceTextInPizzaItem"
+        android:layout_toRightOf="@id/imageInPizzaItem"
         android:background="#335533"
         android:text="titol"
         android:textColor="#E63444"
@@ -42,7 +42,7 @@
     </TextView>
 
     <TextView
-        android:id="@id/priceTextInItem"
+        android:id="@id/priceTextInPizzaItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/separatorTop"
@@ -56,15 +56,15 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/descTextInItem"
+        android:id="@+id/descTextInPizzaItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/separatorBottom"
-        android:layout_below="@id/titleTextInItem"
+        android:layout_below="@id/titleTextInPizzaItem"
         android:layout_marginBottom="13dp"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@id/separatorRight"
-        android:layout_toRightOf="@id/imageInItem"
+        android:layout_toRightOf="@id/imageInPizzaItem"
         android:background="#33FF33"
         android:text="desc"
         android:textSize="10sp" >
@@ -76,11 +76,11 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/imageButtonInItem"
+        android:layout_toLeftOf="@+id/imageButtonInPizzaItem"
         android:background="@android:color/darker_gray" />
 
     <ImageButton
-        android:id="@id/imageButtonInItem"
+        android:id="@id/imageButtonInPizzaItem"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentRight="true"

@@ -16,7 +16,7 @@
         android:background="@android:color/darker_gray" />
 
     <ImageView
-        android:id="@+id/imageInSubItem"
+        android:id="@+id/imageInPizzaSubItem"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerVertical="true"
@@ -27,13 +27,13 @@
         android:scaleType="fitXY" />
 
     <TextView
-        android:id="@+id/textInSubItem"
+        android:id="@+id/textInPizzaSubItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imageInSubItem"
+        android:layout_toRightOf="@id/imageInPizzaSubItem"
         android:layout_alignParentRight="true"
         android:layout_below="@id/separatorTop"
-        android:layout_above="@+id/pizzaButtonInSubItem"
+        android:layout_above="@+id/pizzaButtonInPizzaSubItem"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
@@ -41,11 +41,11 @@
     </TextView>
 
     <LinearLayout
-        android:id="@id/pizzaButtonInSubItem"
+        android:id="@id/pizzaButtonInPizzaSubItem"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/imageInSubItem"
+        android:layout_toRightOf="@id/imageInPizzaSubItem"
         android:layout_above="@+id/separatorBottom"
         android:orientation="horizontal"
         android:background="#e73445" 
