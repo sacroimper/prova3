@@ -395,7 +395,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	});
 
 	// Change font type on layout
-	TextView tv = (TextView) findViewById(R.id.buton_menu_text);
+	TextView tv = (TextView) findViewById(R.id.button_menu_text);
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);

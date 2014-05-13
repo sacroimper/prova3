@@ -54,7 +54,7 @@
             android:paddingLeft="20dp" >
 
             <ImageView
-                android:id="@+id/buton_menu_img"
+                android:id="@+id/button_menu_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
@@ -62,7 +62,7 @@
                 android:src="@drawable/iconmenulist" />
 
             <TextView
-                android:id="@+id/buton_menu_text"
+                android:id="@+id/button_menu_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -86,7 +86,7 @@
             android:paddingLeft="20dp" >
 
             <ImageView
-                android:id="@+id/buton_cart_img"
+                android:id="@+id/button_cart_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
