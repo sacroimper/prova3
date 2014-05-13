@@ -46,5 +46,15 @@
     
     <!-- End Layout Buttons -->
     <string name="button_price">32,00€</string>
+    
+    <!-- Contact Activity -->
+    <string name="contact_telephone">TELEPHONE: 93 666 666</string>
+    <string name="contact_address">ADDRESS: C/ Gran vía del calamar, 666, 2, 00069 Barcelona</string>
+    <string name="contact_email">E-MAIL: jodertio@chicote.com</string>
+    <string name="contact_wood_oven">WOOD OVEN</string>
+    <string name="contact_quality_gourmet">QUALITY GOURMET</string>
+    <string name="contact_italian_chef">ITALIAN CHEF</string>
+    <string name="contact_satisfaction">SATISFACTION 100%</string>
+    
 </resources>
 
