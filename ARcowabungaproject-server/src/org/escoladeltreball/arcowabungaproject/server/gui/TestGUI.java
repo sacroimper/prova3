@@ -86,7 +86,7 @@ public class TestGUI extends JFrame {
 	Ingredient i9 = new Ingredient(16, "I9", 1.5f, 151, 152);
 	Ingredient i10 = new Ingredient(17, "I10", 1.5f, 151, 152);
 
-	Pizza p1 = new Pizza(1, "P1", 10, 150, 0, Pizza.MASSTYPE_THIN,
+	Pizza p1 = new Pizza(1, "Carbonara", 10, 150, 0, Pizza.MASSTYPE_THIN,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_SMALL);
 
 	Ingredients is1 = new Ingredients(28);
