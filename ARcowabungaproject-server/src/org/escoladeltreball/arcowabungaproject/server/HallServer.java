@@ -26,7 +26,8 @@ package org.escoladeltreball.arcowabungaproject.server;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
+
+import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 
 public class HallServer extends Server {
 
@@ -37,8 +38,6 @@ public class HallServer extends Server {
     // ====================
     // ATTRIBUTES
     // ====================
-
-    private Map<Integer, Server> listeningServers;
 
     // ====================
     // CONSTRUCTORS
@@ -61,6 +60,16 @@ public class HallServer extends Server {
     // PRIVATE METHODS
     // ====================
 
+    private int validPort() {
+	int validPort = HALL_PORT + 1;
+	synchronized (listeningServers) {
+	    while (listeningServers.containsKey(validPort)) {
+		validPort++;
+	    }
+	}
+	return validPort;
+    }
+
     // ====================
     // OVERRIDE METHODS
     // ====================
@@ -70,15 +79,30 @@ public class HallServer extends Server {
 	init();
 	try {
 	    waitClient();
-
+	    int opt = in.readInt();
+	    Server newServer = null;
+	    int newPort = validPort();
+	    switch (opt) {
+	    case ServerConstants.SERVER_OPTION_DATABASE_UPDATE:
+		newServer = new DatabaseUpdateServer(newPort);
+		break;
+	    case ServerConstants.SERVER_OPTION_SEND_ORDER:
+		newServer = new OrderReceiverServer(newPort);
+		break;
+	    }
+	    if (newServer != null) {
+		newServer.start();
+		out.write(newPort);
+	    }
+	    closeClient();
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	close();
     }
-
     // ====================
     // GETTERS & SETTERS
     // ====================
+
 }

@@ -60,7 +60,9 @@ public abstract class Server extends Thread {
 	super();
 	setName(getClass().getSimpleName() + ":" + port);
 	this.port = port;
-	listeningServers.put(port, this);
+	synchronized (listeningServers) {
+	    listeningServers.put(port, this);
+	}
     }
 
     // ====================
@@ -96,7 +98,9 @@ public abstract class Server extends Thread {
 	} finally {
 	    print("Closed");
 	}
-	listeningServers.remove(port);
+	synchronized (listeningServers) {
+	    listeningServers.remove(port);
+	}
     }
 
     protected void init() {
