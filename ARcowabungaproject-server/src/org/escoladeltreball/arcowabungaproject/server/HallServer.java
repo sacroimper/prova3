@@ -28,8 +28,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Server extends Thread {
+public class HallServer extends Thread {
 
     // ====================
     // CONSTANTS
@@ -45,23 +47,15 @@ public class Server extends Thread {
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
+    private Map<Integer, HallServer> listeningServers;
+
     // ====================
     // CONSTRUCTORS
     // ====================
 
-    public Server() {
+    public HallServer() {
 	super();
-	// TODO Auto-generated constructor stub
-    }
-
-    public Server(String name) {
-	super(name);
-	// TODO Auto-generated constructor stub
-    }
-
-    public Server(ThreadGroup group, String name) {
-	super(group, name);
-	// TODO Auto-generated constructor stub
+	listeningServers = new HashMap<Integer, HallServer>();
     }
 
     // ====================
@@ -77,7 +71,7 @@ public class Server extends Thread {
     // ====================
 
     private void waitClient() throws IOException {
-	System.out.println("Server> Esperant client ...");
+	print("Waiting client ...");
 	socketService = serverSocket.accept();
 	out = new ObjectOutputStream(socketService.getOutputStream());
 	out.flush();
@@ -88,7 +82,7 @@ public class Server extends Thread {
 	out.close();
 	in.close();
 	socketService.close();
-	System.out.println("Server> Client tancat");
+	print("Client closed");
     }
 
     private void close() {
@@ -97,7 +91,7 @@ public class Server extends Thread {
 	} catch (IOException e) {
 	    System.out.println(e);
 	} finally {
-	    System.out.println("Server> Finalitzat");
+	    print("Closed");
 	}
     }
 
@@ -108,6 +102,10 @@ public class Server extends Thread {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+    }
+
+    private void print(String msg) {
+	System.out.println(getClass().getSimpleName() + "> " + msg);
     }
 
     // ====================
