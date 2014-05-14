@@ -24,12 +24,16 @@
 
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
+import java.awt.BorderLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.Border;
 
@@ -37,6 +41,10 @@ public class ServerGUI extends JFrame {
 
     private JButton startServer;
     private Border border;
+    private JPanel jpOrders;
+    private JPanel jpInfo;
+
+    private JSplitPane split;
     private JPanel panelWaitOrders;
     private JPanel panelMakingOrders;
     private JPanel panelSendedOrders;
@@ -51,8 +59,21 @@ public class ServerGUI extends JFrame {
 	this.setTitle("Cowabunga Server");
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	this.setLocationRelativeTo(null);
+	this.setLayout(new BorderLayout());
 
-	this.add(createTabs());
+	this.jpOrders = new JPanel();
+	this.jpOrders.setLayout(new BorderLayout());
+	this.jpOrders.setBorder(BorderFactory.createEtchedBorder());
+	this.jpOrders.add(createTabs());
+
+	this.jpInfo = new JPanel();
+	this.jpInfo.setBorder(BorderFactory.createEtchedBorder());
+
+	this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpOrders,
+		jpInfo);
+	this.split.setOneTouchExpandable(true);
+
+	this.add(split);
 	this.setJMenuBar(CreateMenuBar());
 	this.setVisible(true);
     }
@@ -60,6 +81,7 @@ public class ServerGUI extends JFrame {
     private JTabbedPane createTabs() {
 	JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
+
 	jtp.addTab("Wait Orders", this.panelWaitOrders);
 	jtp.addTab("Making Orders", this.panelMakingOrders);
 	jtp.addTab("Sended Orders", this.panelSendedOrders);
