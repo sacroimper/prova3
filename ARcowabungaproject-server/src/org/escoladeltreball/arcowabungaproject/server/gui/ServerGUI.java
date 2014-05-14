@@ -27,7 +27,6 @@ package org.escoladeltreball.arcowabungaproject.server.gui;
 import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -39,7 +38,6 @@ import javax.swing.border.Border;
 
 public class ServerGUI extends JFrame {
 
-    private JButton startServer;
     private Border border;
     private JPanel jpOrders;
     private JPanel jpInfo;
@@ -72,6 +70,7 @@ public class ServerGUI extends JFrame {
 	this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpOrders,
 		jpInfo);
 	this.split.setOneTouchExpandable(true);
+	this.split.setResizeWeight(0.5);
 
 	this.add(split);
 	this.setJMenuBar(CreateMenuBar());
