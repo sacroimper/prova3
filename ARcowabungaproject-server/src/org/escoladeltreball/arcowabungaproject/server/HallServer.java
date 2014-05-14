@@ -67,26 +67,28 @@ public class HallServer extends Server {
     @Override
     public void run() {
 	init();
-	try {
-	    waitClient();
-	    int opt = in.readInt();
-	    Server newServer = null;
-	    int newPort = getValidPort();
-	    switch (opt) {
-	    case ServerConstants.SERVER_OPTION_DATABASE_UPDATE:
-		newServer = new DatabaseUpdateServer(newPort);
-		break;
-	    case ServerConstants.SERVER_OPTION_SEND_ORDER:
-		newServer = new OrderReceiverServer(newPort);
-		break;
+	while (!isStopped()) {
+	    try {
+		waitClient();
+		int opt = in.readInt();
+		Server newServer = null;
+		int newPort = getValidPort();
+		switch (opt) {
+		case ServerConstants.SERVER_OPTION_DATABASE_UPDATE:
+		    newServer = new DatabaseUpdateServer(newPort);
+		    break;
+		case ServerConstants.SERVER_OPTION_SEND_ORDER:
+		    newServer = new OrderReceiverServer(newPort);
+		    break;
+		}
+		if (newServer != null) {
+		    newServer.start();
+		    out.write(newPort);
+		}
+		closeClient();
+	    } catch (IOException e) {
+		e.printStackTrace();
 	    }
-	    if (newServer != null) {
-		newServer.start();
-		out.write(newPort);
-	    }
-	    closeClient();
-	} catch (IOException e) {
-	    e.printStackTrace();
 	}
 	close();
     }
