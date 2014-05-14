@@ -51,7 +51,7 @@ public abstract class Server extends Thread {
     protected ObjectOutputStream out;
 
     private int port;
-    protected Map<Integer, Server> listeningServers;
+    protected static Map<Integer, Server> listeningServers;
 
     // ====================
     // CONSTRUCTORS
