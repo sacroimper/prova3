@@ -25,6 +25,7 @@ package org.escoladeltreball.arcowabungaproject.server.gui;
 
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -74,7 +75,10 @@ public class PizzaPanel extends JPanel {
     // PRIVATE METHODS
     // ====================
     private void initComponents() {
+
 	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	this.border = BorderFactory.createEtchedBorder();
+	this.setBorder(border);
 	// Put information
 	this.jlPizzaName = new JLabel(this.pizza.getName());
 	this.jlPizzaName.setFont(jlPizzaName.getFont().deriveFont(30f));
@@ -84,7 +88,7 @@ public class PizzaPanel extends JPanel {
 	this.jlPizzaType = new JLabel("Type: " + this.pizza.getType());
 	this.jlPizzaPrice = new JLabel("Price: " + this.pizza.getPrice() + "€");
 
-	String[] columnNames = { "Ingredient", "Quantity", };
+	String[] columnNames = { "Ingredient", "Quantity" };
 	String[][] ingredientsData = new String[this.pizza.getIngredients()
 		.size()][2];
 
@@ -99,11 +103,14 @@ public class PizzaPanel extends JPanel {
 	// Center text in table
 	DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 	centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-	jtIngredients.getColumn("Ingredient").setCellRenderer(centerRenderer);
-	jtIngredients.getColumn("Quantity").setCellRenderer(centerRenderer);
+	this.jtIngredients.getColumn("Ingredient").setCellRenderer(
+		centerRenderer);
+	this.jtIngredients.getColumn("Quantity")
+		.setCellRenderer(centerRenderer);
 
 	JScrollPane sp = new JScrollPane(this.jtIngredients);
-
+	sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	sp.setMaximumSize(this.jtIngredients.getMaximumSize());
 	this.add(this.jlPizzaName);
 	this.add(this.jlPizzaSize);
 	this.add(this.jlPizzaMassType);
