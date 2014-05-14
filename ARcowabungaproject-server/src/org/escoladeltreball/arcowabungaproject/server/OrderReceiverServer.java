@@ -23,17 +23,11 @@
  */
 package org.escoladeltreball.arcowabungaproject.server;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-
 /**
  * @author local
  * 
  */
-public class OrderReceiverServer extends Thread {
+public class OrderReceiverServer extends Server {
 
     // ====================
     // CONSTANTS
@@ -43,26 +37,12 @@ public class OrderReceiverServer extends Thread {
     // ATTRIBUTES
     // ====================
 
-    private ServerSocket serverSocket;
-    private Socket socketService;
-
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
-
     // ====================
     // CONSTRUCTORS
     // ====================
 
-    public OrderReceiverServer() {
-	super();
-    }
-
-    public OrderReceiverServer(String name) {
-	super(name);
-    }
-
-    public OrderReceiverServer(ThreadGroup group, String name) {
-	super(group, name);
+    public OrderReceiverServer(int port) {
+	super(port);
     }
 
     // ====================
@@ -76,40 +56,6 @@ public class OrderReceiverServer extends Thread {
     // ====================
     // PRIVATE METHODS
     // ====================
-
-    private void waitClient() throws IOException {
-	System.out.println("Server> Esperant client ...");
-	socketService = serverSocket.accept();
-	out = new ObjectOutputStream(socketService.getOutputStream());
-	out.flush();
-	in = new ObjectInputStream(socketService.getInputStream());
-    }
-
-    private void closeClient() throws IOException {
-	out.close();
-	in.close();
-	socketService.close();
-	System.out.println("Server> Client tancat");
-    }
-
-    private void close() {
-	try {
-	    closeClient();
-	} catch (IOException e) {
-	    System.out.println(e);
-	} finally {
-	    System.out.println("Server> Finalitzat");
-	}
-    }
-
-    private void init() {
-	try {
-	    serverSocket = new ServerSocket(5432);
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-    }
 
     // ====================
     // OVERRIDE METHODS

@@ -23,6 +23,12 @@
  */
 package org.escoladeltreball.arcowabungaproject.server;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 /**
  * @author Marc
  * 
@@ -33,13 +39,29 @@ public abstract class Server extends Thread {
     // CONSTANTS
     // ====================
 
+    public static final int HALL_PORT = 4444;
+
     // ====================
     // ATTRIBUTES
     // ====================
 
+    private ServerSocket serverSocket;
+    private Socket socketService;
+
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
+
+    private int port;
+
     // ====================
     // CONSTRUCTORS
     // ====================
+
+    public Server(int port) {
+	super();
+	setName(getClass().getSimpleName() + ":" + port);
+	this.port = port;
+    }
 
     // ====================
     // PUBLIC METHODS
@@ -48,6 +70,44 @@ public abstract class Server extends Thread {
     // ====================
     // PROTECTED METHODS
     // ====================
+
+    protected void waitClient() throws IOException {
+	print("Waiting client ...");
+	socketService = serverSocket.accept();
+	out = new ObjectOutputStream(socketService.getOutputStream());
+	out.flush();
+	in = new ObjectInputStream(socketService.getInputStream());
+    }
+
+    protected void closeClient() throws IOException {
+	out.close();
+	in.close();
+	socketService.close();
+	print("Client closed");
+    }
+
+    protected void close() {
+	try {
+	    closeClient();
+	} catch (IOException e) {
+	    System.out.println(e);
+	} finally {
+	    print("Closed");
+	}
+    }
+
+    protected void init() {
+	try {
+	    serverSocket = new ServerSocket(5432);
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+    }
+
+    protected void print(String msg) {
+	System.out.println(getName() + "> " + msg);
+    }
 
     // ====================
     // PRIVATE METHODS
@@ -63,4 +123,13 @@ public abstract class Server extends Thread {
     // ====================
     // GETTERS & SETTERS
     // ====================
+
+    public int getPort() {
+	return port;
+    }
+
+    public void setPort(int port) {
+	this.port = port;
+    }
+
 }
