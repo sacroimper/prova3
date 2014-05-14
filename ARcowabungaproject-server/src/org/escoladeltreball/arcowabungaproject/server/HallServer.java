@@ -1,5 +1,5 @@
 /*
- *  Server.java
+ *  HallServer.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -21,6 +21,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
+
 package org.escoladeltreball.arcowabungaproject.server;
 
 import java.io.IOException;
