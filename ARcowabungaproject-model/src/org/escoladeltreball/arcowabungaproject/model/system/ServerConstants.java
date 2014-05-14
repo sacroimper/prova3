@@ -32,6 +32,7 @@ public class ServerConstants {
 
     public static final int SERVER_OPTION_DATABASE_UPDATE = 1;
     public static final int SERVER_OPTION_SEND_ORDER = 2;
+    public static final int SERVER_RESPONSE_OK = 3;
 
     // ====================
     // ATTRIBUTES
