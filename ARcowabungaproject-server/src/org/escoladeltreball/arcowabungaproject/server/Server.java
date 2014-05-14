@@ -42,11 +42,11 @@ public abstract class Server extends Thread {
     // ATTRIBUTES
     // ====================
 
-    private ServerSocket serverSocket;
-    private Socket socketService;
+    protected ServerSocket serverSocket;
+    protected Socket socketService;
 
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
+    protected ObjectInputStream in;
+    protected ObjectOutputStream out;
 
     private int port;
 
