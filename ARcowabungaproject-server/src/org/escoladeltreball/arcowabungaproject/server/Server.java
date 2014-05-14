@@ -29,6 +29,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Map;
 
 public abstract class Server extends Thread {
 
@@ -49,6 +50,7 @@ public abstract class Server extends Thread {
     protected ObjectOutputStream out;
 
     private int port;
+    protected Map<Integer, Server> listeningServers;
 
     // ====================
     // CONSTRUCTORS
@@ -58,6 +60,7 @@ public abstract class Server extends Thread {
 	super();
 	setName(getClass().getSimpleName() + ":" + port);
 	this.port = port;
+	listeningServers.put(port, this);
     }
 
     // ====================
@@ -87,11 +90,13 @@ public abstract class Server extends Thread {
     protected void close() {
 	try {
 	    closeClient();
+	    serverSocket.close();
 	} catch (IOException e) {
 	    System.out.println(e);
 	} finally {
 	    print("Closed");
 	}
+	listeningServers.remove(port);
     }
 
     protected void init() {
