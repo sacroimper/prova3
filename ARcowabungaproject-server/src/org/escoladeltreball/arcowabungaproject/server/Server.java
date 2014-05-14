@@ -30,6 +30,7 @@ import java.io.ObjectOutputStream;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Server extends Thread {
@@ -51,7 +52,9 @@ public abstract class Server extends Thread {
     protected ObjectOutputStream out;
 
     private int port;
-    protected static Map<Integer, Server> listeningServers;
+    private boolean stop;
+
+    protected static Map<Integer, Server> listeningServers = new HashMap<Integer, Server>();
 
     // ====================
     // CONSTRUCTORS
@@ -61,6 +64,7 @@ public abstract class Server extends Thread {
 	super();
 	setName(getClass().getSimpleName() + ":" + port);
 	this.port = port;
+	stop = false;
 	synchronized (listeningServers) {
 	    listeningServers.put(port, this);
 	}
@@ -175,6 +179,10 @@ public abstract class Server extends Thread {
 
     public void setPort(int port) {
 	this.port = port;
+    }
+
+    public boolean isStopped() {
+	return stop;
     }
 
 }
