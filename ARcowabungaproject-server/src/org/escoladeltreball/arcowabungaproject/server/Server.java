@@ -116,6 +116,16 @@ public abstract class Server extends Thread {
 	System.out.println(getName() + "> " + msg);
     }
 
+    protected int validPort() {
+	int validPort = HALL_PORT + 1;
+	synchronized (listeningServers) {
+	    while (listeningServers.containsKey(validPort)) {
+		validPort++;
+	    }
+	}
+	return validPort;
+    }
+
     // ====================
     // PRIVATE METHODS
     // ====================

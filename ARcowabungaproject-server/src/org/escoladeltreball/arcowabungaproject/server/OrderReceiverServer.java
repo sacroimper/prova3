@@ -24,10 +24,6 @@
 
 package org.escoladeltreball.arcowabungaproject.server;
 
-/**
- * @author local
- * 
- */
 public class OrderReceiverServer extends Server {
 
     // ====================

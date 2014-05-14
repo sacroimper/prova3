@@ -60,16 +60,6 @@ public class HallServer extends Server {
     // PRIVATE METHODS
     // ====================
 
-    private int validPort() {
-	int validPort = HALL_PORT + 1;
-	synchronized (listeningServers) {
-	    while (listeningServers.containsKey(validPort)) {
-		validPort++;
-	    }
-	}
-	return validPort;
-    }
-
     // ====================
     // OVERRIDE METHODS
     // ====================
@@ -96,11 +86,11 @@ public class HallServer extends Server {
 	    }
 	    closeClient();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	close();
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================
