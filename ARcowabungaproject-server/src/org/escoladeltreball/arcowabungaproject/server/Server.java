@@ -27,6 +27,7 @@ package org.escoladeltreball.arcowabungaproject.server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
@@ -116,14 +117,41 @@ public abstract class Server extends Thread {
 	System.out.println(getName() + "> " + msg);
     }
 
-    protected int validPort() {
-	int validPort = HALL_PORT + 1;
+    protected int getValidPort() {
+	int newPort = HALL_PORT + 1;
 	synchronized (listeningServers) {
-	    while (listeningServers.containsKey(validPort)) {
-		validPort++;
+	    while (listeningServers.containsKey(newPort)
+		    || !isValidPort(newPort)) {
+		newPort++;
 	    }
 	}
-	return validPort;
+	return newPort;
+    }
+
+    protected boolean isValidPort(int port) {
+	ServerSocket ss = null;
+	DatagramSocket ds = null;
+	try {
+	    ss = new ServerSocket(port);
+	    ss.setReuseAddress(true);
+	    ds = new DatagramSocket(port);
+	    ds.setReuseAddress(true);
+	    return true;
+	} catch (IOException e) {
+	} finally {
+	    if (ds != null) {
+		ds.close();
+	    }
+
+	    if (ss != null) {
+		try {
+		    ss.close();
+		} catch (IOException e) {
+		    /* should not be thrown */
+		}
+	    }
+	}
+	return false;
     }
 
     // ====================

@@ -71,7 +71,7 @@ public class HallServer extends Server {
 	    waitClient();
 	    int opt = in.readInt();
 	    Server newServer = null;
-	    int newPort = validPort();
+	    int newPort = getValidPort();
 	    switch (opt) {
 	    case ServerConstants.SERVER_OPTION_DATABASE_UPDATE:
 		newServer = new DatabaseUpdateServer(newPort);
