@@ -30,10 +30,6 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * @author Marc
- * 
- */
 public abstract class Server extends Thread {
 
     // ====================
@@ -78,6 +74,7 @@ public abstract class Server extends Thread {
 	out = new ObjectOutputStream(socketService.getOutputStream());
 	out.flush();
 	in = new ObjectInputStream(socketService.getInputStream());
+	print("Client conected");
     }
 
     protected void closeClient() throws IOException {
@@ -99,9 +96,9 @@ public abstract class Server extends Thread {
 
     protected void init() {
 	try {
-	    serverSocket = new ServerSocket(5432);
+	    serverSocket = new ServerSocket(port);
+	    print("Opened");
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
     }
