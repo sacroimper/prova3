@@ -100,7 +100,9 @@ public class Order extends IdObject {
 	int numOfPizzas = 0;
 	int numOfDriks = 0;
 	int numOfOffers = 0;
-	int[] differentProducts = new int[3];
+	int numOfPizzasOffer = 0;
+	int numOfDrinksOffer = 0;
+	int[] differentProducts = new int[5];
 	ArrayList<Product> products = (ArrayList<Product>) this
 		.getShoppingCart().getProducts();
 	for (Product product : products) {
@@ -115,9 +117,9 @@ public class Order extends IdObject {
 			.getProductList();
 		for (Product offerProduct : offerProducts) {
 		    if (offerProduct instanceof Pizza) {
-			numOfPizzas++;
+			numOfPizzasOffer++;
 		    } else if (offerProduct instanceof Drink) {
-			numOfDriks++;
+			numOfDrinksOffer++;
 		    }
 		}
 	    }
@@ -125,6 +127,8 @@ public class Order extends IdObject {
 	differentProducts[0] = numOfPizzas;
 	differentProducts[1] = numOfDriks;
 	differentProducts[2] = numOfOffers;
+	differentProducts[3] = numOfPizzasOffer;
+	differentProducts[4] = numOfDrinksOffer;
 	return differentProducts;
     }
 
