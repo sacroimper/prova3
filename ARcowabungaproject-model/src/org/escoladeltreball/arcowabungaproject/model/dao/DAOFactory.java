@@ -524,4 +524,7 @@ public abstract class DAOFactory {
 	this.pizzeria = pizzeria;
     }
 
+    public int getCurrentVersion() {
+	return currentVersion;
+    }
 }
