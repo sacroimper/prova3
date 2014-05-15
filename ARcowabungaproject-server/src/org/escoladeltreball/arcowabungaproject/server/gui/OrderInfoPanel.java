@@ -23,7 +23,16 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
+import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+
+import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 
 public class OrderInfoPanel extends JPanel {
 
@@ -34,10 +43,26 @@ public class OrderInfoPanel extends JPanel {
     // ====================
     // ATTRIBUTES
     // ====================
+    private Order order;
+    private JLabel jlIdOrder;
+    private JPanel jpContacInfo;
+    private JPanel[] jpPizzas;
+    private JPanel[] jpDrinks;
+    private JPanel[] jpOffers;
+    private int numOfPizzas;
+    private int numOfDrinks;
+    private int numOfOffers;
 
     // ====================
     // CONSTRUCTORS
     // ====================
+    public OrderInfoPanel(Order order, int[] numOfProducts) {
+	this.order = order;
+	this.numOfPizzas = numOfProducts[0];
+	this.numOfDrinks = numOfProducts[1];
+	this.numOfOffers = numOfProducts[2];
+	this.initComponents();
+    }
 
     // ====================
     // PUBLIC METHODS
@@ -50,7 +75,34 @@ public class OrderInfoPanel extends JPanel {
     // ====================
     // PRIVATE METHODS
     // ====================
+    private void initComponents() {
+	this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+	this.jlIdOrder = new JLabel("Order Id: " + this.order.getId());
+	this.jpContacInfo = new ContactInfoPanel(this.order);
+	addProductsInfo();
+	this.add(jlIdOrder);
+	this.add(jpContacInfo);
+	this.add(new JSeparator(JSeparator.HORIZONTAL));
+	for (int i = 0; i < jpPizzas.length; i++) {
+	    this.add(jpPizzas[i]);
+	}
+    }
 
+    private void addProductsInfo() {
+	this.jpPizzas = new JPanel[this.numOfPizzas];
+	int indexPizzas = 0;
+	ArrayList<Product> products = (ArrayList<Product>) this.order
+		.getShoppingCart().getProducts();
+	for (Product product : products) {
+	    if (product instanceof Pizza) {
+		Pizza pizza = (Pizza) product;
+		this.jpPizzas[indexPizzas] = new PizzaPanel(pizza);
+		indexPizzas++;
+	    }
+	    // Drinks
+	    // Offers
+	}
+    }
     // ====================
     // OVERRIDE METHODS
     // ====================
