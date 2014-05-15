@@ -74,6 +74,14 @@ public abstract class Server extends Thread {
     // PUBLIC METHODS
     // ====================
 
+    public void stopServer() {
+	close();
+    }
+
+    public void startServer() {
+	start();
+    }
+
     // ====================
     // PROTECTED METHODS
     // ====================
