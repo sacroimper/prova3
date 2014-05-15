@@ -24,6 +24,8 @@
 
 package org.escoladeltreball.arcowabungaproject.model;
 
+import java.util.ArrayList;
+
 import org.joda.time.DateTime;
 
 public class Order extends IdObject {
@@ -83,12 +85,43 @@ public class Order extends IdObject {
 	return String.format("%.2f€", getTotalPrice());
     }
 
-    private float getTotalPrice() {
-	float totalPrice = 0;
-	for (Product product : getShoppingCart().getProducts()) {
-	    totalPrice += product.getPrice();
+    /**
+     * Calculate the number of different products in the order.
+     * 
+     * @return an array where the number of pizzas are stored in index 0, the
+     *         number of drinks are stored in index 1 and the number of offers
+     *         are stored in index 2
+     */
+    public int[] numOfDifferentsProductsInOrder() {
+	int numOfPizzas = 0;
+	int numOfDriks = 0;
+	int numOfOffers = 0;
+	int[] differentProducts = new int[3];
+	ArrayList<Product> products = (ArrayList<Product>) this
+		.getShoppingCart().getProducts();
+	for (Product product : products) {
+	    if (product instanceof Pizza) {
+		numOfPizzas++;
+	    } else if (product instanceof Drink) {
+		numOfDriks++;
+	    } else if (product instanceof Offer) {
+		numOfOffers++;
+		Offer offer = (Offer) product;
+		ArrayList<Product> offerProducts = (ArrayList<Product>) offer
+			.getProductList();
+		for (Product offerProduct : offerProducts) {
+		    if (offerProduct instanceof Pizza) {
+			numOfPizzas++;
+		    } else if (offerProduct instanceof Drink) {
+			numOfDriks++;
+		    }
+		}
+	    }
 	}
-	return totalPrice;
+	differentProducts[0] = numOfPizzas;
+	differentProducts[1] = numOfDriks;
+	differentProducts[2] = numOfOffers;
+	return differentProducts;
     }
 
     // ====================
@@ -98,6 +131,14 @@ public class Order extends IdObject {
     // ====================
     // PRIVATE METHODS
     // ====================
+
+    private float getTotalPrice() {
+	float totalPrice = 0;
+	for (Product product : getShoppingCart().getProducts()) {
+	    totalPrice += product.getPrice();
+	}
+	return totalPrice;
+    }
 
     // ====================
     // OVERRIDE METHODS
