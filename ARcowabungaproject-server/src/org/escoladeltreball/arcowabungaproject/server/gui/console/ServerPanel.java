@@ -1,5 +1,5 @@
 /*
- *  ConsolePanel.java
+ *  ServerPanel.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -30,7 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class ConsolePanel extends JPanel {
+public class ServerPanel extends JPanel {
 
     // ====================
     // CONSTANTS
@@ -47,7 +47,7 @@ public class ConsolePanel extends JPanel {
     // CONSTRUCTORS
     // ====================
 
-    public ConsolePanel() {
+    public ServerPanel() {
 	super();
 	initComponents();
     }
