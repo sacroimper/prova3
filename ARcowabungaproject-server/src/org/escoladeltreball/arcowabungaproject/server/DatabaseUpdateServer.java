@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
 public class DatabaseUpdateServer extends Server {
@@ -79,6 +80,14 @@ public class DatabaseUpdateServer extends Server {
 		out.writeObject(pizzeria.getDrinks());
 		out.writeObject(pizzeria.getOffers());
 		out.writeInt(currentVersion);
+	    }
+	    boolean end = false;
+	    while (!end) {
+		try {
+		    end = in.readInt() == ServerConstants.SERVER_RESPONSE_OK;
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	    }
 	} catch (IOException e) {
 	    e.printStackTrace();

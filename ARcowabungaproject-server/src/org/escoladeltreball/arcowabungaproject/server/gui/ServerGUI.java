@@ -33,20 +33,38 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 import org.escoladeltreball.arcowabungaproject.server.gui.console.ServerPanel;
 
 public class ServerGUI extends JFrame {
 
+    // ====================
+    // CONSTANTS
+    // ====================
+
+    // ====================
+    // ATTRIBUTES
+    // ====================
     private JPanel jpOrderManager;
     private JPanel jpDataBaseManger;
-    private JPanel jpServerManager;
     private JPanel jpServerConsole;
     private static ServerGUI instance;
 
+    // ====================
+    // CONSTRUCTORS
+    // ====================
     private ServerGUI() {
+	DAOFactory dao = DAOPostgreSQL.getInstance();
+	Pizzeria pizzeria = Pizzeria.getInstance(dao);
+	dao.loadDemo();
 	this.initComponents();
     }
 
+    // ====================
+    // PUBLIC METHODS
+    // ====================
     public static ServerGUI getInstance() {
 	if (instance == null) {
 	    instance = new ServerGUI();
@@ -54,8 +72,18 @@ public class ServerGUI extends JFrame {
 	return instance;
     }
 
+    // ====================
+    // PROTECTED METHODS
+    // ====================
+
+    // ====================
+    // PRIVATE METHODS
+    // ====================
+
     private void initComponents() {
-	this.setSize(900, 700);
+	setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+
+	// this.setSize(1000, 800);
 	this.setResizable(true);
 	this.setTitle("Cowabunga Server");
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,20 +92,18 @@ public class ServerGUI extends JFrame {
 
 	this.add(createMainTabs());
 	this.setJMenuBar(createMenuBar());
-
 	this.setVisible(true);
     }
 
     private JTabbedPane createMainTabs() {
 	this.jpOrderManager = OrderManagerPanel.getInstance();
-
 	this.jpServerConsole = new ServerPanel();
 
 	JTabbedPane jtpMain = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
 	jtpMain.addTab("Oreder Manager", this.jpOrderManager);
 	// jtpMain.addTab("DataBase Manager", this.jpDataBaseManger);
-	jtpMain.addTab("Server Manager", this.jpServerManager);
+	jtpMain.addTab("Server Manager", this.jpServerConsole);
 
 	return jtpMain;
     }
@@ -105,5 +131,11 @@ public class ServerGUI extends JFrame {
     public static void main(String[] args) {
 	getInstance();
     }
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
 
+    // ====================
+    // GETTERS & SETTERS
+    // ====================
 }

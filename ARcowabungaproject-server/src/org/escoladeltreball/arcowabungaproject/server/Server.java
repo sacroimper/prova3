@@ -64,7 +64,7 @@ public abstract class Server extends Thread {
 	super();
 	setName(getClass().getSimpleName() + ":" + port);
 	this.port = port;
-	stop = false;
+	stop = true;
 	synchronized (listeningServers) {
 	    listeningServers.put(port, this);
 	}
@@ -73,6 +73,20 @@ public abstract class Server extends Thread {
     // ====================
     // PUBLIC METHODS
     // ====================
+
+    public void stopServer() {
+	if (!stop) {
+	    stop = true;
+	    close();
+	}
+    }
+
+    public void startServer() {
+	if (stop) {
+	    stop = false;
+	    start();
+	}
+    }
 
     // ====================
     // PROTECTED METHODS

@@ -1,5 +1,5 @@
 /*
- *  ServerPanel.java
+ *  DrinkPanel.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -21,22 +21,16 @@
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
-package org.escoladeltreball.arcowabungaproject.server.gui.console;
+package org.escoladeltreball.arcowabungaproject.server.gui;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.PrintStream;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
-import org.escoladeltreball.arcowabungaproject.server.HallServer;
+import org.escoladeltreball.arcowabungaproject.model.Drink;
 
-public class ServerPanel extends JPanel implements ActionListener {
+public class DrinkPanel extends JPanel {
 
     // ====================
     // CONSTANTS
@@ -45,20 +39,17 @@ public class ServerPanel extends JPanel implements ActionListener {
     // ====================
     // ATTRIBUTES
     // ====================
-
-    private JTextArea jtaConsole;
-    private JLabel jlTitle;
-    private JPanel jpLeft;
-    private JButton jbStart;
-    private JButton jbStop;
+    private Drink drink;
+    private JLabel jldrinkName;
+    private JLabel jldrinkPrice;
+    private Border border;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-
-    public ServerPanel() {
-	super();
-	initComponents();
+    public DrinkPanel(Drink drink) {
+	this.drink = drink;
+	this.initComponents();
     }
 
     // ====================
@@ -72,52 +63,19 @@ public class ServerPanel extends JPanel implements ActionListener {
     // ====================
     // PRIVATE METHODS
     // ====================
-
     private void initComponents() {
+	this.border = BorderFactory.createEtchedBorder();
+	this.jldrinkName = new JLabel("Name: " + this.drink.getName());
+	this.jldrinkPrice = new JLabel("Price: " + this.drink.getPrice() + "€");
 
-	this.setLayout(new BorderLayout());
+	this.setBorder(border);
+	this.add(this.jldrinkName);
+	this.add(this.jldrinkPrice);
 
-	jlTitle = new JLabel("Servers Output");
-	jtaConsole = new JTextArea("init");
-
-	PrintStream in = System.out;
-	PrintStreamCapturer psc = new PrintStreamCapturer(jtaConsole, in);
-	System.setOut(psc);
-
-	jpLeft = new JPanel();
-	jpLeft.setLayout(new BoxLayout(jpLeft, BoxLayout.Y_AXIS));
-
-	jbStart = new JButton("Start");
-	jbStop = new JButton("Stop");
-	jbStop.setEnabled(false);
-	jbStart.addActionListener(this);
-	jbStop.addActionListener(this);
-
-	jpLeft.add(jbStart);
-	jpLeft.add(jbStop);
-
-	this.add(jpLeft, BorderLayout.WEST);
-	this.add(jlTitle, BorderLayout.NORTH);
-	this.add(jtaConsole, BorderLayout.CENTER);
     }
-
     // ====================
     // OVERRIDE METHODS
     // ====================
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-	Object src = e.getSource();
-	if (src.equals(jbStart)) {
-	    HallServer.getInstance().startServer();
-	    jbStart.setEnabled(false);
-	    jbStop.setEnabled(true);
-	} else {
-	    HallServer.getInstance().stopServer();
-	    jbStop.setEnabled(false);
-	    jbStart.setEnabled(true);
-	}
-    }
 
     // ====================
     // GETTERS & SETTERS
