@@ -74,6 +74,13 @@ public class OrderManagerPanel extends JPanel {
     // ====================
     // PUBLIC METHODS
     // ====================
+    public void setJpInfo(JPanel jpInfo) {
+	if (this.jpInfo != null) {
+	    this.split.remove(this.jpInfo);
+	}
+	this.jpInfo = jpInfo;
+	this.split.setRightComponent(this.jpInfo);
+    }
 
     // ====================
     // PROTECTED METHODS
@@ -115,14 +122,6 @@ public class OrderManagerPanel extends JPanel {
 	jtp.addTab("Sended Orders", this.jpSendedOrders);
 
 	return jtp;
-    }
-
-    public void setJpInfo(JPanel jpInfo) {
-	if (this.jpInfo != null) {
-	    this.split.remove(this.jpInfo);
-	}
-	this.jpInfo = jpInfo;
-	this.split.setRightComponent(this.jpInfo);
     }
 
     private void addWaitOrder() {
