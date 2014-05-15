@@ -24,6 +24,12 @@
 
 package org.escoladeltreball.arcowabungaproject.server;
 
+import java.io.IOException;
+
+import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
+
 public class DatabaseUpdateServer extends Server {
 
     // ====================
@@ -61,10 +67,24 @@ public class DatabaseUpdateServer extends Server {
     @Override
     public void run() {
 	init();
-
+	try {
+	    waitClient();
+	    int clientDBVersion = in.readInt();
+	    Pizzeria pizzeria = Pizzeria.getInstance();
+	    DAOFactory dao = DAOPostgreSQL.getInstance();
+	    int currentVersion = dao.getCurrentVersion();
+	    if (clientDBVersion != currentVersion) {
+		out.writeObject(pizzeria.getIngredients());
+		out.writeObject(pizzeria.getPredefinedPizzas());
+		out.writeObject(pizzeria.getDrinks());
+		out.writeObject(pizzeria.getOffers());
+		out.writeInt(currentVersion);
+	    }
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
 	close();
     }
-
     // ====================
     // GETTERS & SETTERS
     // ====================
