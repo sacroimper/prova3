@@ -44,20 +44,30 @@ import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
+import org.escoladeltreball.arcowabungaproject.server.gui.console.ConsolePanel;
 import org.joda.time.DateTime;
 
 public class ServerGUI extends JFrame {
 
     private JPanel jpOrders;
-    private JPanel jpInfo;
+    public static JPanel jpInfo;
 
     private JSplitPane split;
     private JPanel jpWaitOrders;
     private JPanel jpMakingOrders;
     private JPanel jpSendedOrders;
+    private JPanel jpServerConsole;
+    private static ServerGUI instance;
 
-    public ServerGUI() {
+    private ServerGUI() {
 	this.initComponents();
+    }
+
+    public static ServerGUI getInstance() {
+	if (instance == null) {
+	    instance = new ServerGUI();
+	}
+	return instance;
     }
 
     private void initComponents() {
@@ -71,7 +81,9 @@ public class ServerGUI extends JFrame {
 	this.jpWaitOrders = new JPanel();
 	this.jpWaitOrders.setLayout(new BoxLayout(this.jpWaitOrders,
 		BoxLayout.Y_AXIS));
-	this.AddWaitOrder();
+	this.addWaitOrder();
+
+	this.jpServerConsole = new ConsolePanel();
 
 	this.jpOrders = new JPanel();
 	this.jpOrders.setLayout(new BorderLayout());
@@ -80,26 +92,41 @@ public class ServerGUI extends JFrame {
 
 	this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpOrders,
 		jpInfo);
+
 	this.split.setOneTouchExpandable(true);
 	this.split.setResizeWeight(0.5);
 
 	this.add(split);
-	this.setJMenuBar(CreateMenuBar());
+	this.setJMenuBar(createMenuBar());
 	this.setVisible(true);
+	System.out.println("Hola");
     }
 
     private JTabbedPane createTabs() {
 	JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
-
 	jtp.addTab("Wait Orders", this.jpWaitOrders);
-	jtp.addTab("Making Orders", this.jpMakingOrders);
-	jtp.addTab("Sended Orders", this.jpSendedOrders);
+
+	// jtp.addTab("Making Orders", this.jpMakingOrders);
+	// jtp.addTab("Sended Orders", this.jpSendedOrders);
+	jtp.addTab("Console", this.jpServerConsole);
 
 	return jtp;
     }
 
-    private JMenuBar CreateMenuBar() {
+    private JTabbedPane createMainTabs() {
+	JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,
+		JTabbedPane.SCROLL_TAB_LAYOUT);
+
+	jtp.addTab("Wait Orders", this.jpWaitOrders);
+	// jtp.addTab("Making Orders", this.jpMakingOrders);
+	// jtp.addTab("Sended Orders", this.jpSendedOrders);
+	jtp.addTab("Console", this.jpServerConsole);
+
+	return jtp;
+    }
+
+    private JMenuBar createMenuBar() {
 	JMenuBar menuBar = new JMenuBar();
 	JMenu menu = new JMenu("File");
 	JMenuItem menuItem = new JMenuItem("Data Base Manager");
@@ -116,7 +143,7 @@ public class ServerGUI extends JFrame {
 	return menuBar;
     }
 
-    private void AddWaitOrder() {
+    private void addWaitOrder() {
 	Set<Ingredient> ingredients = new HashSet<Ingredient>();
 
 	Ingredient i1 = new Ingredient(8, "I1", 1.5f, 151, 152);
@@ -154,16 +181,20 @@ public class ServerGUI extends JFrame {
 	Order or1 = new Order(41, "a", "a", dt1, "a", a1, s1);
 	this.jpWaitOrders.add(new OrderPanel(or1));
 	int[] numProducts = { 1, 0, 0 };
-	this.jpInfo = new OrderInfoPanel(or1, numProducts);
+	this.jpInfo = new OrderInfoPanel();
 	this.jpInfo.setBorder(BorderFactory.createEtchedBorder());
+
     }
+
+    // public void setJpInfo(JPanel jpInfo) {
+    // this.jpInfo = jpInfo;
+    // }
 
     /**
      * @param args
      */
     public static void main(String[] args) {
-	new ServerGUI();
-
+	getInstance();
     }
 
 }
