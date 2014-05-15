@@ -68,27 +68,28 @@ public class OrderReceiverServer extends Server {
 	init();
 	try {
 	    waitClient();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-	Order order = null;
-	while (order == null) {
-	    try {
-		order = (Order) in.readObject();
-	    } catch (ClassNotFoundException e) {
-		e.printStackTrace();
-		order = null;
-	    } catch (IOException e) {
-		e.printStackTrace();
-		order = null;
+	    Order order = null;
+	    while (order == null) {
+		try {
+		    order = (Order) in.readObject();
+		} catch (ClassNotFoundException e) {
+		    e.printStackTrace();
+		    order = null;
+		} catch (IOException e) {
+		    e.printStackTrace();
+		    order = null;
+		}
 	    }
-	}
-	try {
-	    out.writeInt(ServerConstants.SERVER_RESPONSE_OK);
+	    try {
+		out.writeInt(ServerConstants.SERVER_RESPONSE_OK);
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+
 	close();
     }
 
