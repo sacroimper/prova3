@@ -86,8 +86,20 @@ public class ShoppingCart extends IdObject {
 	return price;
     }
 
+    public float getPriceWithTax() {
+	float price = 0.0f;
+	for (Product product : productList) {
+	    price += product.getPrice();
+	}
+	return price * (Product.TAX_PERCENT + 1);
+    }
+
     public String getFormatedPrice() {
 	return String.format("%.2f€", getPrice());
+    }
+
+    public String getFormatedPriceWithTax() {
+	return String.format("%.2f€", getPriceWithTax());
     }
 
     public List<Product> getProducts() {
