@@ -64,6 +64,10 @@ public class OrderInfoPanel extends JPanel {
 	this.initComponents();
     }
 
+    public OrderInfoPanel() {
+
+    }
+
     // ====================
     // PUBLIC METHODS
     // ====================
