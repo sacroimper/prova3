@@ -28,6 +28,7 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.ShoppingCartAdapter;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class OrderActivity extends Activity {
 
@@ -91,6 +93,11 @@ public class OrderActivity extends Activity {
 	// // Adding listeners
 	// listView.setOnTouchListener(this);
 
+	// Set custom text
+	TextView tv = (TextView) this.findViewById(R.id.button_cart_text);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) this.findViewById(R.id.button_menu_text);
+	CustomTextView.customTextView(this, tv);
     }
 
     @Override
