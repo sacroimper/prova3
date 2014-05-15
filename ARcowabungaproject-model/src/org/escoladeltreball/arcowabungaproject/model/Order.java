@@ -82,7 +82,11 @@ public class Order extends IdObject {
     }
 
     public String getFormatedPrice() {
-	return String.format("%.2f€", getTotalPrice());
+	return shoppingCart.getFormatedPrice();
+    }
+
+    public String getFormatedPriceWithTax() {
+	return shoppingCart.getFormatedPrice();
     }
 
     /**
@@ -124,6 +128,14 @@ public class Order extends IdObject {
 	return differentProducts;
     }
 
+    public float getTotalPrice() {
+	return shoppingCart.getPrice();
+    }
+
+    public float getTotalPriceWithTax() {
+	return shoppingCart.getPriceWithTax();
+    }
+
     // ====================
     // PROTECTED METHODS
     // ====================
@@ -131,14 +143,6 @@ public class Order extends IdObject {
     // ====================
     // PRIVATE METHODS
     // ====================
-
-    private float getTotalPrice() {
-	float totalPrice = 0;
-	for (Product product : getShoppingCart().getProducts()) {
-	    totalPrice += product.getPrice();
-	}
-	return totalPrice;
-    }
 
     // ====================
     // OVERRIDE METHODS
