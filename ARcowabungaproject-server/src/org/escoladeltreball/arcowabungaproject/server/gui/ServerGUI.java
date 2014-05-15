@@ -50,9 +50,12 @@ import org.joda.time.DateTime;
 public class ServerGUI extends JFrame {
 
     private JPanel jpOrders;
-    public static JPanel jpInfo;
+    private JPanel jpInfo;
 
     private JSplitPane split;
+    private JPanel jpOrderManager;
+    private JPanel jpDataBaseManger;
+    private JPanel jpServerManager;
     private JPanel jpWaitOrders;
     private JPanel jpMakingOrders;
     private JPanel jpSendedOrders;
@@ -78,6 +81,9 @@ public class ServerGUI extends JFrame {
 	this.setLocationRelativeTo(null);
 	this.setLayout(new BorderLayout());
 
+	this.jpOrderManager = new JPanel();
+	this.jpOrderManager.setLayout(new BorderLayout());
+
 	this.jpWaitOrders = new JPanel();
 	this.jpWaitOrders.setLayout(new BoxLayout(this.jpWaitOrders,
 		BoxLayout.Y_AXIS));
@@ -89,15 +95,16 @@ public class ServerGUI extends JFrame {
 	this.jpOrders.setLayout(new BorderLayout());
 	this.jpOrders.setBorder(BorderFactory.createEtchedBorder());
 	this.jpOrders.add(createTabs());
-
 	this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpOrders,
 		jpInfo);
 
 	this.split.setOneTouchExpandable(true);
 	this.split.setResizeWeight(0.5);
 
-	this.add(split);
+	this.jpOrderManager.add(split);
+	this.add(createMainTabs());
 	this.setJMenuBar(createMenuBar());
+
 	this.setVisible(true);
 	System.out.println("Hola");
     }
@@ -107,23 +114,23 @@ public class ServerGUI extends JFrame {
 		JTabbedPane.SCROLL_TAB_LAYOUT);
 	jtp.addTab("Wait Orders", this.jpWaitOrders);
 
-	// jtp.addTab("Making Orders", this.jpMakingOrders);
-	// jtp.addTab("Sended Orders", this.jpSendedOrders);
-	jtp.addTab("Console", this.jpServerConsole);
+	jtp.addTab("Making Orders", this.jpMakingOrders);
+	jtp.addTab("Sended Orders", this.jpSendedOrders);
 
 	return jtp;
     }
 
     private JTabbedPane createMainTabs() {
+	JTabbedPane jtpMain = new JTabbedPane(JTabbedPane.TOP,
+		JTabbedPane.SCROLL_TAB_LAYOUT);
+	jtpMain.addTab("Oreder Manager", this.jpOrderManager);
+	jtpMain.addTab("DataBase Manager", this.jpDataBaseManger);
+	jtpMain.addTab("Server Manager", this.jpServerManager);
+
 	JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
 
-	jtp.addTab("Wait Orders", this.jpWaitOrders);
-	// jtp.addTab("Making Orders", this.jpMakingOrders);
-	// jtp.addTab("Sended Orders", this.jpSendedOrders);
-	jtp.addTab("Console", this.jpServerConsole);
-
-	return jtp;
+	return jtpMain;
     }
 
     private JMenuBar createMenuBar() {
@@ -186,9 +193,13 @@ public class ServerGUI extends JFrame {
 
     }
 
-    // public void setJpInfo(JPanel jpInfo) {
-    // this.jpInfo = jpInfo;
-    // }
+    public void setJpInfo(JPanel jpInfo) {
+	if (this.jpInfo != null) {
+	    this.split.remove(this.jpInfo);
+	}
+	this.jpInfo = jpInfo;
+	this.split.setRightComponent(this.jpInfo);
+    }
 
     /**
      * @param args
