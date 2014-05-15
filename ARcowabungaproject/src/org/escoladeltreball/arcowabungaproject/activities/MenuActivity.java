@@ -458,6 +458,11 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	}
     }
 
+    @Override
+    public void onPause() {
+	super.onPause();
+	finish();
+    }
     // ====================
     // GETTERS & SETTERS
     // ====================

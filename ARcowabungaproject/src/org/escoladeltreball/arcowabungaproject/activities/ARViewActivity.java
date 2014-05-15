@@ -82,6 +82,12 @@ public class ARViewActivity extends Activity {
 	return true;
     }
 
+    @Override
+    public void onPause() {
+	super.onPause();
+	finish();
+    }
+
     // ====================
     // GETTERS & SETTERS
     // ====================
