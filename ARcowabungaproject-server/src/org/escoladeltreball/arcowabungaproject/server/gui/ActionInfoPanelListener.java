@@ -28,7 +28,7 @@ import org.escoladeltreball.arcowabungaproject.model.Order;
  *   GNU General Public License for more details.
  *
  *   You should have received a copy of the GNU General Public License
- *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
+ *   along with ARcowabungaprojstaticect.  If not, see <http://www.gnu.org/licenses/>. 
  */
 
 public class ActionInfoPanelListener implements ActionListener {
@@ -68,7 +68,7 @@ public class ActionInfoPanelListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 	JPanel jpInfo = new OrderInfoPanel(this.order,
 		this.order.numOfDifferentsProductsInOrder());
-	ServerGUI.getInstance().setJpInfo(jpInfo);
+	OrderManagerPanel.getInstance().setJpInfo(jpInfo);
 
 	System.out.println("listener");
 
