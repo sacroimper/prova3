@@ -33,6 +33,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 import org.escoladeltreball.arcowabungaproject.server.gui.console.ServerPanel;
 
 public class ServerGUI extends JFrame {
@@ -53,6 +56,9 @@ public class ServerGUI extends JFrame {
     // CONSTRUCTORS
     // ====================
     private ServerGUI() {
+	DAOFactory dao = DAOPostgreSQL.getInstance();
+	Pizzeria pizzeria = Pizzeria.getInstance(dao);
+	dao.loadDemo();
 	this.initComponents();
     }
 

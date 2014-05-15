@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
@@ -101,6 +100,12 @@ public class OrderInfoPanel extends JPanel {
 	    constraints.fill = GridBagConstraints.BOTH;
 	    this.add(jpPizzas[i], constraints);
 	}
+	// for (int i = 0; i < jpDrinks.length; i++) {
+	// constraints.gridx = 0;
+	// constraints.gridy = i + jpPizzas.length;
+	// constraints.fill = GridBagConstraints.BOTH;
+	// this.add(jpDrinks[i], constraints);
+	// }
     }
 
     private void addProductsInfo() {
@@ -114,11 +119,12 @@ public class OrderInfoPanel extends JPanel {
 		Pizza pizza = (Pizza) product;
 		this.jpPizzas[indexPizzas] = new PizzaPanel(pizza);
 		indexPizzas++;
-	    } else if (product instanceof Drink) {
-		Drink drink = (Drink) product;
-		this.jpDrinks[indexDrink] = new DrinkPanel(drink);
-		indexDrink++;
 	    }
+	    // if (product instanceof Drink) {
+	    // Drink drink = (Drink) product;
+	    // this.jpDrinks[indexDrink] = new DrinkPanel(drink);
+	    // indexDrink++;
+	    // }
 	    // Offers
 	}
     }
