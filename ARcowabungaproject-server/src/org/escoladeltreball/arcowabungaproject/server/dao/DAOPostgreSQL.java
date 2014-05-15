@@ -47,13 +47,26 @@ public class DAOPostgreSQL extends DAOFactory {
     // ATTRIBUTES
     // ====================
 
+    private static DAOPostgreSQL instance;
+
     // ====================
     // CONSTRUCTORS
     // ====================
 
+    protected DAOPostgreSQL() {
+	super();
+    }
+
     // ====================
     // PUBLIC METHODS
     // ====================
+
+    public static DAOPostgreSQL getInstance() {
+	if (instance == null) {
+	    instance = new DAOPostgreSQL();
+	}
+	return instance;
+    }
 
     // ====================
     // PROTECTED METHODS
