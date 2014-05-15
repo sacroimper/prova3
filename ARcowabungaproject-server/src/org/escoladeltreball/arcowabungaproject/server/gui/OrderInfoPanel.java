@@ -87,17 +87,15 @@ public class OrderInfoPanel extends JPanel {
 	GridBagConstraints constraints = new GridBagConstraints();
 	constraints.gridx = 0;
 	constraints.gridy = 0;
-	constraints.fill = GridBagConstraints.BOTH;
+	constraints.fill = GridBagConstraints.HORIZONTAL;
 	this.add(jlIdOrder, constraints);
 	constraints.gridx = 0;
 	constraints.gridy = 1;
-	constraints.fill = GridBagConstraints.BOTH;
 	this.add(jpContacInfo, constraints);
 
 	for (int i = 0; i < jpPizzas.length; i++) {
 	    constraints.gridx = 0;
 	    constraints.gridy = i + 2;
-	    constraints.fill = GridBagConstraints.BOTH;
 	    this.add(jpPizzas[i], constraints);
 	}
 	// for (int i = 0; i < jpDrinks.length; i++) {
