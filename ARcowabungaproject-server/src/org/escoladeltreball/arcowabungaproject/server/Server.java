@@ -128,6 +128,8 @@ public abstract class Server extends Thread {
 	    print("Opened");
 	} catch (IOException e) {
 	    e.printStackTrace();
+	    stop = true;
+	    throw new RuntimeException("Couln't open server");
 	}
     }
 
