@@ -49,7 +49,7 @@ import org.joda.time.DateTime;
 public class ServerGUI extends JFrame {
 
     private JPanel jpOrders;
-    private JPanel jpInfo;
+    public static JPanel jpInfo;
 
     private JSplitPane split;
     private JPanel jpWaitOrders;
@@ -88,6 +88,7 @@ public class ServerGUI extends JFrame {
 
 	this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpOrders,
 		jpInfo);
+
 	this.split.setOneTouchExpandable(true);
 	this.split.setResizeWeight(0.5);
 
@@ -99,11 +100,9 @@ public class ServerGUI extends JFrame {
     private JTabbedPane createTabs() {
 	JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
-
 	jtp.addTab("Wait Orders", this.jpWaitOrders);
 	jtp.addTab("Making Orders", this.jpMakingOrders);
 	jtp.addTab("Sended Orders", this.jpSendedOrders);
-
 	return jtp;
     }
 
@@ -162,19 +161,20 @@ public class ServerGUI extends JFrame {
 	Order or1 = new Order(41, "a", "a", dt1, "a", a1, s1);
 	this.jpWaitOrders.add(new OrderPanel(or1));
 	int[] numProducts = { 1, 0, 0 };
-	this.jpInfo = new OrderInfoPanel(or1, numProducts);
+	this.jpInfo = new OrderInfoPanel();
 	this.jpInfo.setBorder(BorderFactory.createEtchedBorder());
+
     }
 
-    public void setJpInfo(JPanel jpInfo) {
-	this.jpInfo = jpInfo;
-    }
+    // public void setJpInfo(JPanel jpInfo) {
+    // this.jpInfo = jpInfo;
+    // }
 
     /**
      * @param args
      */
     public static void main(String[] args) {
-	new ServerGUI();
+	getInstance();
     }
 
 }
