@@ -64,7 +64,7 @@ public abstract class Server extends Thread {
 	super();
 	setName(getClass().getSimpleName() + ":" + port);
 	this.port = port;
-	stop = false;
+	stop = true;
 	synchronized (listeningServers) {
 	    listeningServers.put(port, this);
 	}
@@ -75,10 +75,12 @@ public abstract class Server extends Thread {
     // ====================
 
     public void stopServer() {
+	stop = true;
 	close();
     }
 
     public void startServer() {
+	stop = false;
 	start();
     }
 
