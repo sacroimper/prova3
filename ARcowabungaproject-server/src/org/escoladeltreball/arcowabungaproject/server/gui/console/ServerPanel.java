@@ -88,7 +88,10 @@ public class ServerPanel extends JPanel implements ActionListener {
 	jpLeft.setLayout(new BoxLayout(jpLeft, BoxLayout.Y_AXIS));
 
 	jbStart = new JButton("Start");
-	jbStop = new JButton("Start");
+	jbStop = new JButton("Stop");
+	jbStop.setEnabled(false);
+	jbStart.addActionListener(this);
+	jbStop.addActionListener(this);
 
 	jpLeft.add(jbStart);
 	jpLeft.add(jbStop);
