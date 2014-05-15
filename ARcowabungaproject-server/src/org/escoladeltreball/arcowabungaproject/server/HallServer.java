@@ -102,6 +102,12 @@ public class HallServer extends Server {
 	close();
     }
 
+    @Override
+    public void stopServer() {
+	super.stopServer();
+	instance = null;
+    }
+
     // ====================
     // GETTERS & SETTERS
     // ====================
