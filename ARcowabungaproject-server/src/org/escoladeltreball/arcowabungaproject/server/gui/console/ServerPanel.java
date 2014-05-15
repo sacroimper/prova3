@@ -24,6 +24,8 @@
 package org.escoladeltreball.arcowabungaproject.server.gui.console;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.PrintStream;
 
 import javax.swing.BoxLayout;
@@ -32,7 +34,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class ServerPanel extends JPanel {
+import org.escoladeltreball.arcowabungaproject.server.HallServer;
+
+public class ServerPanel extends JPanel implements ActionListener {
 
     // ====================
     // CONSTANTS
@@ -97,6 +101,20 @@ public class ServerPanel extends JPanel {
     // ====================
     // OVERRIDE METHODS
     // ====================
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+	Object src = e.getSource();
+	if (src.equals(jbStart)) {
+	    HallServer.getInstance().startServer();
+	    jbStart.setEnabled(false);
+	    jbStop.setEnabled(true);
+	} else {
+	    HallServer.getInstance().stopServer();
+	    jbStop.setEnabled(false);
+	    jbStart.setEnabled(true);
+	}
+    }
 
     // ====================
     // GETTERS & SETTERS
