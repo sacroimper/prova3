@@ -44,6 +44,7 @@ import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
+import org.escoladeltreball.arcowabungaproject.server.gui.console.ConsolePanel;
 import org.joda.time.DateTime;
 
 public class ServerGUI extends JFrame {
@@ -55,6 +56,7 @@ public class ServerGUI extends JFrame {
     private JPanel jpWaitOrders;
     private JPanel jpMakingOrders;
     private JPanel jpSendedOrders;
+    private JPanel jpServerConsole;
     private static ServerGUI instance;
 
     private ServerGUI() {
@@ -81,6 +83,8 @@ public class ServerGUI extends JFrame {
 		BoxLayout.Y_AXIS));
 	this.addWaitOrder();
 
+	this.jpServerConsole = new ConsolePanel();
+
 	this.jpOrders = new JPanel();
 	this.jpOrders.setLayout(new BorderLayout());
 	this.jpOrders.setBorder(BorderFactory.createEtchedBorder());
@@ -94,6 +98,7 @@ public class ServerGUI extends JFrame {
 	this.add(split);
 	this.setJMenuBar(createMenuBar());
 	this.setVisible(true);
+	System.out.println("Hola");
     }
 
     private JTabbedPane createTabs() {
@@ -101,8 +106,21 @@ public class ServerGUI extends JFrame {
 		JTabbedPane.SCROLL_TAB_LAYOUT);
 
 	jtp.addTab("Wait Orders", this.jpWaitOrders);
-	jtp.addTab("Making Orders", this.jpMakingOrders);
-	jtp.addTab("Sended Orders", this.jpSendedOrders);
+	// jtp.addTab("Making Orders", this.jpMakingOrders);
+	// jtp.addTab("Sended Orders", this.jpSendedOrders);
+	jtp.addTab("Console", this.jpServerConsole);
+
+	return jtp;
+    }
+
+    private JTabbedPane createMainTabs() {
+	JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,
+		JTabbedPane.SCROLL_TAB_LAYOUT);
+
+	jtp.addTab("Wait Orders", this.jpWaitOrders);
+	// jtp.addTab("Making Orders", this.jpMakingOrders);
+	// jtp.addTab("Sended Orders", this.jpSendedOrders);
+	jtp.addTab("Console", this.jpServerConsole);
 
 	return jtp;
     }
