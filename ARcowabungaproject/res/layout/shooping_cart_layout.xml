@@ -33,6 +33,7 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/remember_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/remember_advertice_title"
@@ -52,6 +53,7 @@
    <!-- BUTTONS -->
 
     <LinearLayout
+        android:id="@+id/bottomMenuLinear"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:background="@color/red"
@@ -65,10 +67,11 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:paddingLeft="20dp"
-            android:gravity="center" >
+            android:gravity="center"
+            android:clickable="true" >
 
             <ImageView
-                android:id="@+id/buton_menu_img"
+                android:id="@+id/button_menu_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
@@ -76,7 +79,7 @@
                 android:src="@drawable/iconmenulist" />
 
             <TextView
-                android:id="@+id/buton_menu_text"
+                android:id="@+id/button_menu_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -85,7 +88,12 @@
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
-
+	
+        <View
+            android:layout_width="6dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pompon_red" />
+        
         <LinearLayout
             android:id="@+id/button_cart"
             android:layout_width="match_parent"
@@ -95,7 +103,7 @@
             android:gravity="center" >
 
             <ImageView
-                android:id="@+id/buton_cart_img"
+                android:id="@+id/button_cart_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
@@ -109,7 +117,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:text="@string/shipping_begin_value"
-                android:textColor="@android:color/white"
+                android:textColor="@color/dark_red_200"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>

@@ -15,7 +15,8 @@
             android:layout_height="30dp"
             android:src="@drawable/iconorderlist"
             android:contentDescription="@string/basket_icon"/>   
-        <TextView 
+        <TextView
+            android:id="@+id/productIntroText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
