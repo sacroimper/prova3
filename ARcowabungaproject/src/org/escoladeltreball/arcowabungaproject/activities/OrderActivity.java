@@ -26,10 +26,12 @@ package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.ShoppingCartAdapter;
+import org.escoladeltreball.arcowabungaproject.ar.OwnMarkerRenderSetup;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
+import system.ArActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -96,6 +98,10 @@ public class OrderActivity extends Activity implements OnClickListener {
 	// // Adding listeners
 	// listView.setOnTouchListener(this);
 
+	// ButtonListeners
+	LinearLayout menuBut = (LinearLayout) findViewById(R.id.button_cart);
+	menuBut.setOnClickListener(this);
+
 	// SET CUSTOM TEXT
 
 	// Bottom buttons
@@ -131,6 +137,10 @@ public class OrderActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
 	if (v.getId() == R.id.button_menu) {
 	    finish();
+	} else if (v.getId() == R.id.button_cart) {
+	    ArActivity.startWithSetup(OrderActivity.this,
+		    new OwnMarkerRenderSetup());
+
 	}
     }
     // ====================
