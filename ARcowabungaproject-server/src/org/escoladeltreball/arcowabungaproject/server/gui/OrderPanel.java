@@ -28,7 +28,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -37,11 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
-import org.escoladeltreball.arcowabungaproject.model.Drink;
-import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
-import org.escoladeltreball.arcowabungaproject.model.Pizza;
-import org.escoladeltreball.arcowabungaproject.model.Product;
 
 public class OrderPanel extends JPanel {
     // ====================
@@ -91,23 +86,18 @@ public class OrderPanel extends JPanel {
 
 	// Put information in components
 	this.jlOrderId = new JLabel("ID: " + this.order.getId());
-	// this.jlOrderId.setBorder(border);
 
 	this.jlNumOfPizzas = new JLabel("Pizzas: "
-		+ this.numOfDifferentsProductsInOrder()[0]);
-	// this.jlNumOfPizzas.setBorder(border);
+		+ this.order.numOfDifferentsProductsInOrder()[0]);
 
 	this.jlNumOfDrinks = new JLabel("Drinks: "
-		+ this.numOfDifferentsProductsInOrder()[1]);
-	// this.jlNumOfDrinks.setBorder(border);
+		+ this.order.numOfDifferentsProductsInOrder()[1]);
 
 	this.jlNumOfOffers = new JLabel("Offers: "
-		+ this.numOfDifferentsProductsInOrder()[2]);
-	// this.jlNumOfOffers.setBorder(border);
+		+ this.order.numOfDifferentsProductsInOrder()[2]);
 
 	this.jlTotalPrice = new JLabel("Total Price: "
 		+ this.order.getShoppingCart().getPrice() + "€");
-	// this.jlTotalPrice.setBorder(border);
 
 	this.jbMakePizza = new JButton("Make Pizza!");
 	this.jbShowInfo = new JButton("Show More Info");
@@ -147,46 +137,6 @@ public class OrderPanel extends JPanel {
 	constraints.gridy = 0;
 	constraints.gridheight = 3;
 	this.add(this.jbShowInfo, constraints);
-    }
-
-    /**
-     * Calculate the number of different products in the order.
-     * 
-     * @return an array where the number of pizzas are stored in index 0, the
-     *         number of drinks are stored in index 1 and the number of offers
-     *         are stored in index 2
-     */
-    private int[] numOfDifferentsProductsInOrder() {
-	int numOfPizzas = 0;
-	int numOfDriks = 0;
-	int numOfOffers = 0;
-	int[] differentProducts = new int[3];
-	ArrayList<Product> products = (ArrayList<Product>) this.order
-		.getShoppingCart().getProducts();
-	for (Product product : products) {
-	    if (product instanceof Pizza) {
-		numOfPizzas++;
-	    } else if (product instanceof Drink) {
-		numOfDriks++;
-	    } else if (product instanceof Offer) {
-		numOfOffers++;
-		Offer offer = (Offer) product;
-		ArrayList<Product> offerProducts = (ArrayList<Product>) offer
-			.getProductList();
-		for (Product offerProduct : offerProducts) {
-		    if (offerProduct instanceof Pizza) {
-			numOfPizzas++;
-		    } else if (offerProduct instanceof Drink) {
-			numOfDriks++;
-		    }
-
-		}
-	    }
-	}
-	differentProducts[0] = numOfPizzas;
-	differentProducts[1] = numOfDriks;
-	differentProducts[2] = numOfOffers;
-	return differentProducts;
     }
 
     // ====================
