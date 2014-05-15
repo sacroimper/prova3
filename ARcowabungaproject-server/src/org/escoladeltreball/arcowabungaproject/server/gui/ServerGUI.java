@@ -55,9 +55,17 @@ public class ServerGUI extends JFrame {
     private JPanel jpWaitOrders;
     private JPanel jpMakingOrders;
     private JPanel jpSendedOrders;
+    private static ServerGUI instance;
 
-    public ServerGUI() {
+    private ServerGUI() {
 	this.initComponents();
+    }
+
+    public static ServerGUI getInstance() {
+	if (instance == null) {
+	    instance = new ServerGUI();
+	}
+	return instance;
     }
 
     private void initComponents() {
@@ -71,7 +79,7 @@ public class ServerGUI extends JFrame {
 	this.jpWaitOrders = new JPanel();
 	this.jpWaitOrders.setLayout(new BoxLayout(this.jpWaitOrders,
 		BoxLayout.Y_AXIS));
-	this.AddWaitOrder();
+	this.addWaitOrder();
 
 	this.jpOrders = new JPanel();
 	this.jpOrders.setLayout(new BorderLayout());
@@ -84,7 +92,7 @@ public class ServerGUI extends JFrame {
 	this.split.setResizeWeight(0.5);
 
 	this.add(split);
-	this.setJMenuBar(CreateMenuBar());
+	this.setJMenuBar(createMenuBar());
 	this.setVisible(true);
     }
 
@@ -99,7 +107,7 @@ public class ServerGUI extends JFrame {
 	return jtp;
     }
 
-    private JMenuBar CreateMenuBar() {
+    private JMenuBar createMenuBar() {
 	JMenuBar menuBar = new JMenuBar();
 	JMenu menu = new JMenu("File");
 	JMenuItem menuItem = new JMenuItem("Data Base Manager");
@@ -116,7 +124,7 @@ public class ServerGUI extends JFrame {
 	return menuBar;
     }
 
-    private void AddWaitOrder() {
+    private void addWaitOrder() {
 	Set<Ingredient> ingredients = new HashSet<Ingredient>();
 
 	Ingredient i1 = new Ingredient(8, "I1", 1.5f, 151, 152);
@@ -158,12 +166,15 @@ public class ServerGUI extends JFrame {
 	this.jpInfo.setBorder(BorderFactory.createEtchedBorder());
     }
 
+    public void setJpInfo(JPanel jpInfo) {
+	this.jpInfo = jpInfo;
+    }
+
     /**
      * @param args
      */
     public static void main(String[] args) {
 	new ServerGUI();
-
     }
 
 }
