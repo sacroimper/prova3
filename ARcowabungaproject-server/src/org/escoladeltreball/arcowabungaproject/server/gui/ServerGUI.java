@@ -69,15 +69,14 @@ public class ServerGUI extends JFrame {
     }
 
     private JTabbedPane createMainTabs() {
-	this.jpOrderManager = new OrderManagerPanel();
-	this.jpOrderManager.setLayout(new BorderLayout());
+	this.jpOrderManager = OrderManagerPanel.getInstance();
 
 	this.jpServerConsole = new ServerPanel();
 
 	JTabbedPane jtpMain = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
 	jtpMain.addTab("Oreder Manager", this.jpOrderManager);
-	jtpMain.addTab("DataBase Manager", this.jpDataBaseManger);
+	// jtpMain.addTab("DataBase Manager", this.jpDataBaseManger);
 	jtpMain.addTab("Server Manager", this.jpServerManager);
 
 	return jtpMain;
@@ -98,10 +97,6 @@ public class ServerGUI extends JFrame {
 	menu.add(menuItem);
 	menuBar.add(menu);
 	return menuBar;
-    }
-
-    public JPanel getJpOrderManager() {
-	return this.jpOrderManager;
     }
 
     /**

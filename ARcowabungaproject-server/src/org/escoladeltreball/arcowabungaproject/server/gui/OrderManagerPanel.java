@@ -28,7 +28,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
@@ -56,12 +55,20 @@ public class OrderManagerPanel extends JPanel {
     private JPanel jpWaitOrders;
     private JPanel jpMakingOrders;
     private JPanel jpSendedOrders;
+    private static OrderManagerPanel instance;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-    public OrderManagerPanel() {
+    private OrderManagerPanel() {
 	this.initComponents();
+    }
+
+    public static OrderManagerPanel getInstance() {
+	if (instance == null) {
+	    instance = new OrderManagerPanel();
+	}
+	return instance;
     }
 
     // ====================
@@ -76,31 +83,34 @@ public class OrderManagerPanel extends JPanel {
     // PRIVATE METHODS
     // ====================
     private void initComponents() {
+	this.setLayout(new BorderLayout());
 	this.jpOrders = new JPanel();
 	this.jpOrders.setLayout(new BorderLayout());
 	this.jpOrders.setBorder(BorderFactory.createEtchedBorder());
-	this.jpOrders.add(createTabs());
+	this.jpInfo = new OrderInfoPanel();
+	this.jpInfo.setBorder(BorderFactory.createEtchedBorder());
 
 	this.jpWaitOrders = new JPanel();
-	this.jpWaitOrders.setLayout(new BoxLayout(this.jpWaitOrders,
-		BoxLayout.Y_AXIS));
 
-	// this.addWaitOrder();
+	this.jpMakingOrders = new JPanel();
+	this.jpSendedOrders = new JPanel();
+
+	this.addWaitOrder();
 
 	this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpOrders,
 		jpInfo);
 	this.split.setOneTouchExpandable(true);
 	this.split.setResizeWeight(0.5);
 
-	this.add(createTabs());
+	this.jpOrders.add(createTabs());
 	this.add(split);
     }
 
     private JTabbedPane createTabs() {
+
 	JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
 	jtp.addTab("Wait Orders", this.jpWaitOrders);
-
 	jtp.addTab("Making Orders", this.jpMakingOrders);
 	jtp.addTab("Sended Orders", this.jpSendedOrders);
 
@@ -151,10 +161,9 @@ public class OrderManagerPanel extends JPanel {
 	ShoppingCart s1 = new ShoppingCart(38);
 	s1.addProduct(p1);
 	Order or1 = new Order(41, "a", "a", dt1, "a", a1, s1);
+
 	this.jpWaitOrders.add(new OrderPanel(or1));
 	int[] numProducts = { 1, 0, 0 };
-	this.jpInfo = new OrderInfoPanel();
-	this.jpInfo.setBorder(BorderFactory.createEtchedBorder());
 
     }
     // ====================
