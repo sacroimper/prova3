@@ -63,6 +63,7 @@ public class OrderPanel extends JPanel {
     public OrderPanel(Order order) {
 	this.order = order;
 	this.initComponents();
+	this.registListeners();
     }
 
     // ====================
@@ -139,6 +140,11 @@ public class OrderPanel extends JPanel {
 	this.add(this.jbShowInfo, constraints);
     }
 
+    private void registListeners() {
+	ActionInfoPanelListener listener = new ActionInfoPanelListener(
+		this.order);
+	this.jbShowInfo.addActionListener(listener);
+    }
     // ====================
     // OVERRIDE METHODS
     // ====================
