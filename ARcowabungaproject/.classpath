@@ -16,8 +16,5 @@
 			<attribute name="javadoc_location" value="jar:file:../libs/javadoc/joda-time-2.3-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/gdx"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/gdx-backend-android"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/model-loaders"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
