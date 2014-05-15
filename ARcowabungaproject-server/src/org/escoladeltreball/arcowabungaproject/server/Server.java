@@ -75,13 +75,17 @@ public abstract class Server extends Thread {
     // ====================
 
     public void stopServer() {
-	stop = true;
-	close();
+	if (!stop) {
+	    stop = true;
+	    close();
+	}
     }
 
     public void startServer() {
-	stop = false;
-	start();
+	if (stop) {
+	    stop = false;
+	    start();
+	}
     }
 
     // ====================
