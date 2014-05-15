@@ -44,7 +44,7 @@ import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
-import org.escoladeltreball.arcowabungaproject.server.gui.console.ConsolePanel;
+import org.escoladeltreball.arcowabungaproject.server.gui.console.ServerPanel;
 import org.joda.time.DateTime;
 
 public class ServerGUI extends JFrame {
@@ -89,7 +89,7 @@ public class ServerGUI extends JFrame {
 		BoxLayout.Y_AXIS));
 	this.addWaitOrder();
 
-	this.jpServerConsole = new ConsolePanel();
+	this.jpServerConsole = new ServerPanel();
 
 	this.jpOrders = new JPanel();
 	this.jpOrders.setLayout(new BorderLayout());
