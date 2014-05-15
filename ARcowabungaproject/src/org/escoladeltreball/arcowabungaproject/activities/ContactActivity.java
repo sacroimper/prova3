@@ -117,6 +117,12 @@ public class ContactActivity extends Activity implements OnClickListener {
 	finish();
     }
 
+    @Override
+    public void onPause() {
+	super.onPause();
+	finish();
+    }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

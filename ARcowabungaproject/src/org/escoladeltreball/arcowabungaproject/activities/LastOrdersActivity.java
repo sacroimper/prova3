@@ -102,6 +102,12 @@ public class LastOrdersActivity extends Activity {
 	return true;
     }
 
+    @Override
+    public void onPause() {
+	super.onPause();
+	finish();
+    }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

@@ -1,5 +1,5 @@
 /*
- *  ConsolePanel.java
+ *  ServerPanel.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -26,11 +26,13 @@ package org.escoladeltreball.arcowabungaproject.server.gui.console;
 import java.awt.BorderLayout;
 import java.io.PrintStream;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class ConsolePanel extends JPanel {
+public class ServerPanel extends JPanel {
 
     // ====================
     // CONSTANTS
@@ -42,12 +44,15 @@ public class ConsolePanel extends JPanel {
 
     private JTextArea jtaConsole;
     private JLabel jlTitle;
+    private JPanel jpLeft;
+    private JButton jbStart;
+    private JButton jbStop;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
-    public ConsolePanel() {
+    public ServerPanel() {
 	super();
 	initComponents();
     }
@@ -75,6 +80,16 @@ public class ConsolePanel extends JPanel {
 	PrintStreamCapturer psc = new PrintStreamCapturer(jtaConsole, in);
 	System.setOut(psc);
 
+	jpLeft = new JPanel();
+	jpLeft.setLayout(new BoxLayout(jpLeft, BoxLayout.Y_AXIS));
+
+	jbStart = new JButton("Start");
+	jbStop = new JButton("Start");
+
+	jpLeft.add(jbStart);
+	jpLeft.add(jbStop);
+
+	this.add(jpLeft, BorderLayout.WEST);
 	this.add(jlTitle, BorderLayout.NORTH);
 	this.add(jtaConsole, BorderLayout.CENTER);
     }

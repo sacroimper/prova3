@@ -40,6 +40,7 @@ public class Product extends IdObject {
     protected float price;
     protected int icon;
     protected float discount;
+    public static float TAX_PERCENT = .1f;
 
     // ====================
     // CONSTRUCTORS
@@ -63,6 +64,14 @@ public class Product extends IdObject {
 
     public String getFormatedPrice() {
 	return String.format("%.2f€", price);
+    }
+
+    public String getFormatedPriceWithTax() {
+	return String.format("%.2f€", getPriceWithTax());
+    }
+
+    public float getPriceWithTax() {
+	return getPrice() * (TAX_PERCENT + 1);
     }
 
     // ====================

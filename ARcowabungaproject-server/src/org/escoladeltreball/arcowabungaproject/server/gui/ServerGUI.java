@@ -33,7 +33,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import org.escoladeltreball.arcowabungaproject.server.gui.console.ConsolePanel;
+import org.escoladeltreball.arcowabungaproject.server.gui.console.ServerPanel;
 
 public class ServerGUI extends JFrame {
 
@@ -72,7 +72,7 @@ public class ServerGUI extends JFrame {
 	this.jpOrderManager = new OrderManagerPanel();
 	this.jpOrderManager.setLayout(new BorderLayout());
 
-	this.jpServerConsole = new ConsolePanel();
+	this.jpServerConsole = new ServerPanel();
 
 	JTabbedPane jtpMain = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
