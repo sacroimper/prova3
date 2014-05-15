@@ -31,6 +31,7 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -63,7 +64,8 @@ public class ShoppingCartAdapter extends BaseAdapter {
     // CONSTRUCTORS
     // ====================
 
-    public ShoppingCartAdapter(Activity activity, ShoppingCart customShoppingCart) {
+    public ShoppingCartAdapter(Activity activity,
+	    ShoppingCart customShoppingCart) {
 	super();
 	this.activity = activity;
 	this.products = customShoppingCart.getProducts();
@@ -128,6 +130,9 @@ public class ShoppingCartAdapter extends BaseAdapter {
 	if (position == 0) {
 	    convertView = inflater.inflate(
 		    R.layout.listitem_product_intro_layout, null);
+	    TextView tv = (TextView) convertView
+		    .findViewById(R.id.productIntroText);
+	    CustomTextView.customTextView(activity, tv);
 	} else if (position == products.size() + 1) {
 
 	    // Fills the proper text prices in listitem_product_final_layout
@@ -136,7 +141,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
 
 	    // Find the TextViews by id
 	    TextView subtotalPrice = (TextView) convertView
-		    .findViewById(R.id.subtotal_price);
+		    .findViewById(R.id.order_subtotal_price);
 	    // TextView shippingCostPrice = (TextView) convertView
 	    // .findViewById(R.id.shipping_cost_value);
 	    // TextView taxesPrice = (TextView) convertView
@@ -146,6 +151,27 @@ public class ShoppingCartAdapter extends BaseAdapter {
 	    subtotalPrice.setText(this.price + "€");
 	    // shippingCostPrice.setText(this.price + "€");
 	    // taxesPrice.setText(this.price + "€");
+
+	    // Text final list
+	    TextView tv = (TextView) convertView
+		    .findViewById(R.id.order_price_total);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView.findViewById(R.id.order_shipping_cost);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView
+		    .findViewById(R.id.order_shipping_cost_text);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView.findViewById(R.id.order_subtotal_price);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView.findViewById(R.id.order_taxes_text);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView.findViewById(R.id.order_text_subtotal);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView.findViewById(R.id.order_text_total);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView.findViewById(R.id.order_withtax_price);
+	    CustomTextView.customTextView(activity, tv);
+
 	} else {
 	    if (convertView == null) {
 		convertView = this.inflater.inflate(
@@ -165,6 +191,13 @@ public class ShoppingCartAdapter extends BaseAdapter {
 		// of this LinearLayout Maybe it has another Adapter?
 		holder.extraIngrentsLayout = (LinearLayout) convertView
 			.findViewById(R.id.extraIngredientLayoutInProductItem);
+
+		// Apply custom textview
+		CustomTextView.customTextView(activity, holder.productTitle);
+		CustomTextView.customTextView(activity, holder.productPrice);
+		TextView tv = (TextView) convertView
+			.findViewById(R.id.extraIngredientIntro);
+		CustomTextView.customTextView(activity, tv);
 
 		convertView.setTag(holder);
 

@@ -26,19 +26,24 @@ package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.ShoppingCartAdapter;
+import org.escoladeltreball.arcowabungaproject.ar.OwnMarkerRenderSetup;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
+import system.ArActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class OrderActivity extends Activity {
+public class OrderActivity extends Activity implements OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -93,11 +98,27 @@ public class OrderActivity extends Activity {
 	// // Adding listeners
 	// listView.setOnTouchListener(this);
 
-	// Set custom text
-	TextView tv = (TextView) this.findViewById(R.id.button_cart_text);
+	// ButtonListeners
+	LinearLayout menuBut = (LinearLayout) findViewById(R.id.button_cart);
+	menuBut.setOnClickListener(this);
+
+	// SET CUSTOM TEXT
+
+	// Bottom buttons
+	TextView tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);
-	tv = (TextView) this.findViewById(R.id.button_menu_text);
+	tv = (TextView) findViewById(R.id.button_menu_text);
 	CustomTextView.customTextView(this, tv);
+
+	// Top text
+	tv = (TextView) findViewById(R.id.remember_advertice_title);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.remember_text);
+	CustomTextView.customTextView(this, tv);
+
+	// SET CLICK LISTENERS
+	LinearLayout ly = (LinearLayout) findViewById(R.id.button_menu);
+	ly.setOnClickListener(this);
     }
 
     @Override
@@ -112,6 +133,16 @@ public class OrderActivity extends Activity {
 	finish();
     }
 
+    @Override
+    public void onClick(View v) {
+	if (v.getId() == R.id.button_menu) {
+	    finish();
+	} else if (v.getId() == R.id.button_cart) {
+	    ArActivity.startWithSetup(OrderActivity.this,
+		    new OwnMarkerRenderSetup());
+
+	}
+    }
     // ====================
     // GETTERS & SETTERS
     // ====================

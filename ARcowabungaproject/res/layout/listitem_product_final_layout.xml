@@ -3,95 +3,102 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-    
-    <RelativeLayout 
+
+    <RelativeLayout
         android:id="@+id/blue_subtotal_layout"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-     	android:background="@color/light_cyan"  
-    >
-    	<TextView 
-    	    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerVertical="true"
-	        android:layout_alignParentLeft="true"
-	        android:layout_marginRight="10dp"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginTop="10dp"
-	        android:text="@string/subtotal_text"
-	        android:textColor="@android:color/white"
-	        android:textSize="20sp" />
-    	<TextView 
-    	    android:id="@+id/subtotal_price"
-    	    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerVertical="true"
-	        android:layout_alignParentRight="true"
-	        android:layout_marginRight="10dp"
-	        android:layout_marginTop="10dp"
-	        android:text="@string/subtotal_value"
-	        android:textColor="@android:color/white"
-	        android:textSize="20sp" />
+        android:background="@color/light_cyan" >
+
+        <TextView
+            android:id="@+id/order_text_subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/subtotal_text"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/order_subtotal_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/subtotal_value"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/taxes_text"
-        android:layout_below="@id/blue_subtotal_layout"
+        android:id="@+id/order_taxes_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/blue_subtotal_layout"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="@string/taxes_text"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />
+
     <TextView
-        android:layout_below="@id/blue_subtotal_layout"
+        android:id="@+id/order_withtax_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/blue_subtotal_layout"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:text="@string/taxes_value"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />
+
     <TextView
-        android:id="@+id/shipping_cost_text"
-        android:layout_below="@id/taxes_text"
+        android:id="@+id/order_shipping_cost_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@id/order_taxes_text"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="4dp"
         android:text="@string/shipping_cost_text"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />
+
     <TextView
-        android:layout_below="@id/taxes_text"
+        android:id="@+id/order_shipping_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+        android:layout_below="@id/order_taxes_text"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="4dp"
         android:text="@string/shipping_cost_value"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />
-    
-    
+
     <View
-        android:layout_below="@id/shipping_cost_text"
         android:id="@+id/separator_total_bottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/order_shipping_cost_text"
         android:layout_marginTop="20dp"
         android:background="@color/red" />
 
     <TextView
-        android:layout_below="@id/separator_total_bottom"
+        android:id="@+id/order_text_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@id/separator_total_bottom"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/total_text"
@@ -99,15 +106,15 @@
         android:textSize="20sp" />
 
     <TextView
-        android:layout_below="@id/separator_total_bottom"
+        android:id="@+id/order_price_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/separator_total_bottom"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/total_price"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
-    
 
 </RelativeLayout>
