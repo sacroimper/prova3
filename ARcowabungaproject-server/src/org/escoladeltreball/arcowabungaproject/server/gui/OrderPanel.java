@@ -24,8 +24,10 @@
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -81,20 +83,31 @@ public class OrderPanel extends JPanel {
     // ====================
 
     private void initComponents() {
+	this.setMaximumSize(new Dimension(900, 90));
 	this.border = BorderFactory.createBevelBorder(BevelBorder.RAISED,
 		new Color(205, 9, 9), new Color(232, 68, 68));
+	this.setBorder(border);
 	this.setLayout(new GridBagLayout());
 
 	// Put information in components
 	this.jlOrderId = new JLabel("ID: " + this.order.getId());
+	// this.jlOrderId.setBorder(border);
+
 	this.jlNumOfPizzas = new JLabel("Pizzas: "
 		+ this.numOfDifferentsProductsInOrder()[0]);
+	// this.jlNumOfPizzas.setBorder(border);
+
 	this.jlNumOfDrinks = new JLabel("Drinks: "
 		+ this.numOfDifferentsProductsInOrder()[1]);
+	// this.jlNumOfDrinks.setBorder(border);
+
 	this.jlNumOfOffers = new JLabel("Offers: "
 		+ this.numOfDifferentsProductsInOrder()[2]);
+	// this.jlNumOfOffers.setBorder(border);
+
 	this.jlTotalPrice = new JLabel("Total Price: "
 		+ this.order.getShoppingCart().getPrice() + "€");
+	// this.jlTotalPrice.setBorder(border);
 
 	this.jbMakePizza = new JButton("Make Pizza!");
 	this.jbShowInfo = new JButton("Show More Info");
@@ -103,13 +116,19 @@ public class OrderPanel extends JPanel {
 	constraints.gridx = 0;
 	constraints.gridy = 0;
 	constraints.gridheight = 3;
+	constraints.ipadx = 5;
+	constraints.insets = new Insets(10, 10, 10, 10);
+	constraints.fill = GridBagConstraints.BOTH;
 	this.add(this.jlOrderId, constraints);
 	constraints.gridx = 1;
 	constraints.gridy = 0;
 	constraints.gridheight = 1;
+	constraints.ipady = 5;
+	constraints.insets = new Insets(10, 0, 10, 10);
 	this.add(this.jlNumOfPizzas, constraints);
 	constraints.gridx = 1;
 	constraints.gridy = 1;
+	constraints.insets = new Insets(0, 0, 10, 10);
 	this.add(this.jlNumOfDrinks, constraints);
 	constraints.gridx = 1;
 	constraints.gridy = 2;
@@ -117,10 +136,12 @@ public class OrderPanel extends JPanel {
 	constraints.gridx = 2;
 	constraints.gridy = 0;
 	constraints.gridheight = 3;
+	constraints.insets = new Insets(10, 0, 10, 10);
 	this.add(this.jlTotalPrice, constraints);
 	constraints.gridx = 3;
 	constraints.gridy = 0;
 	constraints.gridheight = 3;
+	constraints.fill = 0;
 	this.add(this.jbMakePizza, constraints);
 	constraints.gridx = 4;
 	constraints.gridy = 0;
