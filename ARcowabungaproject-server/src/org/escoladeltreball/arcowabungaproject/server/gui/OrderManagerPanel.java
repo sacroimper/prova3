@@ -28,6 +28,7 @@ import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
@@ -46,6 +47,7 @@ public class OrderManagerPanel extends JPanel {
     private JPanel jpOrders;
     private JPanel jpInfo;
     private JSplitPane split;
+    private JScrollPane scroll;
     private JPanel jpWaitOrders;
     private JPanel jpMakingOrders;
     private JPanel jpSendedOrders;
@@ -69,11 +71,11 @@ public class OrderManagerPanel extends JPanel {
     // PUBLIC METHODS
     // ====================
     public void setJpInfo(JPanel jpInfo) {
-	if (this.jpInfo != null) {
-	    this.split.remove(this.jpInfo);
-	}
+
+	this.split.remove(this.scroll);
 	this.jpInfo = jpInfo;
-	this.split.setRightComponent(this.jpInfo);
+	this.scroll = new JScrollPane(this.jpInfo);
+	this.split.setRightComponent(this.scroll);
     }
 
     // ====================
@@ -90,6 +92,8 @@ public class OrderManagerPanel extends JPanel {
 	this.jpOrders.setBorder(BorderFactory.createEtchedBorder());
 	this.jpInfo = new OrderInfoPanel();
 	this.jpInfo.setBorder(BorderFactory.createEtchedBorder());
+	this.scroll = new JScrollPane(this.jpInfo);
+	scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 	this.jpWaitOrders = new JPanel();
 	this.jpWaitOrders.setLayout(new BoxLayout(jpWaitOrders,
@@ -100,7 +104,7 @@ public class OrderManagerPanel extends JPanel {
 	this.addWaitOrder();
 
 	this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpOrders,
-		jpInfo);
+		scroll);
 	this.split.setOneTouchExpandable(true);
 	this.split.setResizeWeight(0.5);
 

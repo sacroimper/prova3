@@ -70,8 +70,6 @@ public class ActionInfoPanelListener implements ActionListener {
 		this.order.numOfDifferentsProductsInOrder());
 	OrderManagerPanel.getInstance().setJpInfo(jpInfo);
 
-	System.out.println("listener");
-
     }
     // ====================
     // GETTERS & SETTERS
