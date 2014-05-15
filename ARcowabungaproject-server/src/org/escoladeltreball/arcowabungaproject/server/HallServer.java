@@ -39,11 +39,13 @@ public class HallServer extends Server {
     // ATTRIBUTES
     // ====================
 
+    private static HallServer instance;
+
     // ====================
     // CONSTRUCTORS
     // ====================
 
-    public HallServer() {
+    private HallServer() {
 	super(HALL_PORT);
 	listeningServers = new HashMap<Integer, Server>();
     }
@@ -51,6 +53,13 @@ public class HallServer extends Server {
     // ====================
     // PUBLIC METHODS
     // ====================
+
+    public static HallServer getInstance() {
+	if (instance == null) {
+	    instance = new HallServer();
+	}
+	return instance;
+    }
 
     // ====================
     // PROTECTED METHODS
