@@ -33,12 +33,15 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class OrderActivity extends Activity {
+public class OrderActivity extends Activity implements OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -93,11 +96,23 @@ public class OrderActivity extends Activity {
 	// // Adding listeners
 	// listView.setOnTouchListener(this);
 
-	// Set custom text
-	TextView tv = (TextView) this.findViewById(R.id.button_cart_text);
+	// SET CUSTOM TEXT
+
+	// Bottom buttons
+	TextView tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);
-	tv = (TextView) this.findViewById(R.id.button_menu_text);
+	tv = (TextView) findViewById(R.id.button_menu_text);
 	CustomTextView.customTextView(this, tv);
+
+	// Top text
+	tv = (TextView) findViewById(R.id.remember_advertice_title);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.remember_text);
+	CustomTextView.customTextView(this, tv);
+
+	// SET CLICK LISTENERS
+	LinearLayout ly = (LinearLayout) findViewById(R.id.button_menu);
+	ly.setOnClickListener(this);
     }
 
     @Override
@@ -112,6 +127,12 @@ public class OrderActivity extends Activity {
 	finish();
     }
 
+    @Override
+    public void onClick(View v) {
+	if (v.getId() == R.id.button_menu) {
+	    finish();
+	}
+    }
     // ====================
     // GETTERS & SETTERS
     // ====================
