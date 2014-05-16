@@ -61,8 +61,11 @@ public class ActionSendPizzaListener implements ActionListener {
     // ====================
     @Override
     public void actionPerformed(ActionEvent e) {
-	// TODO Auto-generated method stub
-
+	OrderManagerPanel omp = OrderManagerPanel.getInstance();
+	omp.getJpMakingOrders().remove(this.jpOrder);
+	this.jpOrder.getJbMakePizza().setText("Save Order!");
+	omp.getJpSendedOrders().add(this.jpOrder);
+	omp.repaint();
     }
     // ====================
     // GETTERS & SETTERS
