@@ -85,7 +85,7 @@ public class DatabaseUpdateServer extends Server {
 		boolean end = false;
 		while (!end) {
 		    try {
-			end = in.readInt() == ServerConstants.SERVER_RESPONSE_OK;
+			end = in.readInt() == ServerConstants.CLIENT_RESPONSE_OK;
 		    } catch (IOException e) {
 			e.printStackTrace();
 		    }
