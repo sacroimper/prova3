@@ -23,10 +23,11 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -76,7 +77,7 @@ public class PizzaPanel extends JPanel {
     // ====================
     private void initComponents() {
 
-	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	this.setLayout(new GridBagLayout());
 	this.border = BorderFactory.createEtchedBorder();
 	this.setBorder(BorderFactory.createTitledBorder(border, "PIZZA"));
 	// Put information
@@ -110,13 +111,26 @@ public class PizzaPanel extends JPanel {
 
 	JScrollPane sp = new JScrollPane(this.jtIngredients);
 	sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-	sp.setMaximumSize(this.jtIngredients.getMaximumSize());
-	this.add(this.jlPizzaName);
-	this.add(this.jlPizzaSize);
-	this.add(this.jlPizzaMassType);
-	this.add(this.jlPizzaType);
-	this.add(sp);
-	this.add(this.jlPizzaPrice);
+
+	this.jtIngredients
+		.setPreferredScrollableViewportSize(this.jtIngredients
+			.getPreferredSize());
+	this.jtIngredients.setFillsViewportHeight(true);
+	GridBagConstraints constraints = new GridBagConstraints();
+	constraints.gridx = 0;
+	constraints.gridy = 0;
+	constraints.fill = GridBagConstraints.HORIZONTAL;
+	this.add(this.jlPizzaName, constraints);
+	constraints.gridy = 1;
+	this.add(this.jlPizzaSize, constraints);
+	constraints.gridy = 2;
+	this.add(this.jlPizzaMassType, constraints);
+	constraints.gridy = 3;
+	this.add(this.jlPizzaType, constraints);
+	constraints.gridy = 4;
+	this.add(sp, constraints);
+	constraints.gridy = 5;
+	this.add(this.jlPizzaPrice, constraints);
     }
     // ====================
     // OVERRIDE METHODS
