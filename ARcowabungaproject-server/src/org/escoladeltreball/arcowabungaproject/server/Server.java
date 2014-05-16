@@ -24,6 +24,8 @@
 
 package org.escoladeltreball.arcowabungaproject.server;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -95,9 +97,11 @@ public abstract class Server extends Thread {
     protected void waitClient() throws IOException {
 	print("Waiting client ...");
 	socketService = serverSocket.accept();
-	out = new ObjectOutputStream(socketService.getOutputStream());
+	out = new ObjectOutputStream(new BufferedOutputStream(
+		socketService.getOutputStream()));
 	out.flush();
-	in = new ObjectInputStream(socketService.getInputStream());
+	in = new ObjectInputStream(new BufferedInputStream(
+		socketService.getInputStream()));
 	print("Client conected");
     }
 
@@ -113,7 +117,7 @@ public abstract class Server extends Thread {
 	    closeClient();
 	    serverSocket.close();
 	} catch (IOException e) {
-	    System.out.println(e);
+	    e.printStackTrace();
 	} finally {
 	    print("Closed");
 	}
@@ -172,6 +176,17 @@ public abstract class Server extends Thread {
 	    }
 	}
 	return false;
+    }
+
+    protected int readInt() {
+	int n = 0;
+	while (n == 0) {
+	    try {
+		n = in.readInt();
+	    } catch (Exception e) {
+	    }
+	}
+	return n;
     }
 
     // ====================
