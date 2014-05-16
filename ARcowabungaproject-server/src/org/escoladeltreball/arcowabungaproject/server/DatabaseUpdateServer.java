@@ -76,18 +76,20 @@ public class DatabaseUpdateServer extends Server {
 	    int currentDBVersion = dao.getCurrentVersion();
 	    if (clientDBVersion != currentDBVersion) {
 		out.writeInt(ServerConstants.SERVER_NEED_UPDATE);
+		out.flush();
 		out.writeObject(pizzeria.getIngredients());
+		out.flush();
 		out.writeObject(pizzeria.getPredefinedPizzas());
+		out.flush();
 		out.writeObject(pizzeria.getDrinks());
+		out.flush();
 		out.writeObject(pizzeria.getOffers());
+		out.flush();
 		out.writeInt(currentDBVersion);
+		out.flush();
 
-		boolean end = false;
-		while (!end) {
+		boolean ok = readInt() == ServerConstants.CLIENT_RESPONSE_OK;
 
-		    end = readInt() == ServerConstants.CLIENT_RESPONSE_OK;
-
-		}
 	    }
 	    out.writeInt(ServerConstants.SERVER_END_CONNECTION);
 	    out.flush();
