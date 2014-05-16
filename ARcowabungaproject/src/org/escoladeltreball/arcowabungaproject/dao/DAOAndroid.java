@@ -330,7 +330,6 @@ public class DAOAndroid extends DAOFactory {
 		    cPizzas.getString(6), cPizzas.getInt(7));
 	    Ingredients ingredients = selectIngredientsById(cPizzas.getInt(8));
 	    pizza.setIngredients(ingredients);
-	    pizza.setIngredients(ingredients);
 	    pizzas.add(pizza);
 	    i++;
 	}
