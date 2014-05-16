@@ -35,10 +35,14 @@ public class ActionMakePizzaListener implements ActionListener {
     // ====================
     // ATTRIBUTES
     // ====================
+    OrderPanel jpOrder;
 
     // ====================
     // CONSTRUCTORS
     // ====================
+    public ActionMakePizzaListener(OrderPanel jpOrder) {
+	this.jpOrder = jpOrder;
+    }
 
     // ====================
     // PUBLIC METHODS
@@ -57,7 +61,11 @@ public class ActionMakePizzaListener implements ActionListener {
     // ====================
     @Override
     public void actionPerformed(ActionEvent e) {
-
+	OrderManagerPanel omp = OrderManagerPanel.getInstance();
+	omp.getJpWaitOrders().remove(this.jpOrder);
+	this.jpOrder.getJbMakePizza().setText("Send Pizza!");
+	omp.getJpMakingOrders().add(this.jpOrder);
+	omp.repaint();
     }
     // ====================
     // GETTERS & SETTERS
