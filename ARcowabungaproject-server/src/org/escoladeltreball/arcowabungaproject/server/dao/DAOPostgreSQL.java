@@ -30,12 +30,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.model.Address;
 import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
@@ -106,6 +108,24 @@ public class DAOPostgreSQL extends DAOFactory {
     // ====================
 
     @Override
+    protected Ingredients selectIngredientsById(int id) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    protected List<Product> selectProductsOffersById(int id) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    protected List<Product> selectShoppingCartProductsById(int id) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
     protected Set<Product> readProducts() {
 	// TODO Auto-generated method stub
 	return null;
@@ -153,6 +173,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[5]),
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[6]),
 			rs.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[7]));
+		pizzaSet.add(pizza);
 	    }
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
