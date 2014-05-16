@@ -55,6 +55,8 @@ public class OrderPanel extends JPanel {
     private JLabel jlNumOfOffers;
     private JLabel jlTotalPrice;
     private JButton jbMakePizza;
+    private JButton jbSendPizza;
+    private JButton jbSavePizza;
     private JButton jbShowInfo;
 
     // ====================
@@ -101,6 +103,8 @@ public class OrderPanel extends JPanel {
 		+ this.order.getShoppingCart().getPrice() + "€");
 
 	this.jbMakePizza = new JButton("Make Pizza!");
+	this.jbSendPizza = new JButton("Send Pizza!");
+	this.jbSavePizza = new JButton("Save Pizza!");
 	this.jbShowInfo = new JButton("Show More Info");
 
 	GridBagConstraints constraints = new GridBagConstraints();
@@ -144,19 +148,26 @@ public class OrderPanel extends JPanel {
 	ActionInfoPanelListener infoPanelListener = new ActionInfoPanelListener(
 		this.order);
 	this.jbShowInfo.addActionListener(infoPanelListener);
-	if (this.jbMakePizza.getText().equals("Make Pizza!")) {
-	    ActionMakePizzaListener makePizzalistener = new ActionMakePizzaListener(
-		    this);
-	    this.jbMakePizza.addActionListener(makePizzalistener);
-	} else if (this.jbMakePizza.getText().equals("Send Pizza!")) {
-	    ActionSendPizzaListener sendPizzaListener = new ActionSendPizzaListener(
-		    this);
-	    this.jbMakePizza.addActionListener(sendPizzaListener);
-	}
+	ActionMakePizzaListener makePizzalistener = new ActionMakePizzaListener(
+		this);
+	this.jbMakePizza.addActionListener(makePizzalistener);
+
+	ActionSendPizzaListener sendPizzaListener = new ActionSendPizzaListener(
+		this);
+	this.jbSendPizza.addActionListener(sendPizzaListener);
+
     }
 
     public JButton getJbMakePizza() {
 	return this.jbMakePizza;
+    }
+
+    public JButton getJbSendPizza() {
+	return this.jbSendPizza;
+    }
+
+    public JButton getJbSavePizza() {
+	return this.jbSavePizza;
     }
     // ====================
     // OVERRIDE METHODS
