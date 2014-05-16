@@ -96,18 +96,18 @@ public class OfferPanel extends JPanel {
 	this.add(this.jlOfferName, constraints);
 
 	for (int i = 0; i < jpPizzas.length; i++) {
-	    constraints.gridy = index++;
+	    constraints.gridy = ++index;
 	    this.add(jpPizzas[i], constraints);
 	}
 	for (int i = 0; i < jpDrinks.length; i++) {
-	    constraints.gridy = index++;
+	    constraints.gridy = ++index;
 	    this.add(jpDrinks[i], constraints);
 	}
 	constraints.gridx = 1;
-	constraints.gridy = index++;
+	constraints.gridy = ++index;
 	constraints.gridwidth = 1;
 	this.add(this.jlDiscount, constraints);
-	constraints.gridy = index++;
+	constraints.gridy = ++index;
 	this.add(this.jlPrice, constraints);
 
     }

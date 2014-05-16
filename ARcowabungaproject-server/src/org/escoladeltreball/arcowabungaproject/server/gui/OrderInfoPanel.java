@@ -47,6 +47,7 @@ public class OrderInfoPanel extends JPanel {
     // ====================
     private Order order;
     private JLabel jlIdOrder;
+    private JLabel jlTotalPrice;
     private JPanel jpContacInfo;
     private JPanel[] jpPizzas;
     private JPanel[] jpDrinks;
@@ -90,6 +91,8 @@ public class OrderInfoPanel extends JPanel {
 	this.setLayout(new GridBagLayout());
 	this.jlIdOrder = new JLabel("Order Id: " + this.order.getId());
 	this.jpContacInfo = new ContactInfoPanel(this.order);
+	this.jlTotalPrice = new JLabel("TOTAL PRICE (with IVA): "
+		+ this.order.getTotalPriceWithTax() + "€");
 	addProductsInfo();
 
 	GridBagConstraints constraints = new GridBagConstraints();
@@ -98,21 +101,23 @@ public class OrderInfoPanel extends JPanel {
 	constraints.fill = GridBagConstraints.HORIZONTAL;
 	this.add(jlIdOrder, constraints);
 	constraints.gridx = 0;
-	constraints.gridy = index++;
+	constraints.gridy = ++index;
 	this.add(jpContacInfo, constraints);
 
 	for (int i = 0; i < jpPizzas.length; i++) {
-	    constraints.gridy = index++;
+	    constraints.gridy = ++index;
 	    this.add(jpPizzas[i], constraints);
 	}
 	for (int i = 0; i < jpDrinks.length; i++) {
-	    constraints.gridy = index++;
+	    constraints.gridy = ++index;
 	    this.add(jpDrinks[i], constraints);
 	}
 	for (int i = 0; i < jpOffers.length; i++) {
-	    constraints.gridy = index++;
+	    constraints.gridy = ++index;
 	    this.add(jpOffers[i], constraints);
 	}
+	constraints.gridy = ++index;
+	this.add(this.jlTotalPrice, constraints);
     }
 
     private void addProductsInfo() {
