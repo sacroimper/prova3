@@ -130,6 +130,15 @@ public class OrderManagerPanel extends JPanel {
 	}
 
     }
+
+    public JPanel getJpWaitOrders() {
+	return this.jpWaitOrders;
+    }
+
+    public JPanel getJpMakingOrders() {
+	return this.jpMakingOrders;
+    }
+
     // ====================
     // OVERRIDE METHODS
     // ====================
