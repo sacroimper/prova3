@@ -70,28 +70,28 @@ public class DatabaseUpdateServer extends Server {
 	try {
 	    init();
 	    waitClient();
-	    int clientDBVersion = in.readInt();
+	    int clientDBVersion = readInt();
 	    Pizzeria pizzeria = Pizzeria.getInstance();
 	    DAOFactory dao = DAOPostgreSQL.getInstance();
-	    int currentVersion = dao.getCurrentVersion();
-	    if (clientDBVersion != currentVersion) {
+	    int currentDBVersion = dao.getCurrentVersion();
+	    if (clientDBVersion != currentDBVersion) {
 		out.writeInt(ServerConstants.SERVER_NEED_UPDATE);
 		out.writeObject(pizzeria.getIngredients());
 		out.writeObject(pizzeria.getPredefinedPizzas());
 		out.writeObject(pizzeria.getDrinks());
 		out.writeObject(pizzeria.getOffers());
-		out.writeInt(currentVersion);
+		out.writeInt(currentDBVersion);
 
 		boolean end = false;
 		while (!end) {
 		    try {
-			end = in.readInt() == ServerConstants.CLIENT_RESPONSE_OK;
-		    } catch (IOException e) {
-			e.printStackTrace();
+			end = readInt() == ServerConstants.CLIENT_RESPONSE_OK;
+		    } catch (Exception e) {
 		    }
 		}
 	    }
 	    out.writeInt(ServerConstants.SERVER_END_CONNECTION);
+	    out.flush();
 
 	} catch (IOException e) {
 	    e.printStackTrace();
