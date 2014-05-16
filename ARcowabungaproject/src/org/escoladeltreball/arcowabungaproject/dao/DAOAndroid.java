@@ -310,11 +310,11 @@ public class DAOAndroid extends DAOFactory {
     @Override
     public boolean loadDemo() {
 	resources = new HashMap<Integer, String>();
-	resources.put(150, "images/pizzalittle.png");
-	resources.put(151, "images/pizzalittle.png");
-	resources.put(152, "images/pizzalittle.png");
-	resources.put(153, "images/pizzalittle.png");
-	resources.put(154, "images/pizzalittle.png");
+	resources.put(150, "images/pizzita.png");
+	resources.put(151, "images/pizzita.png");
+	resources.put(152, "images/pizzita.png");
+	resources.put(153, "images/pizzita.png");
+	resources.put(154, "images/pizzita.png");
 	return super.loadDemo();
     }
 
