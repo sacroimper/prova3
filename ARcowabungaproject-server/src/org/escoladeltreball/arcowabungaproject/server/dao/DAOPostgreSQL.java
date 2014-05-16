@@ -173,6 +173,10 @@ public class DAOPostgreSQL extends DAOFactory {
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[5]),
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[6]),
 			rs.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[7]));
+
+		Ingredients ingredients = selectIngredientsById(rs
+			.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[8]));
+		pizza.setIngredients(ingredients);
 		pizzaSet.add(pizza);
 	    }
 	} catch (SQLException e) {
