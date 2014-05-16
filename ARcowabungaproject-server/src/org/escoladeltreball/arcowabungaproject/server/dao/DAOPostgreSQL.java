@@ -24,6 +24,9 @@
 
 package org.escoladeltreball.arcowabungaproject.server.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,6 +58,24 @@ public class DAOPostgreSQL extends DAOFactory {
 
     protected DAOPostgreSQL() {
 	super();
+	connectToDatabase();
+    }
+
+    private void connectToDatabase() {
+	try {
+	    Class.forName("org.postgresql.Driver");
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	System.out.println("Driver Cargado");
+	Connection con = null;
+	try {
+	    con = DriverManager.getConnection(
+		    "jdbc:postgresql://localhost:5432/cowabunga", "usr", "");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	System.out.println("Conenexion realizada");
     }
 
     // ====================
