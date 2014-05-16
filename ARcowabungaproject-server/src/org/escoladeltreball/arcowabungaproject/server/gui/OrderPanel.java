@@ -144,9 +144,15 @@ public class OrderPanel extends JPanel {
 	ActionInfoPanelListener infoPanelListener = new ActionInfoPanelListener(
 		this.order);
 	this.jbShowInfo.addActionListener(infoPanelListener);
-	ActionMakePizzaListener makePizzalistener = new ActionMakePizzaListener(
-		this);
-	this.jbMakePizza.addActionListener(makePizzalistener);
+	if (this.jbMakePizza.getText().equals("Make Pizza!")) {
+	    ActionMakePizzaListener makePizzalistener = new ActionMakePizzaListener(
+		    this);
+	    this.jbMakePizza.addActionListener(makePizzalistener);
+	}
+    }
+
+    public JButton getJbMakePizza() {
+	return this.jbMakePizza;
     }
     // ====================
     // OVERRIDE METHODS
