@@ -23,9 +23,10 @@
 
 	<!-- This should be added to to allow the fullscreen mode to big screen 
 		devices like the samsung galaxy tab -->
-<!-- 	<supports-screens android:smallScreens="true" -->
-<!-- 		android:normalScreens="true" android:largeScreens="true" -->
-<!-- 		android:anyDensity="true" /> -->
+	<supports-screens android:smallScreens="true"
+		android:normalScreens="true" android:largeScreens="true"
+		android:xlargeScreens="true"
+		android:anyDensity="true" />
  
     <application
         android:allowBackup="true"
