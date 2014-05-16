@@ -35,12 +35,15 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class LastOrdersActivity extends Activity {
+public class LastOrdersActivity extends Activity implements OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -94,6 +97,10 @@ public class LastOrdersActivity extends Activity {
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);
+
+	// Apply click listener
+	LinearLayout ly = (LinearLayout) findViewById(R.id.bottomLinearMenu);
+	ly.setOnClickListener(this);
     }
 
     @Override
@@ -108,6 +115,12 @@ public class LastOrdersActivity extends Activity {
 	finish();
     }
 
+    @Override
+    public void onClick(View v) {
+	if (v.getId() == R.id.bottomLinearMenu) {
+	    finish();
+	}
+    }
     // ====================
     // GETTERS & SETTERS
     // ====================
