@@ -79,7 +79,7 @@ public class HallServer extends Server {
 	while (!isStopped()) {
 	    try {
 		waitClient();
-		int opt = in.readInt();
+		int opt = readInt();
 		Server newServer = null;
 		int newPort = getValidPort();
 		switch (opt) {
@@ -91,8 +91,9 @@ public class HallServer extends Server {
 		    break;
 		}
 		if (newServer != null) {
-		    newServer.start();
-		    out.write(newPort);
+		    newServer.startServer();
+		    out.writeInt(newPort);
+		    out.flush();
 		}
 		closeClient();
 	    } catch (IOException e) {
