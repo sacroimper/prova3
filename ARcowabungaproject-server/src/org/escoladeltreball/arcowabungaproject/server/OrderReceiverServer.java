@@ -82,6 +82,7 @@ public class OrderReceiverServer extends Server {
 	    }
 	    try {
 		out.writeInt(ServerConstants.SERVER_RESPONSE_OK);
+		// out.writeInt(ServerConstants.SERVER_END_CONNECTION);
 	    } catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

@@ -99,7 +99,11 @@ public class OrderManagerPanel extends JPanel {
 	this.jpWaitOrders.setLayout(new BoxLayout(jpWaitOrders,
 		BoxLayout.Y_AXIS));
 	this.jpMakingOrders = new JPanel();
+	this.jpMakingOrders.setLayout(new BoxLayout(jpMakingOrders,
+		BoxLayout.Y_AXIS));
 	this.jpSendedOrders = new JPanel();
+	this.jpSendedOrders.setLayout(new BoxLayout(jpSendedOrders,
+		BoxLayout.Y_AXIS));
 
 	this.addWaitOrder();
 
@@ -137,6 +141,10 @@ public class OrderManagerPanel extends JPanel {
 
     public JPanel getJpMakingOrders() {
 	return this.jpMakingOrders;
+    }
+
+    public JPanel getJpSendedOrders() {
+	return this.jpSendedOrders;
     }
 
     // ====================

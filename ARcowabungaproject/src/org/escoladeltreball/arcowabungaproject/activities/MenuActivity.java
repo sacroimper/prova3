@@ -450,8 +450,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
     @Override
     public void onClick(View v) {
 	if (v.getId() == R.id.button_menu) {
-	    Intent intent = new Intent(this, MainMenuActivity.class);
-	    startActivity(intent);
+	    finish();
 	} else if (v.getId() == R.id.button_cart) {
 	    Intent intent = new Intent(this, OrderActivity.class);
 	    startActivity(intent);

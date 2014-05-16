@@ -1,5 +1,5 @@
 /*
- *  ServerConstants.java
+ *  ActionSendPizzaListener.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -21,30 +21,30 @@
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
+package org.escoladeltreball.arcowabungaproject.server.gui;
 
-package org.escoladeltreball.arcowabungaproject.model.system;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ServerConstants {
+public class ActionSendOrderListener implements ActionListener {
 
     // ====================
     // CONSTANTS
     // ====================
 
-    public static final int SERVER_OPTION_DATABASE_UPDATE = 1;
-    public static final int SERVER_OPTION_SEND_ORDER = 2;
-    public static final int SERVER_RESPONSE_OK = 3;
-    public static final int SERVER_NEED_UPDATE = 4;
-    public static final int SERVER_END_CONNECTION = 5;
-
-    public static final int CLIENT_RESPONSE_OK = 1003;
-
     // ====================
     // ATTRIBUTES
     // ====================
+    OrderPanel jpOrder;
 
     // ====================
     // CONSTRUCTORS
     // ====================
+    public ActionSendOrderListener(OrderPanel jpOrder) {
+	this.jpOrder = jpOrder;
+    }
 
     // ====================
     // PUBLIC METHODS
@@ -61,7 +61,21 @@ public class ServerConstants {
     // ====================
     // OVERRIDE METHODS
     // ====================
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+	OrderManagerPanel omp = OrderManagerPanel.getInstance();
+	this.jpOrder.remove(this.jpOrder.getJbSendPizza());
+	GridBagConstraints constraints = new GridBagConstraints();
+	constraints.gridx = 3;
+	constraints.gridy = 0;
+	constraints.gridheight = 3;
+	constraints.fill = 0;
+	constraints.insets = new Insets(10, 0, 10, 10);
+	this.jpOrder.add(this.jpOrder.getJbSavePizza(), constraints);
+	omp.getJpMakingOrders().remove(this.jpOrder);
+	omp.getJpSendedOrders().add(this.jpOrder);
+	omp.repaint();
+    }
     // ====================
     // GETTERS & SETTERS
     // ====================
