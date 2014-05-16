@@ -117,7 +117,8 @@ public class DAOPostgreSQL extends DAOFactory {
 	Statement stm;
 	try {
 	    stm = this.con.createStatement();
-	    ResultSet rs = stm.executeQuery("SELECT * FROM INGREDIENT;");
+	    ResultSet rs = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_INGREDIENT + ";");
 	    while (rs.next()) {
 		Ingredient ingredient = new Ingredient(
 			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[0]),
@@ -127,15 +128,36 @@ public class DAOPostgreSQL extends DAOFactory {
 			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]));
 		ingredientsSet.add(ingredient);
 	    }
+	    stm.close();
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-
 	return ingredientsSet;
     }
 
     @Override
     protected Set<Pizza> readPizza() {
+	HashSet<Pizza> pizzaSet = new HashSet<Pizza>();
+	Statement stm;
+	try {
+	    stm = this.con.createStatement();
+	    ResultSet rs = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_PIZZAS + ";");
+	    while (rs.next()) {
+		Pizza pizza = new Pizza(
+			rs.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[0]),
+			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[1]),
+			rs.getFloat(DAOFactory.COLUMNS_NAME_PIZZAS[2]),
+			rs.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[3]),
+			rs.getFloat(DAOFactory.COLUMNS_NAME_PIZZAS[4]),
+			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[5]),
+			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[6]),
+			rs.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[7]));
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
 
 	return null;
     }
