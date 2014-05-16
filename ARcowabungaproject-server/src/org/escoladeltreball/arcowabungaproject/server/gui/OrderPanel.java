@@ -148,6 +148,10 @@ public class OrderPanel extends JPanel {
 	    ActionMakePizzaListener makePizzalistener = new ActionMakePizzaListener(
 		    this);
 	    this.jbMakePizza.addActionListener(makePizzalistener);
+	} else if (this.jbMakePizza.getText().equals("Send Pizza!")) {
+	    ActionSendPizzaListener sendPizzaListener = new ActionSendPizzaListener(
+		    this);
+	    this.jbMakePizza.addActionListener(sendPizzaListener);
 	}
     }
 
