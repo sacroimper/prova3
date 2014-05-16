@@ -23,9 +23,19 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
-import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+
+import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
+import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 
 public class OfferPanel extends JPanel {
 
@@ -37,12 +47,22 @@ public class OfferPanel extends JPanel {
     // ATTRIBUTES
     // ====================
     private Offer offer;
+    private JPanel[] jpPizzas;
+    private JPanel[] jpDrinks;
+    private JLabel jlOfferName;
+    private JLabel jlPrice;
+    private JLabel jlDiscount;
+    private Border border;
+    private int numOfPizzasOffer;
+    private int numOfDrinksOffer;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-    public OfferPanel(Offer offer) {
+    public OfferPanel(Offer offer, int[] numOfProductsInOffer) {
 	this.offer = offer;
+	this.numOfPizzasOffer = numOfProductsInOffer[3];
+	this.numOfDrinksOffer = numOfProductsInOffer[4];
 	this.initComonents();
     }
 
@@ -58,7 +78,54 @@ public class OfferPanel extends JPanel {
     // PRIVATE METHODS
     // ====================
     private void initComonents() {
+	int index = 0;
+	this.border = BorderFactory.createEtchedBorder();
+	this.jlOfferName = new JLabel("Offer Name : " + this.offer.getName());
+	this.jlDiscount = new JLabel("Discount: " + this.offer.getDiscount());
+	this.jlPrice = new JLabel("Price: " + this.offer.getPrice());
 
+	this.setLayout(new GridBagLayout());
+	GridBagConstraints constraints = new GridBagConstraints();
+	constraints.gridx = 0;
+	constraints.gridy = index;
+	constraints.gridwidth = 2;
+	constraints.fill = GridBagConstraints.HORIZONTAL;
+	this.add(this.jlOfferName, constraints);
+
+	for (int i = 0; i < jpPizzas.length; i++) {
+	    constraints.gridy = index++;
+	    this.add(jpPizzas[i], constraints);
+	}
+	for (int i = 0; i < jpDrinks.length; i++) {
+	    constraints.gridy = index++;
+	    this.add(jpDrinks[i], constraints);
+	}
+	constraints.gridx = 1;
+	constraints.gridy = index++;
+	this.add(this.jlDiscount);
+	constraints.gridy = index++;
+	this.add(this.jlPrice);
+
+    }
+
+    private void addProductsInfo() {
+	this.jpPizzas = new JPanel[this.numOfPizzasOffer];
+	this.jpDrinks = new JPanel[this.numOfDrinksOffer];
+	int indexPizzas = 0;
+	int indexDrink = 0;
+	ArrayList<Product> products = (ArrayList<Product>) this.offer
+		.getProductList();
+	for (Product product : products) {
+	    if (product instanceof Pizza) {
+		Pizza pizza = (Pizza) product;
+		this.jpPizzas[indexPizzas] = new PizzaPanel(pizza);
+		indexPizzas++;
+	    } else if (product instanceof Drink) {
+		Drink drink = (Drink) product;
+		this.jpDrinks[indexDrink] = new DrinkPanel(drink);
+		indexDrink++;
+	    }
+	}
     }
     // ====================
     // OVERRIDE METHODS
