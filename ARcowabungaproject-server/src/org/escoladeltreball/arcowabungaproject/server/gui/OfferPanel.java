@@ -91,7 +91,7 @@ public class OfferPanel extends JPanel {
 	GridBagConstraints constraints = new GridBagConstraints();
 	constraints.gridx = 0;
 	constraints.gridy = index;
-	// constraints.gridwidth = 2;
+	constraints.gridwidth = 2;
 	constraints.fill = GridBagConstraints.HORIZONTAL;
 	this.add(this.jlOfferName, constraints);
 
@@ -103,7 +103,7 @@ public class OfferPanel extends JPanel {
 	    constraints.gridy = index++;
 	    this.add(jpDrinks[i], constraints);
 	}
-	constraints.gridx = 0;
+	constraints.gridx = 1;
 	constraints.gridy = index++;
 	constraints.gridwidth = 1;
 	this.add(this.jlDiscount, constraints);
