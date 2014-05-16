@@ -148,11 +148,11 @@ public class OrderPanel extends JPanel {
 	ActionInfoPanelListener infoPanelListener = new ActionInfoPanelListener(
 		this.order);
 	this.jbShowInfo.addActionListener(infoPanelListener);
-	ActionMakePizzaListener makePizzalistener = new ActionMakePizzaListener(
+	ActionMakeOrderListener makePizzalistener = new ActionMakeOrderListener(
 		this);
 	this.jbMakePizza.addActionListener(makePizzalistener);
 
-	ActionSendPizzaListener sendPizzaListener = new ActionSendPizzaListener(
+	ActionSendOrderListener sendPizzaListener = new ActionSendOrderListener(
 		this);
 	this.jbSendPizza.addActionListener(sendPizzaListener);
 

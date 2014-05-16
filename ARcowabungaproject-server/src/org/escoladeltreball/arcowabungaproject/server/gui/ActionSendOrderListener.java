@@ -28,7 +28,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ActionSendPizzaListener implements ActionListener {
+public class ActionSendOrderListener implements ActionListener {
 
     // ====================
     // CONSTANTS
@@ -42,7 +42,7 @@ public class ActionSendPizzaListener implements ActionListener {
     // ====================
     // CONSTRUCTORS
     // ====================
-    public ActionSendPizzaListener(OrderPanel jpOrder) {
+    public ActionSendOrderListener(OrderPanel jpOrder) {
 	this.jpOrder = jpOrder;
     }
 
