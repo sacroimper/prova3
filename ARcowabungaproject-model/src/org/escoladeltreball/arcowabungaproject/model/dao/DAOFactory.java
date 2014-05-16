@@ -26,6 +26,7 @@ package org.escoladeltreball.arcowabungaproject.model.dao;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -471,6 +472,36 @@ public abstract class DAOFactory {
     // ====================
     // PROTECTED METHODS
     // ====================
+
+    /**
+     * Returns a map with Ingredient object as key and number of that ingredient
+     * as value by the id of ingredients table.
+     * 
+     * @param id
+     *            of ingredients table.
+     * @return Ingredients Object
+     */
+    protected abstract Ingredients selectIngredientsById(int id);
+
+    /**
+     * Returns a list of products that can have a offer by its id. the product
+     * offer can have a pizza or a drink
+     * 
+     * @param id
+     *            of product
+     * @return Return a list of products.
+     */
+    protected abstract List<Product> selectProductsOffersById(int id);
+
+    /**
+     * Returns a list of products that can have a shopping cart by its id. the
+     * product of shopping cart can have a pizza, a drink or a offer.
+     * 
+     * @param id
+     *            of product
+     * @return Return a list of products.
+     */
+    protected abstract List<Product> selectShoppingCartProductsById(int id);
 
     protected abstract Set<Product> readProducts();
 
