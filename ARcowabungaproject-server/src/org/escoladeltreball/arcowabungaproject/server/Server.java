@@ -60,7 +60,7 @@ public abstract class Server extends Thread {
     // CONSTRUCTORS
     // ====================
 
-    public Server(int port) {
+    protected Server(int port) {
 	super();
 	setName(getClass().getSimpleName() + ":" + port);
 	this.port = port;
