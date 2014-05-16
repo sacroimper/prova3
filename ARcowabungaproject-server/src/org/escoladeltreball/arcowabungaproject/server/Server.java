@@ -184,6 +184,12 @@ public abstract class Server extends Thread {
 	    try {
 		n = in.readInt();
 	    } catch (Exception e) {
+		try {
+		    Thread.sleep(500);
+		} catch (InterruptedException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
 	    }
 	}
 	return n;

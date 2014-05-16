@@ -81,7 +81,7 @@ public class ServerGUI extends JFrame {
     // ====================
 
     private void initComponents() {
-	this.setSize(1000, 800);
+	this.setSize(800, 600);
 	setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 
 	this.setResizable(true);
