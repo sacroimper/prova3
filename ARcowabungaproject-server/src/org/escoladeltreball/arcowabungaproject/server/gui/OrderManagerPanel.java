@@ -143,6 +143,10 @@ public class OrderManagerPanel extends JPanel {
 	return this.jpMakingOrders;
     }
 
+    public JPanel getJpSendedOrders() {
+	return this.jpSendedOrders;
+    }
+
     // ====================
     // OVERRIDE METHODS
     // ====================
