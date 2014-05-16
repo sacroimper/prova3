@@ -1,5 +1,5 @@
 /*
- *  OrderInfoPanel.java
+ *  OfferPanel.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -27,16 +27,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
-import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 
-public class OrderInfoPanel extends JPanel {
+public class OfferPanel extends JPanel {
 
     // ====================
     // CONSTANTS
@@ -45,34 +46,24 @@ public class OrderInfoPanel extends JPanel {
     // ====================
     // ATTRIBUTES
     // ====================
-    private Order order;
-    private JLabel jlIdOrder;
-    private JLabel jlTotalPrice;
-    private JPanel jpContacInfo;
+    private Offer offer;
     private JPanel[] jpPizzas;
     private JPanel[] jpDrinks;
-    private JPanel[] jpOffers;
-    private int numOfPizzas;
-    private int numOfDrinks;
-    private int numOfOffers;
+    private JLabel jlOfferName;
+    private JLabel jlPrice;
+    private JLabel jlDiscount;
+    private Border border;
     private int numOfPizzasOffer;
     private int numOfDrinksOffer;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-    public OrderInfoPanel(Order order, int[] numOfProducts) {
-	this.order = order;
-	this.numOfPizzas = numOfProducts[0];
-	this.numOfDrinks = numOfProducts[1];
-	this.numOfOffers = numOfProducts[2];
-	this.numOfPizzasOffer = numOfProducts[3];
-	this.numOfDrinksOffer = numOfProducts[4];
-	this.initComponents();
-    }
-
-    public OrderInfoPanel() {
-
+    public OfferPanel(Offer offer, int numOfPizzasOffer, int numOfDrinksOffer) {
+	this.offer = offer;
+	this.numOfPizzasOffer = numOfPizzasOffer;
+	this.numOfDrinksOffer = numOfDrinksOffer;
+	this.initComonents();
     }
 
     // ====================
@@ -86,23 +77,23 @@ public class OrderInfoPanel extends JPanel {
     // ====================
     // PRIVATE METHODS
     // ====================
-    private void initComponents() {
-	int index = 0;
+    private void initComonents() {
 	this.setLayout(new GridBagLayout());
-	this.jlIdOrder = new JLabel("Order Id: " + this.order.getId());
-	this.jpContacInfo = new ContactInfoPanel(this.order);
-	this.jlTotalPrice = new JLabel("TOTAL PRICE (with IVA): "
-		+ this.order.getTotalPriceWithTax() + "€");
-	addProductsInfo();
+	int index = 0;
+	this.border = BorderFactory.createEtchedBorder();
+	this.setBorder(BorderFactory.createTitledBorder(border, "OFFER"));
+	this.jlOfferName = new JLabel("Offer Name : " + this.offer.getName());
+	this.jlDiscount = new JLabel("Discount: " + this.offer.getDiscount());
+	this.jlPrice = new JLabel("Price: " + this.offer.getPrice());
+
+	this.addProductsInfo();
 
 	GridBagConstraints constraints = new GridBagConstraints();
 	constraints.gridx = 0;
 	constraints.gridy = index;
+	constraints.gridwidth = 2;
 	constraints.fill = GridBagConstraints.HORIZONTAL;
-	this.add(jlIdOrder, constraints);
-	constraints.gridx = 0;
-	constraints.gridy = ++index;
-	this.add(jpContacInfo, constraints);
+	this.add(this.jlOfferName, constraints);
 
 	for (int i = 0; i < jpPizzas.length; i++) {
 	    constraints.gridy = ++index;
@@ -112,23 +103,22 @@ public class OrderInfoPanel extends JPanel {
 	    constraints.gridy = ++index;
 	    this.add(jpDrinks[i], constraints);
 	}
-	for (int i = 0; i < jpOffers.length; i++) {
-	    constraints.gridy = ++index;
-	    this.add(jpOffers[i], constraints);
-	}
+	constraints.gridx = 1;
 	constraints.gridy = ++index;
-	this.add(this.jlTotalPrice, constraints);
+	constraints.gridwidth = 1;
+	this.add(this.jlDiscount, constraints);
+	constraints.gridy = ++index;
+	this.add(this.jlPrice, constraints);
+
     }
 
     private void addProductsInfo() {
-	this.jpPizzas = new JPanel[this.numOfPizzas];
-	this.jpDrinks = new JPanel[this.numOfDrinks];
-	this.jpOffers = new JPanel[this.numOfOffers];
+	this.jpPizzas = new JPanel[this.numOfPizzasOffer];
+	this.jpDrinks = new JPanel[this.numOfDrinksOffer];
 	int indexPizzas = 0;
 	int indexDrink = 0;
-	int indexOffer = 0;
-	ArrayList<Product> products = (ArrayList<Product>) this.order
-		.getShoppingCart().getProducts();
+	ArrayList<Product> products = (ArrayList<Product>) this.offer
+		.getProductList();
 	for (Product product : products) {
 	    if (product instanceof Pizza) {
 		Pizza pizza = (Pizza) product;
@@ -138,13 +128,7 @@ public class OrderInfoPanel extends JPanel {
 		Drink drink = (Drink) product;
 		this.jpDrinks[indexDrink] = new DrinkPanel(drink);
 		indexDrink++;
-	    } else if (product instanceof Offer) {
-		Offer offer = (Offer) product;
-		this.jpOffers[indexOffer] = new OfferPanel(offer,
-			this.numOfPizzasOffer, this.numOfDrinksOffer);
-		indexOffer++;
 	    }
-
 	}
     }
     // ====================

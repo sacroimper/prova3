@@ -65,10 +65,10 @@ public class DrinkPanel extends JPanel {
     // ====================
     private void initComponents() {
 	this.border = BorderFactory.createEtchedBorder();
+	this.setBorder(BorderFactory.createTitledBorder(border, "DRINK"));
 	this.jldrinkName = new JLabel("Name: " + this.drink.getName());
 	this.jldrinkPrice = new JLabel("Price: " + this.drink.getPrice() + "€");
 
-	this.setBorder(border);
 	this.add(this.jldrinkName);
 	this.add(this.jldrinkPrice);
 
