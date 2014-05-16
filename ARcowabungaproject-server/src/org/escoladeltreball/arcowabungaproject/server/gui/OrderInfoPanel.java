@@ -31,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.escoladeltreball.arcowabungaproject.model.Drink;
+import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
@@ -53,6 +54,8 @@ public class OrderInfoPanel extends JPanel {
     private int numOfPizzas;
     private int numOfDrinks;
     private int numOfOffers;
+    private int numOfPizzasOffer;
+    private int numOfDrinksOffer;
 
     // ====================
     // CONSTRUCTORS
@@ -62,6 +65,8 @@ public class OrderInfoPanel extends JPanel {
 	this.numOfPizzas = numOfProducts[0];
 	this.numOfDrinks = numOfProducts[1];
 	this.numOfOffers = numOfProducts[2];
+	this.numOfPizzasOffer = numOfProducts[3];
+	this.numOfDrinksOffer = numOfProducts[4];
 	this.initComponents();
     }
 
@@ -86,6 +91,7 @@ public class OrderInfoPanel extends JPanel {
 	this.jlIdOrder = new JLabel("Order Id: " + this.order.getId());
 	this.jpContacInfo = new ContactInfoPanel(this.order);
 	addProductsInfo();
+
 	GridBagConstraints constraints = new GridBagConstraints();
 	constraints.gridx = 0;
 	constraints.gridy = index;
@@ -103,13 +109,19 @@ public class OrderInfoPanel extends JPanel {
 	    constraints.gridy = index++;
 	    this.add(jpDrinks[i], constraints);
 	}
+	for (int i = 0; i < jpOffers.length; i++) {
+	    constraints.gridy = index++;
+	    this.add(jpOffers[i], constraints);
+	}
     }
 
     private void addProductsInfo() {
 	this.jpPizzas = new JPanel[this.numOfPizzas];
 	this.jpDrinks = new JPanel[this.numOfDrinks];
+	this.jpOffers = new JPanel[this.numOfOffers];
 	int indexPizzas = 0;
 	int indexDrink = 0;
+	int indexOffer = 0;
 	ArrayList<Product> products = (ArrayList<Product>) this.order
 		.getShoppingCart().getProducts();
 	for (Product product : products) {
@@ -121,8 +133,13 @@ public class OrderInfoPanel extends JPanel {
 		Drink drink = (Drink) product;
 		this.jpDrinks[indexDrink] = new DrinkPanel(drink);
 		indexDrink++;
+	    } else if (product instanceof Offer) {
+		Offer offer = (Offer) product;
+		this.jpOffers[indexOffer] = new OfferPanel(offer,
+			this.numOfPizzasOffer, this.numOfDrinksOffer);
+		indexOffer++;
 	    }
-	    // Offers
+
 	}
     }
     // ====================

@@ -59,10 +59,10 @@ public class OfferPanel extends JPanel {
     // ====================
     // CONSTRUCTORS
     // ====================
-    public OfferPanel(Offer offer, int[] numOfProductsInOffer) {
+    public OfferPanel(Offer offer, int numOfPizzasOffer, int numOfDrinksOffer) {
 	this.offer = offer;
-	this.numOfPizzasOffer = numOfProductsInOffer[3];
-	this.numOfDrinksOffer = numOfProductsInOffer[4];
+	this.numOfPizzasOffer = numOfPizzasOffer;
+	this.numOfDrinksOffer = numOfDrinksOffer;
 	this.initComonents();
     }
 
@@ -78,17 +78,20 @@ public class OfferPanel extends JPanel {
     // PRIVATE METHODS
     // ====================
     private void initComonents() {
+	this.setLayout(new GridBagLayout());
 	int index = 0;
 	this.border = BorderFactory.createEtchedBorder();
+	this.setBorder(BorderFactory.createTitledBorder(border, "OFFER"));
 	this.jlOfferName = new JLabel("Offer Name : " + this.offer.getName());
 	this.jlDiscount = new JLabel("Discount: " + this.offer.getDiscount());
 	this.jlPrice = new JLabel("Price: " + this.offer.getPrice());
 
-	this.setLayout(new GridBagLayout());
+	this.addProductsInfo();
+
 	GridBagConstraints constraints = new GridBagConstraints();
 	constraints.gridx = 0;
 	constraints.gridy = index;
-	constraints.gridwidth = 2;
+	// constraints.gridwidth = 2;
 	constraints.fill = GridBagConstraints.HORIZONTAL;
 	this.add(this.jlOfferName, constraints);
 
@@ -100,11 +103,12 @@ public class OfferPanel extends JPanel {
 	    constraints.gridy = index++;
 	    this.add(jpDrinks[i], constraints);
 	}
-	constraints.gridx = 1;
+	constraints.gridx = 0;
 	constraints.gridy = index++;
-	this.add(this.jlDiscount);
+	constraints.gridwidth = 1;
+	this.add(this.jlDiscount, constraints);
 	constraints.gridy = index++;
-	this.add(this.jlPrice);
+	this.add(this.jlPrice, constraints);
 
     }
 

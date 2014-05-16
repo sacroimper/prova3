@@ -78,7 +78,7 @@ public class PizzaPanel extends JPanel {
 
 	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	this.border = BorderFactory.createEtchedBorder();
-	this.setBorder(border);
+	this.setBorder(BorderFactory.createTitledBorder(border, "PIZZA"));
 	// Put information
 	this.jlPizzaName = new JLabel(this.pizza.getName());
 	this.jlPizzaName.setFont(jlPizzaName.getFont().deriveFont(30f));
