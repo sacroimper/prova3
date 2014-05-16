@@ -36,6 +36,8 @@ public class ServerConstants {
     public static final int SERVER_NEED_UPDATE = 4;
     public static final int SERVER_END_CONNECTION = 5;
 
+    public static final int CLIENT_RESPONSE_OK = 1003;
+
     // ====================
     // ATTRIBUTES
     // ====================
