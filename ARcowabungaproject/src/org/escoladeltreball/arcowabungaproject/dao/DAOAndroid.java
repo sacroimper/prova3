@@ -139,15 +139,24 @@ public class DAOAndroid extends DAOFactory {
     // ====================
     // PRIVATE METHODS
     // ====================
-    /**
-     * Returns a map with Ingredient object as key and number of that ingredient
-     * as value by the id of ingredients table.
-     * 
-     * @param id
-     *            of ingredients table.
-     * @return Ingredients Object
-     */
-    private Ingredients selectIngredientsById(int id) {
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
+
+    @Override
+    public boolean loadDemo() {
+	resources = new HashMap<Integer, String>();
+	resources.put(150, "images/pizzita.png");
+	resources.put(151, "images/pizzita.png");
+	resources.put(152, "images/pizzita.png");
+	resources.put(153, "images/pizzita.png");
+	resources.put(154, "images/pizzita.png");
+	return super.loadDemo();
+    }
+
+    @Override
+    protected Ingredients selectIngredientsById(int id) {
 	Ingredients ingredients = new Ingredients(id);
 	/*
 	 * Select all rows with the same id_ingredients from ingredients table
@@ -182,15 +191,8 @@ public class DAOAndroid extends DAOFactory {
 	return ingredients;
     }
 
-    /**
-     * Returns a list of products that can have a offer by its id. the product
-     * offer can have a pizza or a drink
-     * 
-     * @param id
-     *            of product
-     * @return Return a list of products.
-     */
-    private List<Product> selectProductsOffersById(int id) {
+    @Override
+    protected List<Product> selectProductsOffersById(int id) {
 	List<Product> productList = new ArrayList<Product>();
 	// Select from offer_product table the rows with offer = id_offer
 	Cursor cOffersProduct = database.query(
@@ -234,15 +236,8 @@ public class DAOAndroid extends DAOFactory {
 	return productList;
     }
 
-    /**
-     * Returns a list of products that can have a shopping cart by its id. the
-     * product of shopping cart can have a pizza, a drink or a offer.
-     * 
-     * @param id
-     *            of product
-     * @return Return a list of products.
-     */
-    private List<Product> selectShoppingCartProductsById(int id) {
+    @Override
+    protected List<Product> selectShoppingCartProductsById(int id) {
 	List<Product> productsList = new ArrayList<Product>();
 	// Select all rows
 	Cursor cShoppingCartsProducts = database.query(
@@ -303,21 +298,6 @@ public class DAOAndroid extends DAOFactory {
 	return productsList;
     }
 
-    // ====================
-    // OVERRIDE METHODS
-    // ====================
-
-    @Override
-    public boolean loadDemo() {
-	resources = new HashMap<Integer, String>();
-	resources.put(150, "images/pizzita.png");
-	resources.put(151, "images/pizzita.png");
-	resources.put(152, "images/pizzita.png");
-	resources.put(153, "images/pizzita.png");
-	resources.put(154, "images/pizzita.png");
-	return super.loadDemo();
-    }
-
     @Override
     protected Set<Ingredient> readIngredient() {
 	Set<Ingredient> ingredients = new HashSet<Ingredient>();
@@ -349,7 +329,6 @@ public class DAOAndroid extends DAOFactory {
 		    cPizzas.getFloat(4), cPizzas.getString(5),
 		    cPizzas.getString(6), cPizzas.getInt(7));
 	    Ingredients ingredients = selectIngredientsById(cPizzas.getInt(8));
-	    pizza.setIngredients(ingredients);
 	    pizza.setIngredients(ingredients);
 	    pizzas.add(pizza);
 	    i++;

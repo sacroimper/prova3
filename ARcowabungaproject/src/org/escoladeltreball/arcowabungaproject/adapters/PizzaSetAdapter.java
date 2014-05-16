@@ -30,11 +30,13 @@ import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.activities.ARViewActivity;
+import org.escoladeltreball.arcowabungaproject.ar.OwnMarkerRenderSetup;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.listeners.AddButtonClickListener;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
+import system.ArActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -270,7 +272,11 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	public void onClick(View v) {
 	    Intent i = new Intent(activity, ARViewActivity.class);
 	    // i.putExtra("pizza", pizzas.get(index).getId);
-	    activity.startActivity(i);
+	    // activity.startActivity(i);
+
+	    // It needs to stablish or send the correct pizza to
+	    // OwnMarkerRenderSetup
+	    ArActivity.startWithSetup(activity, new OwnMarkerRenderSetup());
 	    // pizzas.get(index);
 	}
     }

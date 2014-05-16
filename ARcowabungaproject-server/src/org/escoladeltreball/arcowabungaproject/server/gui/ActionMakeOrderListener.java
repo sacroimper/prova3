@@ -23,10 +23,12 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ActionMakePizzaListener implements ActionListener {
+public class ActionMakeOrderListener implements ActionListener {
 
     // ====================
     // CONSTANTS
@@ -40,7 +42,7 @@ public class ActionMakePizzaListener implements ActionListener {
     // ====================
     // CONSTRUCTORS
     // ====================
-    public ActionMakePizzaListener(OrderPanel jpOrder) {
+    public ActionMakeOrderListener(OrderPanel jpOrder) {
 	this.jpOrder = jpOrder;
     }
 
@@ -62,8 +64,15 @@ public class ActionMakePizzaListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 	OrderManagerPanel omp = OrderManagerPanel.getInstance();
+	this.jpOrder.remove(this.jpOrder.getJbMakePizza());
+	GridBagConstraints constraints = new GridBagConstraints();
+	constraints.gridx = 3;
+	constraints.gridy = 0;
+	constraints.gridheight = 3;
+	constraints.fill = 0;
+	constraints.insets = new Insets(10, 0, 10, 10);
+	this.jpOrder.add(this.jpOrder.getJbSendPizza(), constraints);
 	omp.getJpWaitOrders().remove(this.jpOrder);
-	this.jpOrder.getJbMakePizza().setText("Send Pizza!");
 	omp.getJpMakingOrders().add(this.jpOrder);
 	omp.repaint();
     }

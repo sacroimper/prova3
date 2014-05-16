@@ -32,6 +32,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import org.escoladeltreball.arcowabungaproject.server.HallServer;
@@ -49,6 +50,7 @@ public class ServerPanel extends JPanel implements ActionListener {
     private JTextArea jtaConsole;
     private JLabel jlTitle;
     private JPanel jpLeft;
+    private JScrollPane jscrConsole;
     private JButton jbStart;
     private JButton jbStop;
 
@@ -84,6 +86,8 @@ public class ServerPanel extends JPanel implements ActionListener {
 	PrintStreamCapturer psc = new PrintStreamCapturer(jtaConsole, in);
 	System.setOut(psc);
 
+	jscrConsole = new JScrollPane(jtaConsole);
+
 	jpLeft = new JPanel();
 	jpLeft.setLayout(new BoxLayout(jpLeft, BoxLayout.Y_AXIS));
 
@@ -98,7 +102,7 @@ public class ServerPanel extends JPanel implements ActionListener {
 
 	this.add(jpLeft, BorderLayout.WEST);
 	this.add(jlTitle, BorderLayout.NORTH);
-	this.add(jtaConsole, BorderLayout.CENTER);
+	this.add(jscrConsole, BorderLayout.CENTER);
     }
 
     // ====================

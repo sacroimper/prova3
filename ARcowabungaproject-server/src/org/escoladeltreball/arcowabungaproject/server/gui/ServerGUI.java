@@ -81,9 +81,9 @@ public class ServerGUI extends JFrame {
     // ====================
 
     private void initComponents() {
+	this.setSize(800, 600);
 	setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 
-	// this.setSize(1000, 800);
 	this.setResizable(true);
 	this.setTitle("Cowabunga Server");
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
