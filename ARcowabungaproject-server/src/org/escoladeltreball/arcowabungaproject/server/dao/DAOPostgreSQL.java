@@ -24,6 +24,12 @@
 
 package org.escoladeltreball.arcowabungaproject.server.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,6 +54,7 @@ public class DAOPostgreSQL extends DAOFactory {
     // ====================
 
     private static DAOPostgreSQL instance;
+    private Connection con;
 
     // ====================
     // CONSTRUCTORS
@@ -55,6 +62,24 @@ public class DAOPostgreSQL extends DAOFactory {
 
     protected DAOPostgreSQL() {
 	super();
+	connectToDatabase();
+    }
+
+    private void connectToDatabase() {
+	try {
+	    Class.forName("org.postgresql.Driver");
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	System.out.println("Driver Cargado");
+	Connection con = null;
+	try {
+	    this.con = DriverManager.getConnection(
+		    "jdbc:postgresql://localhost:5432/cowabunga", "usr", "");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	System.out.println("Conenexion realizada");
     }
 
     // ====================
@@ -88,13 +113,30 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Set<Ingredient> readIngredient() {
-	// TODO Auto-generated method stub
-	return null;
+	HashSet<Ingredient> ingredientsSet = new HashSet<Ingredient>();
+	Statement stm;
+	try {
+	    stm = this.con.createStatement();
+	    ResultSet rs = stm.executeQuery("SELECT * FROM INGREDIENT;");
+	    while (rs.next()) {
+		Ingredient ingredient = new Ingredient(
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[0]),
+			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[1]),
+			rs.getFloat(DAOFactory.COLUMNS_NAME_INGREDIENT[2]),
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[3]),
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]));
+		ingredientsSet.add(ingredient);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+
+	return ingredientsSet;
     }
 
     @Override
     protected Set<Pizza> readPizza() {
-	// TODO Auto-generated method stub
+
 	return null;
     }
 
