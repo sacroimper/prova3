@@ -44,7 +44,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -208,9 +207,14 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 			.findViewById(R.id.priceTextInPizzaItem);
 		holder.tvDesc = (TextView) convertView
 			.findViewById(R.id.descTextInPizzaItem);
-		holder.ibAdd = (ImageButton) convertView
+		holder.ibAdd = (LinearLayout) convertView
 			.findViewById(R.id.imageButtonInPizzaItem);
 		holder.ibAdd.setFocusable(false);
+		// ImageButton ib = (ImageButton) convertView
+		// .findViewById(R.id.imageButtonInPizzaItemContent);
+		// ib.setOnClickListener(new AddButtonClickListener(group,
+		// activity));
+		// ib.setFocusable(false);
 		CustomTextView.customTextView(activity, holder.tvTitle);
 		CustomTextView.customTextView(activity, holder.tvPrice);
 		CustomTextView.customTextView(activity, holder.tvDesc);
@@ -235,6 +239,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
 	    holder.ibAdd.setOnClickListener(new AddButtonClickListener(group,
 		    activity));
+
 	}
 	return convertView;
     }
@@ -281,6 +286,6 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	public TextView tvTitle;
 	public TextView tvPrice;
 	public TextView tvDesc;
-	public ImageButton ibAdd;
+	public LinearLayout ibAdd;
     }
 }
