@@ -29,6 +29,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -224,8 +225,28 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Set<Offer> readOffer() {
-	// TODO Auto-generated method stub
-	return null;
+	HashSet<Offer> offers = new HashSet<Offer>();
+	Statement stm;
+	try {
+	    stm = this.con.createStatement();
+	    ResultSet rsOffer = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_OFFERS + ";");
+	    while (rsOffer.next()) {
+		Offer offer = new Offer(
+			rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[0]),
+			rsOffer.getString(DAOFactory.COLUMNS_NAME_OFFERS[1]),
+			rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[2]),
+			rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[3]),
+			rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[4]));
+		ArrayList<Product> productList = (ArrayList<Product>) selectProductsOffersById(rsOffer
+			.getInt(DAOFactory.COLUMNS_NAME_OFFERS[5]));
+		offer.setProductList(productList);
+		offers.add(offer);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return offers;
     }
 
     @Override
