@@ -732,6 +732,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    for (Ingredient ingredient : ingredients) {
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENT
@@ -762,8 +763,44 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected void writePizzas(Set<Pizza> pizzas) {
-	// TODO Auto-generated method stub
-
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    for (Pizza pizza : pizzas) {
+		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_PIZZAS
+			+ "VALUES(" + pizza.getId() + ",'" + pizza.getName()
+			+ "'," + pizza.getPrice() + "," + pizza.getIcon()
+			+ ",'" + pizza.getMassType() + "','" + pizza.getType()
+			+ "'," + pizza.getSize() + "," + pizza.getDiscount()
+			+ "," + pizza.getIngredients().getId() + ");");
+		for (Ingredient ingredient : pizza.getIngredientsSet()) {
+		    stm.executeUpdate("INSERT INTO "
+			    + DAOFactory.TABLE_INGREDIENTS + "VALUES("
+			    + pizza.getIngredients().getId() + ","
+			    + ingredient.getId() + ","
+			    + pizza.getIngredients().get(ingredient) + ");");
+		}
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     @Override
