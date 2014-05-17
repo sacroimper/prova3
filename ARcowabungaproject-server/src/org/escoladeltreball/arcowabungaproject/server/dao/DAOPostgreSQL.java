@@ -30,6 +30,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -505,8 +506,25 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Map<String, String> readPreferences() {
-	// TODO Auto-generated method stub
-	return null;
+	Map<String, String> preferences = new HashMap<String, String>();
+	Statement stm;
+	try {
+	    stm = this.con.createStatement();
+	    ResultSet rsPreferences = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_PREFERENCES);
+
+	    while (rsPreferences.next()) {
+
+		preferences
+			.put(rsPreferences
+				.getString(DAOFactory.COLUMNS_NAME_PREFERENCES[0]),
+				rsPreferences
+					.getString(DAOFactory.COLUMNS_NAME_PREFERENCES[1]));
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return preferences;
     }
 
     @Override
