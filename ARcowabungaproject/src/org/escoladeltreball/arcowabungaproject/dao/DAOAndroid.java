@@ -194,7 +194,7 @@ public class DAOAndroid extends DAOFactory {
     @Override
     protected List<Product> selectProductsOffersById(int id) {
 	List<Product> productList = new ArrayList<Product>();
-	// Select from offer_product table the rows with offer = id_offer
+	// Select from offers products table the offers with the same id
 	Cursor cOffersProduct = database.query(
 		DAOFactory.TABLE_OFFERS_PRODUCTS,
 		DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS,
@@ -203,7 +203,6 @@ public class DAOAndroid extends DAOFactory {
 	int i = 0;
 	while (i < cOffersProduct.getCount()) {
 	    cOffersProduct.move(i);
-	    Product product = null;
 	    // Product can be a pizza product or drink product
 	    // Select pizza with the same id as product.
 	    Cursor cPizza = database.query(
@@ -213,10 +212,14 @@ public class DAOAndroid extends DAOFactory {
 			    + cOffersProduct.getInt(1), null, null, null, null);
 	    if (cPizza != null) {
 		cPizza.moveToFirst();
-		product = new Pizza(cPizza.getInt(0), cPizza.getString(1),
+		Pizza pizza = new Pizza(cPizza.getInt(0), cPizza.getString(1),
 			cPizza.getFloat(2), cPizza.getInt(3),
 			cPizza.getFloat(4), cPizza.getString(5),
 			cPizza.getString(6), cPizza.getInt(7));
+		Ingredients ingredients = selectIngredientsById(cPizza
+			.getInt(8));
+		pizza.setIngredients(ingredients);
+		productList.add(pizza);
 	    }
 	    // Select drink with the same id as product.
 	    Cursor cDrink = database.query(
@@ -226,11 +229,11 @@ public class DAOAndroid extends DAOFactory {
 			    + cOffersProduct.getInt(1), null, null, null, null);
 	    if (cDrink != null) {
 		cDrink.moveToFirst();
-		product = new Drink(cDrink.getInt(0), cDrink.getString(1),
+		Drink drink = new Drink(cDrink.getInt(0), cDrink.getString(1),
 			cDrink.getFloat(2), cDrink.getInt(3),
 			cDrink.getFloat(4), cDrink.getInt(5));
+		productList.add(drink);
 	    }
-	    productList.add(product);
 	    i++;
 	}
 	return productList;
