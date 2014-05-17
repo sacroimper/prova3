@@ -45,6 +45,7 @@ import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.joda.time.DateTime;
 
 public class DAOPostgreSQL extends DAOFactory {
 
@@ -450,8 +451,31 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Set<Order> readOrder() {
-	// TODO Auto-generated method stub
-	return null;
+	HashSet<Order> OrdersSet = new HashSet<Order>();
+	try {
+	    Statement stm = this.con.createStatement();
+	    // Select all rows of order table.
+	    ResultSet rsOrder = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_ORDERS + ";");
+	    while (rsOrder.next()) {
+		DateTime dateTime = DateTime.parse(rsOrder
+			.getString(DAOFactory.COLUMNS_NAME_ORDERS[3]));
+		Order order = new Order(
+			rsOrder.getInt(DAOFactory.COLUMNS_NAME_ORDERS[0]),
+			rsOrder.getString(DAOFactory.COLUMNS_NAME_ORDERS[1]),
+			rsOrder.getString(DAOFactory.COLUMNS_NAME_ORDERS[2]),
+			dateTime,
+			rsOrder.getString(DAOFactory.COLUMNS_NAME_ORDERS[4]),
+			readAddress(rsOrder
+				.getInt(DAOFactory.COLUMNS_NAME_ORDERS[5])),
+			readShoppingCart(rsOrder
+				.getInt(DAOFactory.COLUMNS_NAME_ORDERS[6])));
+		OrdersSet.add(order);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return OrdersSet;
     }
 
     @Override
