@@ -119,7 +119,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	     * Select all rows with the same id_ingredients from ingredients
 	     * table
 	     */
-	    ResultSet rsIngredients = stm.executeQuery("Select * FROM "
+	    ResultSet rsIngredients = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_INGREDIENTS + " WHERE "
 		    + DAOFactory.COLUMNS_NAME_INGREDIENTS[0] + "=" + id + ";");
 	    while (rsIngredients.next()) {
@@ -148,8 +148,69 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected List<Product> selectProductsOffersById(int id) {
-	// TODO Auto-generated method stub
-	return null;
+	List<Product> products = new ArrayList<Product>();
+	try {
+	    Statement stm = this.con.createStatement();
+	    // Select from offers products table the offers with the same id
+	    ResultSet rsProducts = stm.executeQuery("SELCET * FROM "
+		    + DAOFactory.TABLE_OFFERS_PRODUCTS + " WHERE "
+		    + DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[0] + "=" + id
+		    + ";");
+	    while (rsProducts.next()) {
+		// Product can be a pizza product or drink product
+		// Select pizza with the same id as product.
+		ResultSet rsPizza = stm
+			.executeQuery("SELECT * FROM "
+				+ DAOFactory.TABLE_PIZZAS
+				+ " WHERE "
+				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
+				+ "="
+				+ rsProducts
+					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1]
+						+ ";"));
+		if (rsPizza != null) {
+		    rsPizza.next();
+		    Pizza pizza = new Pizza(
+			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[0]),
+			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[1]),
+			    rsPizza.getFloat(DAOFactory.COLUMNS_NAME_PIZZAS[2]),
+			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[3]),
+			    rsPizza.getFloat(DAOFactory.COLUMNS_NAME_PIZZAS[4]),
+			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[5]),
+			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[6]),
+			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[7]));
+		    Ingredients ingredients = selectIngredientsById(rsPizza
+			    .getInt(DAOFactory.COLUMNS_NAME_PIZZAS[8]));
+		    pizza.setIngredients(ingredients);
+		    products.add(pizza);
+		}
+		// Select drink with the same id as product.
+		ResultSet rsDrink = stm
+			.executeQuery("SELECT * FROM "
+				+ DAOFactory.TABLE_DRINKS
+				+ " WHERE "
+				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
+				+ "="
+				+ rsProducts
+					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1]
+						+ ";"));
+		if (rsDrink != null) {
+		    rsDrink.next();
+		    Drink drink = new Drink(
+			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[0]),
+			    rsDrink.getString(DAOFactory.COLUMNS_NAME_DRINKS[1]),
+			    rsDrink.getFloat(DAOFactory.COLUMNS_NAME_DRINKS[2]),
+			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[3]),
+			    rsDrink.getFloat(DAOFactory.COLUMNS_NAME_DRINKS[4]),
+			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[5]));
+		    products.add(drink);
+		}
+	    }
+
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return products;
     }
 
     @Override
