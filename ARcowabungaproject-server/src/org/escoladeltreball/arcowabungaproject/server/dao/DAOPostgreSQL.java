@@ -148,7 +148,7 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected List<Product> selectProductsOffersById(int id) {
-	List<Product> products = new ArrayList<Product>();
+	List<Product> productsList = new ArrayList<Product>();
 	try {
 	    Statement stm = this.con.createStatement();
 	    // Select from offers products table the offers with the same id
@@ -182,7 +182,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		    Ingredients ingredients = selectIngredientsById(rsPizza
 			    .getInt(DAOFactory.COLUMNS_NAME_PIZZAS[8]));
 		    pizza.setIngredients(ingredients);
-		    products.add(pizza);
+		    productsList.add(pizza);
 		}
 		// Select drink with the same id as product.
 		ResultSet rsDrink = stm
@@ -203,14 +203,14 @@ public class DAOPostgreSQL extends DAOFactory {
 			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[3]),
 			    rsDrink.getFloat(DAOFactory.COLUMNS_NAME_DRINKS[4]),
 			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[5]));
-		    products.add(drink);
+		    productsList.add(drink);
 		}
 	    }
 
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-	return products;
+	return productsList;
     }
 
     @Override
@@ -227,10 +227,9 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Set<Ingredient> readIngredient() {
-	HashSet<Ingredient> ingredientsSet = new HashSet<Ingredient>();
-	Statement stm;
+	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
 	try {
-	    stm = this.con.createStatement();
+	    Statement stm = this.con.createStatement();
 	    // Select all rows of ingredient table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_INGREDIENT + ";");
@@ -253,11 +252,11 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Set<Pizza> readPizza() {
-	HashSet<Pizza> pizzaSet = new HashSet<Pizza>();
+	Set<Pizza> pizzaSet = new HashSet<Pizza>();
 	Statement stm;
 	try {
 	    stm = this.con.createStatement();
-	    // Select all rows of table pizzas
+	    // Select all rows of Pizza table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_PIZZAS + ";");
 	    while (rs.next()) {
@@ -271,7 +270,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[5]),
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[6]),
 			rs.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[7]));
-		// get the map of ingredients.
+		// get the pizza ingredients map.
 		Ingredients ingredients = selectIngredientsById(rs
 			.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[8]));
 		pizza.setIngredients(ingredients);
@@ -280,40 +279,62 @@ public class DAOPostgreSQL extends DAOFactory {
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-
-	return null;
+	return pizzaSet;
     }
 
     @Override
     protected Set<Offer> readOffer() {
-	HashSet<Offer> offers = new HashSet<Offer>();
-	Statement stm;
+	Set<Offer> offersSet = new HashSet<Offer>();
 	try {
-	    stm = this.con.createStatement();
+	    Statement stm = this.con.createStatement();
+	    // Select all rows from Offer table.
 	    ResultSet rsOffer = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_OFFERS + ";");
 	    while (rsOffer.next()) {
+		// Create a offer object and put in the HashSet
 		Offer offer = new Offer(
 			rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[0]),
 			rsOffer.getString(DAOFactory.COLUMNS_NAME_OFFERS[1]),
 			rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[2]),
 			rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[3]),
 			rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[4]));
+		// Get the offer products list
 		ArrayList<Product> productList = (ArrayList<Product>) selectProductsOffersById(rsOffer
 			.getInt(DAOFactory.COLUMNS_NAME_OFFERS[5]));
 		offer.setProductList(productList);
-		offers.add(offer);
+		offersSet.add(offer);
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-	return offers;
+	return offersSet;
     }
 
     @Override
     protected Set<Drink> readDrink() {
-	// TODO Auto-generated method stub
-	return null;
+	Set<Drink> drinksSet = new HashSet<Drink>();
+	Statement stm;
+	try {
+	    stm = this.con.createStatement();
+	    // Select all rows from drink table
+	    ResultSet rsDrinks = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_DRINKS + ";");
+	    while (rsDrinks.next()) {
+		// Create a drink object and put it in the HashSet
+		Drink drink = new Drink(
+			rsDrinks.getInt(DAOFactory.COLUMNS_NAME_DRINKS[0]),
+			rsDrinks.getString(DAOFactory.COLUMNS_NAME_DRINKS[1]),
+			rsDrinks.getFloat(DAOFactory.COLUMNS_NAME_DRINKS[2]),
+			rsDrinks.getInt(DAOFactory.COLUMNS_NAME_DRINKS[3]),
+			rsDrinks.getFloat(DAOFactory.COLUMNS_NAME_DRINKS[4]),
+			rsDrinks.getInt(DAOFactory.COLUMNS_NAME_DRINKS[5]));
+		drinksSet.add(drink);
+	    }
+
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return drinksSet;
     }
 
     @Override
