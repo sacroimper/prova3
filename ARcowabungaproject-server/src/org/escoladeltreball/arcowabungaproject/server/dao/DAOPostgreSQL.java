@@ -59,7 +59,6 @@ public class DAOPostgreSQL extends DAOFactory {
     // ====================
 
     private static DAOPostgreSQL instance;
-    private Connection con;
 
     // ====================
     // CONSTRUCTORS
@@ -70,7 +69,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	connectToDatabase();
     }
 
-    private void connectToDatabase() {
+    private Connection connectToDatabase() {
 	try {
 	    Class.forName("org.postgresql.Driver");
 	} catch (Exception e) {
@@ -79,12 +78,13 @@ public class DAOPostgreSQL extends DAOFactory {
 	System.out.println("Driver Cargado");
 	Connection con = null;
 	try {
-	    this.con = DriverManager.getConnection(
+	    con = DriverManager.getConnection(
 		    "jdbc:postgresql://localhost:5432/cowabunga", "usr", "");
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
 	System.out.println("Conenexion realizada");
+	return con;
     }
 
     // ====================
@@ -113,9 +113,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected Ingredients selectIngredientsById(int id) {
 	Ingredients ingredients = new Ingredients(id);
-	Statement stm;
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 
 	    /*
 	     * Select all rows with the same id_ingredients from ingredients
@@ -148,6 +150,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return ingredients;
     }
@@ -155,8 +172,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected List<Product> selectProductsOffersById(int id) {
 	List<Product> productsList = new ArrayList<Product>();
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    Statement stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    // Select from offers products table the offers with the same id
 	    ResultSet rsProducts = stm.executeQuery("SELCET * FROM "
 		    + DAOFactory.TABLE_OFFERS_PRODUCTS + " WHERE "
@@ -215,6 +235,21 @@ public class DAOPostgreSQL extends DAOFactory {
 
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return productsList;
     }
@@ -222,8 +257,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected List<Product> selectShoppingCartProductsById(int id) {
 	List<Product> productsList = new ArrayList<Product>();
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    Statement stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    ResultSet rsShoppingCartProducts = stm
 		    .executeQuery("SELECT * FROM "
 			    + DAOFactory.TABLE_SHOPPINGCART_PRODUCTS
@@ -306,6 +344,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return productsList;
     }
@@ -319,8 +372,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected Set<Ingredient> readIngredient() {
 	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    Statement stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    // Select all rows of ingredient table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_INGREDIENT + ";");
@@ -337,6 +393,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.close();
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return ingredientsSet;
     }
@@ -344,9 +415,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected Set<Pizza> readPizza() {
 	Set<Pizza> pizzaSet = new HashSet<Pizza>();
-	Statement stm;
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    // Select all rows of Pizza table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_PIZZAS + ";");
@@ -369,6 +442,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return pizzaSet;
     }
@@ -376,8 +464,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected Set<Offer> readOffer() {
 	Set<Offer> offersSet = new HashSet<Offer>();
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    Statement stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    // Select all rows from Offer table.
 	    ResultSet rsOffer = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_OFFERS + ";");
@@ -397,6 +488,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return offersSet;
     }
@@ -404,9 +510,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected Set<Drink> readDrink() {
 	Set<Drink> drinksSet = new HashSet<Drink>();
-	Statement stm;
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    // Select all rows from drink table
 	    ResultSet rsDrinks = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_DRINKS + ";");
@@ -424,6 +532,21 @@ public class DAOPostgreSQL extends DAOFactory {
 
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return drinksSet;
     }
@@ -431,8 +554,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected ShoppingCart readShoppingCart(int idShoppingCart) {
 	ShoppingCart shoppingCart = null;
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    Statement stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    ResultSet rsShoppingCart = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_SHOPPINGCARTS + " WHERE "
 		    + DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0] + "="
@@ -446,6 +572,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return shoppingCart;
     }
@@ -453,8 +594,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected Set<Order> readOrder() {
 	HashSet<Order> OrdersSet = new HashSet<Order>();
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    Statement stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    // Select all rows of order table.
 	    ResultSet rsOrder = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_ORDERS + ";");
@@ -475,6 +619,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return OrdersSet;
     }
@@ -482,8 +641,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected Address readAddress(int idAddress) {
 	Address address = null;
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    Statement stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    ResultSet rsAddress = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_ADDRESS + " WHERE "
 		    + DAOFactory.COLUMNS_NAME_ADDRESS[0] + "=" + idAddress
@@ -500,6 +662,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return address;
     }
@@ -507,9 +684,11 @@ public class DAOPostgreSQL extends DAOFactory {
     @Override
     protected Map<String, String> readPreferences() {
 	Map<String, String> preferences = new HashMap<String, String>();
-	Statement stm;
+	Connection con = null;
+	Statement stm = null;
 	try {
-	    stm = this.con.createStatement();
+	    con = connectToDatabase();
+	    stm = con.createStatement();
 	    ResultSet rsPreferences = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_PREFERENCES);
 
@@ -523,6 +702,21 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
 	}
 	return preferences;
     }
@@ -535,8 +729,35 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
-	// TODO Auto-generated method stub
-
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    stm = con.createStatement();
+	    for (Ingredient ingredient : ingredients) {
+		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENT
+			+ "VALUES(" + ingredient.getId() + ",'"
+			+ ingredient.getName() + "'," + ingredient.getIcon()
+			+ "," + ingredient.getModel() + ","
+			+ ingredient.getPrice() + ");");
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     @Override
