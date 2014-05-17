@@ -480,8 +480,27 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Address readAddress(int idAddress) {
-	// TODO Auto-generated method stub
-	return null;
+	Address address = null;
+	try {
+	    Statement stm = this.con.createStatement();
+	    ResultSet rsAddress = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_ADDRESS + " WHERE "
+		    + DAOFactory.COLUMNS_NAME_ADDRESS[0] + "=" + idAddress
+		    + ";");
+	    if (rsAddress.next()) {
+		address = new Address(
+			rsAddress.getInt(DAOFactory.COLUMNS_NAME_ADDRESS[0]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[1]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[2]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[3]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[4]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[5]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[6]));
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return address;
     }
 
     @Override
