@@ -109,8 +109,40 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Ingredients selectIngredientsById(int id) {
-	// TODO Auto-generated method stub
-	return null;
+	Ingredients ingredients = new Ingredients(id);
+	Statement stm;
+	try {
+	    stm = this.con.createStatement();
+
+	    /*
+	     * Select all rows with the same id_ingredients from ingredients
+	     * table
+	     */
+	    ResultSet rsIngredients = stm.executeQuery("Select * FROM "
+		    + DAOFactory.TABLE_INGREDIENTS + " WHERE "
+		    + DAOFactory.COLUMNS_NAME_INGREDIENTS[0] + "=" + id + ";");
+	    while (rsIngredients.next()) {
+		/*
+		 * Select all rows with the same id_ingredient from ingredient
+		 * table and put in the map
+		 */
+		ResultSet rsIngredient = stm.executeQuery("SELECT * FROM "
+			+ DAOFactory.TABLE_INGREDIENT + "WHERE "
+			+ DAOFactory.COLUMNS_NAME_INGREDIENT[0] + "="
+			+ rsIngredients.getInt(1) + ";");
+		while (rsIngredient.next()) {
+
+		    Ingredient ingredient = new Ingredient(
+			    rsIngredient.getInt(0), rsIngredient.getString(1),
+			    rsIngredient.getInt(2), rsIngredient.getInt(3),
+			    rsIngredient.getInt(4));
+		    ingredients.put(ingredient, rsIngredient.getInt(2));
+		}
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return ingredients;
     }
 
     @Override
@@ -137,9 +169,11 @@ public class DAOPostgreSQL extends DAOFactory {
 	Statement stm;
 	try {
 	    stm = this.con.createStatement();
+	    // Select all rows of ingredient table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_INGREDIENT + ";");
 	    while (rs.next()) {
+		// Create a ingredient object and put in the HashSet
 		Ingredient ingredient = new Ingredient(
 			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[0]),
 			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[1]),
@@ -161,9 +195,11 @@ public class DAOPostgreSQL extends DAOFactory {
 	Statement stm;
 	try {
 	    stm = this.con.createStatement();
+	    // Select all rows of table pizzas
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_PIZZAS + ";");
 	    while (rs.next()) {
+		// Create a pizza object and put in the HashSet
 		Pizza pizza = new Pizza(
 			rs.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[0]),
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[1]),
@@ -173,14 +209,13 @@ public class DAOPostgreSQL extends DAOFactory {
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[5]),
 			rs.getString(DAOFactory.COLUMNS_NAME_PIZZAS[6]),
 			rs.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[7]));
-
+		// get the map of ingredients.
 		Ingredients ingredients = selectIngredientsById(rs
 			.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[8]));
 		pizza.setIngredients(ingredients);
 		pizzaSet.add(pizza);
 	    }
 	} catch (SQLException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 
