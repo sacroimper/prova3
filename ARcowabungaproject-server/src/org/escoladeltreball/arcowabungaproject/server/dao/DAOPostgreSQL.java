@@ -128,9 +128,13 @@ public class DAOPostgreSQL extends DAOFactory {
 		 * table and put in the map
 		 */
 		ResultSet rsIngredient = stm.executeQuery("SELECT * FROM "
-			+ DAOFactory.TABLE_INGREDIENT + "WHERE "
-			+ DAOFactory.COLUMNS_NAME_INGREDIENT[0] + "="
-			+ rsIngredients.getInt(1) + ";");
+			+ DAOFactory.TABLE_INGREDIENT
+			+ " WHERE "
+			+ DAOFactory.COLUMNS_NAME_INGREDIENT[0]
+			+ "="
+			+ rsIngredients
+				.getInt(DAOFactory.COLUMNS_NAME_INGREDIENTS[1])
+			+ ";");
 		while (rsIngredient.next()) {
 
 		    Ingredient ingredient = new Ingredient(
@@ -166,10 +170,10 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
 				+ "="
 				+ rsProducts
-					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1]
-						+ ";"));
+					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1])
+				+ ";");
+		rsPizza.next();
 		if (rsPizza != null) {
-		    rsPizza.next();
 		    Pizza pizza = new Pizza(
 			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[0]),
 			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[1]),
@@ -192,10 +196,10 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
 				+ "="
 				+ rsProducts
-					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1]
-						+ ";"));
+					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1])
+				+ ";");
+		rsDrink.next();
 		if (rsDrink != null) {
-		    rsDrink.next();
 		    Drink drink = new Drink(
 			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[0]),
 			    rsDrink.getString(DAOFactory.COLUMNS_NAME_DRINKS[1]),
@@ -215,8 +219,93 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected List<Product> selectShoppingCartProductsById(int id) {
-	// TODO Auto-generated method stub
-	return null;
+	List<Product> productsList = new ArrayList<Product>();
+	try {
+	    Statement stm = this.con.createStatement();
+	    ResultSet rsShoppingCartProducts = stm
+		    .executeQuery("SELECT * FROM "
+			    + DAOFactory.TABLE_SHOPPINGCART_PRODUCTS
+			    + " WHERE "
+			    + DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0]
+			    + "=" + id + ";");
+	    while (rsShoppingCartProducts.next()) {
+		// Product can be a pizza product, drink product or offer
+		// product.
+		// Select pizza with the same id as product.
+		ResultSet rsPizza = stm
+			.executeQuery("SELECT * FROM "
+				+ DAOFactory.TABLE_PIZZAS
+				+ " WHERE "
+				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
+				+ "="
+				+ rsShoppingCartProducts
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+				+ ";");
+		rsPizza.next();
+		if (rsPizza != null) {
+		    Pizza pizza = new Pizza(
+			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[0]),
+			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[1]),
+			    rsPizza.getFloat(DAOFactory.COLUMNS_NAME_PIZZAS[2]),
+			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[3]),
+			    rsPizza.getFloat(DAOFactory.COLUMNS_NAME_PIZZAS[4]),
+			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[5]),
+			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[6]),
+			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[7]));
+		    Ingredients ingredients = selectIngredientsById(rsPizza
+			    .getInt(DAOFactory.COLUMNS_NAME_PIZZAS[8]));
+		    pizza.setIngredients(ingredients);
+		    productsList.add(pizza);
+		}
+		// Select drink with the same id as product.
+		ResultSet rsDrink = stm
+			.executeQuery("SELECT * FROM "
+				+ DAOFactory.TABLE_DRINKS
+				+ " WHERE "
+				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
+				+ "="
+				+ rsShoppingCartProducts
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+				+ ";");
+		rsDrink.next();
+		if (rsDrink != null) {
+		    Drink drink = new Drink(
+			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[0]),
+			    rsDrink.getString(DAOFactory.COLUMNS_NAME_DRINKS[1]),
+			    rsDrink.getFloat(DAOFactory.COLUMNS_NAME_DRINKS[2]),
+			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[3]),
+			    rsDrink.getFloat(DAOFactory.COLUMNS_NAME_DRINKS[4]),
+			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[5]));
+		    productsList.add(drink);
+		}
+		// Select offer with the same id as product.
+		ResultSet rsOffer = stm
+			.executeQuery("SELECT * FROM "
+				+ DAOFactory.TABLE_OFFERS
+				+ " WHERE "
+				+ DAOFactory.COLUMNS_NAME_OFFERS[0]
+				+ "="
+				+ rsShoppingCartProducts
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+				+ ";");
+		rsOffer.next();
+		if (rsOffer != null) {
+		    Offer offer = new Offer(
+			    rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[0]),
+			    rsOffer.getString(DAOFactory.COLUMNS_NAME_OFFERS[1]),
+			    rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[2]),
+			    rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[3]),
+			    rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[4]));
+		    ArrayList<Product> productOfferList = (ArrayList<Product>) selectProductsOffersById(rsOffer
+			    .getInt(DAOFactory.COLUMNS_NAME_OFFERS[5]));
+		    offer.setProductList(productOfferList);
+		    productsList.add(offer);
+		}
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return productsList;
     }
 
     @Override
@@ -339,8 +428,24 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected ShoppingCart readShoppingCart(int idShoppingCart) {
-	// TODO Auto-generated method stub
-	return null;
+	ShoppingCart shoppingCart = null;
+	try {
+	    Statement stm = this.con.createStatement();
+	    ResultSet rsShoppingCart = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_SHOPPINGCARTS + " WHERE "
+		    + DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0] + "="
+		    + idShoppingCart + ";");
+	    rsShoppingCart.next();
+	    if (rsShoppingCart != null) {
+		shoppingCart = new ShoppingCart(
+			rsShoppingCart.getInt(idShoppingCart));
+		ArrayList<Product> productsList = (ArrayList<Product>) selectShoppingCartProductsById(idShoppingCart);
+		shoppingCart.setProducts(productsList);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return shoppingCart;
     }
 
     @Override
