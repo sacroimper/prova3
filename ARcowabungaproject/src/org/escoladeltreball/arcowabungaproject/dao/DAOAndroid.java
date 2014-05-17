@@ -376,21 +376,18 @@ public class DAOAndroid extends DAOFactory {
 
     @Override
     protected ShoppingCart readShoppingCart(int idShoppingCart) {
-	Cursor cShoppingCarts = database.query(DAOFactory.TABLE_SHOPPINGCARTS,
-		DAOFactory.COLUMNS_NAME_SHOPPINGCARTS, null, null, null, null,
-		null);
+	Cursor cShoppingCarts = database
+		.query(DAOFactory.TABLE_SHOPPINGCARTS,
+			DAOFactory.COLUMNS_NAME_SHOPPINGCARTS,
+			DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0] + "="
+				+ idShoppingCart, null, null, null, null);
 	ShoppingCart shoppingCart = null;
-	int i = 0;
-	while (i < cShoppingCarts.getCount()) {
-	    cShoppingCarts.move(i);
-	    if (cShoppingCarts.getInt(0) == idShoppingCart) {
-		shoppingCart = new ShoppingCart(cShoppingCarts.getInt(0));
-		List<Product> productsList = selectShoppingCartProductsById(cShoppingCarts
-			.getInt(0));
-		shoppingCart.setProducts(productsList);
-		i = cShoppingCarts.getCount();
-	    }
-	    i++;
+	cShoppingCarts.moveToFirst();
+	if (cShoppingCarts != null) {
+	    shoppingCart = new ShoppingCart(cShoppingCarts.getInt(0));
+	    List<Product> productsList = selectShoppingCartProductsById(cShoppingCarts
+		    .getInt(0));
+	    shoppingCart.setProducts(productsList);
 	}
 	return shoppingCart;
     }
