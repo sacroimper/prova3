@@ -163,7 +163,7 @@ public class DAOAndroid extends DAOFactory {
 	 */
 	Cursor cIngredients = database.query(DAOFactory.TABLE_INGREDIENTS,
 		DAOFactory.COLUMNS_NAME_INGREDIENTS,
-		DAOFactory.COLUMNS_NAME_INGREDIENTS[1] + "=" + id, null, null,
+		DAOFactory.COLUMNS_NAME_INGREDIENTS[0] + "=" + id, null, null,
 		null, null);
 	int i = 0;
 	while (i < cIngredients.getCount()) {
