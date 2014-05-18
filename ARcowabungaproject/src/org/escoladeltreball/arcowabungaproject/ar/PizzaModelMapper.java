@@ -74,10 +74,11 @@ public class PizzaModelMapper {
     // ATTRIBUTES
     // ====================
 
-    private Set<Ingredient> ingredients;
     private static Map<String, String> ingredientTextureMap;
     private static List<String> modelIngredientTextures;
     private static int ingredientsSize;
+
+    private Set<Ingredient> ingredients;
 
     // ====================
     // CONSTRUCTORS

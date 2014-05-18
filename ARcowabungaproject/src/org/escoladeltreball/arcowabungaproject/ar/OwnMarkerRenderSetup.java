@@ -61,8 +61,8 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
 	GDXConnection.init(myTargetActivity, renderer);
 
-	new OwnModelLoader(this.renderer, "data/models/pizza_V5.obj",
-		"data/models/arpizza_texture.jpg") {
+	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
+		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(MeshComponent gdxMesh) {
 		pizzaMesh = gdxMesh;
