@@ -12,6 +12,9 @@ import gl.GLFactory;
 import gl.scenegraph.MeshComponent;
 //import gl.scenegraph.Shape;
 import gui.GuiSetup;
+
+import java.util.Map;
+
 import markerDetection.MarkerDetectionSetup;
 import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
@@ -71,6 +74,15 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		world.add(o);
 	    }
 	};
+
+	// Method to deploy the ingredients object and textures
+	if (PizzaModelMapper.getIngredientsSize() > 0) {
+	    Map<String, String> pizzaTextureMap = PizzaModelMapper
+		    .getIngredientTextureMap();
+	    for (int i = 0; i < PizzaModelMapper.getIngredientsSize(); i++) {
+
+	    }
+	}
     }
 
     @Override

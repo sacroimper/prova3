@@ -76,7 +76,7 @@ public class PizzaModelMapper {
 
     private static Map<String, String> ingredientTextureMap;
     private static List<String> modelIngredientTextures;
-    private static int ingredientsSize;
+    private static int ingredientsSize = 0;
 
     private Set<Ingredient> ingredients;
 
