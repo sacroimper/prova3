@@ -52,14 +52,13 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	world = new World(camera);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void _b_addWorldsToRenderer(GL1Renderer renderer,
 	    GLFactory objectFactory, GeoObj currentPosition) {
 	this.renderer = renderer;
 	this.renderer.addRenderElement(world);
 
-	GDXConnection.init(myTargetActivity, renderer);
+	GDXConnection.init(this.getActivity(), renderer);
 
 	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
