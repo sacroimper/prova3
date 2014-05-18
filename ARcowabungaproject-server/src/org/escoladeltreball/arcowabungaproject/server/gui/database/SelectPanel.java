@@ -23,9 +23,19 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui.database;
 
-import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class SelectPanel extends JPanel {
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+
+public class SelectPanel extends JPanel implements ItemListener {
 
     // ====================
     // CONSTANTS
@@ -34,10 +44,21 @@ public class SelectPanel extends JPanel {
     // ====================
     // ATTRIBUTES
     // ====================
+    private JLabel[] jlLists;
+    private JTextField[] jtfList;
+    private JLabel jlChooseTable;
+    private JComboBox<String> jcbTables;
+    private GridBagConstraints constraints;
+    private int indexConstrainstX = 0;
+    private int indexConstrainstY = 0;
 
     // ====================
     // CONSTRUCTORS
     // ====================
+    public SelectPanel() {
+	this.initComponents();
+	this.registListeners();
+    }
 
     // ====================
     // PUBLIC METHODS
@@ -50,10 +71,75 @@ public class SelectPanel extends JPanel {
     // ====================
     // PRIVATE METHODS
     // ====================
+    private void initComponents() {
+	this.setLayout(new GridBagLayout());
+	String[] items = { "", DAOFactory.TABLE_ADDRESS,
+		DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
+		DAOFactory.TABLE_INGREDIENTS, DAOFactory.TABLE_OFFERS,
+		DAOFactory.TABLE_OFFERS_PRODUCTS, DAOFactory.TABLE_ORDERS,
+		DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES,
+		DAOFactory.TABLE_PRODUCTS, DAOFactory.TABLE_RESOURCES,
+		DAOFactory.TABLE_SHOPPINGCART_PRODUCTS,
+		DAOFactory.TABLE_SHOPPINGCARTS };
+	this.jlChooseTable = new JLabel("Choose Table");
+	this.jcbTables = new JComboBox<>(items);
+	this.constraints = new GridBagConstraints();
+	this.constraints.gridx = this.indexConstrainstX;
+	this.constraints.gridy = this.indexConstrainstY;
+	this.add(jlChooseTable, this.constraints);
+	this.constraints.gridx = ++this.indexConstrainstX;
+	this.add(jcbTables, this.constraints);
+    }
+
+    private void registListeners() {
+	this.jcbTables.addItemListener(this);
+    }
 
     // ====================
     // OVERRIDE METHODS
     // ====================
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+	if (e.getStateChange() == ItemEvent.DESELECTED) {
+	    String item = (String) e.getItem();
+	    switch (item) {
+	    case DAOFactory.TABLE_ADDRESS:
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_ADDRESS.length; i++) {
+		    this.remove(this.jlLists[i]);
+		    this.remove(this.jtfList[i]);
+		}
+		break;
+	    default:
+		break;
+	    }
+	}
+	if (e.getStateChange() == ItemEvent.SELECTED) {
+	    String item = (String) e.getItem();
+	    switch (item) {
+	    case DAOFactory.TABLE_ADDRESS:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_ADDRESS.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_ADDRESS.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_ADDRESS.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_ADDRESS[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
+
+	    default:
+		break;
+	    }
+	}
+	this.repaint();
+    }
 
     // ====================
     // GETTERS & SETTERS
