@@ -43,32 +43,32 @@ public class PizzaModelMapper {
     // ====================
 
     // PIZZA
-    public final static String BASIC_PIZZA_MODEL = "/data/models/pizza_V5.obj";
-    public final static String BASIC_PIZZA_TEXTURE = "/data/models/arpizza_texture.obj";
+    public final static String BASIC_PIZZA_MODEL = "data/models/pizza_V5.obj";
+    public final static String BASIC_PIZZA_TEXTURE = "data/models/arpizza_texture.jpg";
 
     // INGREDIENTS
-    final static String INGREDIENT_MODEL = "/data/models/ingredient_V5.obj";
-    final static String INGREDIENT_MUSHROOM_TEXTURE = "/data/models/mushroom_texture.obj";
-    final static String INGREDIENT_REDPEPPER_TEXTURE = "/data/models/redpepper_texture.obj";
-    final static String INGREDIENT_GREENPEPPER_TEXTURE = "/data/models/greenpepper_texture.obj";
-    final static String INGREDIENT_TUNA_TEXTURE = "/data/models/tuna_texture.obj";
-    final static String INGREDIENT_PINEAPPLE_TEXTURE = "/data/models/pineapple_texture.obj";
-    final static String INGREDIENT_HAM_TEXTURE = "/data/models/ham_texture.obj";
-    final static String INGREDIENT_BACON_TEXTURE = "/data/models/bacon_texture.obj";
-    final static String INGREDIENT_BLUECHEESE_TEXTURE = "/data/models/bluecheese_texture.obj";
-    final static String INGREDIENT_GOATCHEESE_TEXTURE = "/data/models/goatcheese_texture.obj";
-    final static String INGREDIENT_GOUDA_TEXTURE = "/data/models/gouda_texture.obj";
-    final static String INGREDIENT_GORGONZOLA_TEXTURE = "/data/models/gorgonzola_texture.obj";
-    final static String INGREDIENT_EMENTAL_TEXTURE = "/data/models/emental_texture.obj";
-    final static String INGREDIENT_PARMESAN_TEXTURE = "/data/models/parmesan_texture.obj";
-    final static String INGREDIENT_ONION_TEXTURE = "/data/models/onion_texture.obj";
-    final static String INGREDIENT_BEARSJENA_TEXTURE = "/data/models/bearsjena_texture.obj";
-    final static String INGREDIENT_CORN_TEXTURE = "/data/models/corn_texture.obj";
-    final static String INGREDIENT_CHICKEN_TEXTURE = "/data/models/chicken_texture.obj";
-    final static String INGREDIENT_MINCE_TEXTURE = "/data/models/mince_texture.obj";
-    final static String INGREDIENT_EGG_TEXTURE = "/data/models/egg_texture.obj";
-    final static String INGREDIENT_MARJORAM_TEXTURE = "/data/models/marjoram_texture.obj";
-    final static String INGREDIENT_ARTICHOKE_TEXTURE = "/data/models/artichoke_texture.obj";
+    final static String INGREDIENT_MODEL = "data/models/ingredient_V5.obj";
+    final static String INGREDIENT_MUSHROOM_TEXTURE = "data/models/mushroom_texture.obj";
+    final static String INGREDIENT_REDPEPPER_TEXTURE = "data/models/redpepper_texture.obj";
+    final static String INGREDIENT_GREENPEPPER_TEXTURE = "data/models/greenpepper_texture.obj";
+    final static String INGREDIENT_TUNA_TEXTURE = "data/models/tuna_texture.obj";
+    final static String INGREDIENT_PINEAPPLE_TEXTURE = "data/models/pineapple_texture.obj";
+    final static String INGREDIENT_HAM_TEXTURE = "data/models/ham_texture.obj";
+    final static String INGREDIENT_BACON_TEXTURE = "data/models/bacon_texture.obj";
+    final static String INGREDIENT_BLUECHEESE_TEXTURE = "data/models/bluecheese_texture.obj";
+    final static String INGREDIENT_GOATCHEESE_TEXTURE = "data/models/goatcheese_texture.obj";
+    final static String INGREDIENT_GOUDA_TEXTURE = "data/models/gouda_texture.obj";
+    final static String INGREDIENT_GORGONZOLA_TEXTURE = "data/models/gorgonzola_texture.obj";
+    final static String INGREDIENT_EMENTAL_TEXTURE = "data/models/emental_texture.obj";
+    final static String INGREDIENT_PARMESAN_TEXTURE = "data/models/parmesan_texture.obj";
+    final static String INGREDIENT_ONION_TEXTURE = "datamodels/onion_texture.obj";
+    final static String INGREDIENT_BEARSJENA_TEXTURE = "data/models/bearsjena_texture.obj";
+    final static String INGREDIENT_CORN_TEXTURE = "data/models/corn_texture.obj";
+    final static String INGREDIENT_CHICKEN_TEXTURE = "data/models/chicken_texture.obj";
+    final static String INGREDIENT_MINCE_TEXTURE = "data/models/mince_texture.obj";
+    final static String INGREDIENT_EGG_TEXTURE = "data/models/egg_texture.obj";
+    final static String INGREDIENT_MARJORAM_TEXTURE = "data/models/marjoram_texture.obj";
+    final static String INGREDIENT_ARTICHOKE_TEXTURE = "data/models/artichoke_texture.obj";
 
     // ====================
     // ATTRIBUTES
