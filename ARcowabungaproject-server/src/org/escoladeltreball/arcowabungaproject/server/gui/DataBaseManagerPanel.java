@@ -59,7 +59,7 @@ public class DataBaseManagerPanel extends JPanel {
     // PRIVATE METHODS
     // ====================
     private void initComponents() {
-
+	createTabs();
     }
 
     private JTabbedPane createTabs() {
