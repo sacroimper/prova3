@@ -37,6 +37,7 @@ import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 import org.escoladeltreball.arcowabungaproject.server.gui.console.ServerPanel;
+import org.escoladeltreball.arcowabungaproject.server.gui.database.DataBaseManagerPanel;
 
 public class ServerGUI extends JFrame {
 
