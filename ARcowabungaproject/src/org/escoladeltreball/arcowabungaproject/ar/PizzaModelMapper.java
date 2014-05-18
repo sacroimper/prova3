@@ -78,19 +78,19 @@ public class PizzaModelMapper {
     private static List<String> modelIngredientTextures;
     private static int ingredientsSize = 0;
 
-    private Set<Ingredient> ingredients;
+    private static Set<Ingredient> ingredients;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
     /**
+     * @return
      * 
      */
-    public PizzaModelMapper(Pizza pizza) {
-	super();
-	this.ingredients = pizza.getIngredientsSet();
-	ingredientsSize = this.ingredients.size();
+    public static void run(Pizza pizza) {
+	ingredients = pizza.getIngredientsSet();
+	ingredientsSize = ingredients.size();
 	modelIngredientTextures = new ArrayList<String>();
 	if (ingredientTextureMap == null) {
 	    ingredientTextureMapAsigner();
@@ -113,7 +113,7 @@ public class PizzaModelMapper {
     /**
      * 
      */
-    private void makeTheModelIngredientTextureList() {
+    private static void makeTheModelIngredientTextureList() {
 	for (Ingredient ingredient : ingredients) {
 	    addToList(ingredient);
 	}
@@ -123,7 +123,7 @@ public class PizzaModelMapper {
      * @param ingredient
      * @param string
      */
-    private void addToList(Ingredient ingredient) {
+    private static void addToList(Ingredient ingredient) {
 	modelIngredientTextures.add(ingredientTextureMap.get(ingredient
 		.getName()));
     }
@@ -131,7 +131,7 @@ public class PizzaModelMapper {
     /**
      * 
      */
-    private void ingredientTextureMapAsigner() {
+    private static void ingredientTextureMapAsigner() {
 	ingredientTextureMap = new HashMap<String, String>();
 
 	// ADD VALUES TO MAP
