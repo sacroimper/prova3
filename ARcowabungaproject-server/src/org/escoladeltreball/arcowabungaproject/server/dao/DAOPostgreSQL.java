@@ -559,6 +559,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	try {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
+	    // Select the shopping card with idShoppingCart
 	    ResultSet rsShoppingCart = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_SHOPPINGCARTS + " WHERE "
 		    + DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0] + "="
@@ -805,8 +806,40 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected void writeOffers(Set<Offer> offers) {
-	// TODO Auto-generated method stub
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    stm = con.createStatement();
+	    for (Offer offer : offers) {
+		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_OFFERS
+			+ " VALUES(" + offer.getId() + ",'" + offer.getName()
+			+ "'," + offer.getPrice() + "," + offer.getIcon() + ","
+			+ offer.getDiscount() + ");");
+		for (Product product : offer.getProductList()) {
+		    stm.executeUpdate("INSERT INTO "
+			    + DAOFactory.TABLE_OFFERS_PRODUCTS + " VALUES("
+			    + offer.getId() + "," + product.getId() + ")");
+		}
+	    }
 
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     @Override
