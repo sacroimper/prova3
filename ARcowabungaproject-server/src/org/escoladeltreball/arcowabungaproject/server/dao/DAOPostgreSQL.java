@@ -369,7 +369,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Ingredient> readIngredient() {
+    public Set<Ingredient> readIngredient(String where) {
 	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
 	Connection con = null;
 	Statement stm = null;
@@ -378,7 +378,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm = con.createStatement();
 	    // Select all rows of ingredient table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_INGREDIENT + ";");
+		    + DAOFactory.TABLE_INGREDIENT + where + ";");
 	    while (rs.next()) {
 		// Create a ingredient object and put in the HashSet
 		Ingredient ingredient = new Ingredient(

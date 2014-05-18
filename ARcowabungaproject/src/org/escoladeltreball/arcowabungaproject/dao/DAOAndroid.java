@@ -302,7 +302,7 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected Set<Ingredient> readIngredient() {
+    protected Set<Ingredient> readIngredient(String where) {
 	Set<Ingredient> ingredients = new HashSet<Ingredient>();
 	Cursor c = database.query(DAOFactory.TABLE_INGREDIENT,
 		DAOFactory.COLUMNS_NAME_INGREDIENT, null, null, null, null,
