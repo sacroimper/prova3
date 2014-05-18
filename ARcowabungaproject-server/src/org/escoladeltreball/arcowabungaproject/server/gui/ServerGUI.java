@@ -98,11 +98,11 @@ public class ServerGUI extends JFrame {
     private JTabbedPane createMainTabs() {
 	this.jpOrderManager = OrderManagerPanel.getInstance();
 	this.jpServerConsole = new ServerPanel();
-
+	this.jpDataBaseManger = new DataBaseManagerPanel();
 	JTabbedPane jtpMain = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
 	jtpMain.addTab("Oreder Manager", this.jpOrderManager);
-	// jtpMain.addTab("DataBase Manager", this.jpDataBaseManger);
+	jtpMain.addTab("DataBase Manager", this.jpDataBaseManger);
 	jtpMain.addTab("Server Manager", this.jpServerConsole);
 
 	return jtpMain;
