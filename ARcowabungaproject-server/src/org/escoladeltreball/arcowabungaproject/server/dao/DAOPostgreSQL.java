@@ -950,7 +950,35 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected void writeAddresses(Address address) {
-	// TODO Auto-generated method stub
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_ADDRESS
+		    + " VALUES(" + address.getId() + ",'" + address.getStreet()
+		    + "','" + address.getNumber() + "','"
+		    + address.getPostCode() + "','" + address.getFloor()
+		    + "','" + address.getStair() + "','" + address.getDoor()
+		    + "');");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
 
     }
 
