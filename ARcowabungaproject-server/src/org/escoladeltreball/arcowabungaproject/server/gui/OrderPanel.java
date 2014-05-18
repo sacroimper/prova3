@@ -102,9 +102,9 @@ public class OrderPanel extends JPanel {
 	this.jlTotalPrice = new JLabel("Total Price: "
 		+ this.order.getShoppingCart().getPrice() + "€");
 
-	this.jbMakePizza = new JButton("Make Pizza!");
-	this.jbSendPizza = new JButton("Send Pizza!");
-	this.jbSavePizza = new JButton("Save Pizza!");
+	this.jbMakePizza = new JButton("Make Order!");
+	this.jbSendPizza = new JButton("Send Order!");
+	this.jbSavePizza = new JButton("Save Order!");
 	this.jbShowInfo = new JButton("Show More Info");
 
 	GridBagConstraints constraints = new GridBagConstraints();
