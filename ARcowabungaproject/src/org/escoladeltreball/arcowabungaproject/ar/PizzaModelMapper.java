@@ -179,4 +179,35 @@ public class PizzaModelMapper {
 	    Map<String, String> ingredientTextureMap) {
 	PizzaModelMapper.ingredientTextureMap = ingredientTextureMap;
     }
+
+    /**
+     * @return the modelIngredientTextures
+     */
+    public static List<String> getModelIngredientTextures() {
+	return modelIngredientTextures;
+    }
+
+    /**
+     * @param modelIngredientTextures
+     *            the modelIngredientTextures to set
+     */
+    public static void setModelIngredientTextures(
+	    List<String> modelIngredientTextures) {
+	PizzaModelMapper.modelIngredientTextures = modelIngredientTextures;
+    }
+
+    /**
+     * @return the ingredientsSize
+     */
+    public static int getIngredientsSize() {
+	return ingredientsSize;
+    }
+
+    /**
+     * @param ingredientsSize
+     *            the ingredientsSize to set
+     */
+    public static void setIngredientsSize(int ingredientsSize) {
+	PizzaModelMapper.ingredientsSize = ingredientsSize;
+    }
 }
