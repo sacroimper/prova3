@@ -75,12 +75,9 @@ public class SelectPanel extends JPanel implements ItemListener {
 	this.setLayout(new GridBagLayout());
 	String[] items = { "", DAOFactory.TABLE_ADDRESS,
 		DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
-		DAOFactory.TABLE_INGREDIENTS, DAOFactory.TABLE_OFFERS,
-		DAOFactory.TABLE_OFFERS_PRODUCTS, DAOFactory.TABLE_ORDERS,
+		DAOFactory.TABLE_OFFERS, DAOFactory.TABLE_ORDERS,
 		DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES,
-		DAOFactory.TABLE_PRODUCTS, DAOFactory.TABLE_RESOURCES,
-		DAOFactory.TABLE_SHOPPINGCART_PRODUCTS,
-		DAOFactory.TABLE_SHOPPINGCARTS };
+		DAOFactory.TABLE_RESOURCES, DAOFactory.TABLE_SHOPPINGCARTS };
 	this.jlChooseTable = new JLabel("Choose Table");
 	this.jcbTables = new JComboBox<>(items);
 	this.constraints = new GridBagConstraints();
@@ -134,6 +131,118 @@ public class SelectPanel extends JPanel implements ItemListener {
 		for (int i = 0; i < DAOFactory.COLUMNS_NAME_DRINKS.length; i++) {
 		    this.jlLists[i] = new JLabel(
 			    DAOFactory.COLUMNS_NAME_DRINKS[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
+	    case DAOFactory.TABLE_INGREDIENT:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_INGREDIENT.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_INGREDIENT[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
+	    case DAOFactory.TABLE_PIZZAS:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_PIZZAS.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_PIZZAS[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
+	    case DAOFactory.TABLE_OFFERS:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_OFFERS.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_OFFERS.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_OFFERS.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_OFFERS[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
+	    case DAOFactory.TABLE_ORDERS:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_ORDERS.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_ORDERS.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_ORDERS.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_ORDERS[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
+	    case DAOFactory.TABLE_PREFERENCES:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_PREFERENCES.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_PREFERENCES[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
+	    case DAOFactory.TABLE_RESOURCES:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_RESOURCES.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_RESOURCES.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_RESOURCES.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_RESOURCES[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
+	    case DAOFactory.TABLE_SHOPPINGCARTS:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_SHOPPINGCARTS.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_SHOPPINGCARTS.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_SHOPPINGCARTS.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[i]);
 		    this.jtfList[i] = new JTextField();
 		    this.constraints.gridx = 0;
 		    this.constraints.gridy = ++this.indexConstrainstY;
