@@ -41,7 +41,7 @@ import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
-import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 public class SelectPanel extends JPanel implements ItemListener, ActionListener {
 
@@ -64,13 +64,11 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 
     private int indexConstrainstX = 0;
     private int indexConstrainstY = 0;
-    private DAOPostgreSQL dao;
 
     // ====================
     // CONSTRUCTORS
     // ====================
     public SelectPanel() {
-	this.dao = DAOPostgreSQL.getInstance();
 	this.initComponents();
 	this.registListeners();
     }
@@ -289,39 +287,25 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 
 		switch (item) {
 		case DAOFactory.TABLE_INGREDIENT:
-		    String where = "";
+
+		    HashSet<Ingredient> ingredientsSet = (HashSet) Pizzeria
+			    .getInstance().getIngredients();
+		    String[][] rowData = new String[ingredientsSet.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
 		    for (int i = 0; i < jtfList.length; i++) {
 			if (!jtfList[i].getText().isEmpty()) {
-			    if (!where.isEmpty()) {
-				where += ",";
-			    }
-			    if (DAOFactory.COLUMNS_TYPE_INGREDIENT
-				    .equals("VARCHAR")) {
-				where += DAOFactory.COLUMNS_NAME_INGREDIENT[i]
-					+ "='" + jtfList[i].getText() + "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_INGREDIENT[i]
-					+ "=" + jtfList[i].getText();
+			    for (Ingredient ingredient : ingredientsSet) {
+				if (jtfList[i].equals(ingredient.getId())) {
+				    rowData[i][0] = ingredient.getId() + "";
+				    rowData[i][1] = ingredient.getName();
+				    rowData[i][2] = ingredient.getIcon() + "";
+				    rowData[i][3] = ingredient.getModel() + "";
+				    rowData[i][4] = ingredient.getPrice() + "";
+				    i++;
+				}
 			    }
 			}
 		    }
 
-		    if (!where.isEmpty()) {
-			where = "WHERE " + where;
-		    }
-
-		    HashSet<Ingredient> ingredientsSet = (HashSet<Ingredient>) this.dao
-			    .readIngredient(where);
-		    String[][] rowData = new String[ingredientsSet.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
-		    int i = 0;
-		    for (Ingredient ingredient : ingredientsSet) {
-			rowData[i][0] = ingredient.getId() + "";
-			rowData[i][1] = ingredient.getName();
-			rowData[i][2] = ingredient.getIcon() + "";
-			rowData[i][3] = ingredient.getModel() + "";
-			rowData[i][4] = ingredient.getPrice() + "";
-			i++;
-		    }
 		    this.jtTable = new JTable(rowData,
 			    DAOFactory.COLUMNS_NAME_INGREDIENT);
 		    this.jpShowTable.add(this.jcbTables);
