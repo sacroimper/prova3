@@ -191,7 +191,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
 				+ "="
 				+ rsProducts
-					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1])
+					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[2])
 				+ ";");
 		rsPizza.next();
 		if (rsPizza != null) {
@@ -217,7 +217,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
 				+ "="
 				+ rsProducts
-					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1])
+					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[2])
 				+ ";");
 		rsDrink.next();
 		if (rsDrink != null) {
@@ -278,7 +278,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
 				+ ";");
 		rsPizza.next();
 		if (rsPizza != null) {
@@ -304,7 +304,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
 				+ ";");
 		rsDrink.next();
 		if (rsDrink != null) {
@@ -325,7 +325,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_OFFERS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
 				+ ";");
 		rsOffer.next();
 		if (rsOffer != null) {
@@ -567,7 +567,8 @@ public class DAOPostgreSQL extends DAOFactory {
 	    if (rsShoppingCart != null) {
 		shoppingCart = new ShoppingCart(
 			rsShoppingCart.getInt(idShoppingCart));
-		ArrayList<Product> productsList = (ArrayList<Product>) selectShoppingCartProductsById(idShoppingCart);
+		ArrayList<Product> productsList = (ArrayList<Product>) selectShoppingCartProductsById(rsShoppingCart
+			.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[1]));
 		shoppingCart.setProducts(productsList);
 	    }
 	} catch (SQLException e) {

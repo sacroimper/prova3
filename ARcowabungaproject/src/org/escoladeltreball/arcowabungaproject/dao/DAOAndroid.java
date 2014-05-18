@@ -350,7 +350,7 @@ public class DAOAndroid extends DAOFactory {
 	    Offer offer = new Offer(cOffer.getInt(0), cOffer.getString(1),
 		    cOffer.getFloat(2), cOffer.getInt(3), cOffer.getFloat(4));
 	    List<Product> productList = selectProductsOffersById(cOffer
-		    .getInt(0));
+		    .getInt(5));
 	    offer.setProductList(productList);
 	    i++;
 	}
@@ -386,7 +386,7 @@ public class DAOAndroid extends DAOFactory {
 	if (cShoppingCarts != null) {
 	    shoppingCart = new ShoppingCart(cShoppingCarts.getInt(0));
 	    List<Product> productsList = selectShoppingCartProductsById(cShoppingCarts
-		    .getInt(0));
+		    .getInt(1));
 	    shoppingCart.setProducts(productsList);
 	}
 	return shoppingCart;
