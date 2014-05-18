@@ -65,7 +65,32 @@ public abstract class DAOFactory {
     public static final String TABLE_ORDERS = "orders";
     public static final String TABLE_ADDRESS = "address";
     public static final String TABLE_PREFERENCES = "preferences";
-
+    /* COLUMNS TYPE */
+    public static final String[] COLUMNS_TYPE_PRODUCTS = { "INTEGER" };
+    public static final String[] COLUMNS_TYPE_RESOURCES = { "INTEGER",
+	    "VARCHAR" };
+    public static final String[] COLUMNS_TYPE_INGREDIENT = { "INTEGER",
+	    "VARCHAR(50)", "SMALLINT", "SMALLINT", "NUMERIC" };
+    public static final String[] COLUMNS_TYPE_INGREDIENTS = { "INTEGER",
+	    "INTEGER", "SMALLINT" };
+    public static final String[] COLUMNS_TYPE_PIZZAS = { "INTEGER", "VARCHAR",
+	    "NUMERIC", "SMALLINT", "VARCHAR", "VARCHAR", "SMALLINT", "NUMERIC",
+	    "INTEGER" };
+    public static final String[] COLUMNS_TYPE_DRINKS = { "INTEGER", "VARCHAR",
+	    "NUMERIC", "SMALLINT", "NUMERIC", "SMALLINT" };
+    public static final String[] COLUMNS_TYPE_OFFERS = { "INTEGER", "VARCHAR",
+	    "NUMERIC", "SMALLINT", "NUMERIC" };
+    public static final String[] COLUMNS_TYPE_OFFERS_PRODUCTS = { "INTEGER",
+	    "INTEGER" };
+    public static final String[] COLUMNS_TYPE_SHOPPING_CARTS = { "INTEGER" };
+    public static final String[] COLUMNS_TYPE_SHOPPINCART_PRODUCTS = {
+	    "INTEGER", "INTEGER" };
+    public static final String[] COLUMNS_TYPE_ORDERS = { "INTEGER", "VARCHAR",
+	    "VARCHAR", "DATE", "VARCHAR", "INTEGER", "INTEGER" };
+    public static final String[] COLUMNS_TYPE_ADDRESS = { "INTEGER", "VARCHAR",
+	    "VARCHAR", "VARCHAR", "VARCHAR", "CHAR", "VARCHAR" };
+    public static final String[] COLUMNS_TYPE_PREFERENCES = { "VARCHAR",
+	    "VARCHAR" };
     /* COLUMNS NAME */
     public static final String[] COLUMNS_NAME_PRODUCTS = { "id_product" };
     public static final String[] COLUMNS_NAME_RESOURCES = { "id_resource",
@@ -166,14 +191,14 @@ public abstract class DAOFactory {
 	    + TABLE_PRODUCTS
 	    + " ON DELTE CASCADE ON UPDATE CASCADE);";
     public static final String CREATE_TABLE_ORDERS = "CREATE TABLE "
-	    + TABLE_ORDERS + "(" + COLUMNS_NAME_ORDERS[0] + " PRIMARY KEY,"
-	    + COLUMNS_NAME_ORDERS[1] + " VARCHAR(9)," + COLUMNS_NAME_ORDERS[2]
-	    + " VARCHAR(50)," + COLUMNS_NAME_OFFERS[3] + " DATE,"
-	    + COLUMNS_NAME_ORDERS[4] + " VARCHAR(15)," + COLUMNS_NAME_ORDERS[5]
-	    + " INTEGER FOREIGN KEY REFERENCES " + TABLE_ADDRESS
-	    + " ON DELTE CASCADE ON UPDATE CASCADE," + COLUMNS_NAME_ORDERS[6]
-	    + " INTEGER FOREIGN KEY REFERENCES" + TABLE_SHOPPINGCARTS
-	    + " ON DELTE CASCADE ON UPDATE CASCADE)";
+	    + TABLE_ORDERS + "(" + COLUMNS_NAME_ORDERS[0]
+	    + " INTEGER PRIMARY KEY," + COLUMNS_NAME_ORDERS[1] + " VARCHAR(9),"
+	    + COLUMNS_NAME_ORDERS[2] + " VARCHAR(50)," + COLUMNS_NAME_OFFERS[3]
+	    + " DATE," + COLUMNS_NAME_ORDERS[4] + " VARCHAR(15),"
+	    + COLUMNS_NAME_ORDERS[5] + " INTEGER FOREIGN KEY REFERENCES "
+	    + TABLE_ADDRESS + " ON DELTE CASCADE ON UPDATE CASCADE,"
+	    + COLUMNS_NAME_ORDERS[6] + " INTEGER FOREIGN KEY REFERENCES"
+	    + TABLE_SHOPPINGCARTS + " ON DELTE CASCADE ON UPDATE CASCADE)";
     public static final String CREATE_TABLE_ADDRESS = "CREATE TABLE "
 	    + TABLE_ADDRESS + " (" + COLUMNS_NAME_ADDRESS[0]
 	    + " INTEGER PRIMARY KEY," + COLUMNS_NAME_ADDRESS[1]
@@ -184,7 +209,7 @@ public abstract class DAOFactory {
     public static final String CREATE_TABLE_PREFERENCES = "CREATE TABLE "
 	    + TABLE_PREFERENCES + " (" + COLUMNS_NAME_PREFERENCES[0]
 	    + " VARCHAR(30) PRIMARY KEY," + COLUMNS_NAME_PREFERENCES[1]
-	    + " INTEGER);";
+	    + " VARCHAR(50));";
 
     /* DROP TABLES */
     public static final String DROP_TABLE_PRODUCTS = "DROP TABLE "
