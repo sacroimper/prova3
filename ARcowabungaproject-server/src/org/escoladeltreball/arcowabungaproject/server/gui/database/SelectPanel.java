@@ -102,16 +102,11 @@ public class SelectPanel extends JPanel implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
 	if (e.getStateChange() == ItemEvent.DESELECTED) {
-	    String item = (String) e.getItem();
-	    switch (item) {
-	    case DAOFactory.TABLE_ADDRESS:
-		for (int i = 0; i < DAOFactory.COLUMNS_NAME_ADDRESS.length; i++) {
+	    if (this.jlLists != null) {
+		for (int i = 0; i < this.jlLists.length; i++) {
 		    this.remove(this.jlLists[i]);
 		    this.remove(this.jtfList[i]);
 		}
-		break;
-	    default:
-		break;
 	    }
 	}
 	if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -133,7 +128,22 @@ public class SelectPanel extends JPanel implements ItemListener {
 		}
 		this.indexConstrainstY = 0;
 		break;
-
+	    case DAOFactory.TABLE_DRINKS:
+		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_DRINKS.length];
+		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_DRINKS.length];
+		for (int i = 0; i < DAOFactory.COLUMNS_NAME_DRINKS.length; i++) {
+		    this.jlLists[i] = new JLabel(
+			    DAOFactory.COLUMNS_NAME_DRINKS[i]);
+		    this.jtfList[i] = new JTextField();
+		    this.constraints.gridx = 0;
+		    this.constraints.gridy = ++this.indexConstrainstY;
+		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		    this.add(this.jlLists[i], this.constraints);
+		    this.constraints.gridx = 1;
+		    this.add(this.jtfList[i], this.constraints);
+		}
+		this.indexConstrainstY = 0;
+		break;
 	    default:
 		break;
 	    }
