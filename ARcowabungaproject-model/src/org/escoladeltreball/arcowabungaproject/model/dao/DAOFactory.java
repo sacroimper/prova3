@@ -294,7 +294,7 @@ public abstract class DAOFactory {
 	}
 
 	pizzeria.setDrinks(readDrink());
-	pizzeria.setIngredients(readIngredient(null));
+	pizzeria.setIngredients(readIngredient());
 	pizzeria.setOffers(readOffer());
 	pizzeria.setOrdersSaved(readOrder());
 
@@ -539,7 +539,7 @@ public abstract class DAOFactory {
 
     protected abstract Set<Product> readProducts();
 
-    protected abstract Set<Ingredient> readIngredient(String where);
+    protected abstract Set<Ingredient> readIngredient();
 
     protected abstract Set<Pizza> readPizza();
 
