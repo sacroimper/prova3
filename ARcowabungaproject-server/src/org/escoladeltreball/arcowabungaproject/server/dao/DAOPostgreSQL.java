@@ -66,7 +66,6 @@ public class DAOPostgreSQL extends DAOFactory {
 
     protected DAOPostgreSQL() {
 	super();
-	connectToDatabase();
     }
 
     private Connection connectToDatabase() {
