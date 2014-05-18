@@ -111,9 +111,7 @@ public class ServerGUI extends JFrame {
     private JMenuBar createMenuBar() {
 	JMenuBar menuBar = new JMenuBar();
 	JMenu menu = new JMenu("File");
-	JMenuItem menuItem = new JMenuItem("Data Base Manager");
-	menu.add(menuItem);
-	menuItem = new JMenuItem("Close");
+	JMenuItem menuItem = new JMenuItem("Close");
 	menu.add(menuItem);
 	menuBar.add(menu);
 	menu = new JMenu("Server");
