@@ -66,7 +66,7 @@ public class DataBaseManagerPanel extends JPanel {
     }
 
     private JTabbedPane createTabs() {
-	this.jpSelectData = new JPanel();
+	this.jpSelectData = new SelectPanel();
 	this.jpInsertData = new JPanel();
 	this.jpUpdateData = new JPanel();
 	this.jpDeleteData = new JPanel();
