@@ -23,6 +23,8 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -59,7 +61,8 @@ public class DataBaseManagerPanel extends JPanel {
     // PRIVATE METHODS
     // ====================
     private void initComponents() {
-	createTabs();
+	this.setLayout(new BorderLayout());
+	this.add(createTabs());
     }
 
     private JTabbedPane createTabs() {
