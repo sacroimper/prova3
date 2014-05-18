@@ -809,6 +809,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    for (Offer offer : offers) {
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_OFFERS
@@ -844,13 +845,39 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected void writeDrinks(Set<Drink> drinks) {
-	// TODO Auto-generated method stub
-
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    for (Drink drink : drinks) {
+		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_DRINKS
+			+ " VALUES(" + drink.getId() + ",'" + drink.getName()
+			+ "'," + drink.getPrice() + "," + drink.getIcon() + ","
+			+ drink.getDiscount() + "," + drink.getSize() + ");");
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     @Override
     protected void writeShoppingCarts(ShoppingCart shoppingCart) {
-	// TODO Auto-generated method stub
 
     }
 
