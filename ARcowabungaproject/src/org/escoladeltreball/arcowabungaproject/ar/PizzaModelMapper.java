@@ -48,27 +48,27 @@ public class PizzaModelMapper {
 
     // INGREDIENTS
     final static String INGREDIENT_MODEL = "data/models/ingredient_V5.obj";
-    final static String INGREDIENT_MUSHROOM_TEXTURE = "data/models/mushroom_texture.obj";
-    final static String INGREDIENT_REDPEPPER_TEXTURE = "data/models/redpepper_texture.obj";
-    final static String INGREDIENT_GREENPEPPER_TEXTURE = "data/models/greenpepper_texture.obj";
-    final static String INGREDIENT_TUNA_TEXTURE = "data/models/tuna_texture.obj";
-    final static String INGREDIENT_PINEAPPLE_TEXTURE = "data/models/pineapple_texture.obj";
-    final static String INGREDIENT_HAM_TEXTURE = "data/models/ham_texture.obj";
-    final static String INGREDIENT_BACON_TEXTURE = "data/models/bacon_texture.obj";
-    final static String INGREDIENT_BLUECHEESE_TEXTURE = "data/models/bluecheese_texture.obj";
-    final static String INGREDIENT_GOATCHEESE_TEXTURE = "data/models/goatcheese_texture.obj";
-    final static String INGREDIENT_GOUDA_TEXTURE = "data/models/gouda_texture.obj";
-    final static String INGREDIENT_GORGONZOLA_TEXTURE = "data/models/gorgonzola_texture.obj";
-    final static String INGREDIENT_EMENTAL_TEXTURE = "data/models/emental_texture.obj";
-    final static String INGREDIENT_PARMESAN_TEXTURE = "data/models/parmesan_texture.obj";
-    final static String INGREDIENT_ONION_TEXTURE = "datamodels/onion_texture.obj";
-    final static String INGREDIENT_BEARSJENA_TEXTURE = "data/models/bearsjena_texture.obj";
-    final static String INGREDIENT_CORN_TEXTURE = "data/models/corn_texture.obj";
-    final static String INGREDIENT_CHICKEN_TEXTURE = "data/models/chicken_texture.obj";
-    final static String INGREDIENT_MINCE_TEXTURE = "data/models/mince_texture.obj";
-    final static String INGREDIENT_EGG_TEXTURE = "data/models/egg_texture.obj";
-    final static String INGREDIENT_MARJORAM_TEXTURE = "data/models/marjoram_texture.obj";
-    final static String INGREDIENT_ARTICHOKE_TEXTURE = "data/models/artichoke_texture.obj";
+    final static String INGREDIENT_MUSHROOM_TEXTURE = "data/models/ingredients/mushroom_texture.png";
+    final static String INGREDIENT_REDPEPPER_TEXTURE = "data/models/ingredients/redpepper_texture.png";
+    final static String INGREDIENT_GREENPEPPER_TEXTURE = "data/models/ingredients/greenpepper_texture.png";
+    final static String INGREDIENT_TUNA_TEXTURE = "data/models/ingredients/tuna_texture.png";
+    final static String INGREDIENT_PINEAPPLE_TEXTURE = "data/models/ingredients/pineapple_texture.png";
+    final static String INGREDIENT_HAM_TEXTURE = "data/models/ingredients/ham_texture.png";
+    final static String INGREDIENT_BACON_TEXTURE = "data/models/ingredients/bacon_texture.png";
+    final static String INGREDIENT_BLUECHEESE_TEXTURE = "data/models/ingredients/bluecheese_texture.png";
+    final static String INGREDIENT_GOATCHEESE_TEXTURE = "data/models/ingredients/goatcheese_texture.png";
+    final static String INGREDIENT_GOUDA_TEXTURE = "data/models/ingredients/gouda_texture.png";
+    final static String INGREDIENT_GORGONZOLA_TEXTURE = "data/models/ingredients/gorgonzola_texture.png";
+    final static String INGREDIENT_EMENTAL_TEXTURE = "data/models/ingredients/emental_texture.png";
+    final static String INGREDIENT_PARMESAN_TEXTURE = "data/models/ingredients/parmesan_texture.png";
+    final static String INGREDIENT_ONION_TEXTURE = "datamodels/ingredients/onion_texture.png";
+    final static String INGREDIENT_BEARSJENA_TEXTURE = "data/models/ingredients/bearsjena_texture.png";
+    final static String INGREDIENT_CORN_TEXTURE = "data/models/ingredients/corn_texture.png";
+    final static String INGREDIENT_CHICKEN_TEXTURE = "data/models/ingredients/chicken_texture.png";
+    final static String INGREDIENT_MINCE_TEXTURE = "data/models/ingredients/mince_texture.png";
+    final static String INGREDIENT_EGG_TEXTURE = "data/models/ingredients/egg_texture.png";
+    final static String INGREDIENT_MARJORAM_TEXTURE = "data/models/ingredients/marjoram_texture.png";
+    final static String INGREDIENT_ARTICHOKE_TEXTURE = "data/models/ingredients/artichoke_texture.png";
 
     // ====================
     // ATTRIBUTES
@@ -76,21 +76,21 @@ public class PizzaModelMapper {
 
     private static Map<String, String> ingredientTextureMap;
     private static List<String> modelIngredientTextures;
-    private static int ingredientsSize;
+    private static int ingredientsSize = 0;
 
-    private Set<Ingredient> ingredients;
+    private static Set<Ingredient> ingredients;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
     /**
+     * @return
      * 
      */
-    public PizzaModelMapper(Pizza pizza) {
-	super();
-	this.ingredients = pizza.getIngredientsSet();
-	ingredientsSize = this.ingredients.size();
+    public static void run(Pizza pizza) {
+	ingredients = pizza.getIngredientsSet();
+	ingredientsSize = ingredients.size();
 	modelIngredientTextures = new ArrayList<String>();
 	if (ingredientTextureMap == null) {
 	    ingredientTextureMapAsigner();
@@ -113,7 +113,7 @@ public class PizzaModelMapper {
     /**
      * 
      */
-    private void makeTheModelIngredientTextureList() {
+    private static void makeTheModelIngredientTextureList() {
 	for (Ingredient ingredient : ingredients) {
 	    addToList(ingredient);
 	}
@@ -123,7 +123,7 @@ public class PizzaModelMapper {
      * @param ingredient
      * @param string
      */
-    private void addToList(Ingredient ingredient) {
+    private static void addToList(Ingredient ingredient) {
 	modelIngredientTextures.add(ingredientTextureMap.get(ingredient
 		.getName()));
     }
@@ -131,7 +131,7 @@ public class PizzaModelMapper {
     /**
      * 
      */
-    private void ingredientTextureMapAsigner() {
+    private static void ingredientTextureMapAsigner() {
 	ingredientTextureMap = new HashMap<String, String>();
 
 	// ADD VALUES TO MAP
@@ -178,5 +178,36 @@ public class PizzaModelMapper {
     public static void setIngredientTextureMap(
 	    Map<String, String> ingredientTextureMap) {
 	PizzaModelMapper.ingredientTextureMap = ingredientTextureMap;
+    }
+
+    /**
+     * @return the modelIngredientTextures
+     */
+    public static List<String> getModelIngredientTextures() {
+	return modelIngredientTextures;
+    }
+
+    /**
+     * @param modelIngredientTextures
+     *            the modelIngredientTextures to set
+     */
+    public static void setModelIngredientTextures(
+	    List<String> modelIngredientTextures) {
+	PizzaModelMapper.modelIngredientTextures = modelIngredientTextures;
+    }
+
+    /**
+     * @return the ingredientsSize
+     */
+    public static int getIngredientsSize() {
+	return ingredientsSize;
+    }
+
+    /**
+     * @param ingredientsSize
+     *            the ingredientsSize to set
+     */
+    public static void setIngredientsSize(int ingredientsSize) {
+	PizzaModelMapper.ingredientsSize = ingredientsSize;
     }
 }

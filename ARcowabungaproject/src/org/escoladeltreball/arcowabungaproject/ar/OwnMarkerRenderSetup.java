@@ -31,7 +31,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     private GLCamera camera;
     private World world;
-    public static MeshComponent pizzaMesh;
+    public static MeshComponent meshComponent;
     private GL1Renderer renderer;
 
     // public Wrapper targetMoveWrapper = new Wrapper();
@@ -65,12 +65,34 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(MeshComponent gdxMesh) {
-		pizzaMesh = gdxMesh;
+		meshComponent = gdxMesh;
 		final Obj o = new Obj();
 		o.setComp(gdxMesh);
 		world.add(o);
 	    }
 	};
+
+	// Method to deploy the ingredients object and textures
+	if (PizzaModelMapper.getIngredientsSize() > 0) {
+	    // TO DEVELOPE
+	    // Map<String, String> pizzaTextureMap = PizzaModelMapper
+	    // .getIngredientTextureMap();
+	    // for (int i = 0; i < PizzaModelMapper.getIngredientsSize(); i++) {
+	    //
+	    // }
+	    // PROVISIONAL
+	    new OwnModelLoader(this.renderer,
+		    PizzaModelMapper.INGREDIENT_MODEL,
+		    PizzaModelMapper.INGREDIENT_MUSHROOM_TEXTURE) {
+		@Override
+		public void modelLoaded(MeshComponent gdxMesh) {
+		    meshComponent = gdxMesh;
+		    final Obj o = new Obj();
+		    o.setComp(gdxMesh);
+		    world.add(o);
+		}
+	    };
+	}
     }
 
     @Override
