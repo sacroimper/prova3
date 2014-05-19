@@ -549,8 +549,6 @@ public abstract class DAOFactory {
      */
     protected abstract List<Product> selectShoppingCartProductsById(int id);
 
-    protected abstract Set<Product> readProducts();
-
     protected abstract Set<Ingredient> readIngredient();
 
     protected abstract Set<Pizza> readPizza();

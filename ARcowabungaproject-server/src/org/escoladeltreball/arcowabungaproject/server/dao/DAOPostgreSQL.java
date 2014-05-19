@@ -458,12 +458,6 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Product> readProducts() {
-
-	return null;
-    }
-
-    @Override
     public Set<Ingredient> readIngredient() {
 	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
 	Connection con = null;

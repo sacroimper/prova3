@@ -457,12 +457,6 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected Set<Product> readProducts() {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
-    @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
 
 	for (Ingredient ingredient : ingredients) {
