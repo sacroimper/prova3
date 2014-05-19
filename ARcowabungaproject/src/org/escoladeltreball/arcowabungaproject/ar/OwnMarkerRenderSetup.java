@@ -92,7 +92,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    // PROVISIONAL
 	    ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
 		    .getModelIngredientTextures();
-	    for (int i = 0; i < 2 /* ingredientTextures.size() */; i++) {
+	    for (int i = 0; i <  ingredientTextures.size() ; i++) {
 		new OwnModelLoader(this.renderer,
 			PizzaModelMapper.INGREDIENT_MODEL,
 			ingredientTextures.get(i)) {
