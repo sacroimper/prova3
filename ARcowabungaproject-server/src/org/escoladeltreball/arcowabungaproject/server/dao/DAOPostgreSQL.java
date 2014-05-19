@@ -605,16 +605,17 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Drink> readDrink() {
+    public Set<Drink> readDrink() {
 	Set<Drink> drinksSet = new HashSet<Drink>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows from drink table
 	    ResultSet rsDrinks = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_DRINKS + ";");
+		    + DAOFactory.TABLE_DRINKS + where + ";");
 	    while (rsDrinks.next()) {
 		// Create a drink object and put it in the HashSet
 		Drink drink = new Drink(
