@@ -25,7 +25,6 @@ import system.EventManager;
 //import worldData.MoveComp;
 import worldData.Obj;
 import worldData.SystemUpdater;
-import worldData.World;
 import actions.ActionBufferedCameraAR;
 import android.app.Activity;
 import de.rwth.GDXConnection;
@@ -33,7 +32,7 @@ import de.rwth.GDXConnection;
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     private GLCamera camera;
-    public World world;
+    public PizzaWorld world;
     public MeshComponent meshComponent;
     private GL1Renderer renderer;
 
@@ -52,7 +51,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     @Override
     public void _a_initFieldsIfNecessary() {
 	camera = new GLCamera();
-	world = new World(camera);
+	world = new PizzaWorld(camera);
     }
 
     @Override
