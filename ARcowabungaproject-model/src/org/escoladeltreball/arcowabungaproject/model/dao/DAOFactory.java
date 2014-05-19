@@ -70,7 +70,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_TYPE_RESOURCES = { "INTEGER",
 	    "VARCHAR" };
     public static final String[] COLUMNS_TYPE_INGREDIENT = { "INTEGER",
-	    "VARCHAR(50)", "SMALLINT", "SMALLINT", "NUMERIC" };
+	    "VARCHAR(50)", "SMALLINT", "SMALLINT", "NUMERIC", "VARCHAR(100)" };
     public static final String[] COLUMNS_TYPE_INGREDIENTS = { "INTEGER",
 	    "INTEGER", "SMALLINT" };
     public static final String[] COLUMNS_TYPE_PIZZAS = { "INTEGER", "VARCHAR",
@@ -97,7 +97,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_NAME_RESOURCES = { "id_resource",
 	    "path" };
     public static final String[] COLUMNS_NAME_INGREDIENT = { "id_ingredient",
-	    "name", "icon", "model", "price" };
+	    "name", "icon", "model", "price", "texture" };
     public static final String[] COLUMNS_NAME_INGREDIENTS = { "id_ingredients",
 	    "ingredient", "num_ingredient" };
     public static final String[] COLUMNS_NAME_PIZZAS = { "id_pizza", "name",
@@ -136,7 +136,8 @@ public abstract class DAOFactory {
 	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
 	    + COLUMNS_NAME_INGREDIENT[3] + " SMALLINT FOREIGN KEY REFERENCES "
 	    + TABLE_RESOURCES + " ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + COLUMNS_NAME_INGREDIENT[4] + " NUMERIC);";
+	    + COLUMNS_NAME_INGREDIENT[4] + " NUMERIC, "
+	    + COLUMNS_NAME_INGREDIENT[5] + "VARCHAR(100));";
     public static final String CREATE_TABLE_INGREDIENTS = "CREATE TABLE "
 	    + TABLE_INGREDIENTS + " (" + COLUMNS_NAME_INGREDIENTS[0]
 	    + " INTEGER PRIMARY KEY," + COLUMNS_NAME_INGREDIENTS[1]

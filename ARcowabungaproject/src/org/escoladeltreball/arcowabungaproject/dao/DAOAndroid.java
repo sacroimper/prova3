@@ -176,7 +176,8 @@ public class DAOAndroid extends DAOFactory {
 		    DAOFactory.TABLE_INGREDIENT,
 		    COLUMNS_NAME_INGREDIENT,
 		    DAOFactory.COLUMNS_NAME_INGREDIENT[0] + "="
-			    + cIngredients.getInt(1), null, null, null, null);
+			    + cIngredients.getInt(1), null, null, null, null,
+		    null);
 	    int j = 0;
 	    while (j < cIngredient.getCount()) {
 		cIngredient.move(j);
@@ -471,6 +472,8 @@ public class DAOAndroid extends DAOFactory {
 		    ingredient.getModel());
 	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[4],
 		    ingredient.getPrice());
+	    values.put(DAOFactory.COLUMNS_NAME_INGREDIENT[5],
+		    ingredient.getTexture());
 
 	    database.insert(DAOFactory.TABLE_INGREDIENT, null, values);
 	}
