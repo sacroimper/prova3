@@ -60,8 +60,20 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    GLFactory objectFactory, GeoObj currentPosition) {
 	this.renderer = renderer;
 	this.renderer.addRenderElement(world);
-
 	GDXConnection.init(this.getActivity(), renderer);
+
+	// Load a previous alpha texture of the ingredient model
+	// Helps to show all correctly
+	new OwnModelLoader(this.renderer, PizzaModelMapper.INGREDIENT_MODEL,
+		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
+	    @Override
+	    public void modelLoaded(MeshComponent gdxMesh) {
+		meshComponent = gdxMesh;
+		final Obj o = new Obj();
+		o.setComp(gdxMesh);
+		world.add(o);
+	    }
+	};
 
 	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
@@ -73,7 +85,6 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		world.add(o);
 	    }
 	};
-
 	// Method to deploy the ingredients object and textures
 	if (PizzaModelMapper.getIngredientsSize() > 0) {
 	    // TO DEVELOPE
@@ -108,7 +119,6 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		    world.add(o);
 		}
 	    };
-
 	}
     }
 
