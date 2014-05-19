@@ -985,6 +985,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			    + ingredient.getId() + ","
 			    + pizza.getIngredients().get(ingredient) + ");");
 		}
+		writeProduct(pizza.getId());
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -1023,6 +1024,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			    + DAOFactory.TABLE_OFFERS_PRODUCTS + " VALUES("
 			    + offer.getId() + "," + product.getId() + ")");
 		}
+		writeProduct(offer.getId());
 	    }
 
 	} catch (SQLException e) {
@@ -1057,6 +1059,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			+ " VALUES(" + drink.getId() + ",'" + drink.getName()
 			+ "'," + drink.getPrice() + "," + drink.getIcon() + ","
 			+ drink.getDiscount() + "," + drink.getSize() + ");");
+		writeProduct(drink.getId());
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
