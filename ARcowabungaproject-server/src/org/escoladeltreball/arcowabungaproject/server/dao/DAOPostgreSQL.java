@@ -127,10 +127,10 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(2,'path2');");
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(3,'path3');");
 
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(10,'pepperoni',0.5,1,2);");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(11,'cheese',0.5,1,2);");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(12,'mushroom',0.5,2,3);");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(13,'tomatoe',0.5,1,3);");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(10,'pepperoni',0.5,1,2,'path_texture1');");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(11,'cheese',0.5,1,2,'path_texture2');");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(12,'mushroom',0.5,2,3,'path_texture3');");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(13,'tomatoe',0.5,1,3,'path_texture4');");
 
 	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,10,2);");
 	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,11,1);");
@@ -234,7 +234,6 @@ public class DAOPostgreSQL extends DAOFactory {
 				.getInt(DAOFactory.COLUMNS_NAME_INGREDIENTS[1])
 			+ ";");
 		while (rsIngredient.next()) {
-
 		    Ingredient ingredient = new Ingredient(
 			    rsIngredient.getInt(0), rsIngredient.getString(1),
 			    rsIngredient.getInt(2), rsIngredient.getInt(3),
@@ -461,6 +460,51 @@ public class DAOPostgreSQL extends DAOFactory {
     protected Set<Product> readProducts() {
 	// TODO Auto-generated method stub
 	return null;
+    }
+
+    public Set<Ingredient> readIngredient(String where) {
+	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    // Select all rows of ingredient with where table
+	    System.out.println("SELECT * FROM " + DAOFactory.TABLE_INGREDIENT
+		    + where + ";");
+	    ResultSet rs = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_INGREDIENT + where + ";");
+	    while (rs.next()) {
+		// Create a ingredient object and put in the HashSet
+		Ingredient ingredient = new Ingredient(
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[0]),
+			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[1]),
+			rs.getFloat(DAOFactory.COLUMNS_NAME_INGREDIENT[2]),
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[3]),
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]),
+			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
+		ingredientsSet.add(ingredient);
+	    }
+	    stm.close();
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	return ingredientsSet;
     }
 
     @Override
