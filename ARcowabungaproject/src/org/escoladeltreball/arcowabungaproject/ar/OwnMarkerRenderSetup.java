@@ -75,6 +75,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    }
 	};
 
+	// Pizza base model and texture loader
 	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
@@ -88,37 +89,22 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	// Method to deploy the ingredients object and textures
 	if (PizzaModelMapper.getIngredientsSize() > 0) {
 	    // TO DEVELOPE
-	    // Map<String, String> pizzaTextureMap = PizzaModelMapper
-	    // .getIngredientTextureMap();
-	    // for (int i = 0; i < PizzaModelMapper.getIngredientsSize(); i++) {
-	    //
-	    // }
+	    // PROVISIONAL
 	    ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
 		    .getModelIngredientTextures();
-
-	    // PROVISIONAL
-	    new OwnModelLoader(this.renderer,
-		    PizzaModelMapper.INGREDIENT_MODEL,
-		    ingredientTextures.get(0)) {
-		@Override
-		public void modelLoaded(MeshComponent gdxMesh) {
-		    meshComponent = gdxMesh;
-		    final Obj o = new Obj();
-		    o.setComp(gdxMesh);
-		    world.add(o);
-		}
-	    };
-	    new OwnModelLoader(this.renderer,
-		    PizzaModelMapper.INGREDIENT_MODEL,
-		    ingredientTextures.get(1)) {
-		@Override
-		public void modelLoaded(MeshComponent gdxMesh) {
-		    meshComponent = gdxMesh;
-		    final Obj o = new Obj();
-		    o.setComp(gdxMesh);
-		    world.add(o);
-		}
-	    };
+	    for (int i = 0; i < 2 /* ingredientTextures.size() */; i++) {
+		new OwnModelLoader(this.renderer,
+			PizzaModelMapper.INGREDIENT_MODEL,
+			ingredientTextures.get(i)) {
+		    @Override
+		    public void modelLoaded(MeshComponent gdxMesh) {
+			meshComponent = gdxMesh;
+			final Obj o = new Obj();
+			o.setComp(gdxMesh);
+			world.add(o);
+		    }
+		};
+	    }
 	}
     }
 
