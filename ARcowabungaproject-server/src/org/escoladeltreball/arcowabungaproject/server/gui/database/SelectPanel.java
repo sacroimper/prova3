@@ -277,305 +277,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	this.repaint();
 	if (this.jbExecuteQuery != null) {
 	    if (this.jtfList != null) {
-		String item = (String) this.jcbTables.getSelectedItem();
-		String[][] rowData = null;
-		switch (item) {
-		case DAOFactory.TABLE_ADDRESS:
-		    for (int i = 0; i < this.jtfList.length; i++) {
-			if (!this.jtfList[i].getText().isEmpty()) {
-			    if (DAOFactory.COLUMNS_TYPE_ADDRESS[i]
-				    .equals("VARCHAR")
-				    || DAOFactory.COLUMNS_TYPE_ADDRESS[i]
-					    .equals("CHAR")) {
-				where += DAOFactory.COLUMNS_NAME_ADDRESS[i]
-					+ "='" + this.jtfList[i].getText()
-					+ "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_ADDRESS[i]
-					+ "=" + this.jtfList[i].getText();
-			    }
-			    where += ",";
-			}
-		    }
-		    if (!where.isEmpty()) {
-			where = where.substring(0, where.length() - 1);
-			where = " WHERE " + where;
-		    }
-		    HashSet<Address> addressList = (HashSet<Address>) DAOPostgreSQL
-			    .getInstance().readAddress();
-		    rowData = new String[addressList.size()][DAOFactory.COLUMNS_NAME_ADDRESS.length];
-		    int i = 0;
-		    for (Address address : addressList) {
-			rowData[i][0] = address.getId() + "";
-			rowData[i][1] = address.getStreet();
-			rowData[i][2] = address.getNumber();
-			rowData[i][3] = address.getPostCode();
-			rowData[i][4] = address.getFloor();
-			rowData[i][5] = address.getStair();
-			rowData[i][6] = address.getDoor();
-			i++;
-		    }
-		    this.jtTable = new JTable(rowData,
-			    DAOFactory.COLUMNS_NAME_ADDRESS);
-		    break;
-		case DAOFactory.TABLE_INGREDIENT:
-		    for (i = 0; i < this.jtfList.length; i++) {
-			if (!this.jtfList[i].getText().isEmpty()) {
-			    if (DAOFactory.COLUMNS_TYPE_INGREDIENT[i]
-				    .equals("VARCHAR")) {
-				where += DAOFactory.COLUMNS_NAME_INGREDIENT[i]
-					+ "='" + this.jtfList[i].getText()
-					+ "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_INGREDIENT[i]
-					+ "=" + this.jtfList[i].getText();
-			    }
-			    where += ",";
-			}
-		    }
-
-		    if (!where.isEmpty()) {
-			where = where.substring(0, where.length() - 1);
-			where = " WHERE " + where;
-		    }
-		    HashSet<Ingredient> ingredientsList = (HashSet<Ingredient>) DAOPostgreSQL
-			    .getInstance().readIngredient();
-		    rowData = new String[ingredientsList.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
-		    i = 0;
-		    for (Ingredient ingredient : ingredientsList) {
-			rowData[i][0] = ingredient.getId() + "";
-			rowData[i][1] = ingredient.getName();
-			rowData[i][2] = ingredient.getPrice() + "";
-			rowData[i][3] = ingredient.getModel() + "";
-			rowData[i][4] = ingredient.getIcon() + "";
-			rowData[i][5] = ingredient.getTexture() + "";
-			i++;
-		    }
-		    this.jtTable = new JTable(rowData,
-			    DAOFactory.COLUMNS_NAME_INGREDIENT);
-		    break;
-		case DAOFactory.TABLE_PIZZAS:
-		    for (i = 0; i < this.jtfList.length; i++) {
-			if (!this.jtfList[i].getText().isEmpty()) {
-			    if (DAOFactory.COLUMNS_TYPE_PIZZAS[i]
-				    .equals("VARCHAR")) {
-				where += DAOFactory.COLUMNS_NAME_PIZZAS[i]
-					+ "='" + this.jtfList[i].getText()
-					+ "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_PIZZAS[i]
-					+ "=" + this.jtfList[i].getText();
-			    }
-			    where += ",";
-			}
-		    }
-
-		    if (!where.isEmpty()) {
-			where = where.substring(0, where.length() - 1);
-			where = " WHERE " + where;
-		    }
-		    HashSet<Pizza> pizzasList = (HashSet<Pizza>) DAOPostgreSQL
-			    .getInstance().readPizza();
-		    rowData = new String[pizzasList.size()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
-		    i = 0;
-		    for (Pizza pizza : pizzasList) {
-			rowData[i][0] = pizza.getId() + "";
-			rowData[i][1] = pizza.getName();
-			rowData[i][2] = pizza.getPrice() + "";
-			rowData[i][3] = pizza.getIcon() + "";
-			rowData[i][4] = pizza.getMassType();
-			rowData[i][5] = pizza.getType();
-			rowData[i][6] = pizza.getSize() + "";
-			rowData[i][7] = pizza.getDiscount() + "";
-			rowData[i][8] = pizza.getIngredients().getId() + "";
-			i++;
-		    }
-		    this.jtTable = new JTable(rowData,
-			    DAOFactory.COLUMNS_NAME_PIZZAS);
-		    break;
-		case DAOFactory.TABLE_DRINKS:
-		    for (i = 0; i < this.jtfList.length; i++) {
-			if (!this.jtfList[i].getText().isEmpty()) {
-			    if (DAOFactory.COLUMNS_TYPE_DRINKS[i]
-				    .equals("VARCHAR")) {
-				where += DAOFactory.COLUMNS_NAME_DRINKS[i]
-					+ "='" + this.jtfList[i].getText()
-					+ "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_DRINKS[i]
-					+ "=" + this.jtfList[i].getText();
-			    }
-			    where += ",";
-			}
-		    }
-
-		    if (!where.isEmpty()) {
-			where = where.substring(0, where.length() - 1);
-			where = " WHERE " + where;
-		    }
-		    HashSet<Drink> drinksList = (HashSet<Drink>) DAOPostgreSQL
-			    .getInstance().readDrink();
-		    rowData = new String[drinksList.size()][DAOFactory.COLUMNS_NAME_DRINKS.length];
-		    i = 0;
-		    for (Drink drink : drinksList) {
-			rowData[i][0] = drink.getId() + "";
-			rowData[i][1] = drink.getName();
-			rowData[i][2] = drink.getPrice() + "";
-			rowData[i][3] = drink.getIcon() + "";
-			rowData[i][4] = drink.getDiscount() + "";
-			rowData[i][5] = drink.getSize() + "";
-			i++;
-		    }
-		    this.jtTable = new JTable(rowData,
-			    DAOFactory.COLUMNS_NAME_DRINKS);
-		    break;
-		case DAOFactory.TABLE_OFFERS:
-		    for (i = 0; i < this.jtfList.length; i++) {
-			if (!this.jtfList[i].getText().isEmpty()) {
-			    if (DAOFactory.COLUMNS_TYPE_OFFERS[i]
-				    .equals("VARCHAR")) {
-				where += DAOFactory.COLUMNS_NAME_OFFERS[i]
-					+ "='" + this.jtfList[i].getText()
-					+ "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_OFFERS[i]
-					+ "=" + this.jtfList[i].getText();
-			    }
-			    where += ",";
-			}
-		    }
-
-		    if (!where.isEmpty()) {
-			where = where.substring(0, where.length() - 1);
-			where = " WHERE " + where;
-		    }
-		    HashSet<Offer> offerList = (HashSet<Offer>) DAOPostgreSQL
-			    .getInstance().readOffer();
-		    rowData = new String[offerList.size()][DAOFactory.COLUMNS_NAME_OFFERS.length];
-		    i = 0;
-		    for (Offer offer : offerList) {
-			rowData[i][0] = offer.getId() + "";
-			rowData[i][1] = offer.getName();
-			rowData[i][2] = offer.getPrice() + "";
-			rowData[i][3] = offer.getIcon() + "";
-			rowData[i][4] = offer.getDiscount() + "";
-			// affegir id de la taula de la llista de productes
-			// rowData[i][5] = offer.getProductList() + "";
-			i++;
-		    }
-		    this.jtTable = new JTable(rowData,
-			    DAOFactory.COLUMNS_NAME_OFFERS);
-		    break;
-		case DAOFactory.TABLE_ORDERS:
-		    for (i = 0; i < this.jtfList.length; i++) {
-			if (!this.jtfList[i].getText().isEmpty()) {
-			    if (DAOFactory.COLUMNS_TYPE_ORDERS[i]
-				    .equals("VARCHAR")
-				    || DAOFactory.COLUMNS_TYPE_ORDERS[i]
-					    .equals("DATE")) {
-				where += DAOFactory.COLUMNS_NAME_ORDERS[i]
-					+ "='" + this.jtfList[i].getText()
-					+ "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_ORDERS[i]
-					+ "=" + this.jtfList[i].getText();
-			    }
-			    where += ",";
-			}
-		    }
-
-		    if (!where.isEmpty()) {
-			where = where.substring(0, where.length() - 1);
-			where = " WHERE " + where;
-		    }
-		    HashSet<Order> orderList = (HashSet<Order>) DAOPostgreSQL
-			    .getInstance().readOrder();
-		    rowData = new String[orderList.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
-		    i = 0;
-		    for (Order order : orderList) {
-			rowData[i][0] = order.getId() + "";
-			rowData[i][1] = order.getEmail();
-			rowData[i][2] = order.getPhone();
-			rowData[i][3] = order.getDateTime() + "";
-			rowData[i][4] = order.getPaymentMethod();
-			rowData[i][5] = order.getAddress().getId() + "";
-			rowData[i][6] = order.getShoppingCart().getId() + "";
-			i++;
-		    }
-		    this.jtTable = new JTable(rowData,
-			    DAOFactory.COLUMNS_NAME_ORDERS);
-		    break;
-		case DAOFactory.TABLE_PREFERENCES:
-		    for (i = 0; i < this.jtfList.length; i++) {
-			if (!this.jtfList[i].getText().isEmpty()) {
-			    if (DAOFactory.COLUMNS_TYPE_PREFERENCES[i]
-				    .equals("VARCHAR")) {
-				where += DAOFactory.COLUMNS_NAME_PREFERENCES[i]
-					+ "='" + this.jtfList[i].getText()
-					+ "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_PREFERENCES[i]
-					+ "=" + this.jtfList[i].getText();
-			    }
-			    where += ",";
-			}
-		    }
-
-		    if (!where.isEmpty()) {
-			where = where.substring(0, where.length() - 1);
-			where = " WHERE " + where;
-		    }
-		    HashMap<String, String> preferences = (HashMap<String, String>) DAOPostgreSQL
-			    .getInstance().readPreferences();
-		    rowData = new String[preferences.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
-		    i = 0;
-
-		    for (Map.Entry<String, String> entry : preferences
-			    .entrySet()) {
-			rowData[i][0] = entry.getKey();
-			rowData[i][1] = entry.getValue();
-			i++;
-		    }
-		    this.jtTable = new JTable(rowData,
-			    DAOFactory.COLUMNS_NAME_PREFERENCES);
-		    break;
-		case DAOFactory.TABLE_RESOURCES:
-		    for (i = 0; i < this.jtfList.length; i++) {
-			if (!this.jtfList[i].getText().isEmpty()) {
-			    if (DAOFactory.COLUMNS_TYPE_RESOURCES[i]
-				    .equals("VARCHAR")) {
-				where += DAOFactory.COLUMNS_NAME_RESOURCES[i]
-					+ "='" + this.jtfList[i].getText()
-					+ "'";
-			    } else {
-				where += DAOFactory.COLUMNS_NAME_RESOURCES[i]
-					+ "=" + this.jtfList[i].getText();
-			    }
-			    where += ",";
-			}
-		    }
-
-		    if (!where.isEmpty()) {
-			where = where.substring(0, where.length() - 1);
-			where = " WHERE " + where;
-		    }
-		    HashMap<Integer, String> resources = (HashMap<Integer, String>) DAOPostgreSQL
-			    .getInstance().readResources();
-		    rowData = new String[resources.size()][DAOFactory.COLUMNS_NAME_RESOURCES.length];
-		    i = 0;
-		    for (Map.Entry<Integer, String> entry : resources
-			    .entrySet()) {
-			rowData[i][0] = entry.getKey() + "";
-			rowData[i][1] = entry.getValue();
-			i++;
-		    }
-		    this.jtTable = new JTable(rowData,
-			    DAOFactory.COLUMNS_NAME_RESOURCES);
-		    break;
-		default:
-		    break;
-		}
-
+		showTable();
 	    }
 	}
 	this.sp = new JScrollPane(this.jtTable);
@@ -587,7 +289,289 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	this.jpShowTable.add(this.sp);
 	this.validate();
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================
+    /**
+     * Show table depends on the selected table
+     * 
+     */
+    private void showTable() {
+	String item = (String) this.jcbTables.getSelectedItem();
+	String[][] rowData = null;
+	switch (item) {
+	case DAOFactory.TABLE_ADDRESS:
+	    for (int i = 0; i < this.jtfList.length; i++) {
+		if (!this.jtfList[i].getText().isEmpty()) {
+		    if (DAOFactory.COLUMNS_TYPE_ADDRESS[i].equals("VARCHAR")
+			    || DAOFactory.COLUMNS_TYPE_ADDRESS[i]
+				    .equals("CHAR")) {
+			where += DAOFactory.COLUMNS_NAME_ADDRESS[i] + "='"
+				+ this.jtfList[i].getText() + "'";
+		    } else {
+			where += DAOFactory.COLUMNS_NAME_ADDRESS[i] + "="
+				+ this.jtfList[i].getText();
+		    }
+		    where += ",";
+		}
+	    }
+	    if (!where.isEmpty()) {
+		where = where.substring(0, where.length() - 1);
+		where = " WHERE " + where;
+	    }
+	    HashSet<Address> addressList = (HashSet<Address>) DAOPostgreSQL
+		    .getInstance().readAddress();
+	    rowData = new String[addressList.size()][DAOFactory.COLUMNS_NAME_ADDRESS.length];
+	    int i = 0;
+	    for (Address address : addressList) {
+		rowData[i][0] = address.getId() + "";
+		rowData[i][1] = address.getStreet();
+		rowData[i][2] = address.getNumber();
+		rowData[i][3] = address.getPostCode();
+		rowData[i][4] = address.getFloor();
+		rowData[i][5] = address.getStair();
+		rowData[i][6] = address.getDoor();
+		i++;
+	    }
+	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_ADDRESS);
+	    break;
+	case DAOFactory.TABLE_INGREDIENT:
+	    for (i = 0; i < this.jtfList.length; i++) {
+		if (!this.jtfList[i].getText().isEmpty()) {
+		    if (DAOFactory.COLUMNS_TYPE_INGREDIENT[i].equals("VARCHAR")) {
+			where += DAOFactory.COLUMNS_NAME_INGREDIENT[i] + "='"
+				+ this.jtfList[i].getText() + "'";
+		    } else {
+			where += DAOFactory.COLUMNS_NAME_INGREDIENT[i] + "="
+				+ this.jtfList[i].getText();
+		    }
+		    where += ",";
+		}
+	    }
+
+	    if (!where.isEmpty()) {
+		where = where.substring(0, where.length() - 1);
+		where = " WHERE " + where;
+	    }
+	    HashSet<Ingredient> ingredientsList = (HashSet<Ingredient>) DAOPostgreSQL
+		    .getInstance().readIngredient();
+	    rowData = new String[ingredientsList.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+	    i = 0;
+	    for (Ingredient ingredient : ingredientsList) {
+		rowData[i][0] = ingredient.getId() + "";
+		rowData[i][1] = ingredient.getName();
+		rowData[i][2] = ingredient.getPrice() + "";
+		rowData[i][3] = ingredient.getModel() + "";
+		rowData[i][4] = ingredient.getIcon() + "";
+		rowData[i][5] = ingredient.getTexture() + "";
+		i++;
+	    }
+	    this.jtTable = new JTable(rowData,
+		    DAOFactory.COLUMNS_NAME_INGREDIENT);
+	    break;
+	case DAOFactory.TABLE_PIZZAS:
+	    for (i = 0; i < this.jtfList.length; i++) {
+		if (!this.jtfList[i].getText().isEmpty()) {
+		    if (DAOFactory.COLUMNS_TYPE_PIZZAS[i].equals("VARCHAR")) {
+			where += DAOFactory.COLUMNS_NAME_PIZZAS[i] + "='"
+				+ this.jtfList[i].getText() + "'";
+		    } else {
+			where += DAOFactory.COLUMNS_NAME_PIZZAS[i] + "="
+				+ this.jtfList[i].getText();
+		    }
+		    where += ",";
+		}
+	    }
+
+	    if (!where.isEmpty()) {
+		where = where.substring(0, where.length() - 1);
+		where = " WHERE " + where;
+	    }
+	    HashSet<Pizza> pizzasList = (HashSet<Pizza>) DAOPostgreSQL
+		    .getInstance().readPizza();
+	    rowData = new String[pizzasList.size()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    i = 0;
+	    for (Pizza pizza : pizzasList) {
+		rowData[i][0] = pizza.getId() + "";
+		rowData[i][1] = pizza.getName();
+		rowData[i][2] = pizza.getPrice() + "";
+		rowData[i][3] = pizza.getIcon() + "";
+		rowData[i][4] = pizza.getMassType();
+		rowData[i][5] = pizza.getType();
+		rowData[i][6] = pizza.getSize() + "";
+		rowData[i][7] = pizza.getDiscount() + "";
+		rowData[i][8] = pizza.getIngredients().getId() + "";
+		i++;
+	    }
+	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
+	    break;
+	case DAOFactory.TABLE_DRINKS:
+	    for (i = 0; i < this.jtfList.length; i++) {
+		if (!this.jtfList[i].getText().isEmpty()) {
+		    if (DAOFactory.COLUMNS_TYPE_DRINKS[i].equals("VARCHAR")) {
+			where += DAOFactory.COLUMNS_NAME_DRINKS[i] + "='"
+				+ this.jtfList[i].getText() + "'";
+		    } else {
+			where += DAOFactory.COLUMNS_NAME_DRINKS[i] + "="
+				+ this.jtfList[i].getText();
+		    }
+		    where += ",";
+		}
+	    }
+
+	    if (!where.isEmpty()) {
+		where = where.substring(0, where.length() - 1);
+		where = " WHERE " + where;
+	    }
+	    HashSet<Drink> drinksList = (HashSet<Drink>) DAOPostgreSQL
+		    .getInstance().readDrink();
+	    rowData = new String[drinksList.size()][DAOFactory.COLUMNS_NAME_DRINKS.length];
+	    i = 0;
+	    for (Drink drink : drinksList) {
+		rowData[i][0] = drink.getId() + "";
+		rowData[i][1] = drink.getName();
+		rowData[i][2] = drink.getPrice() + "";
+		rowData[i][3] = drink.getIcon() + "";
+		rowData[i][4] = drink.getDiscount() + "";
+		rowData[i][5] = drink.getSize() + "";
+		i++;
+	    }
+	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_DRINKS);
+	    break;
+	case DAOFactory.TABLE_OFFERS:
+	    for (i = 0; i < this.jtfList.length; i++) {
+		if (!this.jtfList[i].getText().isEmpty()) {
+		    if (DAOFactory.COLUMNS_TYPE_OFFERS[i].equals("VARCHAR")) {
+			where += DAOFactory.COLUMNS_NAME_OFFERS[i] + "='"
+				+ this.jtfList[i].getText() + "'";
+		    } else {
+			where += DAOFactory.COLUMNS_NAME_OFFERS[i] + "="
+				+ this.jtfList[i].getText();
+		    }
+		    where += ",";
+		}
+	    }
+
+	    if (!where.isEmpty()) {
+		where = where.substring(0, where.length() - 1);
+		where = " WHERE " + where;
+	    }
+	    HashSet<Offer> offerList = (HashSet<Offer>) DAOPostgreSQL
+		    .getInstance().readOffer();
+	    rowData = new String[offerList.size()][DAOFactory.COLUMNS_NAME_OFFERS.length];
+	    i = 0;
+	    for (Offer offer : offerList) {
+		rowData[i][0] = offer.getId() + "";
+		rowData[i][1] = offer.getName();
+		rowData[i][2] = offer.getPrice() + "";
+		rowData[i][3] = offer.getIcon() + "";
+		rowData[i][4] = offer.getDiscount() + "";
+		// affegir id de la taula de la llista de productes
+		// rowData[i][5] = offer.getProductList() + "";
+		i++;
+	    }
+	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_OFFERS);
+	    break;
+	case DAOFactory.TABLE_ORDERS:
+	    for (i = 0; i < this.jtfList.length; i++) {
+		if (!this.jtfList[i].getText().isEmpty()) {
+		    if (DAOFactory.COLUMNS_TYPE_ORDERS[i].equals("VARCHAR")
+			    || DAOFactory.COLUMNS_TYPE_ORDERS[i].equals("DATE")) {
+			where += DAOFactory.COLUMNS_NAME_ORDERS[i] + "='"
+				+ this.jtfList[i].getText() + "'";
+		    } else {
+			where += DAOFactory.COLUMNS_NAME_ORDERS[i] + "="
+				+ this.jtfList[i].getText();
+		    }
+		    where += ",";
+		}
+	    }
+
+	    if (!where.isEmpty()) {
+		where = where.substring(0, where.length() - 1);
+		where = " WHERE " + where;
+	    }
+	    HashSet<Order> orderList = (HashSet<Order>) DAOPostgreSQL
+		    .getInstance().readOrder();
+	    rowData = new String[orderList.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
+	    i = 0;
+	    for (Order order : orderList) {
+		rowData[i][0] = order.getId() + "";
+		rowData[i][1] = order.getEmail();
+		rowData[i][2] = order.getPhone();
+		rowData[i][3] = order.getDateTime() + "";
+		rowData[i][4] = order.getPaymentMethod();
+		rowData[i][5] = order.getAddress().getId() + "";
+		rowData[i][6] = order.getShoppingCart().getId() + "";
+		i++;
+	    }
+	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_ORDERS);
+	    break;
+	case DAOFactory.TABLE_PREFERENCES:
+	    for (i = 0; i < this.jtfList.length; i++) {
+		if (!this.jtfList[i].getText().isEmpty()) {
+		    if (DAOFactory.COLUMNS_TYPE_PREFERENCES[i]
+			    .equals("VARCHAR")) {
+			where += DAOFactory.COLUMNS_NAME_PREFERENCES[i] + "='"
+				+ this.jtfList[i].getText() + "'";
+		    } else {
+			where += DAOFactory.COLUMNS_NAME_PREFERENCES[i] + "="
+				+ this.jtfList[i].getText();
+		    }
+		    where += ",";
+		}
+	    }
+
+	    if (!where.isEmpty()) {
+		where = where.substring(0, where.length() - 1);
+		where = " WHERE " + where;
+	    }
+	    HashMap<String, String> preferences = (HashMap<String, String>) DAOPostgreSQL
+		    .getInstance().readPreferences();
+	    rowData = new String[preferences.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
+	    i = 0;
+
+	    for (Map.Entry<String, String> entry : preferences.entrySet()) {
+		rowData[i][0] = entry.getKey();
+		rowData[i][1] = entry.getValue();
+		i++;
+	    }
+	    this.jtTable = new JTable(rowData,
+		    DAOFactory.COLUMNS_NAME_PREFERENCES);
+	    break;
+	case DAOFactory.TABLE_RESOURCES:
+	    for (i = 0; i < this.jtfList.length; i++) {
+		if (!this.jtfList[i].getText().isEmpty()) {
+		    if (DAOFactory.COLUMNS_TYPE_RESOURCES[i].equals("VARCHAR")) {
+			where += DAOFactory.COLUMNS_NAME_RESOURCES[i] + "='"
+				+ this.jtfList[i].getText() + "'";
+		    } else {
+			where += DAOFactory.COLUMNS_NAME_RESOURCES[i] + "="
+				+ this.jtfList[i].getText();
+		    }
+		    where += ",";
+		}
+	    }
+
+	    if (!where.isEmpty()) {
+		where = where.substring(0, where.length() - 1);
+		where = " WHERE " + where;
+	    }
+	    HashMap<Integer, String> resources = (HashMap<Integer, String>) DAOPostgreSQL
+		    .getInstance().readResources();
+	    rowData = new String[resources.size()][DAOFactory.COLUMNS_NAME_RESOURCES.length];
+	    i = 0;
+	    for (Map.Entry<Integer, String> entry : resources.entrySet()) {
+		rowData[i][0] = entry.getKey() + "";
+		rowData[i][1] = entry.getValue();
+		i++;
+	    }
+	    this.jtTable = new JTable(rowData,
+		    DAOFactory.COLUMNS_NAME_RESOURCES);
+	    break;
+	default:
+	    break;
+	}
+    }
 }
