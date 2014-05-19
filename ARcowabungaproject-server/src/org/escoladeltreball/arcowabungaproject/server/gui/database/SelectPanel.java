@@ -36,12 +36,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
-import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
 public class SelectPanel extends JPanel implements ItemListener, ActionListener {
 
@@ -61,7 +62,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
     private GridBagConstraints constraints;
     private JButton jbExecuteQuery;
     private JTable jtTable;
-
+    private JScrollPane sp;
     private int indexConstrainstX = 0;
     private int indexConstrainstY = 0;
 
@@ -89,6 +90,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	this.jpDoSelect = new JPanel();
 	this.jpDoSelect.setLayout(new GridBagLayout());
 	this.jpShowTable = new JPanel();
+	this.jbExecuteQuery = new JButton("Execute Query");
 	String[] items = { "", DAOFactory.TABLE_ADDRESS,
 		DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
 		DAOFactory.TABLE_OFFERS, DAOFactory.TABLE_ORDERS,
@@ -108,9 +110,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 
     private void registListeners() {
 	this.jcbTables.addItemListener(this);
-	if (this.jbExecuteQuery != null) {
-	    this.jbExecuteQuery.addActionListener(this);
-	}
+	this.jbExecuteQuery.addActionListener(this);
     }
 
     // ====================
@@ -271,7 +271,6 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	    default:
 		break;
 	    }
-	    this.jbExecuteQuery = new JButton("Execute Query");
 	    this.constraints.gridy = ++this.indexConstrainstY;
 	    this.jpDoSelect.add(this.jbExecuteQuery, constraints);
 	    this.indexConstrainstY = 0;
@@ -281,34 +280,45 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+	if (this.sp != null) {
+	    this.jpShowTable.remove(this.sp);
+	}
 	if (this.jbExecuteQuery != null) {
 	    if (this.jtfList != null) {
 		String item = (String) this.jcbTables.getSelectedItem();
 
 		switch (item) {
 		case DAOFactory.TABLE_INGREDIENT:
+		    String where = "";
 
-		    HashSet<Ingredient> ingredientsSet = (HashSet) Pizzeria
-			    .getInstance().getIngredients();
-		    String[][] rowData = new String[ingredientsSet.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
-		    for (int i = 0; i < jtfList.length; i++) {
-			if (!jtfList[i].getText().isEmpty()) {
-			    for (Ingredient ingredient : ingredientsSet) {
-				if (jtfList[i].equals(ingredient.getId())) {
-				    rowData[i][0] = ingredient.getId() + "";
-				    rowData[i][1] = ingredient.getName();
-				    rowData[i][2] = ingredient.getIcon() + "";
-				    rowData[i][3] = ingredient.getModel() + "";
-				    rowData[i][4] = ingredient.getPrice() + "";
-				    i++;
-				}
-			    }
+		    String[][] rowData = null;
+		    // for(int i = 0; i < this.jtfList.length ; i++){
+		    //
+		    // }
+		    if (where.isEmpty()) {
+			HashSet<Ingredient> ingredientsList = (HashSet<Ingredient>) DAOPostgreSQL
+				.getInstance().readIngredient();
+			rowData = new String[ingredientsList.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+			int i = 0;
+			for (Ingredient ingredient : ingredientsList) {
+			    rowData[i][0] = ingredient.getId() + "";
+			    rowData[i][1] = ingredient.getName();
+			    rowData[i][2] = ingredient.getIcon() + "";
+			    rowData[i][3] = ingredient.getModel() + "";
+			    rowData[i][4] = ingredient.getPrice() + "";
+			    i++;
 			}
 		    }
-
 		    this.jtTable = new JTable(rowData,
 			    DAOFactory.COLUMNS_NAME_INGREDIENT);
-		    this.jpShowTable.add(this.jcbTables);
+		    this.sp = new JScrollPane(this.jtTable);
+		    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		    this.jtTable
+			    .setPreferredScrollableViewportSize(this.jtTable
+				    .getPreferredSize());
+		    this.jtTable.setFillsViewportHeight(true);
+		    this.jpShowTable.add(this.sp);
 		    this.repaint();
 		    break;
 
