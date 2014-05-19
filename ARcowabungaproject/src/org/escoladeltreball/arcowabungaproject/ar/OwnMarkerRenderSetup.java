@@ -25,7 +25,6 @@ import system.EventManager;
 //import worldData.MoveComp;
 import worldData.Obj;
 import worldData.SystemUpdater;
-import worldData.World;
 import actions.ActionBufferedCameraAR;
 import android.app.Activity;
 import de.rwth.GDXConnection;
@@ -33,8 +32,8 @@ import de.rwth.GDXConnection;
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     private GLCamera camera;
-    private World world;
-    public static MeshComponent meshComponent;
+    public PizzaWorld world;
+    public MeshComponent meshComponent;
     private GL1Renderer renderer;
 
     // public Wrapper targetMoveWrapper = new Wrapper();
@@ -52,19 +51,18 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     @Override
     public void _a_initFieldsIfNecessary() {
 	camera = new GLCamera();
-	world = new World(camera);
+	world = new PizzaWorld(camera);
     }
 
     @Override
     public void _b_addWorldsToRenderer(GL1Renderer renderer,
 	    GLFactory objectFactory, GeoObj currentPosition) {
 	this.renderer = renderer;
-	this.renderer.addRenderElement(world);
-	GDXConnection.init(this.getActivity(), renderer);
+	GDXConnection.init(this.getActivity(), this.renderer);
 
 	// Load a previous alpha texture of the ingredient model
 	// Helps to show all correctly
-	new OwnModelLoader(this.renderer, PizzaModelMapper.INGREDIENT_MODEL,
+	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(MeshComponent gdxMesh) {
@@ -72,6 +70,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		final Obj o = new Obj();
 		o.setComp(gdxMesh);
 		world.add(o);
+		world.remove(o);
 	    }
 	};
 
@@ -86,13 +85,28 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		world.add(o);
 	    }
 	};
+
 	// Method to deploy the ingredients object and textures
 	if (PizzaModelMapper.getIngredientsSize() > 0) {
-	    // TO DEVELOPE
-	    // PROVISIONAL
+
 	    ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
 		    .getModelIngredientTextures();
-	    for (int i = 0; i <  ingredientTextures.size() ; i++) {
+
+	    for (int i = 0; i < ingredientTextures.size(); i++) {
+		// Load a previous alpha texture of the ingredient model
+		// Helps to show all correctly
+		new OwnModelLoader(this.renderer,
+			PizzaModelMapper.BASIC_PIZZA_MODEL,
+			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
+		    @Override
+		    public void modelLoaded(MeshComponent gdxMesh) {
+			meshComponent = gdxMesh;
+			final Obj o = new Obj();
+			o.setComp(gdxMesh);
+			world.add(o);
+			world.remove(o);
+		    }
+		};
 		new OwnModelLoader(this.renderer,
 			PizzaModelMapper.INGREDIENT_MODEL,
 			ingredientTextures.get(i)) {
@@ -106,6 +120,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		};
 	    }
 	}
+	this.renderer.addRenderElement(world);
     }
 
     @Override
