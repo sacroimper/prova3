@@ -30,7 +30,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -101,7 +103,8 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	String[] items = { "", DAOFactory.TABLE_ADDRESS,
 		DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
 		DAOFactory.TABLE_OFFERS, DAOFactory.TABLE_ORDERS,
-		DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES };
+		DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES,
+		DAOFactory.TABLE_RESOURCES };
 	this.jlChooseTable = new JLabel("Choose Table");
 	this.jcbTables = new JComboBox<>(items);
 	this.constraints = new GridBagConstraints();
@@ -501,6 +504,73 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    }
 		    this.jtTable = new JTable(rowData,
 			    DAOFactory.COLUMNS_NAME_ORDERS);
+		    break;
+		case DAOFactory.TABLE_PREFERENCES:
+		    for (i = 0; i < this.jtfList.length; i++) {
+			if (!this.jtfList[i].getText().isEmpty()) {
+			    if (DAOFactory.COLUMNS_TYPE_PREFERENCES[i]
+				    .equals("VARCHAR")) {
+				where += DAOFactory.COLUMNS_NAME_PREFERENCES[i]
+					+ "='" + this.jtfList[i].getText()
+					+ "'";
+			    } else {
+				where += DAOFactory.COLUMNS_NAME_PREFERENCES[i]
+					+ "=" + this.jtfList[i].getText();
+			    }
+			    where += ",";
+			}
+		    }
+
+		    if (!where.isEmpty()) {
+			where = where.substring(0, where.length() - 1);
+			where = " WHERE " + where;
+		    }
+		    HashMap<String, String> preferences = (HashMap<String, String>) DAOPostgreSQL
+			    .getInstance().readPreferences();
+		    rowData = new String[preferences.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
+		    i = 0;
+
+		    for (Map.Entry<String, String> entry : preferences
+			    .entrySet()) {
+			rowData[i][0] = entry.getKey();
+			rowData[i][1] = entry.getValue();
+			i++;
+		    }
+		    this.jtTable = new JTable(rowData,
+			    DAOFactory.COLUMNS_NAME_PREFERENCES);
+		    break;
+		case DAOFactory.TABLE_RESOURCES:
+		    for (i = 0; i < this.jtfList.length; i++) {
+			if (!this.jtfList[i].getText().isEmpty()) {
+			    if (DAOFactory.COLUMNS_TYPE_RESOURCES[i]
+				    .equals("VARCHAR")) {
+				where += DAOFactory.COLUMNS_NAME_RESOURCES[i]
+					+ "='" + this.jtfList[i].getText()
+					+ "'";
+			    } else {
+				where += DAOFactory.COLUMNS_NAME_RESOURCES[i]
+					+ "=" + this.jtfList[i].getText();
+			    }
+			    where += ",";
+			}
+		    }
+
+		    if (!where.isEmpty()) {
+			where = where.substring(0, where.length() - 1);
+			where = " WHERE " + where;
+		    }
+		    HashMap<Integer, String> resources = (HashMap<Integer, String>) DAOPostgreSQL
+			    .getInstance().readResources();
+		    rowData = new String[resources.size()][DAOFactory.COLUMNS_NAME_RESOURCES.length];
+		    i = 0;
+		    for (Map.Entry<Integer, String> entry : resources
+			    .entrySet()) {
+			rowData[i][0] = entry.getKey() + "";
+			rowData[i][1] = entry.getValue();
+			i++;
+		    }
+		    this.jtTable = new JTable(rowData,
+			    DAOFactory.COLUMNS_NAME_RESOURCES);
 		    break;
 		default:
 		    break;
