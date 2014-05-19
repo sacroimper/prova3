@@ -252,6 +252,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		    ingredients.put(ingredient, rsIngredients
 			    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENTS[2]));
 		}
+		stm2.close();
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -290,7 +291,8 @@ public class DAOPostgreSQL extends DAOFactory {
 	    while (rsProducts.next()) {
 		// Product can be a pizza product or drink product
 		// Select pizza with the same id as product.
-		ResultSet rsPizza = stm
+		Statement stm2 = con.createStatement();
+		ResultSet rsPizza = stm2
 			.executeQuery("SELECT * FROM "
 				+ DAOFactory.TABLE_PIZZAS
 				+ " WHERE "
@@ -315,8 +317,10 @@ public class DAOPostgreSQL extends DAOFactory {
 		    pizza.setIngredients(ingredients);
 		    productsList.add(pizza);
 		}
+		stm2.close();
 		// Select drink with the same id as product.
-		ResultSet rsDrink = stm
+		Statement stm3 = con.createStatement();
+		ResultSet rsDrink = stm3
 			.executeQuery("SELECT * FROM "
 				+ DAOFactory.TABLE_DRINKS
 				+ " WHERE "
@@ -336,6 +340,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[5]));
 		    productsList.add(drink);
 		}
+		stm3.close();
 	    }
 
 	} catch (SQLException e) {
@@ -377,7 +382,8 @@ public class DAOPostgreSQL extends DAOFactory {
 		// Product can be a pizza product, drink product or offer
 		// product.
 		// Select pizza with the same id as product.
-		ResultSet rsPizza = stm
+		Statement stm2 = con.createStatement();
+		ResultSet rsPizza = stm2
 			.executeQuery("SELECT * FROM "
 				+ DAOFactory.TABLE_PIZZAS
 				+ " WHERE "
@@ -402,8 +408,10 @@ public class DAOPostgreSQL extends DAOFactory {
 		    pizza.setIngredients(ingredients);
 		    productsList.add(pizza);
 		}
+		stm2.close();
 		// Select drink with the same id as product.
-		ResultSet rsDrink = stm
+		Statement stm3 = con.createStatement();
+		ResultSet rsDrink = stm3
 			.executeQuery("SELECT * FROM "
 				+ DAOFactory.TABLE_DRINKS
 				+ " WHERE "
@@ -423,8 +431,10 @@ public class DAOPostgreSQL extends DAOFactory {
 			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[5]));
 		    productsList.add(drink);
 		}
+		stm3.close();
 		// Select offer with the same id as product.
-		ResultSet rsOffer = stm
+		Statement stm4 = con.createStatement();
+		ResultSet rsOffer = stm4
 			.executeQuery("SELECT * FROM "
 				+ DAOFactory.TABLE_OFFERS
 				+ " WHERE "
@@ -446,6 +456,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		    offer.setProductList(productOfferList);
 		    productsList.add(offer);
 		}
+		stm4.close();
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
