@@ -559,16 +559,17 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Offer> readOffer() {
+    public Set<Offer> readOffer() {
 	Set<Offer> offersSet = new HashSet<Offer>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows from Offer table.
 	    ResultSet rsOffer = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_OFFERS + ";");
+		    + DAOFactory.TABLE_OFFERS + where + ";");
 	    while (rsOffer.next()) {
 		// Create a offer object and put in the HashSet
 		Offer offer = new Offer(
@@ -692,16 +693,17 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Order> readOrder() {
-	HashSet<Order> OrdersSet = new HashSet<Order>();
+    public Set<Order> readOrder() {
+	HashSet<Order> ordersSet = new HashSet<Order>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows of order table.
 	    ResultSet rsOrder = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_ORDERS + ";");
+		    + DAOFactory.TABLE_ORDERS + where + ";");
 	    while (rsOrder.next()) {
 		DateTime dateTime = DateTime.parse(rsOrder
 			.getString(DAOFactory.COLUMNS_NAME_ORDERS[3]));
@@ -715,7 +717,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				.getInt(DAOFactory.COLUMNS_NAME_ORDERS[5])),
 			readShoppingCart(rsOrder
 				.getInt(DAOFactory.COLUMNS_NAME_ORDERS[6])));
-		OrdersSet.add(order);
+		ordersSet.add(order);
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -735,7 +737,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		}
 	    }
 	}
-	return OrdersSet;
+	return ordersSet;
     }
 
     @Override
