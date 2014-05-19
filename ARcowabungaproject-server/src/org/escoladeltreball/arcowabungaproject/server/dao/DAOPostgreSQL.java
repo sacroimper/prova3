@@ -862,8 +862,8 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    public Map<String, String> readResources() {
-	Map<String, String> resources = new HashMap<String, String>();
+    public Map<Integer, String> readResources() {
+	Map<Integer, String> resources = new HashMap<Integer, String>();
 	Connection con = null;
 	Statement stm = null;
 	try {
@@ -876,7 +876,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    while (rsPreferences.next()) {
 		resources
 			.put(rsPreferences
-				.getString(DAOFactory.COLUMNS_NAME_RESOURCES[0]),
+				.getInt(DAOFactory.COLUMNS_NAME_RESOURCES[0]),
 				rsPreferences
 					.getString(DAOFactory.COLUMNS_NAME_RESOURCES[1]));
 	    }
@@ -1219,13 +1219,13 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeResources(Map<String, String> resources) {
+    protected void writeResources(Map<Integer, String> resources) {
 	Connection con = null;
 	Statement stm = null;
 	try {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
-	    for (Map.Entry<String, String> entry : resources.entrySet()) {
+	    for (Map.Entry<Integer, String> entry : resources.entrySet()) {
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_PREFERENCES
 			+ " VALUES(" + entry.getKey() + ",'" + entry.getValue()
 			+ "');");

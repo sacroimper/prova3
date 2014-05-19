@@ -565,7 +565,7 @@ public abstract class DAOFactory {
 
     protected abstract Map<String, String> readPreferences();
 
-    protected abstract Map<String, String> readResources();
+    protected abstract Map<Integer, String> readResources();
 
     protected abstract void writeProduct(int idProduct);
 
@@ -585,7 +585,7 @@ public abstract class DAOFactory {
 
     protected abstract void writePreferences(Map<String, String> preferences);
 
-    protected abstract void writeResources(Map<String, String> resources);
+    protected abstract void writeResources(Map<Integer, String> resources);
 
     // ====================
     // PRIVATE METHODS

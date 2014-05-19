@@ -451,7 +451,7 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected Map<String, String> readResources() {
+    protected Map<Integer, String> readResources() {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -625,8 +625,8 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected void writeResources(Map<String, String> resources) {
-	for (Map.Entry<String, String> entry : resources.entrySet()) {
+    protected void writeResources(Map<Integer, String> resources) {
+	for (Map.Entry<Integer, String> entry : resources.entrySet()) {
 	    ContentValues values = new ContentValues();
 	    values.put(DAOFactory.COLUMNS_NAME_RESOURCES[0], entry.getKey());
 	    values.put(DAOFactory.COLUMNS_NAME_RESOURCES[1], entry.getValue());
