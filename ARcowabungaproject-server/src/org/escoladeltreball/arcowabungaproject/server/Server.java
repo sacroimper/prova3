@@ -35,13 +35,15 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
+
 public abstract class Server extends Thread {
 
     // ====================
     // CONSTANTS
     // ====================
 
-    public static final int HALL_PORT = 4444;
+    
 
     // ====================
     // ATTRIBUTES
@@ -142,7 +144,7 @@ public abstract class Server extends Thread {
     }
 
     protected int getValidPort() {
-	int newPort = HALL_PORT + 1;
+	int newPort = ServerConstants.HALL_SERVER_PORT + 1;
 	synchronized (listeningServers) {
 	    while (listeningServers.containsKey(newPort)
 		    || !isValidPort(newPort)) {

@@ -38,6 +38,8 @@ public class ServerConstants {
 
     public static final int CLIENT_RESPONSE_OK = 1003;
 
+    public static final int HALL_SERVER_PORT = 4444;
+
     // ====================
     // ATTRIBUTES
     // ====================
