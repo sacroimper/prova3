@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:minHeight="230dp" >
 
     <RelativeLayout
         android:id="@+id/blueSubtotalInOrderEndingSubItem"
@@ -102,8 +103,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/total_text"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/text_color_listview"
+        android:textSize="23sp" />
 
     <TextView
         android:id="@+id/totalValueInOrderEndingSubItem"
@@ -114,22 +115,23 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/total_price"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/text_color_listview"
+        android:textSize="23sp" />
 
     <LinearLayout
         android:id="@+id/buttonInOrderEndingSubItem"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/totalTextInOrderEndingSubItem"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:background="@color/red"
+        android:background="@layout/custom_button_radius_general"
         android:clickable="true"
         android:gravity="center"
+        android:minHeight="45dp"
         android:orientation="horizontal" >
 
         <ImageView
@@ -144,7 +146,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/redo_order"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </RelativeLayout>

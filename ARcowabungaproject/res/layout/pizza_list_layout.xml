@@ -10,8 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:groupIndicator="@null"
-        android:divider="@color/cacaca"
-        android:dividerHeight="1dp">
+        android:divider="@null">
     </ExpandableListView>
 
 </LinearLayout>
