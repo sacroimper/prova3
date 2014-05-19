@@ -109,17 +109,23 @@ public abstract class Server extends Thread {
 	out.close();
 	in.close();
 	socketService.close();
+	socketService = null;
 	print("Client closed");
     }
 
     protected void close() {
 	try {
 	    try {
-		closeClient();
+		if (socketService != null) {
+		    closeClient();
+		}
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    }
-	    serverSocket.close();
+	    if (serverSocket != null) {
+		serverSocket.close();
+		serverSocket = null;
+	    }
 	} catch (IOException e) {
 	    e.printStackTrace();
 	} finally {
