@@ -1193,8 +1193,34 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected void writeResources(Map<String, String> resources) {
-	// TODO Auto-generated method stub
-
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    for (Map.Entry<String, String> entry : resources.entrySet()) {
+		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_PREFERENCES
+			+ " VALUES(" + entry.getKey() + ",'" + entry.getValue()
+			+ "');");
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     // ====================
