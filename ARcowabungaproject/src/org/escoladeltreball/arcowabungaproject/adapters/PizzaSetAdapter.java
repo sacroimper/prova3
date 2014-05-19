@@ -269,9 +269,9 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public void onClick(View v) {
-	    PizzaModelMapper.run(pizzas.get(index)); // Stablish the correct
-						     // pizza parametters in
-						     // static variables
+	    PizzaModelMapper.run(pizzas.get(index - 1)); // Stablish the correct
+							 // pizza parametters in
+							 // static variables
 	    ArActivity.startWithSetup(activity, new OwnMarkerRenderSetup());
 	}
     }
