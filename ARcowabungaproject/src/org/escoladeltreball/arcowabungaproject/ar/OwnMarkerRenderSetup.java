@@ -9,7 +9,7 @@ import gl.GL1Renderer;
 import gl.GLCamera;
 import gl.GLFactory;
 //import gl.animations.AnimationFaceToCamera;
-import gl.scenegraph.MeshComponent;
+//import gl.scenegraph.MeshComponent;
 //import gl.scenegraph.Shape;
 import gui.GuiSetup;
 
@@ -37,18 +37,20 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     private Preview cameraPreview;
     private GLCamera camera;
     public PizzaWorld world;
-    public MeshComponent meshComponent;
+    public PizzaMesh meshComponent;
     private GL1Renderer renderer;
 
     // public Wrapper targetMoveWrapper = new Wrapper();
 
     @Override
     public UnrecognizedMarkerListener _a2_getUnrecognizedMarkerListener() {
+	camera.setNewPosition(100, 100, 100);
 	return null;
     }
 
     @Override
     public void _a3_registerMarkerObjects(MarkerObjectMap markerObjectMap) {
+	camera.setNewPosition(0, 0, 0);
 	markerObjectMap.put(new CameraMarker(0, camera));
     }
 
@@ -69,10 +71,10 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
-	    public void modelLoaded(MeshComponent gdxMesh) {
-		meshComponent = gdxMesh;
+	    public void modelLoaded(PizzaMesh pizzaMesh) {
+		meshComponent = pizzaMesh;
 		final Obj o = new Obj();
-		o.setComp(gdxMesh);
+		o.setComp(pizzaMesh);
 		world.add(o);
 		world.remove(o);
 	    }
@@ -82,10 +84,10 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
-	    public void modelLoaded(MeshComponent gdxMesh) {
-		meshComponent = gdxMesh;
+	    public void modelLoaded(PizzaMesh pizzaMesh) {
+		meshComponent = pizzaMesh;
 		final Obj o = new Obj();
-		o.setComp(gdxMesh);
+		o.setComp(pizzaMesh);
 		world.add(o);
 	    }
 	};
@@ -103,10 +105,10 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.BASIC_PIZZA_MODEL,
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
-		    public void modelLoaded(MeshComponent gdxMesh) {
-			meshComponent = gdxMesh;
+		    public void modelLoaded(PizzaMesh pizzaMesh) {
+			meshComponent = pizzaMesh;
 			final Obj o = new Obj();
-			o.setComp(gdxMesh);
+			o.setComp(pizzaMesh);
 			world.add(o);
 			world.remove(o);
 		    }
@@ -115,10 +117,10 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.INGREDIENT_MODEL,
 			ingredientTextures.get(i)) {
 		    @Override
-		    public void modelLoaded(MeshComponent gdxMesh) {
-			meshComponent = gdxMesh;
+		    public void modelLoaded(PizzaMesh pizzaMesh) {
+			meshComponent = pizzaMesh;
 			final Obj o = new Obj();
-			o.setComp(gdxMesh);
+			o.setComp(pizzaMesh);
 			world.add(o);
 		    }
 		};
