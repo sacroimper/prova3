@@ -38,6 +38,7 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import system.ArActivity;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -187,7 +188,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    CustomTextView.customTextView(activity, tv);
 	    tv = (TextView) convertView
 		    .findViewById(R.id.makeYourPizza_description);
-	    CustomTextView.customTextView(activity, tv);
+	    CustomTextView.customTextView(activity, tv, Typeface.ITALIC);
 	    tv = (TextView) convertView
 		    .findViewById(R.id.makeYourPizza_description_second);
 	    CustomTextView.customTextView(activity, tv);
@@ -231,10 +232,10 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    holder.tvTitle.setText(group.getName());
 	    holder.tvPrice.setText(group.getFormatedPrice());
 	    String desc = group.getIngedientsDescription();
-	    if (desc.length() > 20) {
-		desc = desc.substring(0, 17) + "...";
+	    if (desc.length() > 80) {
+		desc = desc.substring(0, 80) + "...";
 	    }
-	    String showMore = "<font color='#FF0000'>"
+	    String showMore = "<font color='#e13546'>"
 		    + activity.getResources().getString(R.string.show_more)
 		    + "</font>";
 	    holder.tvDesc.setText(Html.fromHtml(desc + " " + showMore));
