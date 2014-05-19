@@ -59,6 +59,8 @@ public class Pizzeria {
     private Set<Offer> offers;
     private ShoppingCart shoppingCart;
     private Map<String, Object> preferences;
+    private Map<Integer, String> resources;
+
     private DAOFactory dao;
 
     // ====================
@@ -397,5 +399,13 @@ public class Pizzeria {
 
     public void setPreferences(Map<String, Object> preferences) {
 	this.preferences = preferences;
+    }
+
+    public Map<Integer, String> getResources() {
+	return resources;
+    }
+
+    public void setResources(Map<Integer, String> resources) {
+	this.resources = resources;
     }
 }

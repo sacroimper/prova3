@@ -200,7 +200,7 @@ public abstract class DAOFactory {
     public static final String CREATE_TABLE_ORDERS = "CREATE TABLE "
 	    + TABLE_ORDERS + "(" + COLUMNS_NAME_ORDERS[0]
 	    + " INTEGER PRIMARY KEY," + COLUMNS_NAME_ORDERS[1] + " VARCHAR(9),"
-	    + COLUMNS_NAME_ORDERS[2] + " VARCHAR(50)," + COLUMNS_NAME_OFFERS[3]
+	    + COLUMNS_NAME_ORDERS[2] + " VARCHAR(50)," + COLUMNS_NAME_ORDERS[3]
 	    + " DATE," + COLUMNS_NAME_ORDERS[4] + " VARCHAR(15),"
 	    + COLUMNS_NAME_ORDERS[5] + " INTEGER REFERENCES " + TABLE_ADDRESS
 	    + " ON DELETE CASCADE ON UPDATE CASCADE," + COLUMNS_NAME_ORDERS[6]
@@ -549,8 +549,6 @@ public abstract class DAOFactory {
      */
     protected abstract List<Product> selectShoppingCartProductsById(int id);
 
-    protected abstract Set<Product> readProducts();
-
     protected abstract Set<Ingredient> readIngredient();
 
     protected abstract Set<Pizza> readPizza();
@@ -566,6 +564,8 @@ public abstract class DAOFactory {
     protected abstract Address readAddressById(int idAddress);
 
     protected abstract Map<String, String> readPreferences();
+
+    protected abstract Map<Integer, String> readResources();
 
     protected abstract void writeProduct(int idProduct);
 
@@ -584,6 +584,8 @@ public abstract class DAOFactory {
     protected abstract void writeAddresses(Address address);
 
     protected abstract void writePreferences(Map<String, String> preferences);
+
+    protected abstract void writeResources(Map<Integer, String> resources);
 
     // ====================
     // PRIVATE METHODS

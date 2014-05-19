@@ -105,24 +105,16 @@ public class PizzaModelMapper {
     // CONSTRUCTORS
     // ====================
 
-    /**
-     * @return
-     * 
-     */
+    // ====================
+    // PUBLIC METHODS
+    // ====================
+
     public static void run(Pizza pizza) {
 	ingredients = pizza.getIngredientsSet();
 	ingredientsSize = ingredients.size();
 	modelIngredientTextures = new ArrayList<String>();
-	// if (ingredientTextureMap == null) {
-	// ingredientTextureMapAsigner();
-	// }
-
 	makeTheModelIngredientTextureList();
     }
-
-    // ====================
-    // PUBLIC METHODS
-    // ====================
 
     // ====================
     // PROTECTED METHODS
@@ -132,75 +124,11 @@ public class PizzaModelMapper {
     // PRIVATE METHODS
     // ====================
 
-    // /**
-    // *
-    // */
-    // private static void makeTheModelIngredientTextureList() {
-    // for (Ingredient ingredient : ingredients) {
-    // addToList(ingredient);
-    // }
-    // }
     private static void makeTheModelIngredientTextureList() {
 	for (Ingredient ingredient : ingredients) {
 	    modelIngredientTextures.add(ingredient.getTexture());
 	}
     }
-
-    // private static void addToList(Ingredient ingredient) {
-    // modelIngredientTextures.add(ingredientTextureMap.get(ingredient
-    // .getName()));
-    // }
-    // /**
-    // *
-    // */
-    // private static void ingredientTextureMapAsigner() {
-    // ingredientTextureMap = new HashMap<String, String>();
-    //
-    // // ADD VALUES TO MAP
-    // ingredientTextureMap.put("mushroom", INGREDIENT_MUSHROOM_TEXTURE);
-    // ingredientTextureMap.put("redpepper", INGREDIENT_REDPEPPER_TEXTURE);
-    // ingredientTextureMap.put("greenpepper", INGREDIENT_GREENPEPPER_TEXTURE);
-    // ingredientTextureMap.put("onion", INGREDIENT_ONION_TEXTURE);
-    // ingredientTextureMap.put("artichoke", INGREDIENT_ARTICHOKE_TEXTURE);
-    // ingredientTextureMap.put("bearsjena", INGREDIENT_BEARSJENA_TEXTURE);
-    // ingredientTextureMap.put("corn", INGREDIENT_CORN_TEXTURE);
-    // ingredientTextureMap.put("marjoram", INGREDIENT_MARJORAM_TEXTURE);
-    // ingredientTextureMap.put("egg", INGREDIENT_EGG_TEXTURE);
-    // ingredientTextureMap.put("ham", INGREDIENT_HAM_TEXTURE);
-    // ingredientTextureMap.put("bacon", INGREDIENT_BACON_TEXTURE);
-    // ingredientTextureMap.put("mince", INGREDIENT_MINCE_TEXTURE);
-    // ingredientTextureMap.put("chicken", INGREDIENT_CHICKEN_TEXTURE);
-    // ingredientTextureMap.put("bluecheese", INGREDIENT_BLUECHEESE_TEXTURE);
-    // ingredientTextureMap.put("goatcheese", INGREDIENT_GOATCHEESE_TEXTURE);
-    // ingredientTextureMap.put("gouda", INGREDIENT_GOUDA_TEXTURE);
-    // ingredientTextureMap.put("gorgonzola", INGREDIENT_GORGONZOLA_TEXTURE);
-    // ingredientTextureMap.put("parmesan", INGREDIENT_PARMESAN_TEXTURE);
-    // ingredientTextureMap.put("pineapple", INGREDIENT_PINEAPPLE_TEXTURE);
-    // }
-
-    // ====================
-    // OVERRIDE METHODS
-    // ====================
-
-    // ====================
-    // GETTERS & SETTERS
-    // ====================
-
-    // /**
-    // * @return the ingredientTextureMap
-    // */
-    // public static Map<String, String> getIngredientTextureMap() {
-    // return ingredientTextureMap;
-    // }
-    //
-    // /**
-    // * @param ingredientTextureMap
-    // * the ingredientTextureMap to set
-    // */
-    // public static void setIngredientTextureMap(
-    // Map<String, String> ingredientTextureMap) {
-    // PizzaModelMapper.ingredientTextureMap = ingredientTextureMap;
-    // }
 
     /**
      * @return the modelIngredientTextures
