@@ -1,5 +1,5 @@
 /*
- *  CustomTextView.java
+ *  PizzaWorld.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -21,23 +21,48 @@
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
+package org.escoladeltreball.arcowabungaproject.ar;
 
-package org.escoladeltreball.arcowabungaproject.utils;
+import gl.GLCamera;
+import gl.Renderable;
 
-import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
-import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import javax.microedition.khronos.opengles.GL10;
 
-import android.content.Context;
-import android.graphics.Typeface;
-import android.widget.TextView;
+import util.Vec;
+import worldData.World;
 
-public class CustomTextView {
+/**
+ * @author local
+ * 
+ */
+public class PizzaWorld extends World {
+
+    /**
+     * think of this as the position on the screen
+     */
+    private Vec myScreenPosition;
+
+    /**
+     * the camera which is responsible to display the world correctly
+     */
+    private GLCamera myCamera;
+
+    /**
+     * think of this as the scale of the whole world on the screen
+     */
+    private Vec myScale;
+
+    /**
+     * @param glCamera
+     */
+    public PizzaWorld(GLCamera glCamera) {
+	super(glCamera);
+	myCamera = glCamera;
+    }
 
     // ====================
     // CONSTANTS
     // ====================
-    private static final String FONT_TYPE = "gnuolane.ttf";
-    private static Typeface tf = null;
 
     // ====================
     // ATTRIBUTES
@@ -51,38 +76,6 @@ public class CustomTextView {
     // PUBLIC METHODS
     // ====================
 
-    public static void customTextView(Context context, TextView tv, int style) {
-	// Font path
-	String fontPath = "fonts/" + FONT_TYPE;
-
-	// Loading Font Face
-	if (tf == null) {
-	    tf = Typeface.createFromAsset(context.getAssets(), fontPath);
-	}
-
-	// Applying font
-	tv.setTypeface(tf, style);
-    }
-
-    public static void customTextView(Context context, TextView tv) {
-	// Font path
-	String fontPath = "fonts/" + FONT_TYPE;
-
-	// Loading Font Face
-	if (tf == null) {
-	    tf = Typeface.createFromAsset(context.getAssets(), fontPath);
-	}
-
-	// Applying font
-	tv.setTypeface(tf);
-    }
-
-    public static void plusPriceOrder(TextView tv) {
-	ShoppingCart shopCart = Pizzeria.getInstance().getShoppingCart();
-	int numberProducts = shopCart.getProducts().size();
-	float price = shopCart.getPrice();
-	tv.setText("(" + numberProducts + ")" + price + "€");
-    }
     // ====================
     // PROTECTED METHODS
     // ====================
@@ -91,9 +84,31 @@ public class CustomTextView {
     // PRIVATE METHODS
     // ====================
 
+    private void glLoadScreenPosition(GL10 gl) {
+	if (myScreenPosition != null)
+	    gl.glTranslatef(myScreenPosition.x, myScreenPosition.y,
+		    myScreenPosition.z);
+    }
+
+    private void glLoadScale(GL10 gl) {
+	if (myScale != null)
+	    gl.glScalef(myScale.x, myScale.y, myScale.z);
+    }
+
     // ====================
     // OVERRIDE METHODS
     // ====================
+
+    @Override
+    public void render(GL10 gl, Renderable parent) {
+	glLoadScreenPosition(gl);
+	myCamera.render(gl, this);
+	glLoadScale(gl);
+	// This shows the coordinate axis in world
+	// CordinateAxis.draw(gl);
+	drawElements(myCamera, gl);
+
+    }
 
     // ====================
     // GETTERS & SETTERS

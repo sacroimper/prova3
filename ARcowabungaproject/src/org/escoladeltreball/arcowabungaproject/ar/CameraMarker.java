@@ -2,6 +2,7 @@ package org.escoladeltreball.arcowabungaproject.ar;
 
 import gl.GLCamera;
 import gl.MarkerObject;
+import markerDetection.UnrecognizedMarkerListener;
 
 /**
  * The camera marker will set the world coordinates to the center of a marker
@@ -35,6 +36,11 @@ public class CameraMarker implements MarkerObject {
     @Override
     public void OnMarkerPositionRecognized(float[] rotMatrix, int start, int end) {
 	myCamera.setRotationMatrix(rotMatrix, start);
+    }
+
+    public UnrecognizedMarkerListener _a2_getUnrecognizedMarkerListener() {
+
+	return null;
     }
 
 }

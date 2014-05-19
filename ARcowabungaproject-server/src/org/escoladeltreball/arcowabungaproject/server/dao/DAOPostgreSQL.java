@@ -46,6 +46,7 @@ import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.server.gui.database.SelectPanel;
 import org.joda.time.DateTime;
 
 public class DAOPostgreSQL extends DAOFactory {
@@ -147,9 +148,9 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate("INSERT INTO PRODUCTS VALUES(41);");
 	    stm.executeUpdate("INSERT INTO PRODUCTS VALUES(50);");
 
-	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(30,'PIZZA1',15,1,'thin','type1',2,2.5,20);");
-	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(31,'PIZZA2',15,2,'thick','type2',3,2.5,21);");
-	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(32,'PIZZA1',15,3,'thin','type2',1,2.5,22);");
+	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(30,'PIZZA1',15,1,2.5,'thin','type1',2,20);");
+	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(31,'PIZZA2',15,2,2.5,'thick','type2',3,21);");
+	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(32,'PIZZA3',15,3,2.5,'thin','type2',1,22);");
 
 	    stm.executeUpdate("INSERT INTO DRINKS VALUES(40, 'coke', 2.5, 2, 0, 1);");
 	    stm.executeUpdate("INSERT INTO DRINKS VALUES(41, 'water', 1.5, 3, 0, 1);");
@@ -457,21 +458,15 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Product> readProducts() {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
-    public Set<Ingredient> readIngredient(String where) {
+    public Set<Ingredient> readIngredient() {
 	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
-	    // Select all rows of ingredient with where table
-	    System.out.println("SELECT * FROM " + DAOFactory.TABLE_INGREDIENT
-		    + where + ";");
+	    // Select all rows of ingredient table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_INGREDIENT + where + ";");
 	    while (rs.next()) {
@@ -508,60 +503,17 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    public Set<Ingredient> readIngredient() {
-	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
-	Connection con = null;
-	Statement stm = null;
-	try {
-	    con = connectToDatabase();
-	    stm = con.createStatement();
-	    // Select all rows of ingredient table
-	    ResultSet rs = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_INGREDIENT + ";");
-	    while (rs.next()) {
-		// Create a ingredient object and put in the HashSet
-		Ingredient ingredient = new Ingredient(
-			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[0]),
-			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[1]),
-			rs.getFloat(DAOFactory.COLUMNS_NAME_INGREDIENT[2]),
-			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[3]),
-			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]),
-			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
-		ingredientsSet.add(ingredient);
-	    }
-	    stm.close();
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	} finally {
-	    if (stm != null) {
-		try {
-		    stm.close();
-		} catch (SQLException e) {
-		    e.printStackTrace();
-		}
-	    }
-	    if (con != null) {
-		try {
-		    con.close();
-		} catch (SQLException e) {
-		    e.printStackTrace();
-		}
-	    }
-	}
-	return ingredientsSet;
-    }
-
-    @Override
-    protected Set<Pizza> readPizza() {
+    public Set<Pizza> readPizza() {
 	Set<Pizza> pizzaSet = new HashSet<Pizza>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows of Pizza table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_PIZZAS + ";");
+		    + DAOFactory.TABLE_PIZZAS + where + ";");
 	    while (rs.next()) {
 		// Create a pizza object and put in the HashSet
 		Pizza pizza = new Pizza(
@@ -601,16 +553,17 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Offer> readOffer() {
+    public Set<Offer> readOffer() {
 	Set<Offer> offersSet = new HashSet<Offer>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows from Offer table.
 	    ResultSet rsOffer = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_OFFERS + ";");
+		    + DAOFactory.TABLE_OFFERS + where + ";");
 	    while (rsOffer.next()) {
 		// Create a offer object and put in the HashSet
 		Offer offer = new Offer(
@@ -647,16 +600,17 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Drink> readDrink() {
+    public Set<Drink> readDrink() {
 	Set<Drink> drinksSet = new HashSet<Drink>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows from drink table
 	    ResultSet rsDrinks = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_DRINKS + ";");
+		    + DAOFactory.TABLE_DRINKS + where + ";");
 	    while (rsDrinks.next()) {
 		// Create a drink object and put it in the HashSet
 		Drink drink = new Drink(
@@ -733,16 +687,17 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Set<Order> readOrder() {
-	HashSet<Order> OrdersSet = new HashSet<Order>();
+    public Set<Order> readOrder() {
+	HashSet<Order> ordersSet = new HashSet<Order>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows of order table.
 	    ResultSet rsOrder = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_ORDERS + ";");
+		    + DAOFactory.TABLE_ORDERS + where + ";");
 	    while (rsOrder.next()) {
 		DateTime dateTime = DateTime.parse(rsOrder
 			.getString(DAOFactory.COLUMNS_NAME_ORDERS[3]));
@@ -752,11 +707,11 @@ public class DAOPostgreSQL extends DAOFactory {
 			rsOrder.getString(DAOFactory.COLUMNS_NAME_ORDERS[2]),
 			dateTime,
 			rsOrder.getString(DAOFactory.COLUMNS_NAME_ORDERS[4]),
-			readAddress(rsOrder
+			readAddressById(rsOrder
 				.getInt(DAOFactory.COLUMNS_NAME_ORDERS[5])),
 			readShoppingCart(rsOrder
 				.getInt(DAOFactory.COLUMNS_NAME_ORDERS[6])));
-		OrdersSet.add(order);
+		ordersSet.add(order);
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -776,11 +731,11 @@ public class DAOPostgreSQL extends DAOFactory {
 		}
 	    }
 	}
-	return OrdersSet;
+	return ordersSet;
     }
 
     @Override
-    protected Address readAddress(int idAddress) {
+    protected Address readAddressById(int idAddress) {
 	Address address = null;
 	Connection con = null;
 	Statement stm = null;
@@ -822,16 +777,60 @@ public class DAOPostgreSQL extends DAOFactory {
 	return address;
     }
 
+    public Set<Address> readAddress() {
+	HashSet<Address> addressSet = new HashSet<Address>();
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    String where = SelectPanel.where;
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+
+	    ResultSet rsAddress = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_ADDRESS + where + ";");
+	    while (rsAddress.next()) {
+		Address address = new Address(
+			rsAddress.getInt(DAOFactory.COLUMNS_NAME_ADDRESS[0]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[1]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[2]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[3]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[4]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[5]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[6]));
+		addressSet.add(address);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	return addressSet;
+    }
+
     @Override
-    protected Map<String, String> readPreferences() {
+    public Map<String, String> readPreferences() {
 	Map<String, String> preferences = new HashMap<String, String>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    ResultSet rsPreferences = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_PREFERENCES);
+		    + DAOFactory.TABLE_PREFERENCES + where + ";");
 
 	    while (rsPreferences.next()) {
 
@@ -863,9 +862,72 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeProduct(int idProduct) {
-	// TODO Auto-generated method stub
+    public Map<Integer, String> readResources() {
+	Map<Integer, String> resources = new HashMap<Integer, String>();
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    String where = SelectPanel.where;
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    ResultSet rsPreferences = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_RESOURCES + where + ";");
 
+	    while (rsPreferences.next()) {
+		resources
+			.put(rsPreferences
+				.getInt(DAOFactory.COLUMNS_NAME_RESOURCES[0]),
+				rsPreferences
+					.getString(DAOFactory.COLUMNS_NAME_RESOURCES[1]));
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	return resources;
+    }
+
+    @Override
+    protected void writeProduct(int idProduct) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENT
+		    + "VALUES(" + idProduct + ");");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     @Override
@@ -923,6 +985,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			    + ingredient.getId() + ","
 			    + pizza.getIngredients().get(ingredient) + ");");
 		}
+		writeProduct(pizza.getId());
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -961,6 +1024,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			    + DAOFactory.TABLE_OFFERS_PRODUCTS + " VALUES("
 			    + offer.getId() + "," + product.getId() + ")");
 		}
+		writeProduct(offer.getId());
 	    }
 
 	} catch (SQLException e) {
@@ -995,6 +1059,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			+ " VALUES(" + drink.getId() + ",'" + drink.getName()
 			+ "'," + drink.getPrice() + "," + drink.getIcon() + ","
 			+ drink.getDiscount() + "," + drink.getSize() + ");");
+		writeProduct(drink.getId());
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -1132,6 +1197,38 @@ public class DAOPostgreSQL extends DAOFactory {
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_PREFERENCES
 			+ " VALUES('" + entry.getKey() + "','"
 			+ entry.getValue() + "');");
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    @Override
+    protected void writeResources(Map<Integer, String> resources) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    for (Map.Entry<Integer, String> entry : resources.entrySet()) {
+		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_PREFERENCES
+			+ " VALUES(" + entry.getKey() + ",'" + entry.getValue()
+			+ "');");
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();

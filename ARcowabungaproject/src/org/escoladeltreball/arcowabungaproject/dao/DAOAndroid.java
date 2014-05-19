@@ -188,8 +188,10 @@ public class DAOAndroid extends DAOFactory {
 		ingredients.put(ingredient, cIngredient.getInt(2));
 		j++;
 	    }
+	    cIngredient.close();
 	    i++;
 	}
+	cIngredients.close();
 	return ingredients;
     }
 
@@ -237,7 +239,10 @@ public class DAOAndroid extends DAOFactory {
 		productList.add(drink);
 	    }
 	    i++;
+	    cPizza.close();
+	    cDrink.close();
 	}
+	cOffersProduct.close();
 	return productList;
     }
 
@@ -298,25 +303,32 @@ public class DAOAndroid extends DAOFactory {
 		offer.setProductList(productOfferList);
 		productsList.add(offer);
 	    }
+	    cOffer.close();
+	    cDrink.close();
+	    cPizza.close();
 	    i++;
 	}
+	cShoppingCartsProducts.close();
 	return productsList;
     }
 
     @Override
     protected Set<Ingredient> readIngredient() {
 	Set<Ingredient> ingredients = new HashSet<Ingredient>();
-	Cursor c = database.query(DAOFactory.TABLE_INGREDIENT,
+	Cursor cIngredient = database.query(DAOFactory.TABLE_INGREDIENT,
 		DAOFactory.COLUMNS_NAME_INGREDIENT, null, null, null, null,
 		null);
 	int i = 0;
-	while (i < c.getCount()) {
-	    c.move(i);
-	    Ingredient ingredient = new Ingredient(c.getInt(0), c.getString(1),
-		    c.getInt(2), c.getInt(3), c.getInt(4), c.getString(5));
+	while (i < cIngredient.getCount()) {
+	    cIngredient.move(i);
+	    Ingredient ingredient = new Ingredient(cIngredient.getInt(0),
+		    cIngredient.getString(1), cIngredient.getInt(2),
+		    cIngredient.getInt(3), cIngredient.getInt(4),
+		    cIngredient.getString(5));
 	    ingredients.add(ingredient);
 	    i++;
 	}
+	cIngredient.close();
 	return ingredients;
     }
 
@@ -338,6 +350,7 @@ public class DAOAndroid extends DAOFactory {
 	    pizzas.add(pizza);
 	    i++;
 	}
+	cPizzas.close();
 	return pizzas;
     }
 
@@ -356,6 +369,7 @@ public class DAOAndroid extends DAOFactory {
 	    offer.setProductList(productList);
 	    i++;
 	}
+	cOffer.close();
 	return offers;
     }
 
@@ -373,6 +387,7 @@ public class DAOAndroid extends DAOFactory {
 	    drinks.add(drink);
 	    i++;
 	}
+	cDrinks.close();
 	return drinks;
     }
 
@@ -391,6 +406,7 @@ public class DAOAndroid extends DAOFactory {
 		    .getInt(1));
 	    shoppingCart.setProducts(productsList);
 	}
+	cShoppingCarts.close();
 	return shoppingCart;
     }
 
@@ -403,7 +419,7 @@ public class DAOAndroid extends DAOFactory {
 	while (i < cOrder.getCount()) {
 	    cOrder.move(i);
 	    DateTime dateTime = DateTime.parse(cOrder.getString(3));
-	    Address address = readAddress(cOrder.getInt(5));
+	    Address address = readAddressById(cOrder.getInt(5));
 	    ShoppingCart shoppingCart = readShoppingCart(cOrder.getInt(6));
 	    Order order = new Order(cOrder.getInt(0), cOrder.getString(1),
 		    cOrder.getString(2), dateTime, cOrder.getString(4),
@@ -411,11 +427,12 @@ public class DAOAndroid extends DAOFactory {
 	    orders.add(order);
 	    i++;
 	}
+	cOrder.close();
 	return orders;
     }
 
     @Override
-    protected Address readAddress(int idAddress) {
+    protected Address readAddressById(int idAddress) {
 	Cursor cAddress = database.query(DAOFactory.TABLE_ADDRESS,
 		DAOFactory.COLUMNS_NAME_ADDRESS, null, null, null, null, null);
 	Address address = null;
@@ -431,6 +448,7 @@ public class DAOAndroid extends DAOFactory {
 	    }
 	    i++;
 	}
+	cAddress.close();
 	return address;
     }
 
@@ -447,13 +465,25 @@ public class DAOAndroid extends DAOFactory {
 		    cPreferences.getString(1));
 	    i++;
 	}
+	cPreferences.close();
 	return preferences;
     }
 
     @Override
-    protected Set<Product> readProducts() {
-	// TODO Auto-generated method stub
-	return null;
+    protected Map<Integer, String> readResources() {
+	Map<Integer, String> resources = new HashMap<Integer, String>();
+	Cursor cResources = database
+		.query(DAOFactory.TABLE_RESOURCES,
+			DAOFactory.COLUMNS_NAME_RESOURCES, null, null, null,
+			null, null);
+	int i = 0;
+	while (i < cResources.getCount()) {
+	    cResources.move(i);
+	    resources.put(cResources.getInt(0), cResources.getString(1));
+	    i++;
+	}
+	cResources.close();
+	return resources;
     }
 
     @Override
@@ -621,6 +651,17 @@ public class DAOAndroid extends DAOFactory {
 	ContentValues values = new ContentValues();
 	values.put(DAOFactory.COLUMNS_NAME_PRODUCTS[0], idProduct);
 	database.insert(DAOFactory.CREATE_TABLE_PRODUCTS, null, values);
+
+    }
+
+    @Override
+    protected void writeResources(Map<Integer, String> resources) {
+	for (Map.Entry<Integer, String> entry : resources.entrySet()) {
+	    ContentValues values = new ContentValues();
+	    values.put(DAOFactory.COLUMNS_NAME_RESOURCES[0], entry.getKey());
+	    values.put(DAOFactory.COLUMNS_NAME_RESOURCES[1], entry.getValue());
+	    database.insert(DAOFactory.TABLE_RESOURCES, null, values);
+	}
 
     }
 

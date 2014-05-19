@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
  
-    <item name="light_cyan" type="color">#3be0d0</item>
+    <item name="light_cyan" type="color">#1ae0d1</item>
     <item name="red" type="color">#E63444</item>
     <item name="grey" type="color">#888888</item>
     <item name="dark_red_100" type="color">#ad2334</item>
@@ -9,6 +9,7 @@
     <item name="dark_red_300" type="color">#711b23</item>
     <item name="dark_red_400" type="color">#5a1b22</item>
  	<item name="cacaca" type="color">#cacaca</item>
-
- 
+	<item name="text_gray" type="color">#979797</item>
+	<item name="background_expandable_expanded_item" type="color">#f0f0f0</item>
+ 	<item name="text_color_listview" type="color">#e13546</item>
 </resources> 
