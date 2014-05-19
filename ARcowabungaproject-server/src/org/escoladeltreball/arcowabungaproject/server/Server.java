@@ -43,8 +43,6 @@ public abstract class Server extends Thread {
     // CONSTANTS
     // ====================
 
-    
-
     // ====================
     // ATTRIBUTES
     // ====================
@@ -116,7 +114,11 @@ public abstract class Server extends Thread {
 
     protected void close() {
 	try {
-	    closeClient();
+	    try {
+		closeClient();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
 	    serverSocket.close();
 	} catch (IOException e) {
 	    e.printStackTrace();
