@@ -18,7 +18,7 @@
     <string name="tab_drinks">DRINKS</string>
     <string name="tab_offers">OFFERS</string>
     <string name="products">PRODUCTS</string>
-    <string name="additional_ingredents">Additional ingredients</string>
+    <string name="additional_ingredents">Additional ingredients:</string>
     <string name="cursor_down">&#9660;</string>
     <string name="cursor_up">&#9650;</string>
     <string name="redo_order">MAKE ORDER AGAIN</string>
@@ -27,8 +27,8 @@
     <!-- List Views -->
     
     <!-- Shopping cart layout -->
-    <string name="remeber_advertice_title">¡RECUERDA!</string>
-    <string name="remeber_advertice_message">Gastos de envío grátis para pedidos superiores a 15€</string>
+    <string name="remeber_advertice_title">REMEMBER!</string>
+    <string name="remeber_advertice_message">FREE Shipping over 15€!</string>
     <string name="extra_ingredient_in_product_item">Suplemento ingredientes extra</string>
     <string name="total_text">TOTAL</string>
     <string name="total_price">30,70€</string>
@@ -39,6 +39,8 @@
     <string name="shipping_cost_text">+ Gastos de envio</string>
     <string name="shipping_cost_value">0,00€</string>
     <string name="shipping_begin_value">(0) 0,00€</string>
+    <string name="shipping_leftbutton_moreitems">ADD MORE ITEMS</string>
+    <string name="shipping_rightbutton_makeorder">MAKE ORDER</string>
     
     <!-- Image Content Descriptions -->
     <string name="chef_icon">Chef Icon</string>

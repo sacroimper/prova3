@@ -30,7 +30,7 @@
             android:layout_toRightOf="@id/chef_icon"
             android:text="@string/remeber_advertice_title"
             android:textColor="@android:color/white"
-            android:textSize="15sp" />
+            android:textSize="23sp" />
 
         <TextView
             android:id="@+id/remember_text"
@@ -40,14 +40,15 @@
             android:layout_toRightOf="@id/chef_icon"
             android:text="@string/remeber_advertice_message"
             android:textColor="@android:color/white"
-            android:textSize="12sp" />
+            android:textSize="17sp" />
     </RelativeLayout>
 
      <ListView
          android:id="@+id/product_list"
          android:layout_width="match_parent"
          android:layout_height="0dp"
-         android:layout_weight="1" >
+         android:layout_weight="1"
+         android:divider="@null" >
      </ListView>
     
    <!-- BUTTONS -->

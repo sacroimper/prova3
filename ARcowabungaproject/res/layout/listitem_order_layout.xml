@@ -3,21 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:minHeight="80dp"
+    android:minHeight="60dp"
     android:paddingLeft="5dp"
     android:paddingRight="5dp" >
 
-    <View
-        android:id="@id/separatorTop"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/darker_gray" />
-
     <ImageView
         android:id="@+id/imageInOrderItem"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dateTextInOrderItem"
         android:layout_marginLeft="5dp"
@@ -26,19 +19,19 @@
         android:contentDescription="@string/pizza_icon"
         android:padding="5dp"
         android:scaleType="fitXY"
-        android:src="@drawable/iconorderlist" />
+        android:src="@drawable/iconorderlistgray" />
 
     <TextView
         android:id="@id/dateTextInOrderItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/separatorTop"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
-        android:background="#335533"
         android:text="data"
-        android:textSize="10sp" >
+        android:textColor="@color/lastorders_text_color"
+        android:textSize="13sp" >
+
     </TextView>
 
     <TextView
@@ -51,7 +44,8 @@
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/priceTextInOrderItem"
         android:layout_toRightOf="@id/imageInOrderItem"
-        android:background="#338888"
+        android:textColor="@color/lastorders_text_color"
+        android:textSize="20sp"
         android:text="desc" >
     </TextView>
 
@@ -64,9 +58,9 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/cursorTextInOrderItem"
-        android:background="#333333"
         android:text="preu"
-        android:textColor="@color/red" >
+        android:textSize="20sp"
+        android:textColor="@color/lastorders_text_color" >
     </TextView>
 
     <TextView
@@ -78,7 +72,6 @@
         android:layout_marginBottom="13dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="#335555"
         android:text="@string/cursor_down"
         android:textColor="@color/red" >
     </TextView>
