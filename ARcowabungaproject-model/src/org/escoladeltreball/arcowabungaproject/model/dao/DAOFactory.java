@@ -70,7 +70,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_TYPE_RESOURCES = { "INTEGER",
 	    "VARCHAR" };
     public static final String[] COLUMNS_TYPE_INGREDIENT = { "INTEGER",
-	    "VARCHAR", "SMALLINT", "SMALLINT", "NUMERIC", "VARCHAR(100)" };
+	    "VARCHAR", "SMALLINT", "SMALLINT", "NUMERIC", "VARCHAR" };
     public static final String[] COLUMNS_TYPE_INGREDIENTS = { "INTEGER",
 	    "INTEGER", "SMALLINT" };
     public static final String[] COLUMNS_TYPE_PIZZAS = { "INTEGER", "VARCHAR",
