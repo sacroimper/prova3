@@ -314,7 +314,7 @@ public abstract class DAOFactory {
 	Ingredient i1 = new Ingredient(8, "I1", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
 	Ingredient i2 = new Ingredient(9, "I2", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
+		"data/models/ingredients/redpepper_texture.png");
 	Ingredient i3 = new Ingredient(10, "I3", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
 	Ingredient i4 = new Ingredient(11, "I4", 1.5f, 151, 152,
