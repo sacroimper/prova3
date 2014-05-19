@@ -25,6 +25,8 @@
 package org.escoladeltreball.arcowabungaproject.server.gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -39,7 +41,7 @@ import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 import org.escoladeltreball.arcowabungaproject.server.gui.console.ServerPanel;
 import org.escoladeltreball.arcowabungaproject.server.gui.database.DataBaseManagerPanel;
 
-public class ServerGUI extends JFrame {
+public class ServerGUI extends JFrame implements ActionListener {
 
     // ====================
     // CONSTANTS
@@ -51,6 +53,7 @@ public class ServerGUI extends JFrame {
     private JPanel jpOrderManager;
     private JPanel jpDataBaseManger;
     private JPanel jpServerConsole;
+    private JMenuItem menuItemInitDB;
     private static ServerGUI instance;
 
     // ====================
@@ -61,6 +64,7 @@ public class ServerGUI extends JFrame {
 	Pizzeria pizzeria = Pizzeria.getInstance(dao);
 	dao.loadDemo();
 	this.initComponents();
+	this.registListeners();
     }
 
     // ====================
@@ -109,18 +113,25 @@ public class ServerGUI extends JFrame {
 	return jtpMain;
     }
 
+    private void registListeners() {
+	this.menuItemInitDB.addActionListener(this);
+    }
+
     private JMenuBar createMenuBar() {
 	JMenuBar menuBar = new JMenuBar();
-	JMenu menu = new JMenu("File");
-	JMenuItem menuItem = new JMenuItem("Close");
-	menu.add(menuItem);
-	menuBar.add(menu);
-	menu = new JMenu("Server");
-	menuItem = new JMenuItem("Start Server");
-	menu.add(menuItem);
-	menuItem = new JMenuItem("Stop Server");
-	menu.add(menuItem);
-	menuBar.add(menu);
+	JMenu menuFile = new JMenu("File");
+	JMenuItem menuItemClose = new JMenuItem("Close");
+	menuFile.add(menuItemClose);
+	this.menuItemInitDB = new JMenuItem("Init Data Base");
+	menuFile.add(menuItemInitDB);
+	menuBar.add(menuFile);
+
+	JMenu menuServer = new JMenu("Server");
+	JMenuItem menuItemStartServer = new JMenuItem("Start Server");
+	menuServer.add(menuItemStartServer);
+	JMenuItem menuItemStopServer = new JMenuItem("Stop Server");
+	menuServer.add(menuItemStopServer);
+	menuBar.add(menuServer);
 	return menuBar;
     }
 
@@ -130,9 +141,16 @@ public class ServerGUI extends JFrame {
     public static void main(String[] args) {
 	getInstance();
     }
+
     // ====================
     // OVERRIDE METHODS
     // ====================
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+	DAOPostgreSQL.getInstance().initDataBase();
+
+    }
 
     // ====================
     // GETTERS & SETTERS

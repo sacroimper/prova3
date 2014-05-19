@@ -78,7 +78,8 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	try {
 	    con = DriverManager.getConnection(
-		    "jdbc:postgresql://localhost:5432/cowabunga", "usr", "");
+		    "jdbc:postgresql://localhost:5432/cowabunga", "postgres",
+		    "postgres");
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
@@ -95,6 +96,100 @@ public class DAOPostgreSQL extends DAOFactory {
 	    instance = new DAOPostgreSQL();
 	}
 	return instance;
+    }
+
+    public void initDataBase() {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    // Create the database
+	    // stm.executeUpdate(DAOFactory.CREATE_DATA_BASE);
+	    // Create all tables
+
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_PREFERENCES);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_RESOURCES);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_PRODUCTS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_ADDRESS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_DRINKS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_INGREDIENT);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_INGREDIENTS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_PIZZAS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS_PRODUCTS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCARTS);
+
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINCART_PRODUCTS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_ORDERS);
+
+	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(1,'path1');");
+	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(2,'path2');");
+	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(3,'path3');");
+
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(10,'pepperoni',0.5,1,2,'path_texture1');");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(11,'cheese',0.5,1,2,'path_texture2');");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(12,'mushroom',0.5,2,3,'path_texture3');");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(13,'tomatoe',0.5,1,3,'path_texture4');");
+
+	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,10,2);");
+	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,11,1);");
+	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,12,3);");
+	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(21,13,1);");
+	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(21,12,2);");
+	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(22,11,3);");
+	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(22,13,1);");
+
+	    stm.executeUpdate("INSERT INTO PRODUCTS VALUES(30);");
+	    stm.executeUpdate("INSERT INTO PRODUCTS VALUES(31);");
+	    stm.executeUpdate("INSERT INTO PRODUCTS VALUES(32);");
+	    stm.executeUpdate("INSERT INTO PRODUCTS VALUES(40);");
+	    stm.executeUpdate("INSERT INTO PRODUCTS VALUES(41);");
+	    stm.executeUpdate("INSERT INTO PRODUCTS VALUES(50);");
+
+	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(30,'PIZZA1',15,1,'thin','type1',2,2.5,20);");
+	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(31,'PIZZA2',15,2,'thick','type2',3,2.5,21);");
+	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(32,'PIZZA1',15,3,'thin','type2',1,2.5,22);");
+
+	    stm.executeUpdate("INSERT INTO DRINKS VALUES(40, 'coke', 2.5, 2, 0, 1);");
+	    stm.executeUpdate("INSERT INTO DRINKS VALUES(41, 'water', 1.5, 3, 0, 1);");
+
+	    stm.executeUpdate("INSERT INTO OFFERS VALUES(50, '2X1', 15, 2, 60);");
+
+	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(60, 50, 30);");
+	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(60, 50, 31);");
+	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(60, 50, 40);");
+	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(60, 50, 41);");
+
+	    stm.executeUpdate("INSERT INTO SHOPPINGCARTS VALUES(80,70);");
+
+	    stm.executeUpdate("INSERT INTO SHOPPINGCART_PRODUCTS VALUES(70,80,50);");
+	    stm.executeUpdate("INSERT INTO SHOPPINGCART_PRODUCTS VALUES(70,80,32);");
+
+	    stm.executeUpdate("INSERT INTO ADDRESS VALUES(90, 'maracana', '268', '00200', '2', 'A', '2');");
+	    stm.executeUpdate("INSERT INTO ADDRESS VALUES(91, 'merindrade', '12', '00100', '4', 'N', '1');");
+	    stm.executeUpdate("INSERT INTO ADDRESS VALUES(92, 'barandero', '435', '00600', '3', 'B', '6');");
+
+	    stm.executeUpdate("INSERT INTO ORDERS VALUES(100,'222222','wewew@wewe.com','12/03/2014-12:00:00','visa',90,80);");
+
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     // ====================
@@ -139,7 +234,6 @@ public class DAOPostgreSQL extends DAOFactory {
 				.getInt(DAOFactory.COLUMNS_NAME_INGREDIENTS[1])
 			+ ";");
 		while (rsIngredient.next()) {
-
 		    Ingredient ingredient = new Ingredient(
 			    rsIngredient.getInt(0), rsIngredient.getString(1),
 			    rsIngredient.getInt(2), rsIngredient.getInt(3),
@@ -366,6 +460,51 @@ public class DAOPostgreSQL extends DAOFactory {
     protected Set<Product> readProducts() {
 	// TODO Auto-generated method stub
 	return null;
+    }
+
+    public Set<Ingredient> readIngredient(String where) {
+	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    // Select all rows of ingredient with where table
+	    System.out.println("SELECT * FROM " + DAOFactory.TABLE_INGREDIENT
+		    + where + ";");
+	    ResultSet rs = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_INGREDIENT + where + ";");
+	    while (rs.next()) {
+		// Create a ingredient object and put in the HashSet
+		Ingredient ingredient = new Ingredient(
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[0]),
+			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[1]),
+			rs.getFloat(DAOFactory.COLUMNS_NAME_INGREDIENT[2]),
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[3]),
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]),
+			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
+		ingredientsSet.add(ingredient);
+	    }
+	    stm.close();
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	return ingredientsSet;
     }
 
     @Override
@@ -1017,4 +1156,5 @@ public class DAOPostgreSQL extends DAOFactory {
     // ====================
     // GETTERS & SETTERS
     // ====================
+
 }
