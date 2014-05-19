@@ -13,6 +13,6 @@
 			<attribute name="javadoc_location" value="jar:file:../libs/javadoc/joda-time-2.3-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/xims/Baixades/postgresql-9.2-1004.jdbc41.jar"/>
+	<classpathentry kind="lib" path="../libs/postgresql-9.2-1004.jdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
