@@ -459,7 +459,7 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected Set<Product> readProducts() {
-	// TODO Auto-generated method stub
+
 	return null;
     }
 
@@ -827,15 +827,16 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Map<String, String> readPreferences() {
+    public Map<String, String> readPreferences() {
 	Map<String, String> preferences = new HashMap<String, String>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    ResultSet rsPreferences = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_PREFERENCES);
+		    + DAOFactory.TABLE_PREFERENCES + where + ";");
 
 	    while (rsPreferences.next()) {
 
@@ -867,9 +868,48 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
+    protected Map<String, String> readResources() {
+	Map<String, String> resources = new HashMap<String, String>();
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    String where = SelectPanel.where;
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    ResultSet rsPreferences = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_RESOURCES + where + ";");
+
+	    while (rsPreferences.next()) {
+		resources
+			.put(rsPreferences
+				.getString(DAOFactory.COLUMNS_NAME_RESOURCES[0]),
+				rsPreferences
+					.getString(DAOFactory.COLUMNS_NAME_RESOURCES[1]));
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	return resources;
+    }
+
+    @Override
     protected void writeProduct(int idProduct) {
 	// TODO Auto-generated method stub
-
     }
 
     @Override
@@ -1155,6 +1195,12 @@ public class DAOPostgreSQL extends DAOFactory {
 		}
 	    }
 	}
+    }
+
+    @Override
+    protected void writeResources(Map<String, String> resources) {
+	// TODO Auto-generated method stub
+
     }
 
     // ====================
