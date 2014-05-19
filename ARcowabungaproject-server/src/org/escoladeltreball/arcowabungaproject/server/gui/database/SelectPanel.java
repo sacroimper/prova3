@@ -273,19 +273,20 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
     @Override
     public void actionPerformed(ActionEvent e) {
 	where = "";
-	this.jpShowTable.remove(this.sp);
+	this.jpShowTable.removeAll();
 	this.repaint();
 	if (this.jbExecuteQuery != null) {
 	    if (this.jtfList != null) {
 		showTable();
 	    }
 	}
-	this.sp = new JScrollPane(this.jtTable);
-	this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 	this.jtTable.setPreferredScrollableViewportSize(this.jtTable
 		.getPreferredSize());
-	this.jtTable.setFillsViewportHeight(true);
+	this.sp = new JScrollPane(this.jtTable);
+	this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	this.sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
 	this.jpShowTable.add(this.sp);
 	this.validate();
     }
@@ -293,8 +294,9 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
     // ====================
     // GETTERS & SETTERS
     // ====================
+
     /**
-     * Show table depends on the selected table
+     * Show table depends on the selected table in JComboBox object
      * 
      */
     private void showTable() {
@@ -405,6 +407,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		i++;
 	    }
 	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
+
 	    break;
 	case DAOFactory.TABLE_DRINKS:
 	    for (i = 0; i < this.jtfList.length; i++) {
