@@ -50,6 +50,20 @@ public class CustomTextView {
     // ====================
     // PUBLIC METHODS
     // ====================
+
+    public static void customTextView(Context context, TextView tv, int style) {
+	// Font path
+	String fontPath = "fonts/" + FONT_TYPE;
+
+	// Loading Font Face
+	if (tf == null) {
+	    tf = Typeface.createFromAsset(context.getAssets(), fontPath);
+	}
+
+	// Applying font
+	tv.setTypeface(tf, style);
+    }
+
     public static void customTextView(Context context, TextView tv) {
 	// Font path
 	String fontPath = "fonts/" + FONT_TYPE;

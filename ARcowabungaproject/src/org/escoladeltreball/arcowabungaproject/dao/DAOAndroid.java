@@ -403,7 +403,7 @@ public class DAOAndroid extends DAOFactory {
 	while (i < cOrder.getCount()) {
 	    cOrder.move(i);
 	    DateTime dateTime = DateTime.parse(cOrder.getString(3));
-	    Address address = readAddress(cOrder.getInt(5));
+	    Address address = readAddressById(cOrder.getInt(5));
 	    ShoppingCart shoppingCart = readShoppingCart(cOrder.getInt(6));
 	    Order order = new Order(cOrder.getInt(0), cOrder.getString(1),
 		    cOrder.getString(2), dateTime, cOrder.getString(4),
@@ -415,7 +415,7 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
-    protected Address readAddress(int idAddress) {
+    protected Address readAddressById(int idAddress) {
 	Cursor cAddress = database.query(DAOFactory.TABLE_ADDRESS,
 		DAOFactory.COLUMNS_NAME_ADDRESS, null, null, null, null, null);
 	Address address = null;
