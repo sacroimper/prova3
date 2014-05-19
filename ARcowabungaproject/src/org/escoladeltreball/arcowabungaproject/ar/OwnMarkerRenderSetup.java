@@ -84,6 +84,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    // }
 	    ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
 		    .getModelIngredientTextures();
+
 	    // PROVISIONAL
 	    new OwnModelLoader(this.renderer,
 		    PizzaModelMapper.INGREDIENT_MODEL,
@@ -96,6 +97,18 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		    world.add(o);
 		}
 	    };
+	    new OwnModelLoader(this.renderer,
+		    PizzaModelMapper.INGREDIENT_MODEL,
+		    ingredientTextures.get(1)) {
+		@Override
+		public void modelLoaded(MeshComponent gdxMesh) {
+		    meshComponent = gdxMesh;
+		    final Obj o = new Obj();
+		    o.setComp(gdxMesh);
+		    world.add(o);
+		}
+	    };
+
 	}
     }
 
