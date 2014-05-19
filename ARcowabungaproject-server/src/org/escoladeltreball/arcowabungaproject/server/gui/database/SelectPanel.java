@@ -43,6 +43,8 @@ import javax.swing.JTextField;
 import org.escoladeltreball.arcowabungaproject.model.Address;
 import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Offer;
+import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
@@ -99,8 +101,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	String[] items = { "", DAOFactory.TABLE_ADDRESS,
 		DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
 		DAOFactory.TABLE_OFFERS, DAOFactory.TABLE_ORDERS,
-		DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES,
-		DAOFactory.TABLE_RESOURCES, DAOFactory.TABLE_SHOPPINGCARTS };
+		DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES };
 	this.jlChooseTable = new JLabel("Choose Table");
 	this.jcbTables = new JComboBox<>(items);
 	this.constraints = new GridBagConstraints();
@@ -256,21 +257,6 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    this.jpDoSelect.add(this.jtfList[i], this.constraints);
 		}
 		break;
-	    case DAOFactory.TABLE_SHOPPINGCARTS:
-		this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_SHOPPINGCARTS.length];
-		this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_SHOPPINGCARTS.length];
-		for (int i = 0; i < DAOFactory.COLUMNS_NAME_SHOPPINGCARTS.length; i++) {
-		    this.jlLists[i] = new JLabel(
-			    DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[i]);
-		    this.jtfList[i] = new JTextField();
-		    this.constraints.gridx = 0;
-		    this.constraints.gridy = ++this.indexConstrainstY;
-		    this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		    this.jpDoSelect.add(this.jlLists[i], this.constraints);
-		    this.constraints.gridx = 1;
-		    this.jpDoSelect.add(this.jtfList[i], this.constraints);
-		}
-		break;
 	    default:
 		break;
 	    }
@@ -328,13 +314,6 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    }
 		    this.jtTable = new JTable(rowData,
 			    DAOFactory.COLUMNS_NAME_ADDRESS);
-		    this.sp = new JScrollPane(this.jtTable);
-		    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		    this.jtTable
-			    .setPreferredScrollableViewportSize(this.jtTable
-				    .getPreferredSize());
-		    this.jtTable.setFillsViewportHeight(true);
-		    this.jpShowTable.add(this.sp);
 		    break;
 		case DAOFactory.TABLE_INGREDIENT:
 		    for (i = 0; i < this.jtfList.length; i++) {
@@ -371,14 +350,6 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    }
 		    this.jtTable = new JTable(rowData,
 			    DAOFactory.COLUMNS_NAME_INGREDIENT);
-		    this.sp = new JScrollPane(this.jtTable);
-		    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-		    this.jtTable
-			    .setPreferredScrollableViewportSize(this.jtTable
-				    .getPreferredSize());
-		    this.jtTable.setFillsViewportHeight(true);
-		    this.jpShowTable.add(this.sp);
 		    break;
 		case DAOFactory.TABLE_PIZZAS:
 		    for (i = 0; i < this.jtfList.length; i++) {
@@ -418,15 +389,6 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    }
 		    this.jtTable = new JTable(rowData,
 			    DAOFactory.COLUMNS_NAME_PIZZAS);
-		    this.sp = new JScrollPane(this.jtTable);
-		    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-		    this.jtTable
-			    .setPreferredScrollableViewportSize(this.jtTable
-				    .getPreferredSize());
-		    this.jtTable.setFillsViewportHeight(true);
-		    this.jpShowTable.add(this.sp);
-
 		    break;
 		case DAOFactory.TABLE_DRINKS:
 		    for (i = 0; i < this.jtfList.length; i++) {
@@ -463,20 +425,96 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    }
 		    this.jtTable = new JTable(rowData,
 			    DAOFactory.COLUMNS_NAME_DRINKS);
-		    this.sp = new JScrollPane(this.jtTable);
-		    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		    break;
+		case DAOFactory.TABLE_OFFERS:
+		    for (i = 0; i < this.jtfList.length; i++) {
+			if (!this.jtfList[i].getText().isEmpty()) {
+			    if (DAOFactory.COLUMNS_TYPE_OFFERS[i]
+				    .equals("VARCHAR")) {
+				where += DAOFactory.COLUMNS_NAME_OFFERS[i]
+					+ "='" + this.jtfList[i].getText()
+					+ "'";
+			    } else {
+				where += DAOFactory.COLUMNS_NAME_OFFERS[i]
+					+ "=" + this.jtfList[i].getText();
+			    }
+			    where += ",";
+			}
+		    }
 
-		    this.jtTable
-			    .setPreferredScrollableViewportSize(this.jtTable
-				    .getPreferredSize());
-		    this.jtTable.setFillsViewportHeight(true);
-		    this.jpShowTable.add(this.sp);
+		    if (!where.isEmpty()) {
+			where = where.substring(0, where.length() - 1);
+			where = " WHERE " + where;
+		    }
+		    HashSet<Offer> offerList = (HashSet<Offer>) DAOPostgreSQL
+			    .getInstance().readOffer();
+		    rowData = new String[offerList.size()][DAOFactory.COLUMNS_NAME_OFFERS.length];
+		    i = 0;
+		    for (Offer offer : offerList) {
+			rowData[i][0] = offer.getId() + "";
+			rowData[i][1] = offer.getName();
+			rowData[i][2] = offer.getPrice() + "";
+			rowData[i][3] = offer.getIcon() + "";
+			rowData[i][4] = offer.getDiscount() + "";
+			// affegir id de la taula de la llista de productes
+			// rowData[i][5] = offer.getProductList() + "";
+			i++;
+		    }
+		    this.jtTable = new JTable(rowData,
+			    DAOFactory.COLUMNS_NAME_OFFERS);
+		    break;
+		case DAOFactory.TABLE_ORDERS:
+		    for (i = 0; i < this.jtfList.length; i++) {
+			if (!this.jtfList[i].getText().isEmpty()) {
+			    if (DAOFactory.COLUMNS_TYPE_ORDERS[i]
+				    .equals("VARCHAR")
+				    || DAOFactory.COLUMNS_TYPE_ORDERS[i]
+					    .equals("DATE")) {
+				where += DAOFactory.COLUMNS_NAME_ORDERS[i]
+					+ "='" + this.jtfList[i].getText()
+					+ "'";
+			    } else {
+				where += DAOFactory.COLUMNS_NAME_ORDERS[i]
+					+ "=" + this.jtfList[i].getText();
+			    }
+			    where += ",";
+			}
+		    }
+
+		    if (!where.isEmpty()) {
+			where = where.substring(0, where.length() - 1);
+			where = " WHERE " + where;
+		    }
+		    HashSet<Order> orderList = (HashSet<Order>) DAOPostgreSQL
+			    .getInstance().readOrder();
+		    rowData = new String[orderList.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
+		    i = 0;
+		    for (Order order : orderList) {
+			rowData[i][0] = order.getId() + "";
+			rowData[i][1] = order.getEmail();
+			rowData[i][2] = order.getPhone();
+			rowData[i][3] = order.getDateTime() + "";
+			rowData[i][4] = order.getPaymentMethod();
+			rowData[i][5] = order.getAddress().getId() + "";
+			rowData[i][6] = order.getShoppingCart().getId() + "";
+			i++;
+		    }
+		    this.jtTable = new JTable(rowData,
+			    DAOFactory.COLUMNS_NAME_ORDERS);
 		    break;
 		default:
 		    break;
 		}
+
 	    }
 	}
+	this.sp = new JScrollPane(this.jtTable);
+	this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+	this.jtTable.setPreferredScrollableViewportSize(this.jtTable
+		.getPreferredSize());
+	this.jtTable.setFillsViewportHeight(true);
+	this.jpShowTable.add(this.sp);
 	this.validate();
     }
     // ====================
