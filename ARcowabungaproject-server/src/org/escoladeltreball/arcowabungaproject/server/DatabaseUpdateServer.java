@@ -77,23 +77,29 @@ public class DatabaseUpdateServer extends Server {
 	    if (clientDBVersion != currentDBVersion) {
 		out.writeInt(ServerConstants.SERVER_NEED_UPDATE);
 		out.flush();
+		print("Updating client database 0%");
 		out.writeObject(pizzeria.getIngredients());
 		out.flush();
+		print("Updating client database 20%");
 		out.writeObject(pizzeria.getPredefinedPizzas());
 		out.flush();
+		print("Updating client database 40%");
 		out.writeObject(pizzeria.getDrinks());
 		out.flush();
+		print("Updating client database 60%");
 		out.writeObject(pizzeria.getOffers());
 		out.flush();
+		print("Updating client database 80%");
 		out.writeInt(currentDBVersion);
 		out.flush();
-
+		print("Updating client database 100%");
 		boolean ok = readInt() == ServerConstants.CLIENT_RESPONSE_OK;
-
+		if (ok) {
+		    print("Client database updated correctly");
+		}
 	    }
 	    out.writeInt(ServerConstants.SERVER_END_CONNECTION);
 	    out.flush();
-
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
