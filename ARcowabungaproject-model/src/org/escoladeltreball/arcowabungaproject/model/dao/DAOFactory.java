@@ -560,7 +560,7 @@ public abstract class DAOFactory {
 
     protected abstract Set<Order> readOrder();
 
-    protected abstract Address readAddress(int idAddress);
+    protected abstract Address readAddressById(int idAddress);
 
     protected abstract Map<String, String> readPreferences();
 

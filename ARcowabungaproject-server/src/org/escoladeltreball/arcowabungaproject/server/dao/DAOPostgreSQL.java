@@ -709,7 +709,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			rsOrder.getString(DAOFactory.COLUMNS_NAME_ORDERS[2]),
 			dateTime,
 			rsOrder.getString(DAOFactory.COLUMNS_NAME_ORDERS[4]),
-			readAddress(rsOrder
+			readAddressById(rsOrder
 				.getInt(DAOFactory.COLUMNS_NAME_ORDERS[5])),
 			readShoppingCart(rsOrder
 				.getInt(DAOFactory.COLUMNS_NAME_ORDERS[6])));
@@ -737,7 +737,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Address readAddress(int idAddress) {
+    protected Address readAddressById(int idAddress) {
 	Address address = null;
 	Connection con = null;
 	Statement stm = null;
@@ -777,6 +777,49 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	}
 	return address;
+    }
+
+    public Set<Address> readAddress() {
+	HashSet<Address> addressSet = new HashSet<Address>();
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    String where = SelectPanel.where;
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+
+	    ResultSet rsAddress = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_ADDRESS + where + ";");
+	    while (rsAddress.next()) {
+		Address address = new Address(
+			rsAddress.getInt(DAOFactory.COLUMNS_NAME_ADDRESS[0]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[1]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[2]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[3]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[4]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[5]),
+			rsAddress.getString(DAOFactory.COLUMNS_NAME_ADDRESS[6]));
+		addressSet.add(address);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	return addressSet;
     }
 
     @Override
