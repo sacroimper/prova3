@@ -12,6 +12,9 @@ import gl.GLFactory;
 import gl.scenegraph.MeshComponent;
 //import gl.scenegraph.Shape;
 import gui.GuiSetup;
+
+import java.util.ArrayList;
+
 import markerDetection.MarkerDetectionSetup;
 import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
@@ -79,10 +82,13 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    // for (int i = 0; i < PizzaModelMapper.getIngredientsSize(); i++) {
 	    //
 	    // }
+	    ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
+		    .getModelIngredientTextures();
+
 	    // PROVISIONAL
 	    new OwnModelLoader(this.renderer,
 		    PizzaModelMapper.INGREDIENT_MODEL,
-		    PizzaModelMapper.INGREDIENT_MUSHROOM_TEXTURE) {
+		    ingredientTextures.get(0)) {
 		@Override
 		public void modelLoaded(MeshComponent gdxMesh) {
 		    meshComponent = gdxMesh;
@@ -91,6 +97,18 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		    world.add(o);
 		}
 	    };
+	    new OwnModelLoader(this.renderer,
+		    PizzaModelMapper.INGREDIENT_MODEL,
+		    ingredientTextures.get(1)) {
+		@Override
+		public void modelLoaded(MeshComponent gdxMesh) {
+		    meshComponent = gdxMesh;
+		    final Obj o = new Obj();
+		    o.setComp(gdxMesh);
+		    world.add(o);
+		}
+	    };
+
 	}
     }
 

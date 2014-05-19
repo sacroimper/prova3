@@ -40,6 +40,7 @@ public class Ingredient extends IdObject {
     private float price;
     private int model;
     private int icon;
+    private String texture;
 
     // ====================
     // CONSTRUCTORS
@@ -50,12 +51,14 @@ public class Ingredient extends IdObject {
 	// TODO Auto-generated constructor stub
     }
 
-    public Ingredient(int id, String name, float price, int model, int icon) {
+    public Ingredient(int id, String name, float price, int model, int icon,
+	    String texture) {
 	super(id);
 	this.name = name;
 	this.price = price;
 	this.model = model;
 	this.icon = icon;
+	this.texture = texture;
     }
 
     // ====================
@@ -76,8 +79,8 @@ public class Ingredient extends IdObject {
 
     @Override
     public String toString() {
-	return "Ingredient [id=" + id + ", name=" + name + ", price=" + price
-		+ ", model=" + model + ", icon=" + icon + "]";
+	return "Ingredient [name=" + name + ", price=" + price + ", model="
+		+ model + ", icon=" + icon + ", texture=" + texture + "]";
     }
 
     public void print() {
@@ -118,5 +121,13 @@ public class Ingredient extends IdObject {
 
     public void setIcon(int icon) {
 	this.icon = icon;
+    }
+
+    public String getTexture() {
+	return texture;
+    }
+
+    public void setTexture(String texture) {
+	this.texture = texture;
     }
 }
