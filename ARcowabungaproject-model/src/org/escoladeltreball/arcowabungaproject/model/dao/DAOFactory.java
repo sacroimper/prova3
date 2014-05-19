@@ -309,25 +309,25 @@ public abstract class DAOFactory {
 	Set<Drink> drinks = new HashSet<Drink>();
 	Set<Offer> offers = new HashSet<Offer>();
 
-	Ingredient i1 = new Ingredient(8, "mushroom", 1.5f, 151, 152,
+	Ingredient i1 = new Ingredient(8, "Mushroom", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i2 = new Ingredient(9, "red pepper", 1.5f, 151, 152,
+	Ingredient i2 = new Ingredient(9, "Red Pepper", 1.5f, 151, 152,
 		"data/models/ingredients/redpepper_texture.png");
-	Ingredient i3 = new Ingredient(10, "ham", 1.5f, 151, 152,
+	Ingredient i3 = new Ingredient(10, "Ham", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i4 = new Ingredient(11, "bacon", 1.5f, 151, 152,
+	Ingredient i4 = new Ingredient(11, "Bacon", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i5 = new Ingredient(12, "pineapple", 1.5f, 151, 152,
+	Ingredient i5 = new Ingredient(12, "Pineapple", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i6 = new Ingredient(13, "corn", 1.5f, 151, 152,
+	Ingredient i6 = new Ingredient(13, "Corn", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i7 = new Ingredient(14, "chicken", 1.5f, 151, 152,
+	Ingredient i7 = new Ingredient(14, "Chicken", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i8 = new Ingredient(15, "blue cheese", 1.5f, 151, 152,
+	Ingredient i8 = new Ingredient(15, "Blue cheese", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i9 = new Ingredient(16, "goat cheese", 1.5f, 151, 152,
+	Ingredient i9 = new Ingredient(16, "Goat cheese", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i10 = new Ingredient(17, "gouda", 1.5f, 151, 152,
+	Ingredient i10 = new Ingredient(17, "Gouda", 1.5f, 151, 152,
 		"data/models/ingredients/mushroom_texture.png");
 
 	ingredients.add(i1);
@@ -341,11 +341,11 @@ public abstract class DAOFactory {
 	ingredients.add(i9);
 	ingredients.add(i10);
 
-	Pizza p1 = new Pizza(1, "P1", 10, 150, 0, Pizza.MASSTYPE_THIN,
+	Pizza p1 = new Pizza(1, "P1", 30, 150, 0, Pizza.MASSTYPE_THIN,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_SMALL);
 	Pizza p2 = new Pizza(2, "P2", 10, 150, 0, Pizza.MASSTYPE_THICK,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_LARGE);
-	Pizza p3 = new Pizza(3, "P3", 10, 150, 0, Pizza.MASSTYPE_THIN,
+	Pizza p3 = new Pizza(3, "P3", 7, 150, 0, Pizza.MASSTYPE_THIN,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_MEDIUM);
 	Pizza p4 = new Pizza(10004, "PC1", 10, 150, 0, Pizza.MASSTYPE_THICK,
 		Pizza.TYPE_COSTUM_SAVED, Pizza.SIZE_SMALL);
@@ -376,6 +376,9 @@ public abstract class DAOFactory {
 	p1.addIngredient(i2, 1);
 	p1.addIngredient(i6, 1);
 	p1.addIngredient(i7, 1);
+	p1.addIngredient(i3, 1);
+	p1.addIngredient(i4, 1);
+	p1.addIngredient(i5, 1);
 	p2.addIngredient(i2, 1);
 	p2.addIngredient(i10, 1);
 	p2.addIngredient(i5, 1);

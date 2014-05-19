@@ -36,6 +36,7 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,8 +180,18 @@ public class OfferSetAdapter extends BaseExpandableListAdapter {
 	holder.ivIcon.setImageDrawable(icon);
 	holder.tvTitle.setText(group.getName());
 	holder.tvPrice.setText(group.getFormatedPrice());
-	holder.tvDesc
-		.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	String description = "";
+	for (Product p : group.getProductList()) {
+	    description += p.getName() + ", ";
+	}
+	description = description.substring(0, description.length() - 2);
+	if (description.length() > 50) {
+	    description = description.substring(0, 50) + "...";
+	}
+	String showMore = "<font color='#e13546'>"
+		+ activity.getResources().getString(R.string.show_more)
+		+ "</font>";
+	holder.tvDesc.setText(Html.fromHtml(description + " " + showMore));
 	holder.ibAdd.setOnClickListener(new AddButtonClickListener(group,
 		activity));
 	return convertView;

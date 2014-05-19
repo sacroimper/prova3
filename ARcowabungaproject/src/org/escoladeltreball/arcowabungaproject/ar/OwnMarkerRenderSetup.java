@@ -15,9 +15,11 @@ import gui.GuiSetup;
 
 import java.util.ArrayList;
 
+import markerDetection.DetectionThread;
 import markerDetection.MarkerDetectionSetup;
 import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
+import preview.Preview;
 import system.EventManager;
 //import util.IO;
 //import util.Vec;
@@ -31,6 +33,8 @@ import de.rwth.GDXConnection;
 
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
+    private DetectionThread myThread;
+    private Preview cameraPreview;
     private GLCamera camera;
     public PizzaWorld world;
     public MeshComponent meshComponent;
@@ -138,6 +142,17 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     @Override
     public void _e2_addElementsToGuiSetup(GuiSetup guiSetup, Activity activity) {
+    }
+
+    // This will send you back to the last activity
+    @Override
+    public void onDestroy(Activity a) {
+	super.onDestroy(a);
+	if (cameraPreview != null)
+	    cameraPreview.releaseCamera();
+	// Ensure app is gone after back button is pressed!
+	if (myThread != null)
+	    myThread.stopThread();
     }
 
 }
