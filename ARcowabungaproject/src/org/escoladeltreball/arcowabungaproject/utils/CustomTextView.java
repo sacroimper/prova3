@@ -50,7 +50,8 @@ public class CustomTextView {
     // ====================
     // PUBLIC METHODS
     // ====================
-    public static void customTextView(Context context, TextView tv) {
+
+    public static void customTextView(Context context, TextView tv, int style) {
 	// Font path
 	String fontPath = "fonts/" + FONT_TYPE;
 
@@ -60,7 +61,10 @@ public class CustomTextView {
 	}
 
 	// Applying font
-	tv.setTypeface(tf);
+	if (style == 0) {
+	    style = Typeface.NORMAL;
+	}
+	tv.setTypeface(tf, style);
     }
 
     public static void plusPriceOrder(TextView tv) {
