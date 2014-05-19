@@ -52,7 +52,7 @@ public class Ingredient extends IdObject {
     }
 
     public Ingredient(int id, String name, float price, int model, int icon,
-	    String Texture) {
+	    String texture) {
 	super(id);
 	this.name = name;
 	this.price = price;
