@@ -310,16 +310,26 @@ public abstract class DAOFactory {
 	Set<Drink> drinks = new HashSet<Drink>();
 	Set<Offer> offers = new HashSet<Offer>();
 
-	Ingredient i1 = new Ingredient(8, "I1", 1.5f, 151, 152);
-	Ingredient i2 = new Ingredient(9, "I2", 1.5f, 151, 152);
-	Ingredient i3 = new Ingredient(10, "I3", 1.5f, 151, 152);
-	Ingredient i4 = new Ingredient(11, "I4", 1.5f, 151, 152);
-	Ingredient i5 = new Ingredient(12, "I5", 1.5f, 151, 152);
-	Ingredient i6 = new Ingredient(13, "I6", 1.5f, 151, 152);
-	Ingredient i7 = new Ingredient(14, "I7", 1.5f, 151, 152);
-	Ingredient i8 = new Ingredient(15, "I8", 1.5f, 151, 152);
-	Ingredient i9 = new Ingredient(16, "I9", 1.5f, 151, 152);
-	Ingredient i10 = new Ingredient(17, "I10", 1.5f, 151, 152);
+	Ingredient i1 = new Ingredient(8, "I1", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i2 = new Ingredient(9, "I2", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i3 = new Ingredient(10, "I3", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i4 = new Ingredient(11, "I4", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i5 = new Ingredient(12, "I5", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i6 = new Ingredient(13, "I6", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i7 = new Ingredient(14, "I7", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i8 = new Ingredient(15, "I8", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i9 = new Ingredient(16, "I9", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
+	Ingredient i10 = new Ingredient(17, "I10", 1.5f, 151, 152,
+		"data/models/ingredients/mushroom.png");
 
 	ingredients.add(i1);
 	ingredients.add(i2);
