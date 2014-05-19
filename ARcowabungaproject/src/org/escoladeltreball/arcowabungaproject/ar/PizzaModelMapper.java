@@ -42,7 +42,7 @@ public class PizzaModelMapper {
 
     // PIZZA
     public final static String BASIC_PIZZA_MODEL = "data/models/pizza_V5.obj";
-    public final static String BASIC_PIZZA_TEXTURE = "data/models/arpizza_texture.jpg";
+    public final static String BASIC_PIZZA_TEXTURE = "data/models/arpizza_texture.png";
 
     // INGREDIENTS
     public final static String INGREDIENT_MODEL = "data/models/ingredient_V5.obj";
