@@ -451,6 +451,12 @@ public class DAOAndroid extends DAOFactory {
     }
 
     @Override
+    protected Map<String, String> readResources() {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
     protected Set<Product> readProducts() {
 	// TODO Auto-generated method stub
 	return null;
@@ -621,6 +627,12 @@ public class DAOAndroid extends DAOFactory {
 	ContentValues values = new ContentValues();
 	values.put(DAOFactory.COLUMNS_NAME_PRODUCTS[0], idProduct);
 	database.insert(DAOFactory.CREATE_TABLE_PRODUCTS, null, values);
+
+    }
+
+    @Override
+    protected void writeResources(Map<String, String> resources) {
+	// TODO Auto-generated method stub
 
     }
 
