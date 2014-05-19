@@ -41,6 +41,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.Address;
+import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
@@ -427,7 +428,50 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    this.jpShowTable.add(this.sp);
 
 		    break;
+		case DAOFactory.TABLE_DRINKS:
+		    for (i = 0; i < this.jtfList.length; i++) {
+			if (!this.jtfList[i].getText().isEmpty()) {
+			    if (DAOFactory.COLUMNS_TYPE_DRINKS[i]
+				    .equals("VARCHAR")) {
+				where += DAOFactory.COLUMNS_NAME_DRINKS[i]
+					+ "='" + this.jtfList[i].getText()
+					+ "'";
+			    } else {
+				where += DAOFactory.COLUMNS_NAME_DRINKS[i]
+					+ "=" + this.jtfList[i].getText();
+			    }
+			    where += ",";
+			}
+		    }
 
+		    if (!where.isEmpty()) {
+			where = where.substring(0, where.length() - 1);
+			where = " WHERE " + where;
+		    }
+		    HashSet<Drink> drinksList = (HashSet<Drink>) DAOPostgreSQL
+			    .getInstance().readDrink();
+		    rowData = new String[drinksList.size()][DAOFactory.COLUMNS_NAME_DRINKS.length];
+		    i = 0;
+		    for (Drink drink : drinksList) {
+			rowData[i][0] = drink.getId() + "";
+			rowData[i][1] = drink.getName();
+			rowData[i][2] = drink.getPrice() + "";
+			rowData[i][3] = drink.getIcon() + "";
+			rowData[i][4] = drink.getDiscount() + "";
+			rowData[i][5] = drink.getSize() + "";
+			i++;
+		    }
+		    this.jtTable = new JTable(rowData,
+			    DAOFactory.COLUMNS_NAME_DRINKS);
+		    this.sp = new JScrollPane(this.jtTable);
+		    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		    this.jtTable
+			    .setPreferredScrollableViewportSize(this.jtTable
+				    .getPreferredSize());
+		    this.jtTable.setFillsViewportHeight(true);
+		    this.jpShowTable.add(this.sp);
+		    break;
 		default:
 		    break;
 		}
