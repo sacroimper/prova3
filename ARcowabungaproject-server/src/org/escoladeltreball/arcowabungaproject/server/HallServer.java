@@ -46,7 +46,7 @@ public class HallServer extends Server {
     // ====================
 
     private HallServer() {
-	super(HALL_PORT);
+	super(ServerConstants.HALL_SERVER_PORT);
 	listeningServers = new HashMap<Integer, Server>();
     }
 

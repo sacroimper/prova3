@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:groupIndicator="@android:color/transparent" >
+        android:groupIndicator="@null"
+        android:divider="@android:color/transparent" >
     </ExpandableListView>
 
      <!-- BUTTONS -->
@@ -78,7 +79,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:text="@string/shipping_begin_value"
-                android:textColor="@android:color/white"
+                android:textColor="@color/dark_red_300"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
