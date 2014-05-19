@@ -46,6 +46,7 @@ import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.server.gui.database.SelectPanel;
 import org.joda.time.DateTime;
 
 public class DAOPostgreSQL extends DAOFactory {
@@ -462,62 +463,18 @@ public class DAOPostgreSQL extends DAOFactory {
 	return null;
     }
 
-    public Set<Ingredient> readIngredient(String where) {
-	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
-	Connection con = null;
-	Statement stm = null;
-	try {
-	    con = connectToDatabase();
-	    stm = con.createStatement();
-	    // Select all rows of ingredient with where table
-	    System.out.println("SELECT * FROM " + DAOFactory.TABLE_INGREDIENT
-		    + where + ";");
-	    ResultSet rs = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_INGREDIENT + where + ";");
-	    while (rs.next()) {
-		// Create a ingredient object and put in the HashSet
-		Ingredient ingredient = new Ingredient(
-			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[0]),
-			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[1]),
-			rs.getFloat(DAOFactory.COLUMNS_NAME_INGREDIENT[2]),
-			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[3]),
-			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]),
-			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
-		ingredientsSet.add(ingredient);
-	    }
-	    stm.close();
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	} finally {
-	    if (stm != null) {
-		try {
-		    stm.close();
-		} catch (SQLException e) {
-		    e.printStackTrace();
-		}
-	    }
-	    if (con != null) {
-		try {
-		    con.close();
-		} catch (SQLException e) {
-		    e.printStackTrace();
-		}
-	    }
-	}
-	return ingredientsSet;
-    }
-
     @Override
     public Set<Ingredient> readIngredient() {
 	Set<Ingredient> ingredientsSet = new HashSet<Ingredient>();
 	Connection con = null;
 	Statement stm = null;
 	try {
+	    String where = SelectPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows of ingredient table
 	    ResultSet rs = stm.executeQuery("SELECT * FROM "
-		    + DAOFactory.TABLE_INGREDIENT + ";");
+		    + DAOFactory.TABLE_INGREDIENT + where + ";");
 	    while (rs.next()) {
 		// Create a ingredient object and put in the HashSet
 		Ingredient ingredient = new Ingredient(
