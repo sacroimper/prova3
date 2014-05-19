@@ -78,7 +78,7 @@ public abstract class OwnModelLoader implements gl.Renderable {
     }
 
     public MeshComponent getGDXShape() {
-	GDXMesh x = new GDXMesh(model, texture);
+	PizzaMesh x = new PizzaMesh(model, texture);
 	return x;
     }
 
@@ -96,11 +96,11 @@ public abstract class OwnModelLoader implements gl.Renderable {
 	}
 
 	if (model != null)
-	    modelLoaded(new GDXMesh(model, texture));
+	    modelLoaded(new PizzaMesh(model, texture));
 	else if (keyFramedModel != null)
-	    modelLoaded(new GDXMesh(keyFramedModel, texture));
+	    modelLoaded(new PizzaMesh(keyFramedModel, texture));
 	else if (skeletonModel != null)
-	    modelLoaded(new GDXMesh(skeletonModel, texture));
+	    modelLoaded(new PizzaMesh(skeletonModel, texture));
 
 	Log.d(LOGTAG, "Result of trying is:");
 	Log.d(LOGTAG, "fileName=" + fileName);
@@ -114,6 +114,6 @@ public abstract class OwnModelLoader implements gl.Renderable {
 
     }
 
-    public abstract void modelLoaded(MeshComponent gdxMesh);
+    public abstract void modelLoaded(PizzaMesh pizzaMesh);
 
 }
