@@ -862,7 +862,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected Map<String, String> readResources() {
+    public Map<String, String> readResources() {
 	Map<String, String> resources = new HashMap<String, String>();
 	Connection con = null;
 	Statement stm = null;
@@ -903,7 +903,31 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected void writeProduct(int idProduct) {
-	// TODO Auto-generated method stub
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENT
+		    + "VALUES(" + idProduct + ");");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     @Override
