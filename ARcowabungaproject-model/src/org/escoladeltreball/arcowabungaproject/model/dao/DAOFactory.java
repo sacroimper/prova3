@@ -74,7 +74,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_TYPE_INGREDIENTS = { "INTEGER",
 	    "INTEGER", "SMALLINT" };
     public static final String[] COLUMNS_TYPE_PIZZAS = { "INTEGER", "VARCHAR",
-	    "NUMERIC", "SMALLINT", "VARCHAR", "VARCHAR", "SMALLINT", "NUMERIC",
+	    "NUMERIC", "SMALLINT", "NUMERIC", "VARCHAR", "VARCHAR", "SMALLINT",
 	    "INTEGER" };
     public static final String[] COLUMNS_TYPE_DRINKS = { "INTEGER", "VARCHAR",
 	    "NUMERIC", "SMALLINT", "NUMERIC", "SMALLINT" };
@@ -101,7 +101,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_NAME_INGREDIENTS = { "id_ingredients",
 	    "ingredient", "num_ingredient" };
     public static final String[] COLUMNS_NAME_PIZZAS = { "id_pizza", "name",
-	    "price", "icon", "massType", "type", "size", "discount",
+	    "price", "icon", "discount", "massType", "type", "size",
 	    "ingredients" };
     public static final String[] COLUMNS_NAME_DRINKS = { "id_drink", "name",
 	    "price", "icon", "discount", "size" };
@@ -151,9 +151,9 @@ public abstract class DAOFactory {
 	    + " VARCHAR(50)," + COLUMNS_NAME_PIZZAS[2] + " NUMERIC,"
 	    + COLUMNS_NAME_PIZZAS[3] + " SMALLINT REFERENCES "
 	    + TABLE_RESOURCES + " ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + COLUMNS_NAME_PIZZAS[4] + " VARCHAR(10)," + COLUMNS_NAME_PIZZAS[5]
-	    + " VARCHAR(10)," + COLUMNS_NAME_PIZZAS[6] + " SMALLINT,"
-	    + COLUMNS_NAME_PIZZAS[7] + " NUMERIC, " + COLUMNS_NAME_PIZZAS[8]
+	    + COLUMNS_NAME_PIZZAS[4] + " NUMERIC," + COLUMNS_NAME_PIZZAS[5]
+	    + " VARCHAR(10)," + COLUMNS_NAME_PIZZAS[6] + " VARCHAR(10),"
+	    + COLUMNS_NAME_PIZZAS[7] + " SMALLINT, " + COLUMNS_NAME_PIZZAS[8]
 	    + " INTEGER);";
     public static final String CREATE_TABLE_DRINKS = "CREATE TABLE "
 	    + TABLE_DRINKS + " (" + COLUMNS_NAME_DRINKS[0]

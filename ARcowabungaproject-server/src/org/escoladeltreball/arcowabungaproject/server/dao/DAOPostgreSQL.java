@@ -150,7 +150,7 @@ public class DAOPostgreSQL extends DAOFactory {
 
 	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(30,'PIZZA1',15,1,2.5,'thin','type1',2,20);");
 	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(31,'PIZZA2',15,2,2.5,'thick','type2',3,21);");
-	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(32,'PIZZA1',15,3,2.5,'thin','type2',1,22);");
+	    stm.executeUpdate("INSERT INTO PIZZAS VALUES(32,'PIZZA3',15,3,2.5,'thin','type2',1,22);");
 
 	    stm.executeUpdate("INSERT INTO DRINKS VALUES(40, 'coke', 2.5, 2, 0, 1);");
 	    stm.executeUpdate("INSERT INTO DRINKS VALUES(41, 'water', 1.5, 3, 0, 1);");
