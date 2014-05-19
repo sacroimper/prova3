@@ -28,15 +28,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.activities.MenuActivity;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
@@ -44,7 +47,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ShoppingCartAdapter extends BaseAdapter {
+public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -171,7 +174,19 @@ public class ShoppingCartAdapter extends BaseAdapter {
 	    CustomTextView.customTextView(activity, tv);
 	    tv = (TextView) convertView.findViewById(R.id.order_withtax_price);
 	    CustomTextView.customTextView(activity, tv);
-
+	    tv = (TextView) convertView
+		    .findViewById(R.id.shipping_leftlinear_text);
+	    CustomTextView.customTextView(activity, tv);
+	    tv = (TextView) convertView
+		    .findViewById(R.id.shipping_rightlinear_text);
+	    CustomTextView.customTextView(activity, tv);
+	    // Set listener
+	    LinearLayout ly = (LinearLayout) convertView
+		    .findViewById(R.id.shipping_leftlinear_button);
+	    ly.setOnClickListener(this);
+	    // ly = (LinearLayout) convertView
+	    // .findViewById(R.id.shipping_rightlinear_button);
+	    // ly.setOnClickListener(this);
 	} else {
 	    if (convertView == null) {
 		convertView = this.inflater.inflate(
@@ -231,6 +246,18 @@ public class ShoppingCartAdapter extends BaseAdapter {
 	ImageButton trashIcon;
 	TextView productPrice;
 	LinearLayout extraIngrentsLayout;
+    }
+
+    @Override
+    public void onClick(View v) {
+	if (v.getId() == R.id.shipping_leftlinear_button) {
+	    Intent intent = new Intent(activity.getApplicationContext(),
+		    MenuActivity.class);
+	    activity.startActivity(intent);
+	    activity.finish();
+	} else {
+	    // TODO
+	}
     }
 
     // ====================

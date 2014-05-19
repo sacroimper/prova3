@@ -31,6 +31,7 @@ import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -108,7 +109,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 	tv = (TextView) findViewById(R.id.remember_advertice_title);
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.remember_text);
-	CustomTextView.customTextView(this, tv);
+	CustomTextView.customTextView(this, tv, Typeface.ITALIC);
 
 	// SET CLICK LISTENERS
 	LinearLayout ly = (LinearLayout) findViewById(R.id.button_menu);
@@ -130,8 +131,6 @@ public class OrderActivity extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
 	if (v.getId() == R.id.button_menu) {
-	    finish();
-	} else if (v.getId() == R.id.button_cart) {
 	    finish();
 	}
     }
