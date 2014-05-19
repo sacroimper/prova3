@@ -143,7 +143,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		    Ingredient ingredient = new Ingredient(
 			    rsIngredient.getInt(0), rsIngredient.getString(1),
 			    rsIngredient.getInt(2), rsIngredient.getInt(3),
-			    rsIngredient.getInt(4));
+			    rsIngredient.getInt(4), rsIngredient.getString(5));
 		    ingredients.put(ingredient, rsIngredient.getInt(2));
 		}
 	    }
@@ -386,7 +386,8 @@ public class DAOPostgreSQL extends DAOFactory {
 			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[1]),
 			rs.getFloat(DAOFactory.COLUMNS_NAME_INGREDIENT[2]),
 			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[3]),
-			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]));
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]),
+			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
 		ingredientsSet.add(ingredient);
 	    }
 	    stm.close();
