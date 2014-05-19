@@ -292,9 +292,21 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    String where = "";
 
 		    String[][] rowData = null;
-		    // for(int i = 0; i < this.jtfList.length ; i++){
-		    //
-		    // }
+		    for (int i = 0; i < this.jtfList.length; i++) {
+			if (!this.jtfList[i].getText().isEmpty()) {
+			    if (DAOFactory.COLUMNS_TYPE_INGREDIENT[i]
+				    .equals("VARCHAR")) {
+				where += DAOFactory.COLUMNS_NAME_INGREDIENT[i]
+					+ "='" + this.jtfList[i].getText()
+					+ "'";
+			    } else {
+				where += DAOFactory.COLUMNS_NAME_INGREDIENT[i]
+					+ "=" + this.jtfList[i].getText();
+			    }
+			    where += ",";
+			}
+
+		    }
 		    if (where.isEmpty()) {
 			HashSet<Ingredient> ingredientsList = (HashSet<Ingredient>) DAOPostgreSQL
 				.getInstance().readIngredient();
@@ -303,9 +315,26 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 			for (Ingredient ingredient : ingredientsList) {
 			    rowData[i][0] = ingredient.getId() + "";
 			    rowData[i][1] = ingredient.getName();
-			    rowData[i][2] = ingredient.getIcon() + "";
+			    rowData[i][2] = ingredient.getPrice() + "";
 			    rowData[i][3] = ingredient.getModel() + "";
-			    rowData[i][4] = ingredient.getPrice() + "";
+			    rowData[i][4] = ingredient.getIcon() + "";
+			    rowData[i][5] = ingredient.getTexture() + "";
+			    i++;
+			}
+		    } else {
+			where = where.substring(0, where.length() - 1);
+			where = " WHERE " + where;
+			HashSet<Ingredient> ingredientsList = (HashSet<Ingredient>) DAOPostgreSQL
+				.getInstance().readIngredient(where);
+			rowData = new String[ingredientsList.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+			int i = 0;
+			for (Ingredient ingredient : ingredientsList) {
+			    rowData[i][0] = ingredient.getId() + "";
+			    rowData[i][1] = ingredient.getName();
+			    rowData[i][2] = ingredient.getPrice() + "";
+			    rowData[i][3] = ingredient.getModel() + "";
+			    rowData[i][4] = ingredient.getIcon() + "";
+			    rowData[i][5] = ingredient.getTexture() + "";
 			    i++;
 			}
 		    }
