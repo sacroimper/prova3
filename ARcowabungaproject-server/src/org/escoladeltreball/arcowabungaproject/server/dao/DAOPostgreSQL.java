@@ -226,7 +226,8 @@ public class DAOPostgreSQL extends DAOFactory {
 		 * Select all rows with the same id_ingredient from ingredient
 		 * table and put in the map
 		 */
-		ResultSet rsIngredient = stm.executeQuery("SELECT * FROM "
+		Statement stm2 = con.createStatement();
+		ResultSet rsIngredient = stm2.executeQuery("SELECT * FROM "
 			+ DAOFactory.TABLE_INGREDIENT
 			+ " WHERE "
 			+ DAOFactory.COLUMNS_NAME_INGREDIENT[0]
@@ -236,10 +237,20 @@ public class DAOPostgreSQL extends DAOFactory {
 			+ ";");
 		while (rsIngredient.next()) {
 		    Ingredient ingredient = new Ingredient(
-			    rsIngredient.getInt(0), rsIngredient.getString(1),
-			    rsIngredient.getInt(2), rsIngredient.getInt(3),
-			    rsIngredient.getInt(4), rsIngredient.getString(5));
-		    ingredients.put(ingredient, rsIngredient.getInt(2));
+			    rsIngredient
+				    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[0]),
+			    rsIngredient
+				    .getString(DAOFactory.COLUMNS_NAME_INGREDIENT[1]),
+			    rsIngredient
+				    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[2]),
+			    rsIngredient
+				    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[3]),
+			    rsIngredient
+				    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]),
+			    rsIngredient
+				    .getString(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
+		    ingredients.put(ingredient, rsIngredients
+			    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENTS[2]));
 		}
 	    }
 	} catch (SQLException e) {
@@ -272,7 +283,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select from offers products table the offers with the same id
-	    ResultSet rsProducts = stm.executeQuery("SELCET * FROM "
+	    ResultSet rsProducts = stm.executeQuery("SELECT * FROM "
 		    + DAOFactory.TABLE_OFFERS_PRODUCTS + " WHERE "
 		    + DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[0] + "=" + id
 		    + ";");
@@ -660,7 +671,8 @@ public class DAOPostgreSQL extends DAOFactory {
 	    rsShoppingCart.next();
 	    if (rsShoppingCart != null) {
 		shoppingCart = new ShoppingCart(
-			rsShoppingCart.getInt(idShoppingCart));
+			rsShoppingCart
+				.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0]));
 		ArrayList<Product> productsList = (ArrayList<Product>) selectShoppingCartProductsById(rsShoppingCart
 			.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[1]));
 		shoppingCart.setProducts(productsList);
