@@ -18,7 +18,7 @@
     <string name="tab_drinks">DRINKS</string>
     <string name="tab_offers">OFFERS</string>
     <string name="products">PRODUCTS</string>
-    <string name="additional_ingredents">Additional ingredients</string>
+    <string name="additional_ingredents">Additional ingredients:</string>
     <string name="cursor_down">&#9660;</string>
     <string name="cursor_up">&#9650;</string>
     <string name="redo_order">MAKE ORDER AGAIN</string>

@@ -13,4 +13,5 @@
 	<item name="background_expandable_expanded_item" type="color">#f0f0f0</item>
  	<item name="text_color_listview" type="color">#e13546</item>
  	<item name="background_red_order" type="color">#e23647</item>
+ 	<item name="lastorders_text_color" type="color">#969696</item>
 </resources> 
