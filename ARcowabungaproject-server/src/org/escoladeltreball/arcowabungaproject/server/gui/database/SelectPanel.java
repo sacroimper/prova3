@@ -63,6 +63,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
     private JButton jbExecuteQuery;
     private JTable jtTable;
     private JScrollPane sp;
+    public static String where = "";
     private int indexConstrainstX = 0;
     private int indexConstrainstY = 0;
 
@@ -280,6 +281,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+	where = "";
 	if (this.sp != null) {
 	    this.jpShowTable.remove(this.sp);
 	}
@@ -289,7 +291,6 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 
 		switch (item) {
 		case DAOFactory.TABLE_INGREDIENT:
-		    String where = "";
 
 		    String[][] rowData = null;
 		    for (int i = 0; i < this.jtfList.length; i++) {
@@ -325,7 +326,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 			where = where.substring(0, where.length() - 1);
 			where = " WHERE " + where;
 			HashSet<Ingredient> ingredientsList = (HashSet<Ingredient>) DAOPostgreSQL
-				.getInstance().readIngredient(where);
+				.getInstance().readIngredient();
 			rowData = new String[ingredientsList.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
 			int i = 0;
 			for (Ingredient ingredient : ingredientsList) {
