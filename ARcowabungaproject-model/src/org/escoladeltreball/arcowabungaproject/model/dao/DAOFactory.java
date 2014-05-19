@@ -70,7 +70,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_TYPE_RESOURCES = { "INTEGER",
 	    "VARCHAR" };
     public static final String[] COLUMNS_TYPE_INGREDIENT = { "INTEGER",
-	    "VARCHAR(50)", "SMALLINT", "SMALLINT", "NUMERIC", "VARCHAR(100)" };
+	    "VARCHAR", "SMALLINT", "SMALLINT", "NUMERIC", "VARCHAR(100)" };
     public static final String[] COLUMNS_TYPE_INGREDIENTS = { "INTEGER",
 	    "INTEGER", "SMALLINT" };
     public static final String[] COLUMNS_TYPE_PIZZAS = { "INTEGER", "VARCHAR",
@@ -137,7 +137,7 @@ public abstract class DAOFactory {
 	    + COLUMNS_NAME_INGREDIENT[3] + " SMALLINT REFERENCES "
 	    + TABLE_RESOURCES + " ON DELETE CASCADE ON UPDATE CASCADE,"
 	    + COLUMNS_NAME_INGREDIENT[4] + " NUMERIC, "
-	    + COLUMNS_NAME_INGREDIENT[5] + "VARCHAR(100));";
+	    + COLUMNS_NAME_INGREDIENT[5] + " VARCHAR(100));";
     public static final String CREATE_TABLE_INGREDIENTS = "CREATE TABLE "
 	    + TABLE_INGREDIENTS + " (" + COLUMNS_NAME_INGREDIENTS[0]
 	    + " INTEGER," + COLUMNS_NAME_INGREDIENTS[1]
