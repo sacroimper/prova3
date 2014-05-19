@@ -206,7 +206,7 @@ public class DAOPostgreSQL extends DAOFactory {
     // ====================
 
     @Override
-    protected Ingredients selectIngredientsById(int id) {
+    public Ingredients selectIngredientsById(int id) {
 	Ingredients ingredients = new Ingredients(id);
 	Connection con = null;
 	Statement stm = null;
