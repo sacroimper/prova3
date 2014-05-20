@@ -121,7 +121,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS_PRODUCTS);
 	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCARTS);
 
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINCART_PRODUCTS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCART_PRODUCTS);
 	    stm.executeUpdate(DAOFactory.CREATE_TABLE_ORDERS);
 
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(1,'path1');");
@@ -374,7 +374,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		    .executeQuery("SELECT * FROM "
 			    + DAOFactory.TABLE_SHOPPINGCART_PRODUCTS
 			    + " WHERE "
-			    + DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0]
+			    + DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[0]
 			    + "=" + id + ";");
 	    while (rsShoppingCartProducts.next()) {
 		// Product can be a pizza product, drink product or offer
@@ -388,7 +388,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1])
 				+ ";");
 
 		if (rsPizza.next()) {
@@ -416,7 +416,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1])
 				+ ";");
 
 		if (rsDrink.next()) {
@@ -439,7 +439,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_OFFERS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1])
 				+ ";");
 
 		if (rsOffer.next()) {

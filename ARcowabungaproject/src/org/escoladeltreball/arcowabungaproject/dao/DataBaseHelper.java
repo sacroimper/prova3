@@ -66,7 +66,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	db.execSQL(DAOFactory.CREATE_TABLE_PIZZAS);
 	db.execSQL(DAOFactory.CREATE_TABLE_PREFERENCES);
 	db.execSQL(DAOFactory.CREATE_TABLE_RESOURCES);
-	db.execSQL(DAOFactory.CREATE_TABLE_SHOPPINCART_PRODUCTS);
+	db.execSQL(DAOFactory.CREATE_TABLE_SHOPPINGCART_PRODUCTS);
 	db.execSQL(DAOFactory.CREATE_TABLE_SHOPPINGCARTS);
 
     }

@@ -545,7 +545,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	    this.jpShowTable.add(this.sp);
 
 	    // Show shoppingCart products table associated to order id's
-	    rowData = new String[shoppingCartTableSize][DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS.length];
+	    rowData = new String[shoppingCartTableSize][DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS.length];
 	    i = 0;
 	    for (Order order : orderList) {
 		for (Product product : order.getShoppingCart().getProducts()) {
@@ -556,7 +556,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	    }
 	    // Show shoppingcart products table
 	    this.jtTable = new JTable(rowData,
-		    DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS);
+		    DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS);
 
 	    break;
 	case DAOFactory.TABLE_PREFERENCES:
