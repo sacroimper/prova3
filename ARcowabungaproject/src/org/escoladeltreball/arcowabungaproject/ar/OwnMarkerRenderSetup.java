@@ -5,6 +5,7 @@ import gl.CustomGLSurfaceView;
 import gl.GL1Renderer;
 import gl.GLCamera;
 import gl.GLFactory;
+import gl.LightSource;
 import gui.GuiSetup;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
 import android.app.Activity;
+
+import com.badlogic.gdx.graphics.GL10;
+
 import de.rwth.GDXConnection;
 
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
@@ -39,6 +43,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     public PizzaWorld world;
     public PizzaMesh meshComponent;
+    public final float PLANE_POSITION_FIXER = 0.0f;
 
     // ====================
     // CONSTRUCTORS
@@ -73,13 +78,11 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     @Override
     public UnrecognizedMarkerListener _a2_getUnrecognizedMarkerListener() {
-	camera.setNewPosition(100, 100, 100);
 	return null;
     }
 
     @Override
     public void _a3_registerMarkerObjects(MarkerObjectMap markerObjectMap) {
-	camera.setNewPosition(0, 0, 0);
 	markerObjectMap.put(new CameraMarker(0, camera));
     }
 
@@ -101,6 +104,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
+		pizzaMesh.setPosition(new Vec(0, 0, PLANE_POSITION_FIXER));
 		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
@@ -114,6 +118,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
+		pizzaMesh.setPosition(new Vec(0, 0, PLANE_POSITION_FIXER));
 		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
@@ -134,6 +139,8 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
+			pizzaMesh.setPosition(new Vec(0, 0,
+				PLANE_POSITION_FIXER));
 			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
@@ -148,6 +155,8 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
 			// pizzaMesh.setRotation(new Vec(0f, 0f, (float) (Math
 			// .random() * 10)));
+			pizzaMesh.setPosition(new Vec(0, 0,
+				PLANE_POSITION_FIXER));
 			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
@@ -156,6 +165,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		};
 	    }
 	}
+
 	this.renderer.addRenderElement(world);
     }
 
@@ -187,6 +197,32 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    myThread.stopThread();
     }
 
+    @Override
+    public boolean _a2_initLightning(ArrayList<LightSource> lights) {
+	lights.add(LightSource.newDefaultAmbientLight(GL10.GL_LIGHT0));
+	// LightSource l = LightSource.newDefaultSpotLight(GL10.GL_LIGHT0, new
+	// Vec(0,0,0), );
+
+	float pizzaMesh = PizzaModelMapper.getPizzaMassType();
+
+	if (pizzaMesh != 1f) {
+	    // l.setScale(pizzaSizeAndMeshVector);
+	    // lights.add(l);
+	    // LightSource light = lights.get(0);
+	    // lights.remove(light);
+	    // light.setScale(pizzaSizeAndMeshVector);
+	    // lights.add(light);
+	    // lights.add(LightSource.newDefaultDefuseLight(GL10.GL_LIGHT1,
+	    // new Vec(-pizzaMesh, 0f, pizzaMesh + 1)));
+	    // // lights.add(LightSource.newDefaultDayLight(GL10.GL_LIGHT0,
+	    // // new Date()));
+	    // lights.add(LightSource.newDefaultSpotLight(GL10.GL_LIGHT2, new
+	    // Vec(
+	    // 0, 0, 5), new Vec(0, 0, 0)));
+	}
+
+	return true;
+    }
     // ====================
     // GETTERS & SETTERS
     // ====================
