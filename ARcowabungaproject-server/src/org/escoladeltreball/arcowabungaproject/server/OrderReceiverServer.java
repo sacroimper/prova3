@@ -71,6 +71,7 @@ public class OrderReceiverServer extends Server {
 	    waitClient();
 	    Order order = (Order) readObject();
 	    Pizzeria.getInstance().addOrderSaved(order);
+	    print(order.toString());
 	    try {
 		out.writeInt(ServerConstants.SERVER_RESPONSE_OK);
 		out.flush();
