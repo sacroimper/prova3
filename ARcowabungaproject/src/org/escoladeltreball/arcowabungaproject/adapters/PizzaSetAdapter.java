@@ -274,6 +274,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 							 // pizza parametters in
 							 // static variables
 	    ArActivity.startWithSetup(activity, new OwnMarkerRenderSetup());
+	    activity.finish();
 	}
     }
 

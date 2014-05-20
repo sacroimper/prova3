@@ -166,6 +166,7 @@ public class OfferSetAdapter extends BaseExpandableListAdapter {
 		    .findViewById(R.id.descTextInOfferItem);
 	    holder.ibAdd = (ImageButton) convertView
 		    .findViewById(R.id.imageButtonInOfferItem);
+	    holder.ibAdd.setFocusable(false);
 	    CustomTextView.customTextView(activity, holder.tvTitle);
 	    CustomTextView.customTextView(activity, holder.tvPrice);
 	    CustomTextView.customTextView(activity, holder.tvDesc);
