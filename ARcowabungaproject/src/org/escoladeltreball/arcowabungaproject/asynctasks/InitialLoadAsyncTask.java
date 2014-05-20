@@ -30,7 +30,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-public class InitialLoadAsyncTask extends AsyncTask<Void, Void, Void> {
+public class InitialLoadAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
     // ====================
     // CONSTANTS
@@ -68,16 +68,14 @@ public class InitialLoadAsyncTask extends AsyncTask<Void, Void, Void> {
     // ====================
 
     @Override
-    protected Void doInBackground(Void... arg0) {
+    protected Boolean doInBackground(Void... arg0) {
 	DAOAndroid daoA = DAOAndroid.getInstance(activity);
-	daoA.loadData();
-	return null;
+	return daoA.loadData();
     }
 
     @Override
-    protected void onPostExecute(Void arg) {
-	Intent mainIntent = new Intent().setClass(activity,
-		MainMenuActivity.class);
+    protected void onPostExecute(Boolean result) {
+	Intent mainIntent = new Intent(activity, MainMenuActivity.class);
 	activity.startActivity(mainIntent);
     }
 
