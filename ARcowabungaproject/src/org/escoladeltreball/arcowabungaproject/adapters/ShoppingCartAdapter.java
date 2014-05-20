@@ -57,7 +57,7 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
     private List<Product> products = new ArrayList<Product>();
     public LayoutInflater inflater;
     public Activity activity;
-    public String price;
+    private ShoppingCart shoppingCart;
 
     // ====================
     // ATTRIBUTES
@@ -72,7 +72,7 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 	super();
 	this.activity = activity;
 	this.products = customShoppingCart.getProducts();
-	this.price = customShoppingCart.getFormatedPrice();
+	this.shoppingCart = customShoppingCart;
 	inflater = activity.getLayoutInflater();
     }
 
@@ -142,30 +142,32 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 	    convertView = inflater.inflate(
 		    R.layout.listitem_product_final_layout, null);
 
-	    // Find the TextViews by id
+	    // Find the TextViews by id and set prices
 	    TextView subtotalPrice = (TextView) convertView
 		    .findViewById(R.id.order_subtotal_price);
-	    // TextView shippingCostPrice = (TextView) convertView
-	    // .findViewById(R.id.shipping_cost_value);
-	    // TextView taxesPrice = (TextView) convertView
-	    // .findViewById(R.id.taxes_value);
+	    TextView finalPrice = (TextView) convertView
+		    .findViewById(R.id.order_price_total);
+	    TextView tax = (TextView) convertView
+		    .findViewById(R.id.order_withtax_price);
+	    Float taxPrice = Product.TAX_PERCENT * this.shoppingCart.getPrice();
+	    tax.setText(String.format("%.2f€", taxPrice));
 
-	    // Set the prices
-	    subtotalPrice.setText(this.price + "€");
+	    subtotalPrice.setText(this.shoppingCart.getFormatedPrice());
+	    finalPrice.setText(this.shoppingCart.getFormatedPriceWithTax());
+
 	    // shippingCostPrice.setText(this.price + "€");
 	    // taxesPrice.setText(this.price + "€");
 
 	    // Text final list
+	    CustomTextView.customTextView(activity, finalPrice);
+	    CustomTextView.customTextView(activity, tax);
 	    TextView tv = (TextView) convertView
-		    .findViewById(R.id.order_price_total);
-	    CustomTextView.customTextView(activity, tv);
-	    tv = (TextView) convertView.findViewById(R.id.order_shipping_cost);
+		    .findViewById(R.id.order_shipping_cost);
 	    CustomTextView.customTextView(activity, tv);
 	    tv = (TextView) convertView
 		    .findViewById(R.id.order_shipping_cost_text);
 	    CustomTextView.customTextView(activity, tv);
-	    tv = (TextView) convertView.findViewById(R.id.order_subtotal_price);
-	    CustomTextView.customTextView(activity, tv);
+	    CustomTextView.customTextView(activity, subtotalPrice);
 	    tv = (TextView) convertView.findViewById(R.id.order_taxes_text);
 	    CustomTextView.customTextView(activity, tv);
 	    tv = (TextView) convertView.findViewById(R.id.order_text_subtotal);

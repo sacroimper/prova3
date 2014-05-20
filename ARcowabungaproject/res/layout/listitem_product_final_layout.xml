@@ -33,7 +33,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/subtotal_value"
+            android:text="@string/shipping_cost_value"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -58,7 +58,7 @@
         android:layout_below="@id/blue_subtotal_layout"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/taxes_value"
+        android:text="@string/shipping_cost_value"
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp" />
 
@@ -115,7 +115,7 @@
         android:layout_below="@id/separator_total_bottom"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/total_price"
+        android:text="@string/shipping_cost_value"
         android:textColor="@color/text_color_listview"
         android:textSize="20sp" />
 

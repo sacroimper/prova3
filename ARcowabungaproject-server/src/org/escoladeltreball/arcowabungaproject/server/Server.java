@@ -204,6 +204,22 @@ public abstract class Server extends Thread {
 	return n;
     }
 
+    protected Object readObject() {
+	Object obj = null;
+	while (obj == null) {
+	    try {
+		obj = in.readObject();
+	    } catch (Exception e) {
+		try {
+		    Thread.sleep(500);
+		} catch (InterruptedException e1) {
+		    e1.printStackTrace();
+		}
+	    }
+	}
+	return obj;
+    }
+
     // ====================
     // PRIVATE METHODS
     // ====================
