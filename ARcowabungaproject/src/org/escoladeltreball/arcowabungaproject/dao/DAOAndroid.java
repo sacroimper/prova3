@@ -207,7 +207,7 @@ public class DAOAndroid extends DAOFactory {
 		Ingredient ingredient = new Ingredient(cIngredient.getInt(0),
 			cIngredient.getString(1), cIngredient.getInt(2),
 			cIngredient.getInt(3), cIngredient.getInt(4),
-			cIngredient.getString(5));
+			cIngredient.getInt(5));
 		ingredients.put(ingredient, cIngredient.getInt(2));
 		j++;
 	    }
@@ -347,7 +347,7 @@ public class DAOAndroid extends DAOFactory {
 	    Ingredient ingredient = new Ingredient(cIngredient.getInt(0),
 		    cIngredient.getString(1), cIngredient.getInt(2),
 		    cIngredient.getInt(3), cIngredient.getInt(4),
-		    cIngredient.getString(5));
+		    cIngredient.getInt(5));
 	    ingredients.add(ingredient);
 	    i++;
 	}
