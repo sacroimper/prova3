@@ -35,7 +35,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     private Preview cameraPreview;
     private GLCamera camera;
     private GL1Renderer renderer;
-    private Vec pizzaSizeAndMesh;
+    private Vec pizzaSizeAndMeshVector;
 
     public PizzaWorld world;
     public PizzaMesh meshComponent;
@@ -52,8 +52,11 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
      * @return
      */
     private Vec pizzaVectorCalculator() {
-	// TODO Auto-generated method stub
-	return null;
+	float pizzaMesh = PizzaModelMapper.getPizzaMassType();
+	float pizzaScale = (float) PizzaModelMapper.getPizzaScale();
+	Vec resultVector = new Vec(pizzaScale, pizzaScale, pizzaScale
+		* pizzaMesh);
+	return resultVector;
     }
 
     // ====================
@@ -84,7 +87,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     public void _a_initFieldsIfNecessary() {
 	camera = new GLCamera();
 	world = new PizzaWorld(camera);
-	pizzaSizeAndMesh = pizzaVectorCalculator();
+	pizzaSizeAndMeshVector = pizzaVectorCalculator();
     }
 
     @Override
@@ -98,7 +101,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		pizzaMesh.setScale(new Vec(2, 2, 2));
+		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
 		world.add(o);
@@ -111,7 +114,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		pizzaMesh.setScale(new Vec(2, 2, 2));
+		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
 		world.add(o);
@@ -131,7 +134,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
-			pizzaMesh.setScale(new Vec(2, 2, 2));
+			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
 			world.add(o);
@@ -145,7 +148,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
 			pizzaMesh.setRotation(new Vec(
 				(float) (Math.random() * 10), 0f, 0f));
-			pizzaMesh.setScale(new Vec(2, 2, 2));
+			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
 			world.add(o);
