@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -99,6 +100,8 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	this.jpDoSelect = new JPanel();
 	this.jpDoSelect.setLayout(new GridBagLayout());
 	this.jpShowTable = new JPanel();
+	this.jpShowTable.setLayout(new BoxLayout(this.jpShowTable,
+		BoxLayout.Y_AXIS));
 	this.jbExecuteQuery = new JButton("Execute Query");
 	this.sp = new JScrollPane();
 	String[] items = { "", DAOFactory.TABLE_ADDRESS,
@@ -324,7 +327,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
-	    // Select address with concrete fields
+	    // Select address with concrete data
 	    HashSet<Address> addressList = (HashSet<Address>) DAOPostgreSQL
 		    .getInstance().readAddress();
 	    rowData = new String[addressList.size()][DAOFactory.COLUMNS_NAME_ADDRESS.length];
@@ -361,7 +364,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
-	    // Select Ingredient with concrete fields
+	    // Select Ingredient with concrete data
 	    HashSet<Ingredient> ingredientsList = (HashSet<Ingredient>) DAOPostgreSQL
 		    .getInstance().readIngredient();
 	    rowData = new String[ingredientsList.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
@@ -398,7 +401,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
-	    // Select pizza with concrete fields
+	    // Select pizza with concrete data
 	    HashSet<Pizza> pizzasList = (HashSet<Pizza>) DAOPostgreSQL
 		    .getInstance().readPizza();
 	    rowData = new String[pizzasList.size()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
@@ -463,7 +466,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
-	    // Select drink with concrete fields
+	    // Select drink with concrete data
 	    HashSet<Drink> drinksList = (HashSet<Drink>) DAOPostgreSQL
 		    .getInstance().readDrink();
 	    rowData = new String[drinksList.size()][DAOFactory.COLUMNS_NAME_DRINKS.length];
@@ -499,7 +502,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
-	    // Select the offers with concrete fields
+	    // Select the offers with concrete data
 	    HashSet<Offer> offerList = (HashSet<Offer>) DAOPostgreSQL
 		    .getInstance().readOffer();
 	    rowData = new String[offerList.size()][DAOFactory.COLUMNS_NAME_OFFERS.length];
@@ -557,7 +560,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
-	    // Select the orders with concrete fields
+	    // Select the orders with concrete data
 	    HashSet<Order> orderList = (HashSet<Order>) DAOPostgreSQL
 		    .getInstance().readOrder();
 	    rowData = new String[orderList.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
@@ -584,7 +587,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	    this.sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	    this.jpShowTable.add(this.sp);
 
-	    // Show shoppingCart table associated to order id's
+	    // Show shoppingCart products table associated to order id's
 	    rowData = new String[shoppingCartTableSize][DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS.length];
 	    i = 0;
 	    for (Order order : orderList) {
@@ -594,11 +597,13 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    i++;
 		}
 	    }
+	    // Show shoppingcart products table
 	    this.jtTable = new JTable(rowData,
 		    DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS);
 
 	    break;
 	case DAOFactory.TABLE_PREFERENCES:
+	    // Fill string with "where" clause
 	    for (i = 0; i < this.jtfList.length; i++) {
 		if (!this.jtfList[i].getText().isEmpty()) {
 		    if (DAOFactory.COLUMNS_TYPE_PREFERENCES[i]
@@ -617,11 +622,12 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
+	    // Select preferences with concrete data
 	    HashMap<String, String> preferences = (HashMap<String, String>) DAOPostgreSQL
 		    .getInstance().readPreferences();
 	    rowData = new String[preferences.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
 	    i = 0;
-
+	    // Fill table with the result of query
 	    for (Map.Entry<String, String> entry : preferences.entrySet()) {
 		rowData[i][0] = entry.getKey();
 		rowData[i][1] = entry.getValue();
@@ -631,6 +637,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    DAOFactory.COLUMNS_NAME_PREFERENCES);
 	    break;
 	case DAOFactory.TABLE_RESOURCES:
+	    // Fill string with "where" clause
 	    for (i = 0; i < this.jtfList.length; i++) {
 		if (!this.jtfList[i].getText().isEmpty()) {
 		    if (DAOFactory.COLUMNS_TYPE_RESOURCES[i].equals("VARCHAR")) {
@@ -648,10 +655,12 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
+	    // Select resources with concrete data
 	    HashMap<Integer, String> resources = (HashMap<Integer, String>) DAOPostgreSQL
 		    .getInstance().readResources();
 	    rowData = new String[resources.size()][DAOFactory.COLUMNS_NAME_RESOURCES.length];
 	    i = 0;
+	    // Fill table with the result of query
 	    for (Map.Entry<Integer, String> entry : resources.entrySet()) {
 		rowData[i][0] = entry.getKey() + "";
 		rowData[i][1] = entry.getValue();
