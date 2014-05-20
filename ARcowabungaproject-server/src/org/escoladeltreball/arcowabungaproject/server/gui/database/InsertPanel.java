@@ -176,7 +176,7 @@ public class InsertPanel extends JPanel implements ActionListener {
 
 		break;
 	    case DAOFactory.TABLE_PIZZAS:
-		id = IdObject.getNextId();
+		id = IdObject.nextId();
 		name = null;
 		price = null;
 		icon = null;
@@ -210,11 +210,11 @@ public class InsertPanel extends JPanel implements ActionListener {
 
 		JTable ingredientsTable = ((ShowRowsTextFieldsPanel) this.jpDoInsert)
 			.getJtIngredientsTable();
-		Ingredients ingredientsMap = new Ingredients(
-			IdObject.getNextId());
-		for (int j = 0; j < DAOFactory.COLUMNS_NAME_INGREDIENTS.length; j++) {
+		Ingredients ingredientsMap = new Ingredients(IdObject.nextId());
+		for (int j = 0; j < ingredientsTable.getRowCount(); j++) {
 		    String quantity = (String) ingredientsTable.getModel()
 			    .getValueAt(j, 2);
+		    System.out.println("quantity " + quantity);
 		    String idIngredient = (String) ingredientsTable.getModel()
 			    .getValueAt(j, 0);
 		    Ingredient ing = new Ingredient(

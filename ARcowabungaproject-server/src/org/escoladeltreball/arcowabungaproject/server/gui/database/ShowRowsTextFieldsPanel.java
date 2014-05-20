@@ -173,7 +173,8 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 		this.add(this.jtfList[i], this.constraints);
 	    }
 	    if (insert) {
-		String[][] rowDataIngredients = new String[DAOFactory.COLUMNS_NAME_INGREDIENT.length][3];
+		String[][] rowDataIngredients = new String[DAOPostgreSQL
+			.getInstance().readIngredient().size()][3];
 		int i = 0;
 		for (Ingredient ingredient : DAOPostgreSQL.getInstance()
 			.readIngredient()) {
