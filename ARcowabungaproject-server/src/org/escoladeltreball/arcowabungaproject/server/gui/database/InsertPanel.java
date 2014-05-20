@@ -35,7 +35,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.escoladeltreball.arcowabungaproject.model.Address;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
@@ -110,10 +112,40 @@ public class InsertPanel extends JPanel implements ActionListener {
 	    this.jcbTables = ((ShowRowsTextFieldsPanel) jpDoInsert)
 		    .getJcbTables();
 	    String item = (String) this.jcbTables.getSelectedItem();
-	    switch (item) {
-	    case DAOFactory.TABLE_INGREDIENT:
-		if (!this.jtfList[0].getText().isEmpty()) {
+	    if (!this.jtfList[0].getText().isEmpty()) {
+		switch (item) {
+		case DAOFactory.TABLE_ADDRESS:
 		    int id = Integer.parseInt(this.jtfList[0].getText());
+		    String street = null;
+		    String number = null;
+		    String postCode = null;
+		    String floor = null;
+		    String stair = null;
+		    String door = null;
+		    if (!this.jtfList[1].getText().isEmpty()) {
+			street = this.jtfList[1].getText();
+		    }
+		    if (!this.jtfList[2].getText().isEmpty()) {
+			number = this.jtfList[2].getText();
+		    }
+		    if (!this.jtfList[3].getText().isEmpty()) {
+			postCode = this.jtfList[3].getText();
+		    }
+		    if (!this.jtfList[4].getText().isEmpty()) {
+			floor = this.jtfList[4].getText();
+		    }
+		    if (!this.jtfList[5].getText().isEmpty()) {
+			stair = this.jtfList[5].getText();
+		    }
+		    if (!this.jtfList[6].getText().isEmpty()) {
+			door = this.jtfList[6].getText();
+		    }
+		    Address address = new Address(id, street, number, postCode,
+			    floor, stair, door);
+		    // DAOPostgreSQL.getInstance().writeAddress(address.getId())
+		    break;
+		case DAOFactory.TABLE_INGREDIENT:
+		    id = Integer.parseInt(this.jtfList[0].getText());
 		    String name = null;
 		    Float price = null;
 		    Integer icon = null;
@@ -126,24 +158,62 @@ public class InsertPanel extends JPanel implements ActionListener {
 			price = Float.parseFloat(this.jtfList[2].getText());
 		    }
 		    if (!this.jtfList[3].getText().isEmpty()) {
-			icon = Integer.parseInt(this.jtfList[3].getText());
+			model = Integer.parseInt(this.jtfList[3].getText());
 		    }
 		    if (!this.jtfList[4].getText().isEmpty()) {
-			model = Integer.parseInt(this.jtfList[4].getText());
+			icon = Integer.parseInt(this.jtfList[4].getText());
 		    }
 		    if (!this.jtfList[5].getText().isEmpty()) {
 			texture = this.jtfList[5].getText();
 		    }
 		    Ingredient ingredient = new Ingredient(id, name, price,
-			    icon, model, texture);
+			    model, icon, texture);
 		    HashSet<Ingredient> ingredients = new HashSet<Ingredient>();
 		    ingredients.add(ingredient);
 		    DAOPostgreSQL.getInstance().writeIngredients(ingredients);
-		}
-		break;
 
-	    default:
-		break;
+		    break;
+		case DAOFactory.TABLE_PIZZAS:
+		    id = Integer.parseInt(this.jtfList[0].getText());
+		    name = null;
+		    price = null;
+		    icon = null;
+		    Float discount = null;
+		    String massType = null;
+		    String type = null;
+		    Integer size = null;
+		    if (!this.jtfList[1].getText().isEmpty()) {
+			name = this.jtfList[1].getText();
+		    }
+		    if (!this.jtfList[2].getText().isEmpty()) {
+			price = Float.parseFloat(this.jtfList[2].getText());
+		    }
+		    if (!this.jtfList[3].getText().isEmpty()) {
+			icon = Integer.parseInt(this.jtfList[3].getText());
+		    }
+		    if (!this.jtfList[4].getText().isEmpty()) {
+			discount = Float.parseFloat(this.jtfList[4].getText());
+		    }
+		    if (!this.jtfList[5].getText().isEmpty()) {
+			massType = this.jtfList[5].getText();
+		    }
+		    if (!this.jtfList[6].getText().isEmpty()) {
+			type = this.jtfList[6].getText();
+		    }
+		    if (!this.jtfList[7].getText().isEmpty()) {
+			size = Integer.parseInt(this.jtfList[7].getText());
+		    }
+		    Pizza pizza = new Pizza(id, name, price, icon, discount,
+			    massType, type, size);
+		    HashSet<Pizza> pizzas = new HashSet<Pizza>();
+		    pizzas.add(pizza);
+		    // DAOPostgreSQL.getInstance().writepizzas(pizzas);
+
+		    break;
+
+		default:
+		    break;
+		}
 	    }
 	}
 	this.validate();
