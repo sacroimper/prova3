@@ -21,6 +21,7 @@ import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
 import preview.Preview;
 import system.EventManager;
+import util.Vec;
 //import util.IO;
 //import util.Vec;
 //import util.Wrapper;
@@ -72,7 +73,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		meshComponent = pizzaMesh;
+		pizzaMesh.setScale(new Vec(2, 2, 2));
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
 		world.add(o);
@@ -85,7 +86,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		meshComponent = pizzaMesh;
+		pizzaMesh.setScale(new Vec(2, 2, 2));
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
 		world.add(o);
@@ -106,7 +107,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
-			meshComponent = pizzaMesh;
+			pizzaMesh.setScale(new Vec(2, 2, 2));
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
 			world.add(o);
@@ -118,7 +119,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			ingredientTextures.get(i)) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
-			meshComponent = pizzaMesh;
+			pizzaMesh.setScale(new Vec(2, 2, 2));
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
 			world.add(o);
