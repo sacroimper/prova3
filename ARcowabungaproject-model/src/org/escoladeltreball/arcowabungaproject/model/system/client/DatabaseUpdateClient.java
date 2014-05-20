@@ -32,10 +32,6 @@ import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 
-/**
- * @author local
- * 
- */
 public class DatabaseUpdateClient extends Client {
 
     // ====================
@@ -51,6 +47,8 @@ public class DatabaseUpdateClient extends Client {
     private Set<Drink> drinks;
     private Set<Offer> offers;
     private int newDBVersion;
+
+    private boolean update;
 
     // ====================
     // CONSTRUCTORS
@@ -102,6 +100,7 @@ public class DatabaseUpdateClient extends Client {
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
+		update = true;
 		serverResponse = readInt();
 	    }
 
@@ -157,5 +156,9 @@ public class DatabaseUpdateClient extends Client {
      */
     public int getNewDBVersion() {
 	return newDBVersion;
+    }
+
+    public boolean isUpdate() {
+	return update;
     }
 }
