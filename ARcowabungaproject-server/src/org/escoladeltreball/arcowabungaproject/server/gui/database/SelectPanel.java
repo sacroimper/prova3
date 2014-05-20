@@ -61,7 +61,6 @@ public class SelectPanel extends JPanel implements ActionListener {
     // ====================
     private JPanel jpDoSelect;
     private JPanel jpShowTable;
-    private JLabel[] jlLists;
     private JTextField[] jtfList;
     private JLabel jlChooseTable;
     private JComboBox<String> jcbTables;
@@ -507,7 +506,6 @@ public class SelectPanel extends JPanel implements ActionListener {
 	where = "";
 	this.jpShowTable.removeAll();
 	this.repaint();
-	this.jlLists = ((ShowRowsTextFieldsPanel) jpDoSelect).getJlLists();
 	this.jtfList = ((ShowRowsTextFieldsPanel) jpDoSelect).getJtfList();
 	if (this.jbExecuteQuery != null) {
 	    if (this.jtfList != null) {
