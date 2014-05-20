@@ -35,6 +35,7 @@ public class Pizza extends Product {
     private static final long serialVersionUID = 3520483599417593606L;
 
     public static final String MASSTYPE_THIN = "thin";
+    public static final String MASSTYPE_NORMAL = "normal";
     public static final String MASSTYPE_THICK = "thick";
     public static final String TYPE_COSTUM_SAVED = "costumSaved";
     public static final String TYPE_COSTUM_TEMPORARY = "costumTemporary";
