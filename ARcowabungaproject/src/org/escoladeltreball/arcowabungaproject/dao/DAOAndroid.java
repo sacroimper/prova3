@@ -157,8 +157,7 @@ public class DAOAndroid extends DAOFactory {
 	// AR ingredient textures
 	resources.put(200, "data/models/ingredients/mushroom_texture.png");
 	resources.put(201, "data/models/ingredients/redpepper_texture.png");
-	// resources.put(202,
-	// "data/models/ingredients/greenpepper_texture.png");
+	resources.put(202, "data/models/ingredients/greenpepper_texture.png");
 	// resources.put(203, "data/models/ingredients/tuna_texture.png");
 	resources.put(204, "data/models/ingredients/ham_texture.png");
 	// resources.put(205, "data/models/ingredients/bacon_texture.png");
@@ -172,13 +171,12 @@ public class DAOAndroid extends DAOFactory {
 	resources.put(213, "data/models/ingredients/corn_texture.png");
 	// resources.put(214, "data/models/ingredients/chicken_texture.png");
 	// resources.put(215, "data/models/ingredients/mince_texture.png");
-	// resources.put(216, "data/models/ingredients/egg_texture.png");
+	resources.put(216, "data/models/ingredients/egg_texture.png");
 	// resources.put(217, "data/models/ingredients/marjoram_texture.png");
 	// resources.put(218, "data/models/ingredients/artichoke_texture.png");
 	resources.put(219, "data/models/ingredients/goatcheese_texture.png");
 
 	// provisional ingredient textures
-	resources.put(202, "data/models/ingredients/mushroom_texture.png");
 	resources.put(203, "data/models/ingredients/mushroom_texture.png");
 	resources.put(205, "data/models/ingredients/mushroom_texture.png");
 	resources.put(206, "data/models/ingredients/mushroom_texture.png");
@@ -190,7 +188,6 @@ public class DAOAndroid extends DAOFactory {
 	resources.put(212, "data/models/ingredients/mushroom_texture.png");
 	resources.put(214, "data/models/ingredients/mushroom_texture.png");
 	resources.put(215, "data/models/ingredients/mushroom_texture.png");
-	resources.put(216, "data/models/ingredients/mushroom_texture.png");
 	resources.put(217, "data/models/ingredients/mushroom_texture.png");
 	resources.put(218, "data/models/ingredients/mushroom_texture.png");
 
