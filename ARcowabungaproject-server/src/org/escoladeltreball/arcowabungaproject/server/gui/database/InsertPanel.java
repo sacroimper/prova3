@@ -23,6 +23,13 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui.database;
 
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InsertPanel extends JPanel {
@@ -34,10 +41,21 @@ public class InsertPanel extends JPanel {
     // ====================
     // ATTRIBUTES
     // ====================
+    private JPanel jpDoInsert;
+    private JPanel jpShowTables;
+    private JButton jbInserData;
+    private JLabel jlChooseTable;
+    private JComboBox<String> jcbTables;
+    private GridBagConstraints constraints;
+    private int indexConstrainstX = 0;
+    private int indexConstrainstY = 0;
 
     // ====================
     // CONSTRUCTORS
     // ====================
+    public InsertPanel() {
+	this.initComponents();
+    }
 
     // ====================
     // PUBLIC METHODS
@@ -50,6 +68,16 @@ public class InsertPanel extends JPanel {
     // ====================
     // PRIVATE METHODS
     // ====================
+    private void initComponents() {
+	this.setLayout(new BorderLayout());
+	this.jpDoInsert = new ShowRowsTextFieldsPanel();
+	this.jpDoInsert.setLayout(new GridBagLayout());
+	this.jpShowTables = new JPanel();
+	this.jbInserData = new JButton("Insert");
+
+	this.add(this.jpDoInsert, BorderLayout.WEST);
+	this.add(this.jpShowTables, BorderLayout.CENTER);
+    }
 
     // ====================
     // OVERRIDE METHODS
