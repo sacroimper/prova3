@@ -93,12 +93,11 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    }
 	};
 
+	ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
+		.getModelIngredientTextures();
+
 	// Method to deploy the ingredients object and textures
-	if (PizzaModelMapper.getIngredientsSize() > 0) {
-
-	    ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
-		    .getModelIngredientTextures();
-
+	if (ingredientTextures.size() > 0) {
 	    for (int i = 0; i < ingredientTextures.size(); i++) {
 		// Load a previous alpha texture of the ingredient model
 		// Helps to show all correctly
