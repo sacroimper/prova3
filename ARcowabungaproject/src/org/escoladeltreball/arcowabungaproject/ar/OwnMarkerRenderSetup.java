@@ -28,6 +28,8 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     // CONSTANTS
     // ====================
 
+    private final Vec INIT_VECTOR = new Vec(0, 0, 0);
+
     // ====================
     // ATTRIBUTES
     // ====================
@@ -40,7 +42,6 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     public PizzaWorld world;
     public PizzaMesh meshComponent;
-    public final float PLANE_POSITION_FIXER = 0.0f;
 
     // ====================
     // CONSTRUCTORS
@@ -101,7 +102,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		pizzaMesh.setPosition(new Vec(0, 0, PLANE_POSITION_FIXER));
+		pizzaMesh.setPosition(INIT_VECTOR);
 		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
@@ -115,7 +116,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		pizzaMesh.setPosition(new Vec(0, 0, PLANE_POSITION_FIXER));
+		pizzaMesh.setPosition(INIT_VECTOR);
 		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
@@ -136,8 +137,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
-			pizzaMesh.setPosition(new Vec(0, 0,
-				PLANE_POSITION_FIXER));
+			pizzaMesh.setPosition(INIT_VECTOR);
 			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
@@ -152,8 +152,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
 			// pizzaMesh.setRotation(new Vec(0f, 0f, (float) (Math
 			// .random() * 10)));
-			pizzaMesh.setPosition(new Vec(0, 0,
-				PLANE_POSITION_FIXER));
+			pizzaMesh.setPosition(INIT_VECTOR);
 			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
