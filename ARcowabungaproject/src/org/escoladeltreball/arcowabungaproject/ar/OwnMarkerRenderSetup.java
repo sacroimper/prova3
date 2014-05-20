@@ -146,8 +146,8 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			ingredientTextures.get(i)) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
-			pizzaMesh.setRotation(new Vec(
-				(float) (Math.random() * 10), 0f, 0f));
+			// pizzaMesh.setRotation(new Vec(0f, 0f, (float) (Math
+			// .random() * 10)));
 			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
