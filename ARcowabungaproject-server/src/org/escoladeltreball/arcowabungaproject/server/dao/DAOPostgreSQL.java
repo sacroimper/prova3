@@ -388,7 +388,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
 				+ ";");
 
 		if (rsPizza.next()) {
@@ -416,7 +416,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
 				+ ";");
 
 		if (rsDrink.next()) {
@@ -439,7 +439,7 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_OFFERS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[1])
 				+ ";");
 
 		if (rsOffer.next()) {
@@ -450,7 +450,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			    rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[3]),
 			    rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[4]));
 		    ArrayList<Product> productOfferList = (ArrayList<Product>) selectProductsOffersById(rsOffer
-			    .getInt(DAOFactory.COLUMNS_NAME_OFFERS[5]));
+			    .getInt(DAOFactory.COLUMNS_NAME_OFFERS[0]));
 		    offer.setProductList(productOfferList);
 		    productsList.add(offer);
 		}
