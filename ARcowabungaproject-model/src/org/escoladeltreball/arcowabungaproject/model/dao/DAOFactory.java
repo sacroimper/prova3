@@ -343,15 +343,15 @@ public abstract class DAOFactory {
 
 	Pizza p1 = new Pizza(1, "P1", 30, 150, 0, Pizza.MASSTYPE_THIN,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_SMALL);
-	Pizza p2 = new Pizza(2, "P2", 10, 150, 0, Pizza.MASSTYPE_THICK,
+	Pizza p2 = new Pizza(2, "P2", 10, 150, 0, Pizza.MASSTYPE_NORMAL,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_LARGE);
-	Pizza p3 = new Pizza(3, "P3", 7, 150, 0, Pizza.MASSTYPE_THIN,
+	Pizza p3 = new Pizza(3, "P3", 7, 150, 0, Pizza.MASSTYPE_THICK,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_MEDIUM);
-	Pizza p4 = new Pizza(10004, "PC1", 10, 150, 0, Pizza.MASSTYPE_THICK,
+	Pizza p4 = new Pizza(10004, "PC1", 10, 150, 0, Pizza.MASSTYPE_THIN,
 		Pizza.TYPE_COSTUM_SAVED, Pizza.SIZE_SMALL);
-	Pizza p5 = new Pizza(10005, "PC2", 10, 150, 0, Pizza.MASSTYPE_THIN,
+	Pizza p5 = new Pizza(10005, "PC2", 10, 150, 0, Pizza.MASSTYPE_NORMAL,
 		Pizza.TYPE_COSTUM_SAVED, Pizza.SIZE_SMALL);
-	Pizza p6 = new Pizza(10006, "PT1", 10, 150, 0, Pizza.MASSTYPE_THIN,
+	Pizza p6 = new Pizza(10006, "PT1", 10, 150, 0, Pizza.MASSTYPE_THICK,
 		Pizza.TYPE_COSTUM_TEMPORARY, Pizza.SIZE_COWABUNGA);
 	Pizza p7 = new Pizza(10007, "PT2", 10, 150, 0, Pizza.MASSTYPE_THICK,
 		Pizza.TYPE_COSTUM_TEMPORARY, Pizza.SIZE_MEDIUM);
