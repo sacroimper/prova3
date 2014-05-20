@@ -1,16 +1,10 @@
 package org.escoladeltreball.arcowabungaproject.ar;
 
-//import com.badlogic.gdx.graphics.g3d.loaders.ogre.mesh.Mesh;
-
 import geo.GeoObj;
-//import gl.Color;
 import gl.CustomGLSurfaceView;
 import gl.GL1Renderer;
 import gl.GLCamera;
 import gl.GLFactory;
-//import gl.animations.AnimationFaceToCamera;
-//import gl.scenegraph.MeshComponent;
-//import gl.scenegraph.Shape;
 import gui.GuiSetup;
 
 import java.util.ArrayList;
@@ -22,10 +16,6 @@ import markerDetection.UnrecognizedMarkerListener;
 import preview.Preview;
 import system.EventManager;
 import util.Vec;
-//import util.IO;
-//import util.Vec;
-//import util.Wrapper;
-//import worldData.MoveComp;
 import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
@@ -33,15 +23,50 @@ import android.app.Activity;
 import de.rwth.GDXConnection;
 
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
+    // ====================
+    // CONSTANTS
+    // ====================
+
+    // ====================
+    // ATTRIBUTES
+    // ====================
 
     private DetectionThread myThread;
     private Preview cameraPreview;
     private GLCamera camera;
+    private GL1Renderer renderer;
+    private Vec pizzaSizeAndMesh;
+
     public PizzaWorld world;
     public PizzaMesh meshComponent;
-    private GL1Renderer renderer;
 
-    // public Wrapper targetMoveWrapper = new Wrapper();
+    // ====================
+    // CONSTRUCTORS
+    // ====================
+
+    // ====================
+    // PUBLIC METHODS
+    // ====================
+
+    /**
+     * @return
+     */
+    private Vec pizzaVectorCalculator() {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    // ====================
+    // PROTECTED METHODS
+    // ====================
+
+    // ====================
+    // PRIVATE METHODS
+    // ====================
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
 
     @Override
     public UnrecognizedMarkerListener _a2_getUnrecognizedMarkerListener() {
@@ -59,6 +84,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     public void _a_initFieldsIfNecessary() {
 	camera = new GLCamera();
 	world = new PizzaWorld(camera);
+	pizzaSizeAndMesh = pizzaVectorCalculator();
     }
 
     @Override
@@ -66,7 +92,6 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    GLFactory objectFactory, GeoObj currentPosition) {
 	this.renderer = renderer;
 	GDXConnection.init(this.getActivity(), this.renderer);
-
 	// Load a previous alpha texture of the ingredient model
 	// Helps to show all correctly
 	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
@@ -158,5 +183,9 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	if (myThread != null)
 	    myThread.stopThread();
     }
+
+    // ====================
+    // GETTERS & SETTERS
+    // ====================
 
 }
