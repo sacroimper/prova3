@@ -48,6 +48,7 @@ import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
@@ -304,6 +305,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	String[][] rowData = null;
 	switch (item) {
 	case DAOFactory.TABLE_ADDRESS:
+	    // Fill string with "where" clause
 	    for (int i = 0; i < this.jtfList.length; i++) {
 		if (!this.jtfList[i].getText().isEmpty()) {
 		    if (DAOFactory.COLUMNS_TYPE_ADDRESS[i].equals("VARCHAR")
@@ -322,10 +324,12 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
+	    // Select address with concrete fields
 	    HashSet<Address> addressList = (HashSet<Address>) DAOPostgreSQL
 		    .getInstance().readAddress();
 	    rowData = new String[addressList.size()][DAOFactory.COLUMNS_NAME_ADDRESS.length];
 	    int i = 0;
+	    // fill table with results of query
 	    for (Address address : addressList) {
 		rowData[i][0] = address.getId() + "";
 		rowData[i][1] = address.getStreet();
@@ -339,6 +343,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_ADDRESS);
 	    break;
 	case DAOFactory.TABLE_INGREDIENT:
+	    // Fill string with "where" clause
 	    for (i = 0; i < this.jtfList.length; i++) {
 		if (!this.jtfList[i].getText().isEmpty()) {
 		    if (DAOFactory.COLUMNS_TYPE_INGREDIENT[i].equals("VARCHAR")) {
@@ -356,10 +361,12 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
+	    // Select Ingredient with concrete fields
 	    HashSet<Ingredient> ingredientsList = (HashSet<Ingredient>) DAOPostgreSQL
 		    .getInstance().readIngredient();
 	    rowData = new String[ingredientsList.size()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
 	    i = 0;
+	    // Fill table with the results of query
 	    for (Ingredient ingredient : ingredientsList) {
 		rowData[i][0] = ingredient.getId() + "";
 		rowData[i][1] = ingredient.getName();
@@ -373,6 +380,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    DAOFactory.COLUMNS_NAME_INGREDIENT);
 	    break;
 	case DAOFactory.TABLE_PIZZAS:
+	    // Fill string with "where" clause
 	    for (i = 0; i < this.jtfList.length; i++) {
 		if (!this.jtfList[i].getText().isEmpty()) {
 		    if (DAOFactory.COLUMNS_TYPE_PIZZAS[i].equals("VARCHAR")) {
@@ -390,10 +398,13 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
+	    // Select pizza with concrete fields
 	    HashSet<Pizza> pizzasList = (HashSet<Pizza>) DAOPostgreSQL
 		    .getInstance().readPizza();
 	    rowData = new String[pizzasList.size()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    int ingredientsTableSize = 0;
 	    i = 0;
+	    // Fill pizza table with the results of query
 	    for (Pizza pizza : pizzasList) {
 		rowData[i][0] = pizza.getId() + "";
 		rowData[i][1] = pizza.getName();
@@ -404,12 +415,37 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		rowData[i][6] = pizza.getSize() + "";
 		rowData[i][7] = pizza.getDiscount() + "";
 		rowData[i][8] = pizza.getIngredients().getId() + "";
+		ingredientsTableSize += pizza.getIngredients().size();
 		i++;
 	    }
+	    // Show pizza table
 	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
+	    this.jtTable.setPreferredScrollableViewportSize(this.jtTable
+		    .getPreferredSize());
+	    this.sp = new JScrollPane(this.jtTable);
+	    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    this.sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	    this.jpShowTable.add(this.sp);
+
+	    // Show List of ingredients table associated to pizza ingredients
+	    // id's
+	    rowData = new String[ingredientsTableSize][DAOFactory.COLUMNS_NAME_INGREDIENTS.length];
+	    i = 0;
+	    for (Pizza pizza : pizzasList) {
+		for (Map.Entry<Ingredient, Integer> entry : pizza
+			.getIngredients().entrySet()) {
+		    rowData[i][0] = pizza.getIngredients().getId() + "";
+		    rowData[i][1] = entry.getKey().getId() + "";
+		    rowData[i][2] = entry.getValue() + "";
+		    i++;
+		}
+	    }
+	    this.jtTable = new JTable(rowData,
+		    DAOFactory.COLUMNS_NAME_INGREDIENTS);
 
 	    break;
 	case DAOFactory.TABLE_DRINKS:
+	    // Fill string with "where" clause
 	    for (i = 0; i < this.jtfList.length; i++) {
 		if (!this.jtfList[i].getText().isEmpty()) {
 		    if (DAOFactory.COLUMNS_TYPE_DRINKS[i].equals("VARCHAR")) {
@@ -427,10 +463,12 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
+	    // Select drink with concrete fields
 	    HashSet<Drink> drinksList = (HashSet<Drink>) DAOPostgreSQL
 		    .getInstance().readDrink();
 	    rowData = new String[drinksList.size()][DAOFactory.COLUMNS_NAME_DRINKS.length];
 	    i = 0;
+	    // Fill drink table
 	    for (Drink drink : drinksList) {
 		rowData[i][0] = drink.getId() + "";
 		rowData[i][1] = drink.getName();
@@ -443,6 +481,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_DRINKS);
 	    break;
 	case DAOFactory.TABLE_OFFERS:
+	    // Fill string with "where" clause
 	    for (i = 0; i < this.jtfList.length; i++) {
 		if (!this.jtfList[i].getText().isEmpty()) {
 		    if (DAOFactory.COLUMNS_TYPE_OFFERS[i].equals("VARCHAR")) {
@@ -460,21 +499,43 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
+	    // Select the offers with concrete fields
 	    HashSet<Offer> offerList = (HashSet<Offer>) DAOPostgreSQL
 		    .getInstance().readOffer();
 	    rowData = new String[offerList.size()][DAOFactory.COLUMNS_NAME_OFFERS.length];
 	    i = 0;
+	    // Fill offers table with the results of query
+	    int offersProductsTableSize = 0;
 	    for (Offer offer : offerList) {
 		rowData[i][0] = offer.getId() + "";
 		rowData[i][1] = offer.getName();
 		rowData[i][2] = offer.getPrice() + "";
 		rowData[i][3] = offer.getIcon() + "";
 		rowData[i][4] = offer.getDiscount() + "";
-		// affegir id de la taula de la llista de productes
-		// rowData[i][5] = offer.getProductList() + "";
+		offersProductsTableSize += offer.getProductList().size();
 		i++;
 	    }
+	    // Show offer table
 	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_OFFERS);
+	    this.jtTable.setPreferredScrollableViewportSize(this.jtTable
+		    .getPreferredSize());
+	    this.sp = new JScrollPane(this.jtTable);
+	    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    this.sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	    this.jpShowTable.add(this.sp);
+
+	    // Show List of products table associated to offer id's
+	    rowData = new String[offersProductsTableSize][DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS.length];
+	    i = 0;
+	    for (Offer offer : offerList) {
+		for (Product product : offer.getProductList()) {
+		    rowData[i][0] = offer.getId() + "";
+		    rowData[i][1] = product.getId() + "";
+		    i++;
+		}
+	    }
+	    this.jtTable = new JTable(rowData,
+		    DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS);
 	    break;
 	case DAOFactory.TABLE_ORDERS:
 	    for (i = 0; i < this.jtfList.length; i++) {
