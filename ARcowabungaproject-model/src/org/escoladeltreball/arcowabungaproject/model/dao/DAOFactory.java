@@ -41,6 +41,7 @@ import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.model.system.client.DatabaseUpdateClient;
 import org.joda.time.DateTime;
 
 public abstract class DAOFactory {
@@ -301,7 +302,18 @@ public abstract class DAOFactory {
     }
 
     public boolean loadServerData() {
-
+	if (pizzeria.getRole().equals(Pizzeria.ROLE_CLIENT)) {
+	    DatabaseUpdateClient c = new DatabaseUpdateClient();
+	    c.connect();
+	    if (c.isUpdate()) {
+		pizzeria.setIngredients(c.getIngredients());
+		pizzeria.setPredefinedPizzas(c.getPredefinedPizzas());
+		pizzeria.setDrinks(c.getDrinks());
+		pizzeria.setOffers(c.getOffers());
+		currentVersion = c.getNewDBVersion();
+	    }
+	    return c.isUpdate();
+	}
 	return false;
     }
 
