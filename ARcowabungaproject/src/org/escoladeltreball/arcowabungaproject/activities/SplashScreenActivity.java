@@ -24,12 +24,11 @@
 
 package org.escoladeltreball.arcowabungaproject.activities;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.model.system.client.Client;
+import org.escoladeltreball.arcowabungaproject.model.system.client.DatabaseUpdateClient;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -73,26 +72,33 @@ public class SplashScreenActivity extends Activity {
 
     private void checkDataBase() {
 
-	// ***ESTE METODO CAMBIARA
-	// ***HA DE COMPROBAR LA ACTUALIZACION DE LA BASE DE DATOS
-	TimerTask task = new TimerTask() {
+	// // ***ESTE METODO CAMBIARA
+	// // ***HA DE COMPROBAR LA ACTUALIZACION DE LA BASE DE DATOS
+	// TimerTask task = new TimerTask() {
+	//
+	// @Override
+	// public void run() {
+	//
+	// // Start the next activity
+	// Intent mainIntent = new Intent().setClass(
+	// SplashScreenActivity.this, MainMenuActivity.class);
+	// startActivity(mainIntent);
+	//
+	// // Close the activity so the user won't able to go back this
+	// // activity pressing Back button
+	// finish();
+	// }
+	// };
+	//
+	// // Simulate a long loading process on application startup.
+	// Timer timer = new Timer();
+	// timer.schedule(task, SPLASH_SCREEN_DELAY);
 
-	    @Override
-	    public void run() {
+	Client c = new DatabaseUpdateClient();
+	c.connect();
 
-		// Start the next activity
-		Intent mainIntent = new Intent().setClass(
-			SplashScreenActivity.this, MainMenuActivity.class);
-		startActivity(mainIntent);
-
-		// Close the activity so the user won't able to go back this
-		// activity pressing Back button
-		finish();
-	    }
-	};
-
-	// Simulate a long loading process on application startup.
-	Timer timer = new Timer();
-	timer.schedule(task, SPLASH_SCREEN_DELAY);
+	Intent mainIntent = new Intent().setClass(SplashScreenActivity.this,
+		MainMenuActivity.class);
+	startActivity(mainIntent);
     }
 }

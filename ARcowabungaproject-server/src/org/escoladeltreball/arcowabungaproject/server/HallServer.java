@@ -81,12 +81,14 @@ public class HallServer extends Server {
 		waitClient();
 		int opt = readInt();
 		Server newServer = null;
-		int newPort = getValidPort();
+		int newPort = 0;
 		switch (opt) {
 		case ServerConstants.SERVER_OPTION_DATABASE_UPDATE:
+		    newPort = getValidPort();
 		    newServer = new DatabaseUpdateServer(newPort);
 		    break;
 		case ServerConstants.SERVER_OPTION_SEND_ORDER:
+		    newPort = getValidPort();
 		    newServer = new OrderReceiverServer(newPort);
 		    break;
 		}
