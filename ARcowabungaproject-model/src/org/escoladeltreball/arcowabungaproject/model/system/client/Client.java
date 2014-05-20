@@ -31,6 +31,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
+
 public abstract class Client {
 
     // ====================
@@ -47,6 +49,8 @@ public abstract class Client {
     protected ObjectOutputStream out;
 
     protected int option;
+
+    protected static String ipAddress;
 
     // ====================
     // CONSTRUCTORS
@@ -139,6 +143,28 @@ public abstract class Client {
 	    }
 	}
 	return obj;
+    }
+
+    protected boolean tryIP() {
+	try {
+	    socket = new Socket(ipAddress, ServerConstants.HALL_SERVER_PORT);
+	    socket.close();
+	    socket = null;
+	} catch (UnknownHostException e) {
+	    return false;
+	} catch (IOException e) {
+	    return false;
+	}
+	return true;
+    }
+
+    protected boolean tryIPs() {
+	boolean foundIP = false;
+	for (int n = 11; n < 255 && !foundIP; n++) {
+	    ipAddress = ServerConstants.IP_ADRESS_PREFIX + n;
+	    foundIP = tryIP();
+	}
+	return true;
     }
 
     // ====================
