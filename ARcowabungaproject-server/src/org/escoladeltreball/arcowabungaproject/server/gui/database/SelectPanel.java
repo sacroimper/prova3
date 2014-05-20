@@ -538,6 +538,7 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		    DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS);
 	    break;
 	case DAOFactory.TABLE_ORDERS:
+	    // Fill string with "where" clause
 	    for (i = 0; i < this.jtfList.length; i++) {
 		if (!this.jtfList[i].getText().isEmpty()) {
 		    if (DAOFactory.COLUMNS_TYPE_ORDERS[i].equals("VARCHAR")
@@ -556,10 +557,12 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		where = where.substring(0, where.length() - 1);
 		where = " WHERE " + where;
 	    }
+	    // Select the orders with concrete fields
 	    HashSet<Order> orderList = (HashSet<Order>) DAOPostgreSQL
 		    .getInstance().readOrder();
 	    rowData = new String[orderList.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
 	    i = 0;
+	    int shoppingCartTableSize = 0;
 	    for (Order order : orderList) {
 		rowData[i][0] = order.getId() + "";
 		rowData[i][1] = order.getEmail();
@@ -568,9 +571,32 @@ public class SelectPanel extends JPanel implements ItemListener, ActionListener 
 		rowData[i][4] = order.getPaymentMethod();
 		rowData[i][5] = order.getAddress().getId() + "";
 		rowData[i][6] = order.getShoppingCart().getId() + "";
+		shoppingCartTableSize += order.getShoppingCart().getProducts()
+			.size();
 		i++;
 	    }
+	    // Show orders table
 	    this.jtTable = new JTable(rowData, DAOFactory.COLUMNS_NAME_ORDERS);
+	    this.jtTable.setPreferredScrollableViewportSize(this.jtTable
+		    .getPreferredSize());
+	    this.sp = new JScrollPane(this.jtTable);
+	    this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    this.sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	    this.jpShowTable.add(this.sp);
+
+	    // Show shoppingCart table associated to order id's
+	    rowData = new String[shoppingCartTableSize][DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS.length];
+	    i = 0;
+	    for (Order order : orderList) {
+		for (Product product : order.getShoppingCart().getProducts()) {
+		    rowData[i][0] = order.getShoppingCart().getId() + "";
+		    rowData[i][1] = product.getId() + "";
+		    i++;
+		}
+	    }
+	    this.jtTable = new JTable(rowData,
+		    DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS);
+
 	    break;
 	case DAOFactory.TABLE_PREFERENCES:
 	    for (i = 0; i < this.jtfList.length; i++) {
