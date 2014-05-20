@@ -106,30 +106,29 @@ public abstract class Server extends Thread {
     }
 
     protected void closeClient() throws IOException {
-	out.close();
-	in.close();
-	socketService.close();
-	socketService = null;
-	print("Client closed");
+	if (socketService != null) {
+	    out.close();
+	    in.close();
+	    socketService.close();
+	    socketService = null;
+	    print("Client closed");
+	}
     }
 
     protected void close() {
 	try {
-	    try {
-		if (socketService != null) {
-		    closeClient();
-		}
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
+	    closeClient();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	try {
 	    if (serverSocket != null) {
 		serverSocket.close();
+		print("Closed");
 		serverSocket = null;
 	    }
 	} catch (IOException e) {
 	    e.printStackTrace();
-	} finally {
-	    print("Closed");
 	}
 	synchronized (listeningServers) {
 	    listeningServers.remove(port);

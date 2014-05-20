@@ -497,6 +497,10 @@ public abstract class DAOFactory {
 	writePreferences(preferences);
     }
 
+    public static DAOFactory getInstance() {
+	return instance;
+    }
+
     // ====================
     // PROTECTED METHODS
     // ====================
