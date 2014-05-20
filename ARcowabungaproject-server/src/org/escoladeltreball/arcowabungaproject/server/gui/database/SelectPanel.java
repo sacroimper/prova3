@@ -93,7 +93,7 @@ public class SelectPanel extends JPanel implements ActionListener {
     // ====================
     private void initComponents() {
 	this.setLayout(new BorderLayout());
-	this.jpDoSelect = new ShowRowsTextFieldsPanel();
+	this.jpDoSelect = new ShowRowsTextFieldsPanel(false);
 	this.jbExecuteQuery = ((ShowRowsTextFieldsPanel) jpDoSelect)
 		.getJbExecuteQuery();
 	this.jpShowTable = new JPanel();

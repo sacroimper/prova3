@@ -73,10 +73,9 @@ public class DatabaseUpdateClient extends Client {
     // ====================
 
     @SuppressWarnings("unchecked")
-    public void conectToDatabaseUpdateServer(int newport) {
-	if (newport != 0) {
-	    init(newport);
-
+    private void conectToDatabaseUpdateServer(int port) {
+	if (port != 0) {
+	    init(port);
 	    try {
 		out.writeInt(1);
 		out.flush();
@@ -84,7 +83,6 @@ public class DatabaseUpdateClient extends Client {
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    }
-
 	    int serverResponse = readInt();
 	    if (serverResponse == ServerConstants.SERVER_NEED_UPDATE) {
 		ingredients = (Set<Ingredient>) readObject();
@@ -103,10 +101,9 @@ public class DatabaseUpdateClient extends Client {
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
-	    } else if (serverResponse == ServerConstants.SERVER_END_CONNECTION) {
-
+		serverResponse = readInt();
 	    }
-	    serverResponse = readInt();
+
 	    close();
 	}
     }
