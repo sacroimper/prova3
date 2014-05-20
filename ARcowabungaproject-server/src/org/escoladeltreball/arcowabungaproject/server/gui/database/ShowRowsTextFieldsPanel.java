@@ -32,6 +32,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
@@ -51,15 +52,18 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
     private JButton jbExecuteQuery;
     private JLabel[] jlLists;
     private JTextField[] jtfList;
+    private JTextArea jtaIngredients;
     private int indexConstrainstX = 0;
     private int indexConstrainstY = 0;
+    private boolean insert;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-    public ShowRowsTextFieldsPanel() {
+    public ShowRowsTextFieldsPanel(boolean insert) {
 	this.initComponents();
 	this.registListeners();
+	this.insert = insert;
     }
 
     // ====================
@@ -96,7 +100,7 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
     }
 
     /**
-     * Show the text fields of the tables depends on table selcted in JComboBox
+     * Show the text fields of the tables depends on table selected in JComboBox
      * 
      * @param e
      *            the item event
@@ -159,6 +163,17 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 		this.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
 		this.add(this.jtfList[i], this.constraints);
+	    }
+	    if (insert) {
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridwidth = 2;
+		this.add(new JLabel("Put ingredients separated with 'comas'"),
+			this.constraints);
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.jtaIngredients = new JTextArea();
+		this.add(jtaIngredients, this.constraints);
 	    }
 	    break;
 	case DAOFactory.TABLE_OFFERS:
