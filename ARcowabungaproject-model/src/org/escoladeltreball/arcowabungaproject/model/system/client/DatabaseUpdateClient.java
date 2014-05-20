@@ -73,7 +73,7 @@ public class DatabaseUpdateClient extends Client {
     // ====================
 
     @SuppressWarnings("unchecked")
-    public void conectToDatabaseUpdateServer(int newport) {
+    private void conectToDatabaseUpdateServer(int newport) {
 	if (newport != 0) {
 	    init(newport);
 
