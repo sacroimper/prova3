@@ -115,7 +115,7 @@ public class DatabaseUpdateClient extends Client {
 
     @Override
     public void connect() {
-
+	tryIPs();
 	int newPort = connectToHallServer(option);
 	conectToDatabaseUpdateServer(newPort);
     }
