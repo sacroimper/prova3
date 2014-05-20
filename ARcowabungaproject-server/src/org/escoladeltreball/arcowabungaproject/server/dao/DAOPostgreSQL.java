@@ -929,8 +929,8 @@ public class DAOPostgreSQL extends DAOFactory {
 	try {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
-	    stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENT
-		    + "VALUES(" + idProduct + ");");
+	    stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_PRODUCTS
+		    + " VALUES(" + idProduct + ");");
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	} finally {
@@ -994,20 +994,20 @@ public class DAOPostgreSQL extends DAOFactory {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    for (Pizza pizza : pizzas) {
+		writeProduct(pizza.getId());
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_PIZZAS
-			+ "VALUES(" + pizza.getId() + ",'" + pizza.getName()
-			+ "'," + pizza.getPrice() + "," + pizza.getIcon()
-			+ ",'" + pizza.getMassType() + "','" + pizza.getType()
-			+ "'," + pizza.getSize() + "," + pizza.getDiscount()
+			+ " VALUES(" + pizza.getId() + ",'" + pizza.getName()
+			+ "'," + pizza.getPrice() + "," + pizza.getIcon() + ","
+			+ pizza.getDiscount() + ",'" + pizza.getMassType()
+			+ "','" + pizza.getType() + "'," + pizza.getSize()
 			+ "," + pizza.getIngredients().getId() + ");");
 		for (Ingredient ingredient : pizza.getIngredientsSet()) {
 		    stm.executeUpdate("INSERT INTO "
-			    + DAOFactory.TABLE_INGREDIENTS + "VALUES("
+			    + DAOFactory.TABLE_INGREDIENTS + " VALUES("
 			    + pizza.getIngredients().getId() + ","
 			    + ingredient.getId() + ","
 			    + pizza.getIngredients().get(ingredient) + ");");
 		}
-		writeProduct(pizza.getId());
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();

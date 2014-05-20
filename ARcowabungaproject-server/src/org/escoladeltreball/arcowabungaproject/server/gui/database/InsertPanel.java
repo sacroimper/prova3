@@ -33,10 +33,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.Address;
+import org.escoladeltreball.arcowabungaproject.model.IdObject;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
@@ -97,7 +100,7 @@ public class InsertPanel extends JPanel implements ActionListener {
 	this.jpShowTables.removeAll();
 	this.jtfList = ((ShowRowsTextFieldsPanel) jpDoInsert).getJtfList();
 	boolean textFieldsIsEmpty = true;
-	int i = 0;
+	int i = 1;
 	while (i < jtfList.length && textFieldsIsEmpty) {
 	    if (!jtfList[i].getText().isEmpty()) {
 		textFieldsIsEmpty = false;
@@ -112,108 +115,121 @@ public class InsertPanel extends JPanel implements ActionListener {
 	    this.jcbTables = ((ShowRowsTextFieldsPanel) jpDoInsert)
 		    .getJcbTables();
 	    String item = (String) this.jcbTables.getSelectedItem();
-	    if (!this.jtfList[0].getText().isEmpty()) {
-		switch (item) {
-		case DAOFactory.TABLE_ADDRESS:
-		    int id = Integer.parseInt(this.jtfList[0].getText());
-		    String street = null;
-		    String number = null;
-		    String postCode = null;
-		    String floor = null;
-		    String stair = null;
-		    String door = null;
-		    if (!this.jtfList[1].getText().isEmpty()) {
-			street = this.jtfList[1].getText();
-		    }
-		    if (!this.jtfList[2].getText().isEmpty()) {
-			number = this.jtfList[2].getText();
-		    }
-		    if (!this.jtfList[3].getText().isEmpty()) {
-			postCode = this.jtfList[3].getText();
-		    }
-		    if (!this.jtfList[4].getText().isEmpty()) {
-			floor = this.jtfList[4].getText();
-		    }
-		    if (!this.jtfList[5].getText().isEmpty()) {
-			stair = this.jtfList[5].getText();
-		    }
-		    if (!this.jtfList[6].getText().isEmpty()) {
-			door = this.jtfList[6].getText();
-		    }
-		    Address address = new Address(id, street, number, postCode,
-			    floor, stair, door);
-		    // DAOPostgreSQL.getInstance().writeAddress(address.getId())
-		    break;
-		case DAOFactory.TABLE_INGREDIENT:
-		    id = Integer.parseInt(this.jtfList[0].getText());
-		    String name = null;
-		    Float price = null;
-		    Integer icon = null;
-		    Integer model = null;
-		    Integer texture = null;
-		    if (!this.jtfList[1].getText().isEmpty()) {
-			name = this.jtfList[1].getText();
-		    }
-		    if (!this.jtfList[2].getText().isEmpty()) {
-			price = Float.parseFloat(this.jtfList[2].getText());
-		    }
-		    if (!this.jtfList[3].getText().isEmpty()) {
-			model = Integer.parseInt(this.jtfList[3].getText());
-		    }
-		    if (!this.jtfList[4].getText().isEmpty()) {
-			icon = Integer.parseInt(this.jtfList[4].getText());
-		    }
-		    if (!this.jtfList[5].getText().isEmpty()) {
-			texture = Integer.parseInt(this.jtfList[5].getText());
-		    }
-		    Ingredient ingredient = new Ingredient(id, name, price,
-			    model, icon, texture);
-		    HashSet<Ingredient> ingredients = new HashSet<Ingredient>();
-		    ingredients.add(ingredient);
-		    DAOPostgreSQL.getInstance().writeIngredients(ingredients);
-
-		    break;
-		case DAOFactory.TABLE_PIZZAS:
-		    id = Integer.parseInt(this.jtfList[0].getText());
-		    name = null;
-		    price = null;
-		    icon = null;
-		    Float discount = null;
-		    String massType = null;
-		    String type = null;
-		    Integer size = null;
-		    if (!this.jtfList[1].getText().isEmpty()) {
-			name = this.jtfList[1].getText();
-		    }
-		    if (!this.jtfList[2].getText().isEmpty()) {
-			price = Float.parseFloat(this.jtfList[2].getText());
-		    }
-		    if (!this.jtfList[3].getText().isEmpty()) {
-			icon = Integer.parseInt(this.jtfList[3].getText());
-		    }
-		    if (!this.jtfList[4].getText().isEmpty()) {
-			discount = Float.parseFloat(this.jtfList[4].getText());
-		    }
-		    if (!this.jtfList[5].getText().isEmpty()) {
-			massType = this.jtfList[5].getText();
-		    }
-		    if (!this.jtfList[6].getText().isEmpty()) {
-			type = this.jtfList[6].getText();
-		    }
-		    if (!this.jtfList[7].getText().isEmpty()) {
-			size = Integer.parseInt(this.jtfList[7].getText());
-		    }
-		    Pizza pizza = new Pizza(id, name, price, icon, discount,
-			    massType, type, size);
-		    HashSet<Pizza> pizzas = new HashSet<Pizza>();
-		    pizzas.add(pizza);
-		    DAOPostgreSQL.getInstance().writePizzas(pizzas);
-
-		    break;
-
-		default:
-		    break;
+	    switch (item) {
+	    case DAOFactory.TABLE_ADDRESS:
+		int id = Integer.parseInt(this.jtfList[0].getText());
+		String street = null;
+		String number = null;
+		String postCode = null;
+		String floor = null;
+		String stair = null;
+		String door = null;
+		if (!this.jtfList[1].getText().isEmpty()) {
+		    street = this.jtfList[1].getText();
 		}
+		if (!this.jtfList[2].getText().isEmpty()) {
+		    number = this.jtfList[2].getText();
+		}
+		if (!this.jtfList[3].getText().isEmpty()) {
+		    postCode = this.jtfList[3].getText();
+		}
+		if (!this.jtfList[4].getText().isEmpty()) {
+		    floor = this.jtfList[4].getText();
+		}
+		if (!this.jtfList[5].getText().isEmpty()) {
+		    stair = this.jtfList[5].getText();
+		}
+		if (!this.jtfList[6].getText().isEmpty()) {
+		    door = this.jtfList[6].getText();
+		}
+		Address address = new Address(id, street, number, postCode,
+			floor, stair, door);
+		// DAOPostgreSQL.getInstance().writeAddress(address.getId())
+		break;
+	    case DAOFactory.TABLE_INGREDIENT:
+		id = Integer.parseInt(this.jtfList[0].getText());
+		String name = null;
+		Float price = null;
+		Integer icon = null;
+		Integer model = null;
+		Integer texture = null;
+		if (!this.jtfList[1].getText().isEmpty()) {
+		    name = this.jtfList[1].getText();
+		}
+		if (!this.jtfList[2].getText().isEmpty()) {
+		    price = Float.parseFloat(this.jtfList[2].getText());
+		}
+		if (!this.jtfList[3].getText().isEmpty()) {
+		    model = Integer.parseInt(this.jtfList[3].getText());
+		}
+		if (!this.jtfList[4].getText().isEmpty()) {
+		    icon = Integer.parseInt(this.jtfList[4].getText());
+		}
+		if (!this.jtfList[5].getText().isEmpty()) {
+		    texture = Integer.parseInt(this.jtfList[5].getText());
+		}
+		Ingredient ingredient = new Ingredient(id, name, price, model,
+			icon, texture);
+		HashSet<Ingredient> ingredients = new HashSet<Ingredient>();
+		ingredients.add(ingredient);
+		DAOPostgreSQL.getInstance().writeIngredients(ingredients);
+
+		break;
+	    case DAOFactory.TABLE_PIZZAS:
+		id = IdObject.getNextId();
+		name = null;
+		price = null;
+		icon = null;
+		Float discount = null;
+		String massType = null;
+		String type = null;
+		Integer size = null;
+		if (!this.jtfList[1].getText().isEmpty()) {
+		    name = this.jtfList[1].getText();
+		}
+		if (!this.jtfList[2].getText().isEmpty()) {
+		    price = Float.parseFloat(this.jtfList[2].getText());
+		}
+		if (!this.jtfList[3].getText().isEmpty()) {
+		    icon = Integer.parseInt(this.jtfList[3].getText());
+		}
+		if (!this.jtfList[4].getText().isEmpty()) {
+		    discount = Float.parseFloat(this.jtfList[4].getText());
+		}
+		if (!this.jtfList[5].getText().isEmpty()) {
+		    massType = this.jtfList[5].getText();
+		}
+		if (!this.jtfList[6].getText().isEmpty()) {
+		    type = this.jtfList[6].getText();
+		}
+		if (!this.jtfList[7].getText().isEmpty()) {
+		    size = Integer.parseInt(this.jtfList[7].getText());
+		}
+		Pizza pizza = new Pizza(id, name, price, icon, discount,
+			massType, type, size);
+
+		JTable ingredientsTable = ((ShowRowsTextFieldsPanel) this.jpDoInsert)
+			.getJtIngredientsTable();
+		Ingredients ingredientsMap = new Ingredients(
+			IdObject.getNextId());
+		for (int j = 0; j < DAOFactory.COLUMNS_NAME_INGREDIENTS.length; j++) {
+		    String quantity = (String) ingredientsTable.getModel()
+			    .getValueAt(j, 2);
+		    String idIngredient = (String) ingredientsTable.getModel()
+			    .getValueAt(j, 0);
+		    Ingredient ing = new Ingredient(
+			    Integer.parseInt(idIngredient));
+		    if (quantity != null && !quantity.isEmpty()) {
+			ingredientsMap.put(ing, Integer.parseInt(quantity));
+		    }
+		}
+		pizza.setIngredients(ingredientsMap);
+		HashSet<Pizza> pizzas = new HashSet<Pizza>();
+		pizzas.add(pizza);
+		DAOPostgreSQL.getInstance().writePizzas(pizzas);
+		break;
+	    default:
+		break;
 	    }
 	}
 	this.validate();
