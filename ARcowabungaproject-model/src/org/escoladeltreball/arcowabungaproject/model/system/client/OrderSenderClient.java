@@ -24,6 +24,7 @@
 package org.escoladeltreball.arcowabungaproject.model.system.client;
 
 import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 
 /**
  * @author local
@@ -47,6 +48,7 @@ public class OrderSenderClient extends Client {
 
     public OrderSenderClient(Order order) {
 	this.order = order;
+	option = ServerConstants.SERVER_OPTION_SEND_ORDER;
     }
 
     // ====================
@@ -61,14 +63,22 @@ public class OrderSenderClient extends Client {
     // PRIVATE METHODS
     // ====================
 
+    private void connectToOrderRecieverServer(int port) {
+	if (port != 0) {
+	    init(port);
+
+	    close();
+	}
+    }
+
     // ====================
     // OVERRIDE METHODS
     // ====================
 
     @Override
     public void connect() {
-	// TODO Auto-generated method stub
-
+	int newPort = connectToHallServer(option);
+	connectToOrderRecieverServer(newPort);
     }
 
     // ====================
