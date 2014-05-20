@@ -77,6 +77,7 @@ public class DatabaseUpdateClient extends Client {
 	if (port != 0) {
 	    init(port);
 	    try {
+		// out.writeInt(DAOFactory.getInstance().getCurrentVersion());
 		out.writeInt(1);
 		out.flush();
 		System.out.println("Versio enviada");

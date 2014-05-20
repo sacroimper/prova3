@@ -27,6 +27,7 @@ package org.escoladeltreball.arcowabungaproject.server;
 import java.io.IOException;
 
 import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 
 public class OrderReceiverServer extends Server {
@@ -68,29 +69,20 @@ public class OrderReceiverServer extends Server {
 	init();
 	try {
 	    waitClient();
-	    Order order = null;
-	    while (order == null) {
-		try {
-		    order = (Order) in.readObject();
-		} catch (ClassNotFoundException e) {
-		    e.printStackTrace();
-		    order = null;
-		} catch (IOException e) {
-		    e.printStackTrace();
-		    order = null;
-		}
-	    }
+	    Order order = (Order) readObject();
+	    Pizzeria.getInstance().addOrderSaved(order);
+	    print(order.toString());
 	    try {
 		out.writeInt(ServerConstants.SERVER_RESPONSE_OK);
+		out.flush();
 		// out.writeInt(ServerConstants.SERVER_END_CONNECTION);
+		// out.flush();
 	    } catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-
 	close();
     }
 

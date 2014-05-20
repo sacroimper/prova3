@@ -987,7 +987,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writePizzas(Set<Pizza> pizzas) {
+    public void writePizzas(Set<Pizza> pizzas) {
 	Connection con = null;
 	Statement stm = null;
 	try {

@@ -23,6 +23,8 @@
  */
 package org.escoladeltreball.arcowabungaproject.model.system.client;
 
+import java.io.IOException;
+
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 
@@ -63,10 +65,17 @@ public class OrderSenderClient extends Client {
     // PRIVATE METHODS
     // ====================
 
-    private void connectToOrderRecieverServer(int port) {
+    private void connectToOrderReceiverServer(int port) {
 	if (port != 0) {
 	    init(port);
-
+	    try {
+		out.writeObject(order);
+		out.flush();
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    readInt();
 	    close();
 	}
     }
@@ -78,7 +87,7 @@ public class OrderSenderClient extends Client {
     @Override
     public void connect() {
 	int newPort = connectToHallServer(option);
-	connectToOrderRecieverServer(newPort);
+	connectToOrderReceiverServer(newPort);
     }
 
     // ====================

@@ -77,7 +77,7 @@ public class InsertPanel extends JPanel implements ActionListener {
     // ====================
     private void initComponents() {
 	this.setLayout(new BorderLayout());
-	this.jpDoInsert = new ShowRowsTextFieldsPanel();
+	this.jpDoInsert = new ShowRowsTextFieldsPanel(true);
 	this.jpDoInsert.setLayout(new GridBagLayout());
 	this.jpShowTables = new JPanel();
 	this.jbInserData = ((ShowRowsTextFieldsPanel) jpDoInsert)
@@ -207,7 +207,7 @@ public class InsertPanel extends JPanel implements ActionListener {
 			    massType, type, size);
 		    HashSet<Pizza> pizzas = new HashSet<Pizza>();
 		    pizzas.add(pizza);
-		    // DAOPostgreSQL.getInstance().writepizzas(pizzas);
+		    DAOPostgreSQL.getInstance().writePizzas(pizzas);
 
 		    break;
 
