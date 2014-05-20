@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 
@@ -97,9 +98,12 @@ public class PizzaModelMapper {
     // PRIVATE METHODS
     // ====================
 
+    // MODIFICAR
     private static void makeTheModelIngredientTextureList() {
+	DAOAndroid daoA = DAOAndroid.getInstance();
 	for (Ingredient ingredient : ingredients) {
-	    modelIngredientTextures.add(ingredient.getTexture());
+	    modelIngredientTextures.add(daoA.getResourcePath(ingredient
+		    .getTexture()));
 	}
     }
 

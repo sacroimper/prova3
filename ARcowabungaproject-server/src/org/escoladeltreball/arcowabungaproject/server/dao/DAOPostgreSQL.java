@@ -960,10 +960,11 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm = con.createStatement();
 	    for (Ingredient ingredient : ingredients) {
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENT
-			+ "VALUES(" + ingredient.getId() + ",'"
-			+ ingredient.getName() + "'," + ingredient.getIcon()
+			+ " VALUES(" + ingredient.getId() + ",'"
+			+ ingredient.getName() + "'," + ingredient.getPrice()
 			+ "," + ingredient.getModel() + ","
-			+ ingredient.getPrice() + ");");
+			+ ingredient.getIcon() + ",'" + ingredient.getTexture()
+			+ "');");
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
