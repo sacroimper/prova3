@@ -24,15 +24,16 @@
 package org.escoladeltreball.arcowabungaproject.server.gui.database;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class InsertPanel extends JPanel {
+public class InsertPanel extends JPanel implements ActionListener {
 
     // ====================
     // CONSTANTS
@@ -44,17 +45,14 @@ public class InsertPanel extends JPanel {
     private JPanel jpDoInsert;
     private JPanel jpShowTables;
     private JButton jbInserData;
-    private JLabel jlChooseTable;
-    private JComboBox<String> jcbTables;
-    private GridBagConstraints constraints;
-    private int indexConstrainstX = 0;
-    private int indexConstrainstY = 0;
+    private JTextField[] jtfList;
 
     // ====================
     // CONSTRUCTORS
     // ====================
     public InsertPanel() {
 	this.initComponents();
+	this.registListeners();
     }
 
     // ====================
@@ -73,10 +71,34 @@ public class InsertPanel extends JPanel {
 	this.jpDoInsert = new ShowRowsTextFieldsPanel();
 	this.jpDoInsert.setLayout(new GridBagLayout());
 	this.jpShowTables = new JPanel();
-	this.jbInserData = new JButton("Insert");
+	this.jbInserData = ((ShowRowsTextFieldsPanel) jpDoInsert)
+		.getJbExecuteQuery();
+	this.jbInserData.setText("Insert Data");
 
 	this.add(this.jpDoInsert, BorderLayout.WEST);
 	this.add(this.jpShowTables, BorderLayout.CENTER);
+    }
+
+    private void registListeners() {
+	this.jbInserData.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+	this.jtfList = ((ShowRowsTextFieldsPanel) jpDoInsert).getJtfList();
+	boolean textFieldsIsEmpty = true;
+	int i = 0;
+	while (i < jtfList.length && textFieldsIsEmpty) {
+	    if (!jtfList[i].getText().isEmpty()) {
+		textFieldsIsEmpty = false;
+	    }
+	    i++;
+	}
+	if (textFieldsIsEmpty) {
+	    this.jpShowTables
+		    .add(new JLabel(
+			    "The insertion was not done. You have not inserted any data"));
+	}
     }
 
     // ====================
