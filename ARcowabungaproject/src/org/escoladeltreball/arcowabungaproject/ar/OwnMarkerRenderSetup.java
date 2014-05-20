@@ -1,16 +1,10 @@
 package org.escoladeltreball.arcowabungaproject.ar;
 
-//import com.badlogic.gdx.graphics.g3d.loaders.ogre.mesh.Mesh;
-
 import geo.GeoObj;
-//import gl.Color;
 import gl.CustomGLSurfaceView;
 import gl.GL1Renderer;
 import gl.GLCamera;
 import gl.GLFactory;
-//import gl.animations.AnimationFaceToCamera;
-//import gl.scenegraph.MeshComponent;
-//import gl.scenegraph.Shape;
 import gui.GuiSetup;
 
 import java.util.ArrayList;
@@ -21,10 +15,7 @@ import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
 import preview.Preview;
 import system.EventManager;
-//import util.IO;
-//import util.Vec;
-//import util.Wrapper;
-//import worldData.MoveComp;
+import util.Vec;
 import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
@@ -32,15 +23,53 @@ import android.app.Activity;
 import de.rwth.GDXConnection;
 
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
+    // ====================
+    // CONSTANTS
+    // ====================
+
+    // ====================
+    // ATTRIBUTES
+    // ====================
 
     private DetectionThread myThread;
     private Preview cameraPreview;
     private GLCamera camera;
+    private GL1Renderer renderer;
+    private Vec pizzaSizeAndMeshVector;
+
     public PizzaWorld world;
     public PizzaMesh meshComponent;
-    private GL1Renderer renderer;
 
-    // public Wrapper targetMoveWrapper = new Wrapper();
+    // ====================
+    // CONSTRUCTORS
+    // ====================
+
+    // ====================
+    // PUBLIC METHODS
+    // ====================
+
+    /**
+     * @return
+     */
+    private Vec pizzaVectorCalculator() {
+	float pizzaMesh = PizzaModelMapper.getPizzaMassType();
+	float pizzaScale = (float) PizzaModelMapper.getPizzaScale();
+	Vec resultVector = new Vec(pizzaScale, pizzaScale, pizzaScale
+		* pizzaMesh);
+	return resultVector;
+    }
+
+    // ====================
+    // PROTECTED METHODS
+    // ====================
+
+    // ====================
+    // PRIVATE METHODS
+    // ====================
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
 
     @Override
     public UnrecognizedMarkerListener _a2_getUnrecognizedMarkerListener() {
@@ -58,6 +87,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     public void _a_initFieldsIfNecessary() {
 	camera = new GLCamera();
 	world = new PizzaWorld(camera);
+	pizzaSizeAndMeshVector = pizzaVectorCalculator();
     }
 
     @Override
@@ -65,14 +95,13 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    GLFactory objectFactory, GeoObj currentPosition) {
 	this.renderer = renderer;
 	GDXConnection.init(this.getActivity(), this.renderer);
-
 	// Load a previous alpha texture of the ingredient model
 	// Helps to show all correctly
 	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		meshComponent = pizzaMesh;
+		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
 		world.add(o);
@@ -85,19 +114,18 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		meshComponent = pizzaMesh;
+		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
 		world.add(o);
 	    }
 	};
 
+	ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
+		.getModelIngredientTextures();
+
 	// Method to deploy the ingredients object and textures
-	if (PizzaModelMapper.getIngredientsSize() > 0) {
-
-	    ArrayList<String> ingredientTextures = (ArrayList<String>) PizzaModelMapper
-		    .getModelIngredientTextures();
-
+	if (ingredientTextures.size() > 0) {
 	    for (int i = 0; i < ingredientTextures.size(); i++) {
 		// Load a previous alpha texture of the ingredient model
 		// Helps to show all correctly
@@ -106,7 +134,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
-			meshComponent = pizzaMesh;
+			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
 			world.add(o);
@@ -118,7 +146,9 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			ingredientTextures.get(i)) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
-			meshComponent = pizzaMesh;
+			// pizzaMesh.setRotation(new Vec(0f, 0f, (float) (Math
+			// .random() * 10)));
+			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
 			world.add(o);
@@ -156,5 +186,9 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	if (myThread != null)
 	    myThread.stopThread();
     }
+
+    // ====================
+    // GETTERS & SETTERS
+    // ====================
 
 }

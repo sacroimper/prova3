@@ -95,11 +95,11 @@ public class PizzaModelMapper {
     // ATTRIBUTES
     // ====================
 
-    // private static Map<String, String> ingredientTextureMap;
     private static ArrayList<String> modelIngredientTextures;
-    private static int ingredientsSize = 0;
-
+    // private static int ingredientsSize = 0;
     private static Set<Ingredient> ingredients;
+    private static int pizzaScale;
+    private static float pizzaMassType;
 
     // ====================
     // CONSTRUCTORS
@@ -111,9 +111,25 @@ public class PizzaModelMapper {
 
     public static void run(Pizza pizza) {
 	ingredients = pizza.getIngredientsSet();
-	ingredientsSize = ingredients.size();
+	pizzaScale = pizza.getSize();
 	modelIngredientTextures = new ArrayList<String>();
 	makeTheModelIngredientTextureList();
+	pizzaMassTypeFloatTranslator(pizza.getMassType());
+    }
+
+    /**
+     * @param string
+     * 
+     */
+    private static void pizzaMassTypeFloatTranslator(String pizzaMeshType) {
+	if (pizzaMeshType.equals(Pizza.MASSTYPE_THIN)) {
+	    pizzaMassType = 0.5f;
+	} else if (pizzaMeshType.equals(Pizza.MASSTYPE_NORMAL)) {
+	    pizzaMassType = 1f;
+	} else if (pizzaMeshType.equals(Pizza.MASSTYPE_THIN)) {
+	    pizzaMassType = 2f;
+	}
+
     }
 
     // ====================
@@ -129,6 +145,14 @@ public class PizzaModelMapper {
 	    modelIngredientTextures.add(ingredient.getTexture());
 	}
     }
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
+
+    // ====================
+    // GETTERS & SETTERS
+    // ====================
 
     /**
      * @return the modelIngredientTextures
@@ -147,17 +171,32 @@ public class PizzaModelMapper {
     }
 
     /**
-     * @return the ingredientsSize
+     * @return the pizzaScale
      */
-    public static int getIngredientsSize() {
-	return ingredientsSize;
+    public static int getPizzaScale() {
+	return pizzaScale;
     }
 
     /**
-     * @param ingredientsSize
-     *            the ingredientsSize to set
+     * @param pizzaScale
+     *            the pizzaScale to set
      */
-    public static void setIngredientsSize(int ingredientsSize) {
-	PizzaModelMapper.ingredientsSize = ingredientsSize;
+    public static void setPizzaScale(int pizzaScale) {
+	PizzaModelMapper.pizzaScale = pizzaScale;
+    }
+
+    /**
+     * @return the pizzaMassType
+     */
+    public static float getPizzaMassType() {
+	return pizzaMassType;
+    }
+
+    /**
+     * @param pizzaMassType
+     *            the pizzaMassType to set
+     */
+    public static void setPizzaMassType(float pizzaMassType) {
+	PizzaModelMapper.pizzaMassType = pizzaMassType;
     }
 }
