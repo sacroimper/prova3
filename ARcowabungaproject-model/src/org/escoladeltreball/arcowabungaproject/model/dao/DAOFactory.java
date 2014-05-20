@@ -251,8 +251,9 @@ public abstract class DAOFactory {
     // CONSTRUCTORS
     // ====================
 
-    protected DAOFactory() {
+    protected DAOFactory(String role) {
 	this.pizzeria = Pizzeria.getInstance(this);
+	pizzeria.setRole(role);
     }
 
     // ====================
@@ -260,34 +261,46 @@ public abstract class DAOFactory {
     // ====================
 
     public boolean loadData() {
-	Map<String, String> preferences = readPreferences();
-	for (Map.Entry<String, String> entry : preferences.entrySet()) {
-	    if (entry.getKey().equals("next_id")) {
-		IdObject.setNextId(Integer.parseInt(entry.getValue()));
-	    } else if (entry.getKey().equals("next_custom_id")) {
-		IdObject.setNextCostumId(Integer.parseInt(entry.getValue()));
-	    } else if (entry.getKey().equals("current_version")) {
-		currentVersion = Integer.parseInt(entry.getValue());
-	    }
-	}
-	// INCOMPLETE
-	return false;
+	// loadLocalData();
+	loadDemo();
+	return loadServerData();
     }
 
     public boolean loadLocalData() {
-	Set<Pizza> pizzes = readPizza();
-	for (Pizza pizza : pizzes) {
-	    if (pizza.getType().equals(Pizza.TYPE_COSTUM_SAVED)) {
-		pizzeria.addCustomSavedPizza(pizza);
-	    } else if (pizza.getType().equals(Pizza.TYPE_PREDEFINED)) {
-		pizzeria.addPredefinedPizza(pizza);
+	pizzeria.setIngredients(readIngredient());
+
+	Set<Pizza> pizzas = readPizza();
+	Set<Pizza> predefinedPizzas = new HashSet<Pizza>();
+	Set<Pizza> customSavedPizzas = new HashSet<Pizza>();
+	Set<Pizza> customTemporaryPizzas = new HashSet<Pizza>();
+	for (Pizza pizza : pizzas) {
+	    if (pizza.getType().equals(Pizza.TYPE_PREDEFINED)) {
+		predefinedPizzas.add(pizza);
+	    } else if (pizza.getType().equals(Pizza.TYPE_CUSTOM_SAVED)) {
+		customSavedPizzas.add(pizza);
+	    } else if (pizza.getType().equals(Pizza.TYPE_CUSTOM_TEMPORARY)) {
+		customTemporaryPizzas.add(pizza);
 	    }
 	}
+	pizzeria.setPredefinedPizzas(predefinedPizzas);
+	pizzeria.setCustomSavedPizzas(customSavedPizzas);
+	pizzeria.setCustomTemporaryPizzas(customTemporaryPizzas);
 
 	pizzeria.setDrinks(readDrink());
-	pizzeria.setIngredients(readIngredient());
 	pizzeria.setOffers(readOffer());
 	pizzeria.setOrdersSaved(readOrder());
+
+	Map<String, String> preferences = readPreferences();
+
+	IdObject.setNextId(Integer.parseInt(preferences.get("next_id")));
+	IdObject.setNextCostumId(Integer.parseInt(preferences
+		.get("next_custom_id")));
+	currentVersion = Integer.parseInt(preferences.get("current_version"));
+
+	return true;
+    }
+
+    public boolean loadServerData() {
 
 	return false;
     }
@@ -330,13 +343,13 @@ public abstract class DAOFactory {
 	Pizza p3 = new Pizza(3, "P3", 7, 150, 0, Pizza.MASSTYPE_THICK,
 		Pizza.TYPE_PREDEFINED, Pizza.SIZE_MEDIUM);
 	Pizza p4 = new Pizza(10004, "PC1", 10, 150, 0, Pizza.MASSTYPE_THIN,
-		Pizza.TYPE_COSTUM_SAVED, Pizza.SIZE_SMALL);
+		Pizza.TYPE_CUSTOM_SAVED, Pizza.SIZE_SMALL);
 	Pizza p5 = new Pizza(10005, "PC2", 10, 150, 0, Pizza.MASSTYPE_NORMAL,
-		Pizza.TYPE_COSTUM_SAVED, Pizza.SIZE_SMALL);
+		Pizza.TYPE_CUSTOM_SAVED, Pizza.SIZE_SMALL);
 	Pizza p6 = new Pizza(10006, "PT1", 10, 150, 0, Pizza.MASSTYPE_THICK,
-		Pizza.TYPE_COSTUM_TEMPORARY, Pizza.SIZE_COWABUNGA);
+		Pizza.TYPE_CUSTOM_TEMPORARY, Pizza.SIZE_COWABUNGA);
 	Pizza p7 = new Pizza(10007, "PT2", 10, 150, 0, Pizza.MASSTYPE_THICK,
-		Pizza.TYPE_COSTUM_TEMPORARY, Pizza.SIZE_MEDIUM);
+		Pizza.TYPE_CUSTOM_TEMPORARY, Pizza.SIZE_MEDIUM);
 
 	Ingredients is1 = new Ingredients(28);
 	Ingredients is2 = new Ingredients(29);
