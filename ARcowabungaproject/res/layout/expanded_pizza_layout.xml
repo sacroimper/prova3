@@ -6,6 +6,7 @@
     android:clickable="true"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:paddingBottom="1dp"
     android:minHeight="130dp"
     android:background="@color/background_expandable_expanded_item" >
 
@@ -41,13 +42,6 @@
         android:layout_marginRight="5dp"
         android:textColor="@color/text_color_listview" >
     </TextView>
-
-    <View
-        android:id="@id/separatorBottom"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:id="@id/pizzaButtonInPizzaSubItem"
