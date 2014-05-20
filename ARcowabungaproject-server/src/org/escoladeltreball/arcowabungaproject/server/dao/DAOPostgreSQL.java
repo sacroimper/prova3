@@ -128,10 +128,10 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(2,'path2');");
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(3,'path3');");
 
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(10,'pepperoni',0.5,1,2,'path_texture1');");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(11,'cheese',0.5,1,2,'path_texture2');");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(12,'mushroom',0.5,2,3,'path_texture3');");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(13,'tomatoe',0.5,1,3,'path_texture4');");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(10,'pepperoni',0.5,1,2,1);");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(11,'cheese',0.5,1,2,2);");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(12,'mushroom',0.5,2,3,1);");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(13,'tomatoe',0.5,1,3,2);");
 
 	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,10,2);");
 	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,11,1);");
