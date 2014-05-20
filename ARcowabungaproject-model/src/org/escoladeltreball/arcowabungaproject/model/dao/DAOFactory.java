@@ -303,14 +303,14 @@ public abstract class DAOFactory {
 
 	Ingredient i1 = new Ingredient(8, "Mushroom", 1.5f, 151, 152, 200);
 	Ingredient i2 = new Ingredient(9, "Red Pepper", 1.5f, 151, 152, 201);
-	Ingredient i3 = new Ingredient(10, "Ham", 1.5f, 151, 152, 202);
-	Ingredient i4 = new Ingredient(11, "Bacon", 1.5f, 151, 152, 203);
-	Ingredient i5 = new Ingredient(12, "Pineapple", 1.5f, 151, 152, 204);
-	Ingredient i6 = new Ingredient(13, "Corn", 1.5f, 151, 152, 205);
-	Ingredient i7 = new Ingredient(14, "Chicken", 1.5f, 151, 152, 206);
-	Ingredient i8 = new Ingredient(15, "Blue cheese", 1.5f, 151, 152, 207);
-	Ingredient i9 = new Ingredient(16, "Goat cheese", 1.5f, 151, 152, 208);
-	Ingredient i10 = new Ingredient(17, "Gouda", 1.5f, 151, 152, 209);
+	Ingredient i3 = new Ingredient(10, "Ham", 1.5f, 151, 152, 204);
+	Ingredient i4 = new Ingredient(11, "Bacon", 1.5f, 151, 152, 218);
+	Ingredient i5 = new Ingredient(12, "Pineapple", 1.5f, 151, 152, 218);
+	Ingredient i6 = new Ingredient(13, "Corn", 1.5f, 151, 152, 213);
+	Ingredient i7 = new Ingredient(14, "Chicken", 1.5f, 151, 152, 218);
+	Ingredient i8 = new Ingredient(15, "Blue cheese", 1.5f, 151, 152, 218);
+	Ingredient i9 = new Ingredient(16, "Goat cheese", 1.5f, 151, 152, 219);
+	Ingredient i10 = new Ingredient(17, "Gouda", 1.5f, 151, 152, 218);
 
 	ingredients.add(i1);
 	ingredients.add(i2);
