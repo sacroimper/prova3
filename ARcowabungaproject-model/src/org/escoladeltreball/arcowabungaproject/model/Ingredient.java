@@ -40,7 +40,7 @@ public class Ingredient extends IdObject {
     private float price;
     private int model;
     private int icon;
-    private String texture;
+    private int texture;
 
     // ====================
     // CONSTRUCTORS
@@ -52,7 +52,7 @@ public class Ingredient extends IdObject {
     }
 
     public Ingredient(int id, String name, float price, int model, int icon,
-	    String texture) {
+	    int texture) {
 	super(id);
 	this.name = name;
 	this.price = price;
@@ -123,11 +123,11 @@ public class Ingredient extends IdObject {
 	this.icon = icon;
     }
 
-    public String getTexture() {
+    public int getTexture() {
 	return texture;
     }
 
-    public void setTexture(String texture) {
+    public void setTexture(int texture) {
 	this.texture = texture;
     }
 }

@@ -118,7 +118,7 @@ public class InsertPanel extends JPanel implements ActionListener {
 		    Float price = null;
 		    Integer icon = null;
 		    Integer model = null;
-		    String texture = null;
+		    Integer texture = null;
 		    if (!this.jtfList[1].getText().isEmpty()) {
 			name = this.jtfList[1].getText();
 		    }
@@ -132,7 +132,7 @@ public class InsertPanel extends JPanel implements ActionListener {
 			model = Integer.parseInt(this.jtfList[4].getText());
 		    }
 		    if (!this.jtfList[5].getText().isEmpty()) {
-			texture = this.jtfList[5].getText();
+			texture = Integer.parseInt(this.jtfList[5].getText());
 		    }
 		    Ingredient ingredient = new Ingredient(id, name, price,
 			    icon, model, texture);
