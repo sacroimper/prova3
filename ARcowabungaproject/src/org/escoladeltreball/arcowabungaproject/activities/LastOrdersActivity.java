@@ -97,6 +97,7 @@ public class LastOrdersActivity extends Activity implements OnClickListener {
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);
+	CustomTextView.plusPriceOrder(tv);
 
 	// Apply click listener
 	LinearLayout ly = (LinearLayout) findViewById(R.id.button_menu);
