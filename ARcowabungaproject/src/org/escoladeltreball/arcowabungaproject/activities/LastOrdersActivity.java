@@ -99,7 +99,7 @@ public class LastOrdersActivity extends Activity implements OnClickListener {
 	CustomTextView.customTextView(this, tv);
 
 	// Apply click listener
-	LinearLayout ly = (LinearLayout) findViewById(R.id.bottomLinearMenu);
+	LinearLayout ly = (LinearLayout) findViewById(R.id.button_menu);
 	ly.setOnClickListener(this);
     }
 
@@ -117,7 +117,7 @@ public class LastOrdersActivity extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-	if (v.getId() == R.id.bottomLinearMenu) {
+	if (v.getId() == R.id.button_menu) {
 	    finish();
 	}
     }
