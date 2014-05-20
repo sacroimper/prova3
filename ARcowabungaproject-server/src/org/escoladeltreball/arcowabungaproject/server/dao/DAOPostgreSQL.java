@@ -46,6 +46,7 @@ import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.server.gui.database.SelectPanel;
 import org.joda.time.DateTime;
 
@@ -66,7 +67,7 @@ public class DAOPostgreSQL extends DAOFactory {
     // ====================
 
     protected DAOPostgreSQL() {
-	super();
+	super(Pizzeria.ROLE_SERVER);
     }
 
     private Connection connectToDatabase() {

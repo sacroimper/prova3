@@ -44,6 +44,7 @@ import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.joda.time.DateTime;
 
 import android.app.Activity;
@@ -75,7 +76,7 @@ public class DAOAndroid extends DAOFactory {
     // ====================
 
     protected DAOAndroid(Context context) {
-	super();
+	super(Pizzeria.ROLE_CLIENT);
 	dbHepler = new DataBaseHelper(context);
 	resources = new HashMap<Integer, String>();
 	drawables = new HashMap<Integer, Drawable>();
