@@ -37,8 +37,8 @@ public class Pizza extends Product {
     public static final String MASSTYPE_THIN = "thin";
     public static final String MASSTYPE_NORMAL = "normal";
     public static final String MASSTYPE_THICK = "thick";
-    public static final String TYPE_COSTUM_SAVED = "costumSaved";
-    public static final String TYPE_COSTUM_TEMPORARY = "costumTemporary";
+    public static final String TYPE_CUSTOM_SAVED = "customSaved";
+    public static final String TYPE_CUSTOM_TEMPORARY = "customTemporary";
     public static final String TYPE_PREDEFINED = "predefined";
     public static final int SIZE_SMALL = 1;
     public static final int SIZE_MEDIUM = 2;
