@@ -252,8 +252,8 @@ public class DAOAndroid extends DAOFactory {
 	// Select all rows
 	Cursor cShoppingCartsProducts = database.query(
 		DAOFactory.TABLE_SHOPPINGCART_PRODUCTS,
-		DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS,
-		DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0] + "=" + id,
+		DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS,
+		DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[0] + "=" + id,
 		null, null, null, null);
 	int i = 0;
 	while (i < cShoppingCartsProducts.getCount()) {
@@ -590,9 +590,9 @@ public class DAOAndroid extends DAOFactory {
 	database.insert(DAOFactory.TABLE_SHOPPINGCARTS, null, values);
 	values.clear();
 	for (Product product : shoppingCart.getProducts()) {
-	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0],
+	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[0],
 		    shoppingCart.getId());
-	    values.put(COLUMNS_NAME_SHOPPINCART_PRODUCTS[1], product.getId());
+	    values.put(COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1], product.getId());
 	    database.insert(DAOFactory.TABLE_SHOPPINGCART_PRODUCTS, null,
 		    values);
 	}

@@ -79,13 +79,12 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_TYPE_DRINKS = { "INTEGER", "VARCHAR",
 	    "NUMERIC", "SMALLINT", "NUMERIC", "SMALLINT" };
     public static final String[] COLUMNS_TYPE_OFFERS = { "INTEGER", "VARCHAR",
-	    "NUMERIC", "SMALLINT", "NUMERIC", "INTEGER" };
+	    "NUMERIC", "SMALLINT", "NUMERIC" };
     public static final String[] COLUMNS_TYPE_OFFERS_PRODUCTS = { "INTEGER",
-	    "INTEGER", "INTEGER" };
-    public static final String[] COLUMNS_TYPE_SHOPPINGCARTS = { "INTEGER",
 	    "INTEGER" };
-    public static final String[] COLUMNS_TYPE_SHOPPINCART_PRODUCTS = {
-	    "INTEGER", "INTEGER", "INTEGER" };
+    public static final String[] COLUMNS_TYPE_SHOPPINGCARTS = { "INTEGER" };
+    public static final String[] COLUMNS_TYPE_SHOPPINGCART_PRODUCTS = {
+	    "INTEGER", "INTEGER" };
     public static final String[] COLUMNS_TYPE_ORDERS = { "INTEGER", "VARCHAR",
 	    "VARCHAR", "DATE", "VARCHAR", "INTEGER", "INTEGER" };
     public static final String[] COLUMNS_TYPE_ADDRESS = { "INTEGER", "VARCHAR",
@@ -106,13 +105,12 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_NAME_DRINKS = { "id_drink", "name",
 	    "price", "icon", "discount", "size" };
     public static final String[] COLUMNS_NAME_OFFERS = { "id_offer", "name",
-	    "price", "icon", "discount", "id_offers_product" };
-    public static final String[] COLUMNS_NAME_OFFERS_PRODUCTS = {
-	    "id_offers_product", "offer", "product" };
-    public static final String[] COLUMNS_NAME_SHOPPINGCARTS = {
-	    "id_shoopingcart", "id_shoopingcart_products" };
-    public static final String[] COLUMNS_NAME_SHOPPINCART_PRODUCTS = {
-	    "id_shoopingcart_products", "shoppingcart", "product" };
+	    "price", "icon", "discount" };
+    public static final String[] COLUMNS_NAME_OFFERS_PRODUCTS = { "offer",
+	    "product" };
+    public static final String[] COLUMNS_NAME_SHOPPINGCARTS = { "id_shoopingcart" };
+    public static final String[] COLUMNS_NAME_SHOPPINGCART_PRODUCTS = {
+	    "shoppingcart", "product" };
     public static final String[] COLUMNS_NAME_ORDERS = { "id_order", "email",
 	    "phone", "date_time", "payment_method", "addres", "shopping_cart" };
     public static final String[] COLUMNS_NAME_ADDRESS = { "id_address",
@@ -171,32 +169,26 @@ public abstract class DAOFactory {
 	    + " VARCHAR(30)," + COLUMNS_NAME_OFFERS[2] + " NUMERIC,"
 	    + COLUMNS_NAME_OFFERS[3] + " SMALLINT REFERENCES "
 	    + TABLE_RESOURCES + " ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + COLUMNS_NAME_OFFERS[4] + " NUMERIC," + COLUMNS_NAME_OFFERS[5]
-	    + " INTEGER);";
+	    + COLUMNS_NAME_OFFERS[4] + " NUMERIC);";
     public static final String CREATE_TABLE_OFFERS_PRODUCTS = "CREATE TABLE "
 	    + TABLE_OFFERS_PRODUCTS + " (" + COLUMNS_NAME_OFFERS_PRODUCTS[0]
-	    + " INTEGER," + COLUMNS_NAME_OFFERS_PRODUCTS[1]
 	    + " INTEGER REFERENCES " + TABLE_PRODUCTS
-	    + " ON DELETE CASCADE ON UPDATE CASCADE," + COLUMNS_NAME_OFFERS[2]
-	    + " INTEGER REFERENCES " + TABLE_PRODUCTS
-	    + " ON DELETE CASCADE ON UPDATE CASCADE);";
+	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
+	    + COLUMNS_NAME_OFFERS_PRODUCTS[1] + " INTEGER REFERENCES "
+	    + TABLE_PRODUCTS + " ON DELETE CASCADE ON UPDATE CASCADE);";
     public static final String CREATE_TABLE_SHOPPINGCARTS = "CREATE TABLE "
 	    + TABLE_SHOPPINGCARTS + " (" + COLUMNS_NAME_SHOPPINGCARTS[0]
-	    + " INTEGER PRIMARY KEY, " + COLUMNS_NAME_SHOPPINGCARTS[1]
-	    + " INTEGER);";
-    public static final String CREATE_TABLE_SHOPPINCART_PRODUCTS = "CREATE TABLE "
+	    + " INTEGER PRIMARY KEY);";
+    public static final String CREATE_TABLE_SHOPPINGCART_PRODUCTS = "CREATE TABLE "
 	    + TABLE_SHOPPINGCART_PRODUCTS
 	    + " ("
-	    + COLUMNS_NAME_SHOPPINCART_PRODUCTS[0]
-	    + " INTEGER,"
-	    + COLUMNS_NAME_SHOPPINCART_PRODUCTS[1]
+	    + COLUMNS_NAME_SHOPPINGCART_PRODUCTS[0]
 	    + " INTEGER REFERENCES "
 	    + TABLE_SHOPPINGCARTS
 	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + COLUMNS_NAME_OFFERS[2]
+	    + COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1]
 	    + " INTEGER REFERENCES "
-	    + TABLE_PRODUCTS
-	    + " ON DELETE CASCADE ON UPDATE CASCADE);";
+	    + TABLE_PRODUCTS + " ON DELETE CASCADE ON UPDATE CASCADE);";
     public static final String CREATE_TABLE_ORDERS = "CREATE TABLE "
 	    + TABLE_ORDERS + "(" + COLUMNS_NAME_ORDERS[0]
 	    + " INTEGER PRIMARY KEY," + COLUMNS_NAME_ORDERS[1] + " VARCHAR(9),"

@@ -121,7 +121,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS_PRODUCTS);
 	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCARTS);
 
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINCART_PRODUCTS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCART_PRODUCTS);
 	    stm.executeUpdate(DAOFactory.CREATE_TABLE_ORDERS);
 
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(1,'path1');");
@@ -155,17 +155,17 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate("INSERT INTO DRINKS VALUES(40, 'coke', 2.5, 2, 0, 1);");
 	    stm.executeUpdate("INSERT INTO DRINKS VALUES(41, 'water', 1.5, 3, 0, 1);");
 
-	    stm.executeUpdate("INSERT INTO OFFERS VALUES(50, '2X1', 15, 2, 60);");
+	    stm.executeUpdate("INSERT INTO OFFERS VALUES(50, '2X1', 15, 2);");
 
-	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(60, 50, 30);");
-	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(60, 50, 31);");
-	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(60, 50, 40);");
-	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(60, 50, 41);");
+	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(50, 30);");
+	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(50, 31);");
+	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(50, 40);");
+	    stm.executeUpdate("INSERT INTO OFFERS_PRODUCTS VALUES(50, 41);");
 
-	    stm.executeUpdate("INSERT INTO SHOPPINGCARTS VALUES(80,70);");
+	    stm.executeUpdate("INSERT INTO SHOPPINGCARTS VALUES(80);");
 
-	    stm.executeUpdate("INSERT INTO SHOPPINGCART_PRODUCTS VALUES(70,80,50);");
-	    stm.executeUpdate("INSERT INTO SHOPPINGCART_PRODUCTS VALUES(70,80,32);");
+	    stm.executeUpdate("INSERT INTO SHOPPINGCART_PRODUCTS VALUES(80,50);");
+	    stm.executeUpdate("INSERT INTO SHOPPINGCART_PRODUCTS VALUES(80,32);");
 
 	    stm.executeUpdate("INSERT INTO ADDRESS VALUES(90, 'maracana', '268', '00200', '2', 'A', '2');");
 	    stm.executeUpdate("INSERT INTO ADDRESS VALUES(91, 'merindrade', '12', '00100', '4', 'N', '1');");
@@ -299,10 +299,9 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
 				+ "="
 				+ rsProducts
-					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[2])
+					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1])
 				+ ";");
-		rsPizza.next();
-		if (rsPizza != null) {
+		if (rsPizza.next()) {
 		    Pizza pizza = new Pizza(
 			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[0]),
 			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[1]),
@@ -327,10 +326,9 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
 				+ "="
 				+ rsProducts
-					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[2])
+					.getInt(DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[1])
 				+ ";");
-		rsDrink.next();
-		if (rsDrink != null) {
+		if (rsDrink.next()) {
 		    Drink drink = new Drink(
 			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[0]),
 			    rsDrink.getString(DAOFactory.COLUMNS_NAME_DRINKS[1]),
@@ -376,7 +374,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		    .executeQuery("SELECT * FROM "
 			    + DAOFactory.TABLE_SHOPPINGCART_PRODUCTS
 			    + " WHERE "
-			    + DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[0]
+			    + DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[0]
 			    + "=" + id + ";");
 	    while (rsShoppingCartProducts.next()) {
 		// Product can be a pizza product, drink product or offer
@@ -390,10 +388,10 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_PIZZAS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1])
 				+ ";");
-		rsPizza.next();
-		if (rsPizza != null) {
+
+		if (rsPizza.next()) {
 		    Pizza pizza = new Pizza(
 			    rsPizza.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[0]),
 			    rsPizza.getString(DAOFactory.COLUMNS_NAME_PIZZAS[1]),
@@ -418,10 +416,10 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_DRINKS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1])
 				+ ";");
-		rsDrink.next();
-		if (rsDrink != null) {
+
+		if (rsDrink.next()) {
 		    Drink drink = new Drink(
 			    rsDrink.getInt(DAOFactory.COLUMNS_NAME_DRINKS[0]),
 			    rsDrink.getString(DAOFactory.COLUMNS_NAME_DRINKS[1]),
@@ -441,10 +439,10 @@ public class DAOPostgreSQL extends DAOFactory {
 				+ DAOFactory.COLUMNS_NAME_OFFERS[0]
 				+ "="
 				+ rsShoppingCartProducts
-					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINCART_PRODUCTS[2])
+					.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1])
 				+ ";");
-		rsOffer.next();
-		if (rsOffer != null) {
+
+		if (rsOffer.next()) {
 		    Offer offer = new Offer(
 			    rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[0]),
 			    rsOffer.getString(DAOFactory.COLUMNS_NAME_OFFERS[1]),
@@ -452,7 +450,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			    rsOffer.getInt(DAOFactory.COLUMNS_NAME_OFFERS[3]),
 			    rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[4]));
 		    ArrayList<Product> productOfferList = (ArrayList<Product>) selectProductsOffersById(rsOffer
-			    .getInt(DAOFactory.COLUMNS_NAME_OFFERS[5]));
+			    .getInt(DAOFactory.COLUMNS_NAME_OFFERS[0]));
 		    offer.setProductList(productOfferList);
 		    productsList.add(offer);
 		}
@@ -596,7 +594,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			rsOffer.getFloat(DAOFactory.COLUMNS_NAME_OFFERS[4]));
 		// Get the offer products list
 		ArrayList<Product> productList = (ArrayList<Product>) selectProductsOffersById(rsOffer
-			.getInt(DAOFactory.COLUMNS_NAME_OFFERS[5]));
+			.getInt(DAOFactory.COLUMNS_NAME_OFFERS[0]));
 		offer.setProductList(productList);
 		offersSet.add(offer);
 	    }
@@ -685,7 +683,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			rsShoppingCart
 				.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0]));
 		ArrayList<Product> productsList = (ArrayList<Product>) selectShoppingCartProductsById(rsShoppingCart
-			.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[1]));
+			.getInt(DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0]));
 		shoppingCart.setProducts(productsList);
 	    }
 	} catch (SQLException e) {
@@ -954,7 +952,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeIngredients(Set<Ingredient> ingredients) {
+    public void writeIngredients(Set<Ingredient> ingredients) {
 	Connection con = null;
 	Statement stm = null;
 	try {
