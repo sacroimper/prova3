@@ -80,8 +80,8 @@ public class CustomTextView {
     public static void plusPriceOrder(TextView tv) {
 	ShoppingCart shopCart = Pizzeria.getInstance().getShoppingCart();
 	int numberProducts = shopCart.getProducts().size();
-	float price = shopCart.getPrice();
-	tv.setText("(" + numberProducts + ")" + price + "€");
+	tv.setText("(" + numberProducts + ")"
+		+ shopCart.getFormatedPriceWithTax());
     }
     // ====================
     // PROTECTED METHODS

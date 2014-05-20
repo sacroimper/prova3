@@ -34,7 +34,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
@@ -56,7 +55,7 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
     private JButton jbExecuteQuery;
     private JLabel[] jlLists;
     private JTextField[] jtfList;
-    private JTextArea jtaIngredients;
+    private JTable jtIngredientsTable;
     private int indexConstrainstX = 0;
     private int indexConstrainstY = 0;
     private boolean insert;
@@ -159,6 +158,11 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length];
 	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length];
 	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_PIZZAS.length; i++) {
+		if (insert) {
+		    if (i == 0) {
+			i = 1;
+		    }
+		}
 		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_PIZZAS[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
@@ -169,20 +173,24 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 		this.add(this.jtfList[i], this.constraints);
 	    }
 	    if (insert) {
-		String[][] rowDataIngredients = new String[DAOFactory.COLUMNS_NAME_INGREDIENT.length][2];
+		String[][] rowDataIngredients = new String[DAOFactory.COLUMNS_NAME_INGREDIENT.length][3];
 		int i = 0;
 		for (Ingredient ingredient : DAOPostgreSQL.getInstance()
 			.readIngredient()) {
-		    rowDataIngredients[i][0] = ingredient.getName();
-		    rowDataIngredients[i][1] = "";
+		    rowDataIngredients[i][0] = ingredient.getId() + "";
+		    rowDataIngredients[i][1] = ingredient.getName();
+		    rowDataIngredients[i][2] = "";
 		    i++;
 		}
 
-		String[] columnsName = { "Ingredient", "Quantity" };
-		JTable table = new JTable(rowDataIngredients, columnsName);
-		table.setPreferredScrollableViewportSize(table
-			.getPreferredSize());
-		JScrollPane sp = new JScrollPane(table);
+		String[] columnsName = { "Id Ingredient", "Ingredient",
+			"Quantity" };
+		this.jtIngredientsTable = new JTable(rowDataIngredients,
+			columnsName);
+		this.jtIngredientsTable
+			.setPreferredScrollableViewportSize(this.jtIngredientsTable
+				.getPreferredSize());
+		JScrollPane sp = new JScrollPane(this.jtIngredientsTable);
 		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.constraints.gridx = 0;
@@ -298,6 +306,10 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 
     public JComboBox<String> getJcbTables() {
 	return jcbTables;
+    }
+
+    public JTable getJtIngredientsTable() {
+	return jtIngredientsTable;
     }
 
 }

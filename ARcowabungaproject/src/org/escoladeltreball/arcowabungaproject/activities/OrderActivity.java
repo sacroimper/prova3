@@ -104,6 +104,9 @@ public class OrderActivity extends Activity implements OnClickListener {
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.button_menu_text);
 	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.button_cart_text);
+	CustomTextView.customTextView(this, tv);
+	CustomTextView.plusPriceOrder(tv);
 
 	// Top text
 	tv = (TextView) findViewById(R.id.remember_advertice_title);
