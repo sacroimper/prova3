@@ -44,6 +44,9 @@ public class Pizzeria {
     // CONSTANTS
     // ====================
 
+    public static final String ROLE_SERVER = "server";
+    public static final String ROLE_CLIENT = "client";
+
     // ====================
     // ATTRIBUTES
     // ====================
