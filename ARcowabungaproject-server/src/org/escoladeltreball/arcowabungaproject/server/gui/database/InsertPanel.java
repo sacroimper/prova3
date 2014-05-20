@@ -27,11 +27,17 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
 public class InsertPanel extends JPanel implements ActionListener {
 
@@ -46,6 +52,7 @@ public class InsertPanel extends JPanel implements ActionListener {
     private JPanel jpShowTables;
     private JButton jbInserData;
     private JTextField[] jtfList;
+    private JComboBox<String> jcbTables;
 
     // ====================
     // CONSTRUCTORS
@@ -85,6 +92,7 @@ public class InsertPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+	this.jpShowTables.removeAll();
 	this.jtfList = ((ShowRowsTextFieldsPanel) jpDoInsert).getJtfList();
 	boolean textFieldsIsEmpty = true;
 	int i = 0;
@@ -98,9 +106,48 @@ public class InsertPanel extends JPanel implements ActionListener {
 	    this.jpShowTables
 		    .add(new JLabel(
 			    "The insertion was not done. You have not inserted any data"));
-	}
-    }
+	} else {
+	    this.jcbTables = ((ShowRowsTextFieldsPanel) jpDoInsert)
+		    .getJcbTables();
+	    String item = (String) this.jcbTables.getSelectedItem();
+	    switch (item) {
+	    case DAOFactory.TABLE_INGREDIENT:
+		if (!this.jtfList[0].getText().isEmpty()) {
+		    int id = Integer.parseInt(this.jtfList[0].getText());
+		    String name = null;
+		    Float price = null;
+		    Integer icon = null;
+		    Integer model = null;
+		    String texture = null;
+		    if (!this.jtfList[1].getText().isEmpty()) {
+			name = this.jtfList[1].getText();
+		    }
+		    if (!this.jtfList[2].getText().isEmpty()) {
+			price = Float.parseFloat(this.jtfList[2].getText());
+		    }
+		    if (!this.jtfList[3].getText().isEmpty()) {
+			icon = Integer.parseInt(this.jtfList[3].getText());
+		    }
+		    if (!this.jtfList[4].getText().isEmpty()) {
+			model = Integer.parseInt(this.jtfList[4].getText());
+		    }
+		    if (!this.jtfList[5].getText().isEmpty()) {
+			texture = this.jtfList[5].getText();
+		    }
+		    Ingredient ingredient = new Ingredient(id, name, price,
+			    icon, model, texture);
+		    HashSet<Ingredient> ingredients = new HashSet<Ingredient>();
+		    ingredients.add(ingredient);
+		    DAOPostgreSQL.getInstance().writeIngredients(ingredients);
+		}
+		break;
 
+	    default:
+		break;
+	    }
+	}
+	this.validate();
+    }
     // ====================
     // OVERRIDE METHODS
     // ====================
