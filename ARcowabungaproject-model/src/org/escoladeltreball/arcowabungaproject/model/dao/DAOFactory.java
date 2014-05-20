@@ -70,7 +70,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_TYPE_RESOURCES = { "INTEGER",
 	    "VARCHAR" };
     public static final String[] COLUMNS_TYPE_INGREDIENT = { "INTEGER",
-	    "VARCHAR", "SMALLINT", "SMALLINT", "NUMERIC", "VARCHAR" };
+	    "VARCHAR", "NUMERIC", "SMALLINT", "SMALLINT", "VARCHAR" };
     public static final String[] COLUMNS_TYPE_INGREDIENTS = { "INTEGER",
 	    "INTEGER", "SMALLINT" };
     public static final String[] COLUMNS_TYPE_PIZZAS = { "INTEGER", "VARCHAR",
@@ -96,7 +96,7 @@ public abstract class DAOFactory {
     public static final String[] COLUMNS_NAME_RESOURCES = { "id_resource",
 	    "path" };
     public static final String[] COLUMNS_NAME_INGREDIENT = { "id_ingredient",
-	    "name", "icon", "model", "price", "texture" };
+	    "name", "price", "model", "icon", "texture" };
     public static final String[] COLUMNS_NAME_INGREDIENTS = { "id_ingredients",
 	    "ingredient", "num_ingredient" };
     public static final String[] COLUMNS_NAME_PIZZAS = { "id_pizza", "name",
@@ -129,13 +129,12 @@ public abstract class DAOFactory {
     public static final String CREATE_TABLE_INGREDIENT = "CREATE TABLE "
 	    + TABLE_INGREDIENT + " (" + COLUMNS_NAME_INGREDIENT[0]
 	    + " INTEGER PRIMARY KEY," + COLUMNS_NAME_INGREDIENT[1]
-	    + " VARCHAR(50)," + COLUMNS_NAME_INGREDIENT[2]
-	    + " SMALLINT REFERENCES " + TABLE_RESOURCES
-	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
+	    + " VARCHAR(50)," + COLUMNS_NAME_INGREDIENT[2] + " NUMERIC, "
 	    + COLUMNS_NAME_INGREDIENT[3] + " SMALLINT REFERENCES "
 	    + TABLE_RESOURCES + " ON DELETE CASCADE ON UPDATE CASCADE,"
 	    + COLUMNS_NAME_INGREDIENT[4] + " NUMERIC, "
-	    + COLUMNS_NAME_INGREDIENT[5] + " VARCHAR(100));";
+	    + COLUMNS_NAME_INGREDIENT[5] + " INTEGER REFERENCES "
+	    + TABLE_RESOURCES + " ON DELETE CASCADE ON UPDATE CASCADE);";
     public static final String CREATE_TABLE_INGREDIENTS = "CREATE TABLE "
 	    + TABLE_INGREDIENTS + " (" + COLUMNS_NAME_INGREDIENTS[0]
 	    + " INTEGER," + COLUMNS_NAME_INGREDIENTS[1]
@@ -301,26 +300,16 @@ public abstract class DAOFactory {
 	Set<Drink> drinks = new HashSet<Drink>();
 	Set<Offer> offers = new HashSet<Offer>();
 
-	Ingredient i1 = new Ingredient(8, "Mushroom", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i2 = new Ingredient(9, "Red Pepper", 1.5f, 151, 152,
-		"data/models/ingredients/redpepper_texture.png");
-	Ingredient i3 = new Ingredient(10, "Ham", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i4 = new Ingredient(11, "Bacon", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i5 = new Ingredient(12, "Pineapple", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i6 = new Ingredient(13, "Corn", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i7 = new Ingredient(14, "Chicken", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i8 = new Ingredient(15, "Blue cheese", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i9 = new Ingredient(16, "Goat cheese", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
-	Ingredient i10 = new Ingredient(17, "Gouda", 1.5f, 151, 152,
-		"data/models/ingredients/mushroom_texture.png");
+	Ingredient i1 = new Ingredient(8, "Mushroom", 1.5f, 151, 152, 200);
+	Ingredient i2 = new Ingredient(9, "Red Pepper", 1.5f, 151, 152, 201);
+	Ingredient i3 = new Ingredient(10, "Ham", 1.5f, 151, 152, 202);
+	Ingredient i4 = new Ingredient(11, "Bacon", 1.5f, 151, 152, 203);
+	Ingredient i5 = new Ingredient(12, "Pineapple", 1.5f, 151, 152, 204);
+	Ingredient i6 = new Ingredient(13, "Corn", 1.5f, 151, 152, 205);
+	Ingredient i7 = new Ingredient(14, "Chicken", 1.5f, 151, 152, 206);
+	Ingredient i8 = new Ingredient(15, "Blue cheese", 1.5f, 151, 152, 207);
+	Ingredient i9 = new Ingredient(16, "Goat cheese", 1.5f, 151, 152, 208);
+	Ingredient i10 = new Ingredient(17, "Gouda", 1.5f, 151, 152, 209);
 
 	ingredients.add(i1);
 	ingredients.add(i2);
@@ -505,6 +494,10 @@ public abstract class DAOFactory {
 	preferences.put("next_custom_id", IdObject.getNextCustomId() + "");
 
 	writePreferences(preferences);
+    }
+
+    public static DAOFactory getInstance() {
+	return instance;
     }
 
     // ====================

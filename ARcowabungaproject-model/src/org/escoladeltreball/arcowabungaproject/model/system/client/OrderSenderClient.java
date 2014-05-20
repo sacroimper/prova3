@@ -1,5 +1,5 @@
 /*
- *  Ingredient.java
+ *  OrderSenderClient.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -21,44 +21,34 @@
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
+package org.escoladeltreball.arcowabungaproject.model.system.client;
 
-package org.escoladeltreball.arcowabungaproject.model;
+import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 
-public class Ingredient extends IdObject {
+/**
+ * @author local
+ * 
+ */
+public class OrderSenderClient extends Client {
 
     // ====================
     // CONSTANTS
     // ====================
 
-    private static final long serialVersionUID = 8143762553201667318L;
-
     // ====================
     // ATTRIBUTES
     // ====================
 
-    private String name;
-    private float price;
-    private int model;
-    private int icon;
-    private int texture;
+    private Order order;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
-    public Ingredient(int id) {
-	super(id);
-	// TODO Auto-generated constructor stub
-    }
-
-    public Ingredient(int id, String name, float price, int model, int icon,
-	    int texture) {
-	super(id);
-	this.name = name;
-	this.price = price;
-	this.model = model;
-	this.icon = icon;
-	this.texture = texture;
+    public OrderSenderClient(Order order) {
+	this.order = order;
+	option = ServerConstants.SERVER_OPTION_SEND_ORDER;
     }
 
     // ====================
@@ -73,61 +63,25 @@ public class Ingredient extends IdObject {
     // PRIVATE METHODS
     // ====================
 
+    private void connectToOrderRecieverServer(int port) {
+	if (port != 0) {
+	    init(port);
+
+	    close();
+	}
+    }
+
     // ====================
     // OVERRIDE METHODS
     // ====================
 
     @Override
-    public String toString() {
-	return "Ingredient [name=" + name + ", price=" + price + ", model="
-		+ model + ", icon=" + icon + ", texture=" + texture + "]";
-    }
-
-    public void print() {
-	System.out.println(toString());
+    public void connect() {
+	int newPort = connectToHallServer(option);
+	connectToOrderRecieverServer(newPort);
     }
 
     // ====================
     // GETTERS & SETTERS
     // ====================
-
-    public String getName() {
-	return name;
-    }
-
-    public void setName(String name) {
-	this.name = name;
-    }
-
-    public float getPrice() {
-	return price;
-    }
-
-    public void setPrice(float price) {
-	this.price = price;
-    }
-
-    public int getModel() {
-	return model;
-    }
-
-    public void setModel(int model) {
-	this.model = model;
-    }
-
-    public int getIcon() {
-	return icon;
-    }
-
-    public void setIcon(int icon) {
-	this.icon = icon;
-    }
-
-    public int getTexture() {
-	return texture;
-    }
-
-    public void setTexture(int texture) {
-	this.texture = texture;
-    }
 }

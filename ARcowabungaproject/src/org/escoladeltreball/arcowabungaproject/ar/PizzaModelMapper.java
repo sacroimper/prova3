@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 
@@ -47,49 +48,6 @@ public class PizzaModelMapper {
     // INGREDIENTS
     public final static String INGREDIENT_MODEL = "data/models/ingredient_V5.obj";
     public final static String INGREDIENT_ALPHA_TEXTURE = "data/models/alpha_texture.png";
-
-    // final static String INGREDIENT_MUSHROOM_TEXTURE =
-    // "data/models/ingredients/mushroom_texture.png";
-    // final static String INGREDIENT_REDPEPPER_TEXTURE =
-    // "data/models/ingredients/redpepper_texture.png";
-    // final static String INGREDIENT_GREENPEPPER_TEXTURE =
-    // "data/models/ingredients/greenpepper_texture.png";
-    // final static String INGREDIENT_TUNA_TEXTURE =
-    // "data/models/ingredients/tuna_texture.png";
-    // final static String INGREDIENT_PINEAPPLE_TEXTURE =
-    // "data/models/ingredients/pineapple_texture.png";
-    // final static String INGREDIENT_HAM_TEXTURE =
-    // "data/models/ingredients/ham_texture.png";
-    // final static String INGREDIENT_BACON_TEXTURE =
-    // "data/models/ingredients/bacon_texture.png";
-    // final static String INGREDIENT_BLUECHEESE_TEXTURE =
-    // "data/models/ingredients/bluecheese_texture.png";
-    // final static String INGREDIENT_GOATCHEESE_TEXTURE =
-    // "data/models/ingredients/goatcheese_texture.png";
-    // final static String INGREDIENT_GOUDA_TEXTURE =
-    // "data/models/ingredients/gouda_texture.png";
-    // final static String INGREDIENT_GORGONZOLA_TEXTURE =
-    // "data/models/ingredients/gorgonzola_texture.png";
-    // final static String INGREDIENT_EMENTAL_TEXTURE =
-    // "data/models/ingredients/emental_texture.png";
-    // final static String INGREDIENT_PARMESAN_TEXTURE =
-    // "data/models/ingredients/parmesan_texture.png";
-    // final static String INGREDIENT_ONION_TEXTURE =
-    // "datamodels/ingredients/onion_texture.png";
-    // final static String INGREDIENT_BEARSJENA_TEXTURE =
-    // "data/models/ingredients/bearsjena_texture.png";
-    // final static String INGREDIENT_CORN_TEXTURE =
-    // "data/models/ingredients/corn_texture.png";
-    // final static String INGREDIENT_CHICKEN_TEXTURE =
-    // "data/models/ingredients/chicken_texture.png";
-    // final static String INGREDIENT_MINCE_TEXTURE =
-    // "data/models/ingredients/mince_texture.png";
-    // final static String INGREDIENT_EGG_TEXTURE =
-    // "data/models/ingredients/egg_texture.png";
-    // final static String INGREDIENT_MARJORAM_TEXTURE =
-    // "data/models/ingredients/marjoram_texture.png";
-    // final static String INGREDIENT_ARTICHOKE_TEXTURE =
-    // "data/models/ingredients/artichoke_texture.png";
 
     // ====================
     // ATTRIBUTES
@@ -140,9 +98,12 @@ public class PizzaModelMapper {
     // PRIVATE METHODS
     // ====================
 
+    // MODIFICAR
     private static void makeTheModelIngredientTextureList() {
+	DAOAndroid daoA = DAOAndroid.getInstance();
 	for (Ingredient ingredient : ingredients) {
-	    modelIngredientTextures.add(ingredient.getTexture());
+	    modelIngredientTextures.add(daoA.getResourcePath(ingredient
+		    .getTexture()));
 	}
     }
 

@@ -128,10 +128,10 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(2,'path2');");
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(3,'path3');");
 
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(10,'pepperoni',0.5,1,2,'path_texture1');");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(11,'cheese',0.5,1,2,'path_texture2');");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(12,'mushroom',0.5,2,3,'path_texture3');");
-	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(13,'tomatoe',0.5,1,3,'path_texture4');");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(10,'pepperoni',0.5,1,2,1);");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(11,'cheese',0.5,1,2,2);");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(12,'mushroom',0.5,2,3,1);");
+	    stm.executeUpdate("INSERT INTO INGREDIENT VALUES(13,'tomatoe',0.5,1,3,2);");
 
 	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,10,2);");
 	    stm.executeUpdate("INSERT INTO INGREDIENTS VALUES(20,11,1);");
@@ -248,7 +248,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			    rsIngredient
 				    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]),
 			    rsIngredient
-				    .getString(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
+				    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
 		    ingredients.put(ingredient, rsIngredients
 			    .getInt(DAOFactory.COLUMNS_NAME_INGREDIENTS[2]));
 		}
@@ -497,7 +497,7 @@ public class DAOPostgreSQL extends DAOFactory {
 			rs.getFloat(DAOFactory.COLUMNS_NAME_INGREDIENT[2]),
 			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[3]),
 			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[4]),
-			rs.getString(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
+			rs.getInt(DAOFactory.COLUMNS_NAME_INGREDIENT[5]));
 		ingredientsSet.add(ingredient);
 	    }
 	    stm.close();
@@ -960,10 +960,11 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm = con.createStatement();
 	    for (Ingredient ingredient : ingredients) {
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENT
-			+ "VALUES(" + ingredient.getId() + ",'"
-			+ ingredient.getName() + "'," + ingredient.getIcon()
+			+ " VALUES(" + ingredient.getId() + ",'"
+			+ ingredient.getName() + "'," + ingredient.getPrice()
 			+ "," + ingredient.getModel() + ","
-			+ ingredient.getPrice() + ");");
+			+ ingredient.getIcon() + ",'" + ingredient.getTexture()
+			+ "');");
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
