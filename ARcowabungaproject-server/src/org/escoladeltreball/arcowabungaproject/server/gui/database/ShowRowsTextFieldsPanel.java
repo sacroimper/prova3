@@ -32,10 +32,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
 public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 
@@ -165,15 +169,27 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 		this.add(this.jtfList[i], this.constraints);
 	    }
 	    if (insert) {
+		String[][] rowDataIngredients = new String[DAOFactory.COLUMNS_NAME_INGREDIENT.length][2];
+		int i = 0;
+		for (Ingredient ingredient : DAOPostgreSQL.getInstance()
+			.readIngredient()) {
+		    rowDataIngredients[i][0] = ingredient.getName();
+		    rowDataIngredients[i][1] = "";
+		    i++;
+		}
+
+		String[] columnsName = { "Ingredient", "Quantity" };
+		JTable table = new JTable(rowDataIngredients, columnsName);
+		table.setPreferredScrollableViewportSize(table
+			.getPreferredSize());
+		JScrollPane sp = new JScrollPane(table);
+		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.constraints.gridx = 0;
 		this.constraints.gridy = ++this.indexConstrainstY;
 		this.constraints.gridwidth = 2;
-		this.add(new JLabel("Put ingredients separated with 'comas'"),
-			this.constraints);
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.jtaIngredients = new JTextArea();
-		this.add(jtaIngredients, this.constraints);
+		this.constraints.fill = GridBagConstraints.BOTH;
+		this.add(sp, constraints);
 	    }
 	    break;
 	case DAOFactory.TABLE_OFFERS:
